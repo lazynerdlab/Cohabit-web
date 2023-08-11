@@ -1,11 +1,16 @@
+"use client";
+
 import {
   Input,
   ConfigProvider,
   Button,
   Checkbox,
+  Radio,
   InputProps,
   ButtonProps,
   CheckboxProps,
+  RadioProps,
+  RadioGroupProps,
 } from "antd";
 
 export const CustomInput = ({ ...props }: InputProps) => (
@@ -34,5 +39,17 @@ export const CustomCheckBox = ({ ...props }: CheckboxProps) => (
     }}
   >
     <Checkbox {...props} />
+  </ConfigProvider>
+);
+
+export const RadioButton = ({ ...props }: RadioProps) => (
+  <ConfigProvider>
+    <Radio.Button {...props} />
+  </ConfigProvider>
+);
+
+export const RadioGroup = ({ ...props }: RadioGroupProps) => (
+  <ConfigProvider>
+    <Radio.Group {...props} />
   </ConfigProvider>
 );
