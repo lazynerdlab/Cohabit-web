@@ -1,7 +1,8 @@
 import { RadioButton, RadioGroup } from "@/lib/AntDesignComponents";
 import { useState } from "react";
+import { CustomTextArea } from "@/lib/AntDesignComponents";
 
-const Step1 = () => {
+const Step3 = () => {
   const [categories, setCategories] = useState([
     { label: "One bedroom", value: "One bedroom", checked: false },
     { label: "One bedroom", value: "One bedroom", checked: false },
@@ -36,10 +37,10 @@ const Step1 = () => {
       <div className="flex justify-between items-center">
         <div className="flex flex-col gap-[0.5rem]">
           <h3 className="text-center text-zinc-900 text-2xl font-bold leading-[28.80px]">
-            Enter your preference
+            Enter your lifestyle
           </h3>
           <p className="text-neutral-500 text-base font-medium leading-relaxed">
-            Please pick your choice
+            Please pick your lifestyle choice
           </p>
         </div>
         <div className="rounded-[30px] bg-[#F47D5B]/[15%] bg-opcity-20 p-[11px] py[15px] justify-center items-center">
@@ -126,4 +127,4 @@ const Step1 = () => {
   );
 };
 
-export default Step1;
+export default Step3;

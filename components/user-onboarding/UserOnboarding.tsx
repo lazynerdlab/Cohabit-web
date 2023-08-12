@@ -1,33 +1,88 @@
 "use client";
-import { useState } from "react";
-import { Steps } from "antd";
+import { useState, useMemo } from "react";
 import Step1 from "./steps/Step1";
+import Step4 from "./steps/Step4";
+import {
+  CustomButton as Button,
+  CustomSteps as Steps,
+} from "@/lib/AntDesignComponents";
+import StepIcon from "@/assets/icons/StepIcon";
+import DoneIcon from "@/assets/icons/DoneIcon";
+import StartIcon from "@/assets/icons/StartIcon";
 
-const description = "This is a description.";
 const UserOnboarding = () => {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState<number>(1);
+  const steps = useMemo(
+    () => [
+      {
+        title: <p className="text-[16px] text-[#2A2069]">Account</p>,
+        content: "",
+        icon: <DoneIcon className="h-[56px]" />,
+        description: <p className="text-[14px] text-[#2A2069]">Step 1/4</p>,
+      },
+      {
+        title: (
+          <div className="flex flex-col font-[400] text-[#2A2069] leading-[28.80px]">
+            <p className="text-[16px]">Preference</p>
+            <p className="text-[14px]">Step 2/4</p>
+          </div>
+        ),
+        content: <Step1 />,
+        icon:
+          current > 1 ? (
+            <DoneIcon className="h-[56px]" />
+          ) : (
+            <StepIcon className="h-[56px]" />
+          ),
+      },
+      {
+        title: (
+          <div className="flex flex-col font-[400] text-[#2A2069] leading-[28.80px]">
+            <p className="text-[16px]">Lifestyle</p>
+            <p className="text-[14px]">Step 3/4</p>
+          </div>
+        ),
+        content: <Step1 />,
+        icon:
+          current > 2 ? (
+            <DoneIcon className="h-[56px]" />
+          ) : (
+            <StepIcon className="h-[56px]" />
+          ),
+      },
+      {
+        title: (
+          <div className="flex flex-col font-[400] text-[#2A2069] leading-[28.80px]">
+            <p className="text-[16px]">Start</p>
+            <p className="text-[14px]">Step 4/4</p>
+          </div>
+        ),
+        content: <Step4 />,
+        icon:
+          current === 3 ? (
+            <StartIcon className="h-[56px]" />
+          ) : (
+            <StepIcon className="h-[56px]" />
+          ),
+      },
+    ],
+    [current]
+  );
   return (
-    <div className="w-full h-full">
-      <Steps
-        current={1}
-        items={[
-          {
-            title: "Finished",
-            description,
-            content: <Step1 />,
-          },
-          {
-            title: "In Progress",
-            description,
-            subTitle: "Left 00:00:08",
-          },
-          {
-            title: "Waiting",
-            description,
-          },
-        ]}
-      />
-      <div></div>
+    <div className="w-[95%] mx-auto h-full grid grid-cols-1 gap-[0.5rem] py-[1.5rem]">
+      <Steps current={current} items={steps} />
+      <div>{steps[current].content}</div>
+      {current !== 3 && (
+        <Button
+          onClick={() => {
+            setCurrent((prev) => prev + 1);
+          }}
+          className="w-[20%] justify-self-end"
+          type="primary"
+        >
+          Next Step
+        </Button>
+      )}
     </div>
   );
 };
