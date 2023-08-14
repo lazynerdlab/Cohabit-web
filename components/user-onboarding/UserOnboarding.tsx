@@ -1,6 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import Step1 from "./steps/Step1";
+import Step3 from "./steps/Step3";
 import Step4 from "./steps/Step4";
 import {
   CustomButton as Button,
@@ -42,7 +43,7 @@ const UserOnboarding = () => {
             <p className="text-[14px]">Step 3/4</p>
           </div>
         ),
-        content: <Step1 />,
+        content: <Step3 />,
         icon:
           current > 2 ? (
             <DoneIcon className="h-[56px]" />
@@ -71,7 +72,7 @@ const UserOnboarding = () => {
   return (
     <div className="w-[95%] mx-auto h-full grid grid-cols-1 gap-[0.5rem] py-[1.5rem]">
       <Steps current={current} items={steps} />
-      <div>{steps[current].content}</div>
+      <div className="w-full">{steps[current].content}</div>
       {current !== 3 && (
         <Button
           onClick={() => {

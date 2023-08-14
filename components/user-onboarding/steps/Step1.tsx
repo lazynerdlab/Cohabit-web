@@ -48,12 +48,12 @@ const Step1 = () => {
           </span>
         </div>
       </div>
-      <div className="bg-[#E7F6FD] bg-opacity-[0.4] grid grid-cols-1 w-[100vw] gap-[1rem] py-[1rem]">
+      <div className="bg-[#E7F6FD] bg-opacity-[0.4] grid grid-cols-1 w[100vw] gap-[1rem] py-[1rem]">
         <div className="w-[98%] mx-auto">
           <h4 className="text-zinc-900 text-xl font-medium leading-normal">
             Select your categories
           </h4>
-          <div className="grid grid-cols-7 justify-between items-center gap[1rem]">
+          <div className="grid grid-cols-6 max-w-[100%] justify-between items-center gap-[1rem]">
             {categories.map((e, i) => (
               <div key={i}>
                 <RadioButton
@@ -78,7 +78,7 @@ const Step1 = () => {
             Select your budget
           </h4>
           <RadioGroup optionType="button">
-            <div className="grid grid-cols-7 justify-between items-center gap[1rem]">
+            <div className="grid grid-cols-7 justify-between items-center gap-[1rem]">
               {budget.map((e, i) => (
                 <div key={i}>
                   <RadioButton value={e.value} key={i}>
@@ -94,7 +94,7 @@ const Step1 = () => {
             Select your Location
           </h4>
           <RadioGroup optionType="button">
-            <div className="grid grid-cols-7 justify-between items-center gap[1rem]">
+            <div className="grid grid-cols-7 justify-between items-center gap-[1rem]">
               {location.map((e, i) => (
                 <div key={i}>
                   <RadioButton value={e.value} key={i}>
@@ -110,7 +110,7 @@ const Step1 = () => {
             Select your Gender
           </h4>
           <RadioGroup optionType="button">
-            <div className="grid grid-cols-7 justify-between items-center gap[1rem]">
+            <div className="grid grid-cols-7 justify-between items-center gap-[1rem]">
               {Gender.map((e, i) => (
                 <div key={i}>
                   <RadioButton value={e.value} key={i}>

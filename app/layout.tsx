@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={ubuntu.className}>
+      <body className={`${ubuntu.className} overflow-x-hidden`}>
         <StyledComponentsRegistry>
           <ConfigProvider
             theme={{

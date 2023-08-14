@@ -14,6 +14,7 @@ import {
   RadioGroupProps,
   StepsProps,
 } from "antd";
+import { TextAreaProps } from "antd/es/input";
 
 export const CustomInput = ({ ...props }: InputProps) => (
   <ConfigProvider
@@ -25,7 +26,7 @@ export const CustomInput = ({ ...props }: InputProps) => (
   </ConfigProvider>
 );
 
-export const CustomTextArea = ({ ...props }) => (
+export const CustomTextArea = ({ ...props }: TextAreaProps) => (
   <ConfigProvider>
     <Input.TextArea {...props} />
   </ConfigProvider>
@@ -63,7 +64,7 @@ export const RadioButton = ({ ...props }: RadioProps) => (
           buttonSolidCheckedColor: "#C4C4C4",
           colorBorder: "#C4C4C4",
           controlHeight: 42,
-          padding: 20,
+          padding: 30,
         },
       },
     }}
@@ -71,10 +72,12 @@ export const RadioButton = ({ ...props }: RadioProps) => (
     {/* <Radio.Group> */}
     <Radio.Button
       style={{
-        margin: "5%",
+        // ...props.style,
+        // margin: "5%",
         borderRadius: 30,
         textAlign: "center",
         color: "#616A6A",
+        width: "100%",
       }}
       {...props}
     />
@@ -107,6 +110,8 @@ export const RadioGroup = ({ ...props }: RadioGroupProps) => (
         borderRadius: 30,
         textAlign: "center",
         color: "#616A6A",
+        // display: "grid",
+        // gridTemplateColumns: 7,
       }}
     />
   </ConfigProvider>
