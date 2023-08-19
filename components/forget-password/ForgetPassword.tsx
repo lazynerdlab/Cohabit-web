@@ -1,4 +1,7 @@
-import { CustomInput, CustomButton } from "@/lib/AntDesignComponents";
+import {
+  CustomInput as Input,
+  AuthButton as Button,
+} from "@/lib/AntDesignComponents";
 const ForgetPassword = () => {
   return (
     <div className="grid grid-cols-1 gap-[1rem] m-auto items-center w-[60%]">
@@ -17,13 +20,9 @@ const ForgetPassword = () => {
           >
             Email Address
           </label>
-          <CustomInput
-            type="email"
-            placeholder="This is a placeholder"
-            id="email"
-          />
+          <Input type="email" placeholder="This is a placeholder" id="email" />
         </div>
-        <CustomButton type="primary">Send Instruction</CustomButton>
+        <Button type="primary">Send Instruction</Button>
       </form>
     </div>
   );

@@ -1,4 +1,7 @@
-import { CustomInput, CustomButton } from "@/lib/AntDesignComponents";
+import {
+  CustomPasswordInput as Input,
+  AuthButton as Button,
+} from "@/lib/AntDesignComponents";
 const CreatePassword = () => {
   return (
     <div className="grid grid-cols-1 gap-[0.5rem] m-auto w-[60%]">
@@ -16,7 +19,7 @@ const CreatePassword = () => {
           >
             Create Password
           </label>
-          <CustomInput
+          <Input
             type="password"
             placeholder="This is a placeholder"
             id="email"
@@ -29,13 +32,13 @@ const CreatePassword = () => {
           >
             Confirm Password
           </label>
-          <CustomInput
+          <Input
             type="password"
             placeholder="This is a placeholder"
             id="ConfirmPassword"
           />
         </div>
-        <CustomButton type="primary">Submit</CustomButton>
+        <Button type="primary">Submit</Button>
       </form>
     </div>
   );

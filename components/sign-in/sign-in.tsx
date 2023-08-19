@@ -1,7 +1,11 @@
 import google from "@/assets/google.svg";
 import Image from "next/image";
-import { CustomInput, CustomButton } from "@/lib/AntDesignComponents";
-import { Input, Checkbox } from "antd";
+import {
+  CustomInput as Input,
+  AuthButton as Button,
+  CustomPasswordInput as PasswordInput,
+  CustomCheckBox as Checkbox,
+} from "@/lib/AntDesignComponents";
 import Link from "next/link";
 
 const SignIn = () => {
@@ -34,7 +38,7 @@ const SignIn = () => {
             >
               Email Address
             </label>
-            <CustomInput
+            <Input
               className=""
               placeholder="This is a placeholder"
               id="email"
@@ -48,7 +52,7 @@ const SignIn = () => {
             >
               Password
             </label>
-            <CustomInput
+            <PasswordInput
               placeholder="This is a placeholder"
               id="email"
               type="password"
@@ -66,7 +70,7 @@ const SignIn = () => {
               </label>
             </div>
           </div>
-          <CustomButton type="primary">Login</CustomButton>
+          <Button type="primary">Login</Button>
         </form>
         <div className="flex items-center justify-center gap-[0.5rem]">
           <h3 className="font-[400] text-[16px] text-[#616A6A]">

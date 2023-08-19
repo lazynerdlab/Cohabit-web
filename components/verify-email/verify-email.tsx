@@ -1,4 +1,7 @@
-import { CustomInput, CustomButton } from "@/lib/AntDesignComponents";
+import {
+  CustomInput as Input,
+  AuthButton as Button,
+} from "@/lib/AntDesignComponents";
 
 const VerifyEmailForm = () => {
   return (
@@ -17,13 +20,13 @@ const VerifyEmailForm = () => {
           >
             Enter verification Code
           </label>
-          <CustomInput
+          <Input
             // className="px-[16px] py-[12px]"
             placeholder="This is a placeholder"
             id="code"
           />
         </div>
-        <CustomButton type="primary">verify</CustomButton>
+        <Button type="primary">verify</Button>
       </form>
       <div className="flex justify-start items-center gap-[0.5rem]">
         <h3 className="text-neutral-500 text-base font-normal leading-relaxed">

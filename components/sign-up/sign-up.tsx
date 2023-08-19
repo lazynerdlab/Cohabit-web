@@ -1,6 +1,10 @@
 import google from "@/assets/google.svg";
 import Image from "next/image";
-import { CustomInput, CustomButton, CustomCheckBox } from "@/lib/AntDesignComponents";
+import {
+  CustomInput as Input,
+  AuthButton as Button,
+  CustomCheckBox as Checkbox,
+} from "@/lib/AntDesignComponents";
 import Link from "next/link";
 
 const SignUp = () => {
@@ -33,7 +37,7 @@ const SignUp = () => {
             >
               First Name
             </label>
-            <CustomInput
+            <Input
               className=""
               placeholder="This is a placeholder"
               id="first_name"
@@ -46,7 +50,7 @@ const SignUp = () => {
             >
               Last Name
             </label>
-            <CustomInput
+            <Input
               className=""
               placeholder="This is a placeholder"
               id="last_name"
@@ -59,7 +63,7 @@ const SignUp = () => {
             >
               Email Address
             </label>
-            <CustomInput
+            <Input
               className=""
               placeholder="This is a placeholder"
               id="email"
@@ -67,7 +71,7 @@ const SignUp = () => {
             />
           </div>
           <div className="w-full mx-auto flex items-start justify-start gap-[1rem]">
-            <CustomCheckBox id="check" />
+            <Checkbox id="check" />
             <label
               htmlFor="check"
               className="text-colorPrimary text-[14px] font-[400] pr-[1rem]"
@@ -84,7 +88,7 @@ const SignUp = () => {
               .
             </label>
           </div>
-          <CustomButton type="primary">Get Started</CustomButton>
+          <Button type="primary">Get Started</Button>
         </form>
         <div className="flex items-center justify-center gap-[0.5rem]">
           <h3 className="font-[400] text-[16px] text-[#616A6A]">
