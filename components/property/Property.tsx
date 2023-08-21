@@ -1,7 +1,9 @@
 import {
   CustomCarousel as Carousel,
-  CustomButton as Button
+  CustomButton as Button,
 } from "@/lib/AntDesignComponents";
+import CarouselBackIcon from "@/assets/icons/CarouselBackIcon";
+import CarouselNextIcon from "@/assets/icons/CarouselNextIcon";
 import PropertySection from "./PropertySection";
 import Image from "next/image";
 import slide from "@/assets/slide.jpg";
@@ -15,7 +17,12 @@ const Property = () => {
     <>
       <div className="w-[95%] mx-auto">
         <div className="relative">
-          <Carousel>
+          <Carousel
+            arrows={true}
+            nextArrow={<CarouselNextIcon />}
+            prevArrow={<CarouselBackIcon />}
+            dots={false}
+          >
             <Image alt="slide" src={slide} className="w-[60vw] h-[200px]" />
             <Image alt="slide" src={slide2} className="w-[60vw] h-[200px]" />
             <Image alt="slide" src={slide} className="w-[60vw] h-[200px]" />

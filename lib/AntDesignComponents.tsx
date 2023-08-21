@@ -15,6 +15,7 @@ import {
   Progress,
   Rate,
   Modal,
+  Tabs,
   InputProps,
   ButtonProps,
   CheckboxProps,
@@ -30,11 +31,10 @@ import {
   ProgressProps,
   RateProps,
   ModalProps,
+  TabsProps,
 } from "antd";
 import { TextAreaProps } from "antd/es/input";
 import { ReactNode } from "react";
-import CarouselNextIcon from "@/assets/icons/CarouselNextIcon";
-import CarouselBackIcon from "@/assets/icons/CarouselBackIcon";
 
 type children = {
   children: ReactNode;
@@ -320,15 +320,13 @@ export const CustomPagination = ({ ...props }: PaginationProps) => (
 );
 
 export const CustomCarousel = ({ ...props }: CarouselProps) => (
-  <ConfigProvider>
-    <Carousel
-      {...props}
-      arrows={true}
-      nextArrow={<CarouselNextIcon />}
-      prevArrow={<CarouselBackIcon />}
-      dots={false}
-      centerMode
-    >
+  <ConfigProvider
+    theme={{
+      token: { colorPrimary: "#010886" },
+      components: { Carousel: { colorPrimaryActive: "#FFF" } },
+    }}
+  >
+    <Carousel {...props} centerMode>
       {props.children}
     </Carousel>
   </ConfigProvider>
@@ -351,5 +349,11 @@ export const CustomModal = ({ ...props }: ModalProps) => (
     <Modal centered maskClosable={false} footer={null} {...props}>
       {props.children}
     </Modal>
+  </ConfigProvider>
+);
+
+export const CustomTabs = ({ ...props }: TabsProps) => (
+  <ConfigProvider theme={{ components: { Tabs: { inkBarColor: "#010886" } } }}>
+    <Tabs {...props} />
   </ConfigProvider>
 );
