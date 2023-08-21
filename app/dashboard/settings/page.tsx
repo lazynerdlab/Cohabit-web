@@ -1,4 +1,5 @@
 import Header from "@/components/header/Header";
+import Settings from "@/components/settings/Settings";
 
 const page = () => {
   return (
@@ -6,6 +7,7 @@ const page = () => {
       <Header>
         <h4 className="text-[#25324B] text-[25px] font-[700]">Settings</h4>
       </Header>
+      <Settings />
     </div>
   );
 };

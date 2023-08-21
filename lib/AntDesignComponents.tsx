@@ -16,6 +16,8 @@ import {
   Rate,
   Modal,
   Tabs,
+  Upload,
+  message,
   InputProps,
   ButtonProps,
   CheckboxProps,
@@ -32,6 +34,7 @@ import {
   RateProps,
   ModalProps,
   TabsProps,
+  UploadProps,
 } from "antd";
 import { TextAreaProps } from "antd/es/input";
 import { ReactNode } from "react";
@@ -357,3 +360,11 @@ export const CustomTabs = ({ ...props }: TabsProps) => (
     <Tabs {...props} />
   </ConfigProvider>
 );
+
+export const CustomUpload = ({ ...props }: UploadProps) => (
+  <ConfigProvider>
+    <Upload.Dragger {...props} />
+  </ConfigProvider>
+);
+
+export const CustomMessage = () => message;

@@ -1,7 +1,7 @@
 import { CustomButton as Button } from "@/lib/AntDesignComponents";
 import EditIcon from "@/assets/icons/EditIcon";
 import EmailIcon from "@/assets/icons/EmailIcon";
-import PhoneIcon from "@/assets/icons/PhoneIcON";
+import PhoneIcon from "@/assets/icons/PhoneIcon";
 import LanguageIcon from "@/assets/icons/LanguageIcon";
 
 const ProfileSection2 = () => {
