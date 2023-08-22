@@ -58,6 +58,15 @@ const DashBoard = () => {
           <div className="flex items-center gap-[0.5rem]">
             <SearchIcon className="cursor-pointer stroke-[#25324B]" />
             <Select
+              bordered={false}
+              style={{
+                width: 300,
+                borderBottomWidth: 1,
+                borderTopWidth: 0,
+                borderLeftWidth: 0,
+                borderRightWidth: 0,
+                borderColor: "#D6DDEB",
+              }}
               onSelect={(e) => {
                 console.log(e);
               }}
@@ -69,6 +78,15 @@ const DashBoard = () => {
           <div className="flex items-center gap-[0.5rem]">
             <LocationIcon className="cursor-pointer" />
             <Select
+              bordered={false}
+              style={{
+                width: 300,
+                borderBottomWidth: 1,
+                borderTopWidth: 0,
+                borderLeftWidth: 0,
+                borderRightWidth: 0,
+                borderColor: "#D6DDEB",
+              }}
               onSelect={(e) => {
                 console.log(e);
               }}

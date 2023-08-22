@@ -17,7 +17,7 @@ import {
   Modal,
   Tabs,
   Upload,
-  message,
+  DatePicker,
   InputProps,
   ButtonProps,
   CheckboxProps,
@@ -35,6 +35,7 @@ import {
   ModalProps,
   TabsProps,
   UploadProps,
+  DatePickerProps,
 } from "antd";
 import { TextAreaProps } from "antd/es/input";
 import { ReactNode } from "react";
@@ -178,13 +179,25 @@ export const RadioGroup = ({ ...props }: RadioGroupProps) => (
     }}
   >
     <Radio.Group
-      {...props}
       style={{
         borderRadius: 30,
         textAlign: "center",
         color: "#616A6A",
       }}
+      {...props}
     />
+  </ConfigProvider>
+);
+
+export const CustomRadio = ({ ...props }: RadioProps) => (
+  <ConfigProvider
+    theme={{
+      token: {
+        colorPrimary: "#4640DE",
+      },
+    }}
+  >
+    <Radio {...props} />
   </ConfigProvider>
 );
 
@@ -279,15 +292,6 @@ export const CustomSelect = ({ ...props }: SelectProps) => (
   <ConfigProvider>
     <Select
       {...props}
-      bordered={false}
-      style={{
-        width: 280,
-        borderBottomWidth: 1,
-        borderTopWidth: 0,
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderColor: "#D6DDEB",
-      }}
       className="hover:border-colorPrimary"
       optionFilterProp="children"
       filterOption={(input, option) =>
@@ -367,4 +371,8 @@ export const CustomUpload = ({ ...props }: UploadProps) => (
   </ConfigProvider>
 );
 
-export const CustomMessage = () => message;
+export const CustomDatePicker = ({ ...props }: DatePickerProps) => (
+  <ConfigProvider>
+    <DatePicker {...props} />
+  </ConfigProvider>
+);
