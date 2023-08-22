@@ -13,9 +13,9 @@ const Profile = () => {
       <div className="w-full flex flex-col rounded-[10px] bg-[#FFF] shadow-sm shadow-[#B8C9C9]">
         <div className="w-full relative">
           <Image alt="background" className="w-full" src={gradient} />
-          <EditIcon className="absolute right-[2%] top-[2%] fill-[#FFF]" />
+          <EditIcon className="absolute right-[2%] top-[2%] fill-[#FFF] cursor-pointer" />
         </div>
-        <div className="p-[1rem] grid grid-cols-[20%_60%_20%]">
+        <div className="p-[1rem] grid grid-cols-[15%_70%_15%]">
           <Image alt="avatar" src={Avatar} />
           <div className="flex flex-col items-start">
             <h4 className="text-[rgba(50, 71, 92, 0.87)] text-[24px] font-[500]">

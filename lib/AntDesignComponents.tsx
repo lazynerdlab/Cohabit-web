@@ -18,6 +18,8 @@ import {
   Tabs,
   Upload,
   DatePicker,
+  Collapse,
+  FloatButton,
   InputProps,
   ButtonProps,
   CheckboxProps,
@@ -36,7 +38,9 @@ import {
   TabsProps,
   UploadProps,
   DatePickerProps,
+  FloatButtonProps,
 } from "antd";
+import type { CollapseProps } from "antd";
 import { TextAreaProps } from "antd/es/input";
 import { ReactNode } from "react";
 
@@ -374,5 +378,17 @@ export const CustomUpload = ({ ...props }: UploadProps) => (
 export const CustomDatePicker = ({ ...props }: DatePickerProps) => (
   <ConfigProvider>
     <DatePicker {...props} />
+  </ConfigProvider>
+);
+
+export const CustomCollapse = ({ ...props }: CollapseProps) => (
+  <ConfigProvider>
+    <Collapse {...props} />
+  </ConfigProvider>
+);
+
+export const CustomFloatButton = ({ ...props }: FloatButtonProps) => (
+  <ConfigProvider>
+    <FloatButton {...props} />
   </ConfigProvider>
 );
