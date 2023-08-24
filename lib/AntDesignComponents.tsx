@@ -64,7 +64,7 @@ export const CustomSearchInput = ({ ...props }: InputProps) => (
       token: {},
     }}
   >
-    <Input
+    <Input.Search
       {...props}
       style={{
         padding: 8,

@@ -1,3 +1,4 @@
+"use client";
 import google from "@/assets/google.svg";
 import Image from "next/image";
 import {
@@ -6,8 +7,10 @@ import {
   CustomCheckBox as Checkbox,
 } from "@/lib/AntDesignComponents";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
+  const { push } = useRouter();
   return (
     <div className="w-[60%] mx-auto">
       <div className="grid grid-cols-1 gap-[0.8rem] w-full">
@@ -88,7 +91,9 @@ const SignUp = () => {
               .
             </label>
           </div>
-          <Button type="primary">Get Started</Button>
+          <Button onClick={() => push("/on-board")} type="primary">
+            Get Started
+          </Button>
         </form>
         <div className="flex items-center justify-center gap-[0.5rem]">
           <h3 className="font-[400] text-[16px] text-[#616A6A]">

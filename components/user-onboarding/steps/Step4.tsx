@@ -1,6 +1,9 @@
+"use client";
+import { useRouter } from "next/navigation";
 import HomeIcon from "@/assets/icons/HomeIcon";
-import { CustomButton as Button } from "@/lib/AntDesignComponents";
+import { AuthButton as Button } from "@/lib/AntDesignComponents";
 const Step4 = () => {
+  const { push } = useRouter();
   return (
     <div className="bg-[#E7F6FD] bg-opacity-[0.4] grid grid-cols-1 w-[100vw] gap-[1rem] py-[10%]">
       <div className="bg-[#FFF] w-[50%] m-auto rounded-[15px] py-[2rem]">
@@ -12,7 +15,9 @@ const Step4 = () => {
           <span className="text-center text-[#7C8493] text-lg font-normal leading-[28.80px]">
             Awesome, your dashboard is ready .
           </span>
-          <Button type="primary">Let’s go!</Button>
+          <Button onClick={() => push("/dashboard")} type="primary">
+            Let’s go!
+          </Button>
         </div>
       </div>
     </div>

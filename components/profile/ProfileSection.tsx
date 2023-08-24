@@ -1,9 +1,6 @@
-import "react-quill/dist/quill.snow.css";
 import Image from "next/image";
 import room from "@/assets/room.jpg";
 import {
-  CustomRate as Rate,
-  CustomProgress as Progress,
   CustomButton as Button,
   CustomCarousel as Carousel,
 } from "@/lib/AntDesignComponents";

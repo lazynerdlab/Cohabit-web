@@ -12,7 +12,7 @@ import HeartIcon from "@/assets/icons/HeartIcon";
 import user from "@/assets/user.svg";
 
 const PropertySection2 = () => {
-  const arr = [1, 1, 1, 1, 1, 1];
+  const arr = [1, 1, 1, 1];
   return (
     <div className="flex flex-col gap-[0.5rem] w-[95%] mx-auto">
       <div className="flex flex-col items-center justify-center gap-[1rem] border border-[#D6DDEB] p-[0.5rem]">

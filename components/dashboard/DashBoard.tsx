@@ -111,7 +111,9 @@ const DashBoard = () => {
               ))}
             </div>
           </RadioGroup>
-          <Button>View All</Button>
+          <Button onClick={() => push("/dashboard/find-property")}>
+            View All
+          </Button>
         </div>
         <div className="grid grid-cols-3 gap-[1rem] w-[98%]">
           {arr.map((e, i) => (
@@ -122,7 +124,7 @@ const DashBoard = () => {
           <h5 className="text-[#25324B] mb-[0.5rem] text-[18px] font-bold leading-[28.80px]">
             Flatmate
           </h5>
-          <Button onClick={() => push("/dashboard/view-all")}>View All</Button>
+          <Button onClick={() => push("/dashboard/view-mate")}>View All</Button>
         </div>
         <div className="grid grid-cols-3 gap-[1rem] w-[98%]">
           {arr.map((e, i) => (

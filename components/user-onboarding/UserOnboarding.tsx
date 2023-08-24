@@ -4,7 +4,7 @@ import Step1 from "./steps/Step1";
 import Step3 from "./steps/Step3";
 import Step4 from "./steps/Step4";
 import {
-  CustomButton as Button,
+  AuthButton as Button,
   CustomSteps as Steps,
 } from "@/lib/AntDesignComponents";
 import StepIcon from "@/assets/icons/StepIcon";

@@ -1,3 +1,6 @@
+"use client";
+import { useState } from "react";
+import PropertyModal from "./PropertyModal";
 import {
   CustomCarousel as Carousel,
   CustomButton as Button,
@@ -13,6 +16,7 @@ import PinLocation from "@/assets/icons/PinLocation";
 import RoomIcon from "@/assets/icons/RoomIcon";
 import BathIcon from "@/assets/icons/BathIcon";
 const Property = () => {
+  const [open, setOpen] = useState(false);
   return (
     <>
       <div className="w-[95%] mx-auto">
@@ -22,13 +26,14 @@ const Property = () => {
             nextArrow={<CarouselNextIcon />}
             prevArrow={<CarouselBackIcon />}
             dots={false}
+            variableWidth
           >
-            <Image alt="slide" src={slide} className="w-[60vw] h-[200px]" />
-            <Image alt="slide" src={slide2} className="w-[60vw] h-[200px]" />
-            <Image alt="slide" src={slide} className="w-[60vw] h-[200px]" />
-            <Image alt="slide" src={slide2} className="w-[60vw] h-[200px]" />
-            <Image alt="slide" src={slide} className="w-[60vw] h-[200px]" />
-            <Image alt="slide" src={slide2} className="w-[60vw] h-[200px]" />
+            <Image alt="slide" src={slide} className="w[60vw] h-[200px]" />
+            <Image alt="slide" src={slide2} className="w[60vw] h-[200px]" />
+            <Image alt="slide" src={slide} className="w[60vw] h-[200px]" />
+            <Image alt="slide" src={slide2} className="w[60vw] h-[200px]" />
+            <Image alt="slide" src={slide} className="w[60vw] h-[200px]" />
+            <Image alt="slide" src={slide2} className="w[60vw] h-[200px]" />
           </Carousel>
           <div className="grid grid-cols-[25%_50%_25%] gap-[0.5rem] items-center shadow shadow-[#CDCDCD] p-[1rem] rounded-[8px] absolute top-[50%] left-[50%] translate-x-[-50%] w-[80%] bg-[#FFF]">
             <Image alt="thumbnail" src={thumbnail} />
@@ -66,12 +71,15 @@ const Property = () => {
               <h5 className="text-[16px] font-[700] text-colorPrimary">
                 NGN150,000
               </h5>
-              <Button type="primary">Rent</Button>
+              <Button onClick={() => setOpen(true)} type="primary">
+                Rent
+              </Button>
             </div>
           </div>
         </div>
         <PropertySection />
       </div>
+      <PropertyModal open={open} setOpen={setOpen} />
     </>
   );
 };
