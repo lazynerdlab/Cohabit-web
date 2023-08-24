@@ -4,7 +4,7 @@ import Header from "@/components/header/Header";
 import BackIcon from "@/assets/icons/BackIcon";
 import { useRouter } from "next/navigation";
 
-const property = () => {
+const Page = () => {
   const { push } = useRouter();
   return (
     <div className="grid grid-cols-1 grid-rows-[10%_90%] max-h-screen overflow-y-scroll">
@@ -26,4 +26,4 @@ const property = () => {
   );
 };
 
-export default property;
+export default Page;

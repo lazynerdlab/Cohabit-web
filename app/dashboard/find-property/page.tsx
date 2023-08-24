@@ -1,7 +1,7 @@
 import Header from "@/components/header/Header";
 import FindProperty from "@/components/find-property/FindProperty";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="grid grid-cols-1 grid-rows-[10%_90%] max-h-screen overflow-y-scroll">
       <Header>
@@ -12,4 +12,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
