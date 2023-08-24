@@ -50,14 +50,14 @@ const SignIn = () => {
           </div>
           <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
             <label
-              htmlFor="email"
+              htmlFor="password"
               className="text-[#0C1938] text-[16px] font-[700]"
             >
               Password
             </label>
             <PasswordInput
               placeholder="This is a placeholder"
-              id="email"
+              id="password"
               type="password"
             />
           </div>

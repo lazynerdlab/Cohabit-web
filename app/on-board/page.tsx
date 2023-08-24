@@ -1,7 +1,8 @@
+"use client";
 import UserOnboarding from "@/components/user-onboarding/UserOnboarding";
 
-const page = () => {
+const Page = () => {
   return <UserOnboarding />;
 };
 
-export default page;
+export default Page;

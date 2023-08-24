@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import { ConfigProvider } from "antd";
 import StyledComponentsRegistry from "@/lib/AntdRegistry";
-import { config } from "@/lib/AntdesingConfig";
 
 const ubuntu = Ubuntu({
   weight: ["300", "400", "500", "700"],

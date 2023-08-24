@@ -1,3 +1,4 @@
+"use client";
 import { RadioButton, RadioGroup } from "@/lib/AntDesignComponents";
 import { useState } from "react";
 
