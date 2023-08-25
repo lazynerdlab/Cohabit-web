@@ -1,3 +1,4 @@
+"use client";
 import authImage from "@/assets/BG.svg";
 import CreatePassword from "@/components/create-password/CreatePassword";
 

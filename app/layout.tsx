@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
-import { ConfigProvider } from "antd";
 import StyledComponentsRegistry from "@/lib/AntdRegistry";
 
 const ubuntu = Ubuntu({
@@ -22,26 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${ubuntu.className} overflow-x-hidden`}>
-        <StyledComponentsRegistry>
-          <ConfigProvider
-            theme={{
-              token: {
-                colorPrimary: "#010886",
-                borderRadius: 5,
-              },
-              components: {
-                Tabs: {
-                  inkBarColor: "#f0f0f0",
-                  itemActiveColor: "#E9EBFD",
-                  itemSelectedColor: "#010886",
-                  algorithm: true,
-                },
-              },
-            }}
-          >
-            {children}
-          </ConfigProvider>
-        </StyledComponentsRegistry>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
   );

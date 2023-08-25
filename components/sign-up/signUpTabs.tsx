@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs } from "antd";
+import { CustomTabs as Tabs } from "@/lib/AntDesignComponents";
 import type { TabsProps } from "antd";
 import SignUp from "./sign-up";
 

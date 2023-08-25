@@ -1,5 +1,10 @@
+import Registry from "../registry";
 const pages = () => {
-  return <div>pages</div>;
+  return (
+    <Registry>
+      <div>pages</div>
+    </Registry>
+  );
 };
 
 export default pages;
