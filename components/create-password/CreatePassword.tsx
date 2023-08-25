@@ -38,7 +38,9 @@ const CreatePassword = () => {
             id="ConfirmPassword"
           />
         </div>
-        <Button type="primary">Submit</Button>
+        <Button style={{ backgroundColor: "#010886" }} type="primary">
+          Submit
+        </Button>
       </form>
     </div>
   );

@@ -44,7 +44,11 @@ const ViewHost = () => {
               </span>
             </div>
           </div>
-          <Button className="self-end text-[14px] font-[600]" type="primary">
+          <Button
+            style={{ backgroundColor: "#010886" }}
+            className="self-end text-[14px] font-[600]"
+            type="primary"
+          >
             Message
           </Button>
         </div>

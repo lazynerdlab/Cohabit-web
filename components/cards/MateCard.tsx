@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import {
   SecondaryButton,
@@ -8,8 +9,10 @@ import {
 import user from "@/assets/mate.svg";
 import ShareIcon from "@/assets/icons/ShareIcon";
 import HeartIcon from "@/assets/icons/HeartIcon";
+import { useRouter } from "next/navigation";
 
 const MateCard = () => {
+  const { push } = useRouter();
   return (
     <div className="rounded-[8px] grid grid-cols-1 shadow shadow-[#CDCDCD] gap-[0.5rem] py-[0.5rem]">
       <div className="flex items-center justify-between w-[98%] mx-auto px-[2%]">
@@ -51,7 +54,13 @@ const MateCard = () => {
             <p className="text-[#FF3D00]">Save</p>
           </div>
         </DangerButton>
-        <Button type="primary">View</Button>
+        <Button
+          style={{ backgroundColor: "#010886" }}
+          onClick={() => push("/dashboard/view-mate/1")}
+          type="primary"
+        >
+          View
+        </Button>
       </div>
     </div>
   );

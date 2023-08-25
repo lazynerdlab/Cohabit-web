@@ -126,7 +126,7 @@ const SideBar = () => {
         selectedKeys={[active]}
         items={items}
       />
-      <div className="grid grid-cols-[20%_80%] mx-auto items-center gap-[1rem] py-[1rem]">
+      <div className="grid grid-cols-[20%_80%] mx-auto justify-between w-[80%] items-center gap-[1rem] py-[1rem]">
         <Image alt="user" src={user} />
         <div className="flex flex-col">
           <h4 className="text-[#202430] text-[18px] font-[600]">Jake Gyll</h4>

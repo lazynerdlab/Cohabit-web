@@ -91,7 +91,11 @@ const SignUp = () => {
               .
             </label>
           </div>
-          <Button onClick={() => push("/on-board")} type="primary">
+          <Button
+            style={{ backgroundColor: "#010886" }}
+            onClick={() => push("/on-board")}
+            type="primary"
+          >
             Get Started
           </Button>
         </form>

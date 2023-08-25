@@ -54,7 +54,9 @@ const Tab2 = () => {
             />
           </div>
           <div>
-            <Button type="primary">Update Email</Button>
+            <Button style={{ backgroundColor: "#010886" }} type="primary">
+              Update Email
+            </Button>
           </div>
         </div>
       </div>
@@ -97,7 +99,9 @@ const Tab2 = () => {
             />
           </div>
           <div>
-            <Button type="primary">Change Password</Button>
+            <Button style={{ backgroundColor: "#010886" }} type="primary">
+              Change Password
+            </Button>
           </div>
         </div>
       </div>

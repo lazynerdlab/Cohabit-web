@@ -78,6 +78,7 @@ const UserOnboarding = () => {
           onClick={() => {
             setCurrent((prev) => prev + 1);
           }}
+          style={{ background: "#010886" }}
           className="w-[20%] justify-self-end"
           type="primary"
         >

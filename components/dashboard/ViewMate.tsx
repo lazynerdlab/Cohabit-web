@@ -71,7 +71,11 @@ const ViewMate = () => {
                 </div>
               </DangerButton>
             </div>
-            <Button className="flex items-center self-end" type="primary">
+            <Button
+              style={{ backgroundColor: "#010886" }}
+              className="flex items-center self-end"
+              type="primary"
+            >
               <p className="text-[14px] font-[600]">Message</p>
             </Button>
           </div>

@@ -94,7 +94,9 @@ const DashBoard = () => {
               options={options}
             />
           </div>
-          <Button type="primary">Search</Button>
+          <Button style={{ backgroundColor: "#010886" }} type="primary">
+            Search
+          </Button>
         </div>
         <div className="text-[16px] font-[400] text-[#515B6F] text-opacity-[0.7] border-b border-[#D6DDEB] p-[0.5rem] w-[98%]">
           Popular : Apartment, Flat, Workspace

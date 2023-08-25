@@ -22,7 +22,9 @@ const ForgetPassword = () => {
           </label>
           <Input type="email" placeholder="This is a placeholder" id="email" />
         </div>
-        <Button type="primary">Send Instruction</Button>
+        <Button style={{ backgroundColor: "#010886" }} type="primary">
+          Send Instruction
+        </Button>
       </form>
     </div>
   );

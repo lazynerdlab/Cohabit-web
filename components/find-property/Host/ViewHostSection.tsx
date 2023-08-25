@@ -44,7 +44,9 @@ const ViewHostSection = () => {
         </div>
         <div className="p-[2rem] flex flex-col items-center gap-[1rem]">
           <p>Thomas Last Active 10Hours Ago</p>
-          <Button type="primary">Message</Button>
+          <Button style={{ backgroundColor: "#010886" }} type="primary">
+            Message
+          </Button>
         </div>
       </div>
     </div>

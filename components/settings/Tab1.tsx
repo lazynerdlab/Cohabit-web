@@ -220,7 +220,7 @@ const Tab1 = () => {
         </div>
       </div>
       <div className="w-full flex justify-end py-[2rem]">
-        <Button type="primary">Save Profile</Button>
+        <Button style={{background:"#010886"}} type="primary">Save Profile</Button>
       </div>
     </div>
   );

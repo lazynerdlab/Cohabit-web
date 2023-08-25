@@ -14,7 +14,7 @@ const Page = () => {
           <div className="flex items-center gap-[0.5rem]">
             <BackIcon
               onClick={() => {
-                push("/find-property");
+                push("/dashboard/find-property");
               }}
               className="w-[40px] h-[40px] font-[400] text-[15px] cursor-pointer"
             />

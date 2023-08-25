@@ -15,7 +15,11 @@ const Step4 = () => {
           <span className="text-center text-[#7C8493] text-lg font-normal leading-[28.80px]">
             Awesome, your dashboard is ready .
           </span>
-          <Button onClick={() => push("/dashboard")} type="primary">
+          <Button
+            style={{ backgroundColor: "#010886" }}
+            onClick={() => push("/dashboard")}
+            type="primary"
+          >
             Let’s go!
           </Button>
         </div>

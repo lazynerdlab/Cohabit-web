@@ -71,7 +71,11 @@ const Property = () => {
               <h5 className="text-[16px] font-[700] text-colorPrimary">
                 NGN150,000
               </h5>
-              <Button onClick={() => setOpen(true)} type="primary">
+              <Button
+                style={{ backgroundColor: "#010886" }}
+                onClick={() => setOpen(true)}
+                type="primary"
+              >
                 Rent
               </Button>
             </div>

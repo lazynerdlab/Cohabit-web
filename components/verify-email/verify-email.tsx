@@ -26,7 +26,9 @@ const VerifyEmailForm = () => {
             id="code"
           />
         </div>
-        <Button type="primary">verify</Button>
+        <Button style={{ backgroundColor: "#010886" }} type="primary">
+          verify
+        </Button>
       </form>
       <div className="flex justify-start items-center gap-[0.5rem]">
         <h3 className="text-neutral-500 text-base font-normal leading-relaxed">

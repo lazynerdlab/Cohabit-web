@@ -39,7 +39,11 @@ const PaymentDetails = () => {
             NGN290,000,000.00
           </p>
         </div>
-        <Button className="w-full" type="primary">
+        <Button
+          style={{ backgroundColor: "#010886" }}
+          className="w-full"
+          type="primary"
+        >
           Make Payment
         </Button>
         <div className="bg-[#3772FF1A]/[10%] rounded-[10px] p-[0.5rem] grid grid-cols-[10%_90%]">

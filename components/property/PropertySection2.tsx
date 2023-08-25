@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import {
   SecondaryButton,
@@ -10,9 +11,11 @@ import HomeCard from "../cards/HomeCard";
 import ShareIcon from "@/assets/icons/ShareIcon";
 import HeartIcon from "@/assets/icons/HeartIcon";
 import user from "@/assets/user.svg";
+import { useRouter } from "next/navigation";
 
 const PropertySection2 = () => {
   const arr = [1, 1, 1, 1];
+  const { push } = useRouter();
   return (
     <div className="flex flex-col gap-[0.5rem] w-[95%] mx-auto">
       <div className="flex flex-col items-center justify-center gap-[1rem] border border-[#D6DDEB] p-[0.5rem]">
@@ -40,7 +43,10 @@ const PropertySection2 = () => {
         </div>
       </div>
       <div className="border border-[#D6DDEB] p-[0.5rem]">
-        <div className="bg-[#1B17E7] px-[1rem] py-[0.5rem] flex items-center gap-[1rem]">
+        <div
+          onClick={() => push("/dashboard/find-property/host/1")}
+          className="bg-[#1B17E7] px-[1rem] py-[0.5rem] flex items-center gap-[1rem] cursor-pointer"
+        >
           <Image alt="host" src={user} />
           <div className="flex flex-col gap-[0.5rem] text-[#FFF]">
             <span>Tony James</span>

@@ -51,7 +51,11 @@ const Profile = () => {
               </span>
             </div>
           </div>
-          <Button className="flex items-center self-end" type="primary">
+          <Button
+            style={{ backgroundColor: "#010886" }}
+            className="flex items-center self-end"
+            type="primary"
+          >
             <div className="flex items-center justify-center gap-[0.2rem]">
               <UserCheckIcon />
               <p className="text-[14px] font-[600]">Edit Profile</p>
