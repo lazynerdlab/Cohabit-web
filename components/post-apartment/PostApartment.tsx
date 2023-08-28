@@ -24,7 +24,7 @@ const PostApartment = () => {
         ),
         content: <Step2 />,
         icon:
-          current === 0 ? (
+          current > 0 ? (
             <DoneIcon className="h-[56px]" />
           ) : (
             <StepIcon className="h-[56px]" />
@@ -39,7 +39,7 @@ const PostApartment = () => {
         ),
         content: <Step3 />,
         icon:
-          current === 1 ? (
+          current > 1 ? (
             <DoneIcon className="h-[56px]" />
           ) : (
             <StepIcon className="h-[56px]" />

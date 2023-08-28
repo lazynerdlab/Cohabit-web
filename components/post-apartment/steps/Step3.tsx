@@ -1,11 +1,12 @@
 "use client";
 import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+// import ReactQuill from "react-quill";
 import { CustomUpload as Upload } from "@/lib/AntDesignComponents";
 import { message } from "antd";
-import ReactQuill from "react-quill";
 import LinkIcon from "@/assets/icons/LinkIcon";
 import type { UploadProps } from "antd";
-
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 const Step3 = () => {
   const props: UploadProps = {
     name: "file",

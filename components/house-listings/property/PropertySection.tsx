@@ -1,5 +1,4 @@
 "use client";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Image from "next/image";
 import map from "@/assets/map.jpg";

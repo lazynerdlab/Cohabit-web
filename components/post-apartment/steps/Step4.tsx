@@ -1,15 +1,17 @@
 "use client";
 import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Home from "@/assets/property.svg";
 import { useRouter } from "next/navigation";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import {
   RadioGroup,
   CustomRadio as Radio,
   CustomInputNumber as InputNumber,
   CustomSelect as Select,
 } from "@/lib/AntDesignComponents";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 const Step4 = () => {
   const { push } = useRouter();
   const options = [
