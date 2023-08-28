@@ -94,7 +94,7 @@ const ProfileSection = () => {
             <h4 className="text-[#25324B] text-[24px] font-[700]">
               Favorite and Saved Searches
             </h4>
-            <Button icon={<PlusIcon />} />
+            <Button icon={<PlusIcon className="fill-[#010886]" />} />
           </div>
           <div className="">
             <Carousel
@@ -159,7 +159,7 @@ const ProfileSection = () => {
             <h4 className="text-[#25324B] text-[24px] font-[700]">
               Rented Apartment
             </h4>
-            <Button icon={<PlusIcon />} />
+            <Button icon={<PlusIcon className="fill-[#010886]" />} />
           </div>
           <div className="">
             <Carousel

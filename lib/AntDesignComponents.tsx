@@ -1,5 +1,6 @@
 import {
   Input,
+  InputNumber,
   ConfigProvider,
   Button,
   Checkbox,
@@ -20,6 +21,7 @@ import {
   Collapse,
   FloatButton,
   InputProps,
+  InputNumberProps,
   ButtonProps,
   CheckboxProps,
   RadioProps,
@@ -57,6 +59,19 @@ export const CustomInput = ({ ...props }: InputProps) => (
     }}
   >
     <Input {...props} style={{ padding: 8 }} />
+  </ConfigProvider>
+);
+
+export const CustomInputNumber = ({ ...props }: InputNumberProps) => (
+  <ConfigProvider
+    theme={{
+      token: {
+        colorPrimary: "#010886",
+        borderRadius: 5,
+      },
+    }}
+  >
+    <InputNumber {...props} style={{ padding: 8 }} />
   </ConfigProvider>
 );
 

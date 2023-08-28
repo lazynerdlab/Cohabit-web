@@ -4,8 +4,10 @@ import Home from "@/assets/property.svg";
 import RoomIcon from "@/assets/icons/RoomIcon";
 import BathIcon from "@/assets/icons/BathIcon";
 import PinLocation from "@/assets/icons/PinLocation";
-import { CustomDivider as Divider } from "@/lib/AntDesignComponents";
-import { CustomButton as Button } from "@/lib/AntDesignComponents";
+import {
+  CustomDivider as Divider,
+  CustomButton as Button,
+} from "@/lib/AntDesignComponents";
 import { useRouter } from "next/navigation";
 
 const HomeCard = () => {

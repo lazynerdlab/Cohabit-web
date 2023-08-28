@@ -54,7 +54,9 @@ const FindProperty = () => {
             <HomeCard key={i} />
           ))}
         </div>
-        <Pagination total={50} />
+        <div className="w-full flex justify-center">
+          <Pagination total={50} />
+        </div>
       </div>
     </div>
   );
