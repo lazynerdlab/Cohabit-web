@@ -1,8 +1,8 @@
 "use client";
+import "react-quill/dist/quill.snow.css";
 import { CustomUpload as Upload } from "@/lib/AntDesignComponents";
 import { message } from "antd";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import LinkIcon from "@/assets/icons/LinkIcon";
 import type { UploadProps } from "antd";
 
