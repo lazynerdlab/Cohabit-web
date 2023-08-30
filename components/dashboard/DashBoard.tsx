@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const DashBoard = () => {
-  const [property, setProperty] = useState();
+  const [currentFilter, setCurrentFilter] = useState("All");
   const { push } = useRouter();
   const arr = [1, 1, 1];
   const filter = [
@@ -102,11 +102,21 @@ const DashBoard = () => {
           Popular : Apartment, Flat, Workspace
         </div>
         <div className="w-[98%] mxauto grid grid-cols-[60%_10%] items-center justify-between">
-          <RadioGroup optionType="button" defaultValue={"All"}>
-            <div className="grid grid-cols-4 justify-between items-center gap-[1rem]">
+          <RadioGroup
+            optionType="button"
+            defaultValue={"All"}
+            onChange={(e) => setCurrentFilter(e.target.value)}
+          >
+            <div className="grid grid-cols-4 justify-start items-center gap-[0.5rem]">
               {filter.map((e, i) => (
                 <div key={i}>
-                  <RadioButton value={e.value} key={i}>
+                  <RadioButton
+                    style={{
+                      color: currentFilter === e.value ? "#FFF" : "#000",
+                    }}
+                    value={e.value}
+                    key={i}
+                  >
                     {e.label}
                   </RadioButton>
                 </div>

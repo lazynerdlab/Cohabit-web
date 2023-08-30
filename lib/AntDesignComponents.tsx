@@ -291,13 +291,14 @@ export const ThemeRadioButton = ({ ...props }: RadioProps) => (
     }}
   >
     <Radio.Button
+      {...props}
       style={{
         borderRadius: 8,
         textAlign: "center",
         color: "#000",
         width: "100%",
+        ...props.style,
       }}
-      {...props}
     />
   </ConfigProvider>
 );
