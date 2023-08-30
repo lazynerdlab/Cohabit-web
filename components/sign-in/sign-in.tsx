@@ -63,7 +63,7 @@ const SignIn = () => {
           </div>
           <div className="w-full mx-auto flex items-center justify-between">
             <Link href="forget-password">Forgot Password</Link>
-            <div className="mxauto flex items-end justify-start gap-[0.3rem]">
+            <div className="mxauto flex items-center justify-start gap-[0.3rem]">
               <Checkbox className="text-[20px]" id="check" />
               <label
                 htmlFor="check"
