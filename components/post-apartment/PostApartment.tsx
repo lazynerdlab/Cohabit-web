@@ -10,9 +10,11 @@ import {
 import StepIcon from "@/assets/icons/StepIcon";
 import DoneIcon from "@/assets/icons/DoneIcon";
 import StartIcon from "@/assets/icons/StartIcon";
+import PostModal from "./PostModal";
 
 const PostApartment = () => {
   const [current, setCurrent] = useState<number>(0);
+  const [open, setOpen] = useState(false);
   const steps = useMemo(
     () => [
       {
@@ -64,31 +66,36 @@ const PostApartment = () => {
     [current]
   );
   return (
-    <div className="w-[95%] mx-auto h-full grid grid-cols-1 gap-[0.5rem] py-[1.5rem]">
-      <Steps current={current} items={steps} />
-      <div className="w-full">{steps[current].content}</div>
-      {current !== 3 ? (
-        <Button
-          onClick={() => {
-            setCurrent((prev) => prev + 1);
-          }}
-          style={{ background: "#010886" }}
-          className="w-[20%] justify-self-end"
-          type="primary"
-        >
-          Next Step
-        </Button>
-      ) : (
-        <Button
-          onClick={() => {}}
-          style={{ background: "#010886" }}
-          className="w-[20%] justify-self-end"
-          type="primary"
-        >
-          Post
-        </Button>
-      )}
-    </div>
+    <>
+      <div className="w-[95%] mx-auto h-full grid grid-cols-1 gap-[0.5rem] py-[1.5rem]">
+        <Steps current={current} items={steps} />
+        <div className="w-full">{steps[current].content}</div>
+        {current !== 2 ? (
+          <Button
+            onClick={() => {
+              setCurrent((prev) => prev + 1);
+            }}
+            style={{ background: "#010886" }}
+            className="w-[20%] justify-self-end"
+            type="primary"
+          >
+            Next Step
+          </Button>
+        ) : (
+          <Button
+            onClick={() => {
+              setOpen(true);
+            }}
+            style={{ background: "#010886" }}
+            className="w-[20%] justify-self-end"
+            type="primary"
+          >
+            Post
+          </Button>
+        )}
+      </div>
+      <PostModal open={open} setOpen={setOpen} />
+    </>
   );
 };
 

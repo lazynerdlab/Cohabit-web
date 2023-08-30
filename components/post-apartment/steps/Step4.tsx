@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Home from "@/assets/property.svg";
 import { useRouter } from "next/navigation";
-// import ReactQuill from "react-quill";
 import {
   RadioGroup,
   CustomRadio as Radio,
@@ -49,8 +48,8 @@ const Step4 = () => {
             Add the description of the apartment, pictures, and features.
           </p>
         </div>
-        <div className="grid grid-cols-[30%_70%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
-          <div className="flex flex-col items-start gap-[0.2rem]">
+        <div className="grid grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+          <div className="flex flex-col items-start self-start gap-[0.2rem]">
             <h4 className="text-[16px] font-[500] text-[#25324B]">
               Type of Apartment
             </h4>
@@ -58,19 +57,39 @@ const Step4 = () => {
               You can select type of apartment
             </p>
           </div>
-          <div className="flex items-center justify-center gap-[1rem] w-[80%] mx-auto">
-            <RadioGroup defaultValue={1}>
+          <div className="flex items-center justify-start gap-[1rem] w-[80%] mx-auto">
+            <RadioGroup defaultValue={2}>
               <div className="flex flex-col gap-[0.3rem]">
-                <Radio value={1}>Option A</Radio>
-                <Radio value={2}>Option A</Radio>
-                <Radio value={3}>Option A</Radio>
-                <Radio value={4}>Option A</Radio>
-                <Radio value={5}>Option A</Radio>
+                <Radio value={1}>
+                  <p className="text-[#515B6F] text-[16px] font-[400]">
+                    Bungalow
+                  </p>
+                </Radio>
+                <Radio value={2}>
+                  <p className="text-[#515B6F] text-[16px] font-[400]">
+                    Duplex
+                  </p>
+                </Radio>
+                <Radio value={3}>
+                  <p className="text-[#515B6F] text-[16px] font-[400]">
+                    Self-Contain
+                  </p>
+                </Radio>
+                <Radio value={4}>
+                  <p className="text-[#515B6F] text-[16px] font-[400]">
+                    2 Bedroom Apartment
+                  </p>
+                </Radio>
+                <Radio value={5}>
+                  <p className="text-[#515B6F] text-[16px] font-[400]">
+                    3 Bedroom Apartment
+                  </p>
+                </Radio>
               </div>
             </RadioGroup>
           </div>
         </div>
-        <div className="grid grid-cols-[30%_70%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+        <div className="grid grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
           <div className="flex flex-col items-start gap-[0.2rem]">
             <h4 className="text-[16px] font-[500] text-[#25324B]">Amount</h4>
             <p className="text-[16px] font-[400] text-[#515B6F]">
@@ -78,11 +97,19 @@ const Step4 = () => {
               can leave this blank
             </p>
           </div>
-          <div className="flex items-center gap-[1rem] w-[80%] mx-auto">
-            <InputNumber value={5000000} prefix={<p>N</p>} controls={false} />
+          <div className="flex justify-start w-[80%] mx-auto">
+            <InputNumber
+              className="w-[70%]"
+              value={500000}
+              style={{
+                width: "80%",
+              }}
+              prefix={<p>N</p>}
+              controls={false}
+            />
           </div>
         </div>
-        <div className="grid grid-cols-[30%_70%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+        <div className="grid grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
           <div className="flex flex-col items-start gap-[0.2rem]">
             <h4 className="text-[16px] font-[500] text-[#25324B]">
               Number of slot
@@ -95,7 +122,7 @@ const Step4 = () => {
             <InputNumber value={10} controls />
           </div>
         </div>
-        <div className="grid grid-cols-[30%_70%] items-start gap-[0.5rem] py-[0.5rem]">
+        <div className="grid grid-cols-[40%_60%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
           <div className="flex flex-col items-start gap-[0.2rem]">
             <h4 className="text-[16px] font-[500] text-[#25324B]">Location</h4>
             <p className="text-[16px] font-[400] text-[#515B6F]">
@@ -125,7 +152,7 @@ const Step4 = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 gap-[0.5rem] w-[98%] mx-auto">
-        <div className="grid grid-cols-[30%_70%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+        <div className="grid grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
           <div className="flex flex-col items-start gap-[0.2rem]">
             <h4 className="text-[16px] font-[500] text-[#25324B]">
               Upload the pictures of the apartment
@@ -142,11 +169,13 @@ const Step4 = () => {
             <Image
               alt="image"
               src={Home}
-              className="w-full block rounded-[8px] h-[100px]"
+              width={500}
+              height={100}
+              className="w[250px] block rounded-[8px] h[200px]"
             />
           </div>
         </div>
-        <div className="grid grid-cols-[30%_70%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
+        <div className="grid grid-cols-[40%_60%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
           <div className="flex flex-col items-start gap-[0.2rem]">
             <h4 className="text-[16px] font-[500] text-[#25324B]">
               Apartment Description
@@ -166,7 +195,7 @@ const Step4 = () => {
             />
           </div>
         </div>
-        <div className="grid grid-cols-[30%_70%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
+        <div className="grid grid-cols-[40%_60%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
           <div className="flex flex-col items-start gap-[0.2rem]">
             <h4 className="text-[16px] font-[500] text-[#25324B]">
               Key Features

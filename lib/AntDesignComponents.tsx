@@ -71,7 +71,7 @@ export const CustomInputNumber = ({ ...props }: InputNumberProps) => (
       },
     }}
   >
-    <InputNumber {...props} style={{ padding: 8 }} />
+    <InputNumber {...props} />
   </ConfigProvider>
 );
 
@@ -138,6 +138,14 @@ export const CustomButton = ({ ...props }: ButtonProps) => (
 export const SecondaryButton = ({ ...props }: ButtonProps) => (
   <ConfigProvider
     theme={{ token: { colorPrimary: "#E5F6F3", borderRadius: 5 } }}
+  >
+    <Button {...props} />
+  </ConfigProvider>
+);
+
+export const SuccessButton = ({ ...props }: ButtonProps) => (
+  <ConfigProvider
+    theme={{ token: { colorPrimary: "#1AD48E", borderRadius: 5 } }}
   >
     <Button {...props} />
   </ConfigProvider>
