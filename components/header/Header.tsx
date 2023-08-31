@@ -7,9 +7,9 @@ import Notification from "@/assets/icons/Notification";
 const Header = ({ children }: HeaderType) => {
   const { replace } = useRouter();
   return (
-    <div className="grid grid-cols-[70%_20%_10%] items-center px-[1rem] sticky shadow-inner shadow-[#D6DDEB]">
+    <div className="grid grid-cols-[70%_20%_10%] items-center px-[2%] sticky shadow-inner shadow-[#D6DDEB]">
       {children}
-      <div className="flex justify-center">
+      <div className="md:flex justify-center hidden">
         <Button
           onClick={() => {
             replace("/");

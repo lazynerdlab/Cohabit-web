@@ -51,16 +51,16 @@ const DashBoard = () => {
   return (
     <div className="w-full mx-auto">
       <div className="w-[98%] mx-auto grid grid-cols-1 py-[0.5rem] gap-[0.5rem]">
-        <h5 className="text-[#25324B] mb-[0.5rem] text-[18px] font-bold leading-[28.80px]">
+        <h5 className="text-[#25324B] mb-[0.5rem] text-[16px] md:text-[18px] font-bold leading-[28.80px]">
           Find your apartment to stay
         </h5>
-        <div className="w-[98%] py-[1rem] px-[2rem] border border-[#D6DDEB] gap-[0.5rem] grid grid-cols-[40%_5%_45%_10%] items-center justify-center">
-          <div className="flex items-center gap-[0.5rem]">
+        <div className="w-[98%] py-[1rem] px-[2%] md:px-[2rem] border border-[#D6DDEB] gap-[0.5rem] grid md:grid-cols-[40%_5%_45%_10%] items-center justify-stretch">
+          <div className="grid grid-cols-[10%_90%] items-center gap-[0.5rem] overflow-hidden">
             <SearchIcon className="cursor-pointer stroke-[#25324B]" />
             <Select
               bordered={false}
               style={{
-                width: 300,
+                // width: "100%",
                 borderBottomWidth: 1,
                 borderTopWidth: 0,
                 borderLeftWidth: 0,
@@ -74,13 +74,13 @@ const DashBoard = () => {
               options={options}
             />
           </div>
-          <div className="self-stretch w-[1px] bg-[#202430]"></div>
-          <div className="flex items-center gap-[0.5rem]">
+          <div className="md:block hidden self-stretch w-[1px] bg-[#202430]"></div>
+          <div className="grid grid-cols-[5%_95%] items-center w-full justifystretch gap-[0.5rem] overflow-hidden">
             <LocationIcon className="cursor-pointer" />
             <Select
               bordered={false}
               style={{
-                width: 300,
+                // width: "100%",
                 borderBottomWidth: 1,
                 borderTopWidth: 0,
                 borderLeftWidth: 0,
@@ -98,16 +98,16 @@ const DashBoard = () => {
             Search
           </Button>
         </div>
-        <div className="text-[16px] font-[400] text-[#515B6F] text-opacity-[0.7] border-b border-[#D6DDEB] p-[0.5rem] w-[98%]">
+        <div className="text-[16px] font-[400] text-[#515B6F] text-opacity-[0.7] border-b border-[#D6DDEB] p-[0.5rem] w-[98%] hidden md:block">
           Popular : Apartment, Flat, Workspace
         </div>
-        <div className="w-[98%] mxauto grid grid-cols-[60%_10%] items-center justify-between">
+        <div className="md:w-[98%] overflow-x-scroll mxauto flex md:grid md:grid-cols-[60%_10%] items-center justify-between gap-[1rem] md:gap-0">
           <RadioGroup
             optionType="button"
             defaultValue={"All"}
             onChange={(e) => setCurrentFilter(e.target.value)}
           >
-            <div className="grid grid-cols-4 justify-start items-center gap-[0.5rem]">
+            <div className="flex md:grid grid-cols-4 justify-start items-center gap-[0.5rem]">
               {filter.map((e, i) => (
                 <div key={i}>
                   <RadioButton
@@ -127,7 +127,7 @@ const DashBoard = () => {
             View All
           </Button>
         </div>
-        <div className="grid grid-cols-3 gap-[1rem] w-[98%]">
+        <div className="grid md:grid-cols-3 gap-[1rem] w-[98%]">
           {arr.map((e, i) => (
             <HomeCard key={i} />
           ))}
@@ -138,7 +138,7 @@ const DashBoard = () => {
           </h5>
           <Button onClick={() => push("/dashboard/view-mate")}>View All</Button>
         </div>
-        <div className="grid grid-cols-3 gap-[1rem] w-[98%]">
+        <div className="grid md:grid-cols-3 gap-[1rem] w-[98%]">
           {arr.map((e, i) => (
             <MateCard key={i} />
           ))}

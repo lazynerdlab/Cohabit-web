@@ -12,9 +12,9 @@ import { useRouter } from "next/navigation";
 const SignUp = () => {
   const { push } = useRouter();
   return (
-    <div className="w-[60%] mx-auto">
+    <div className="w-[90%] md:w-[60%] mx-auto">
       <div className="grid grid-cols-1 gap-[0.8rem] w-full">
-        <div className="w-[408px] text-center text-gray-900 text-[32px] font-bold leading-[38.40px]">
+        <div className="text-center text-gray-900 text-[32px] font-bold leading-[38.40px]">
           Get More Opportunites
         </div>
         <div className="w-full mx-auto">

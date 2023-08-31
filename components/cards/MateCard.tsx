@@ -41,7 +41,7 @@ const MateCard = () => {
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-between w-[98%] mx-auto p-[2%]">
+      <div className="grid grid-cols-3 gap-[0.2rem] items-center justify-between w-[98%] mx-auto p-[2%]">
         <SecondaryButton type="primary">
           <div className="flex items-center gap-[0.1rem]">
             <ShareIcon />

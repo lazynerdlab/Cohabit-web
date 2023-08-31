@@ -118,7 +118,7 @@ const SideBar = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 grid-rows-[10%_75%_15%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-screen overflow-y-hidden">
+    <div className="grid grid-cols-1 grid-rows-[5%_75%_15%] md:grid-rows-[10%_75%_15%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-screen overflow-y-hidden">
       <Title />
       <Menu
         onClick={onClick}
@@ -126,9 +126,9 @@ const SideBar = () => {
         selectedKeys={[active]}
         items={items}
       />
-      <div className="grid grid-cols-[20%_80%] mx-auto justify-between w-[80%] items-center gap-[1rem] py-[1rem]">
+      <div className="grid md:grid-cols-[20%_80%] mx-auto justify-between w-[80%] items-center gap-[1rem] py-[1rem]">
         <Image alt="user" src={user} />
-        <div className="flex flex-col">
+        <div className="md:flex flex-col hidden">
           <h4 className="text-[#202430] text-[18px] font-[600]">Jake Gyll</h4>
           <p className="text-[#202430] text-opacity-[0.5] text-[14px] font-[400]">
             jakegyll@email.com

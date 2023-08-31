@@ -1,5 +1,6 @@
 "use client";
 import google from "@/assets/google.svg";
+import Logo from "@/assets/logo.svg";
 import Image from "next/image";
 import {
   CustomInput as Input,
@@ -13,9 +14,14 @@ import { useRouter } from "next/navigation";
 const SignIn = () => {
   const { push } = useRouter();
   return (
-    <div className="w-[55%] grid grid-cols-1 gap-[1rem] m-auto">
+    <div className="w-[90%] md:w-[55%] grid grid-cols-1 gap-[1rem] m-auto">
       <div className="grid grid-cols-1 gap-[0.8rem] w-full">
-        <div className="w-[408px] text-center text-gray-900 text-[32px] font-bold leading-[38.40px]">
+        <Image
+          className="justify-self-center h-full md:hidden"
+          alt=""
+          src={Logo}
+        />
+        <div className="text-center text-gray-900 text-[32px] font-bold leading-[38.40px]">
           Welcome Back, Dude
         </div>
         <div className="w-full mx-auto">

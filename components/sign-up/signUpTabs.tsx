@@ -1,7 +1,8 @@
-import React from "react";
 import { CustomTabs as Tabs } from "@/lib/AntDesignComponents";
+import Image from "next/image";
 import type { TabsProps } from "antd";
 import SignUp from "./sign-up";
+import Logo from "@/assets/logo.svg";
 
 const items: TabsProps["items"] = [
   {
@@ -17,7 +18,10 @@ const items: TabsProps["items"] = [
 ];
 
 const SignUpTabs = () => (
-  <Tabs centered={true} defaultActiveKey="1" items={items} />
+  <div className="self-center justify-self-center grid grid-col-1">
+    <Image className="justify-self-center h-full md:hidden" alt="" src={Logo} />
+    <Tabs centered={true} defaultActiveKey="1" items={items} />
+  </div>
 );
 
 export default SignUpTabs;
