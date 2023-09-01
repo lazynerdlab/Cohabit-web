@@ -6,7 +6,7 @@ import LanguageIcon from "@/assets/icons/LanguageIcon";
 
 const ProfileSection2 = () => {
   return (
-    <div className="flex flex-col gap-[0.5rem] w-[95%] mx-auto">
+    <div className="flex flex-col gap-[0.5rem] w-full md:w-[95%] mx-auto">
       <div className="py-[1rem] border border-[#D6DDEB] px-[20px] flex flex-col gap-[0.3rem]">
         <span className="flex items-center gap-[0.5rem]">
           <h4 className="text-[#25324B] text-[20px] font-[700]">

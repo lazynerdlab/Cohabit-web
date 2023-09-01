@@ -66,7 +66,7 @@ const Tab1 = () => {
           This is your personal information that you can update anytime.
         </p>
       </div>
-      <div className="grid grid-cols-[30%_70%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid md:grid-cols-[30%_70%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             Profile Photo
@@ -76,23 +76,25 @@ const Tab1 = () => {
             help recruiters recognize you!
           </p>
         </div>
-        <div className="flex items-center gap-[1rem] w-[80%] mx-auto">
+        <div className="flex items-center gap-[1rem] w-[98%] md:w-[80%] mx-auto">
           <Image alt="photo" src={user} />
           <Upload {...props}>
-            <div className="flex flex-col items-center p-[0.5rem]">
-              <JpgIcon />
-              <span className="flex items-center gap-[0.2rem] text-[16px] font-[400]">
-                <p className="text-colorPriary">Click to replace</p>
+            <div className="flex flex-col items-center p-[0.2rem] md:p-[0.5rem]">
+              <JpgIcon className="hidden md:block" />
+              <span className="flex flex-col md:flex-row items-center gap-[0.2rem] text-[10px] md:text-[16px] font-[400]">
+                <p className="text-colorPriary text[12px] md:text[16px]">
+                  Click to replace
+                </p>
                 <p className="text-[#515B6F)]">or drag and drop</p>
               </span>
-              <p className="text-[16px] font-[400] text-[#7C8493]">
+              <p className="text-[10px] md:text-[16px] font-[400] text-[#7C8493]">
                 SVG, PNG, JPG or GIF (max. 400 x 400px).
               </p>
             </div>
           </Upload>
         </div>
       </div>
-      <div className="grid grid-cols-[30%_70%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid md:grid-cols-[30%_70%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <h4 className="text-[16px] font-[500] text-[#25324B]">
           Personal Details
         </h4>
@@ -106,7 +108,7 @@ const Tab1 = () => {
             </label>
             <Input className="" placeholder="This is a placeholder" id="name" />
           </div>
-          <div className="grid grid-cols-2 gap-[0.5rem]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[0.5rem]">
             <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
               <label
                 htmlFor="name"
@@ -164,7 +166,7 @@ const Tab1 = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-[30%_70%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid md:grid-cols-[30%_70%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             Account Type
@@ -220,7 +222,9 @@ const Tab1 = () => {
         </div>
       </div>
       <div className="w-full flex justify-end py-[2rem]">
-        <Button style={{background:"#010886"}} type="primary">Save Profile</Button>
+        <Button style={{ background: "#010886" }} type="primary">
+          Save Profile
+        </Button>
       </div>
     </div>
   );

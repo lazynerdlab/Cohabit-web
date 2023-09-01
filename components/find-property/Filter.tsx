@@ -139,7 +139,7 @@ const Filter = () => {
           return { ...modified };
         });
       }}
-      className="max-h-screen min-h-screen overflow-y-scroll"
+      className="max-h-screen min-h-screen max-w-[80vw] overflow-y-scroll w-full absolute mini:relative z-[9999999]"
     />
   );
 };

@@ -18,42 +18,44 @@ const Profile = () => {
           <Image alt="background" className="w-full" src={gradient} />
           <EditIcon className="absolute right-[2%] top-[2%] fill-[#FFF] cursor-pointer" />
         </div>
-        <div className="p-[1rem] grid grid-cols-[15%_70%_15%]">
+        <div className="p-[1rem] grid grid-cols-[20%_80%]">
           <Image alt="avatar" src={Avatar} />
           <div className="flex flex-col items-start justify-between">
-            <h4 className="text-[rgba(50, 71, 92, 0.87)] text-[24px] font-[500] p-0">
+            <h4 className="text-[rgba(50, 71, 92, 0.87)] text-[15px] md:text-[24px] font-[500] p-0">
               John Doe
             </h4>
-            <span className="flex items-center gap-[0.5rem] bg-[#56CDAD]/[50%] px-[24px] py-[12px] rounded-[8px]">
+            <span className="flex items-center gap-[0.5rem] bg-[#56CDAD]/[50%] px-[12px] py-[6px] md:px-[24px] md:py-[12px] rounded-[8px]">
               <FlagIcon className="fill-[#56CDAD]" />
-              <p className="text-[#56CDAD] text-[16px] uppercase font-[500]">
+              <p className="text-[#56CDAD] text-[10px] md:text-[16px] uppercase font-[500]">
                 Looking for apartment
               </p>
             </span>
-            <div className="flex items-start gap-[0.2rem]">
-              <span className="flex gap-[0.2rem]">
-                <VerifiedIcon />
-                <p className="text-[rgba(50, 71, 92, 0.60)] text-[16px] font-[500]">
-                  Verified
-                </p>
-              </span>
-              <span className="flex gap-[0.2rem]">
-                <LocationIcon />
-                <p className="text-[rgba(50, 71, 92, 0.60)] text-[16px] font-[500]">
-                  Lagos Nigeria
-                </p>
-              </span>
-              <span className="flex gap-[0.2rem]">
-                <CalendarIcon />
-                <p className="text-[rgba(50, 71, 92, 0.60)] text-[16px] font-[500]">
-                  Joined April 2021
-                </p>
-              </span>
-            </div>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-[90%_10%] w-[98%] pb-[2%] mx-auto">
+          <div className="flex items-start gap-[0.2rem]">
+            <span className="flex gap-[0.2rem]">
+              <VerifiedIcon />
+              <p className="text-[rgba(50, 71, 92, 0.60)] text-[10px] md:text-[16px] font-[500]">
+                Verified
+              </p>
+            </span>
+            <span className="flex gap-[0.2rem]">
+              <LocationIcon />
+              <p className="text-[rgba(50, 71, 92, 0.60)] text-[10px] md:text-[16px] font-[500]">
+                Lagos Nigeria
+              </p>
+            </span>
+            <span className="flex gap-[0.2rem]">
+              <CalendarIcon />
+              <p className="text-[rgba(50, 71, 92, 0.60)] text-[10px] md:text-[16px] font-[500]">
+                Joined April 2021
+              </p>
+            </span>
           </div>
           <Button
             style={{ backgroundColor: "#010886" }}
-            className="flex items-center self-end"
+            className="flex items-center justify-self-end"
             type="primary"
           >
             <div className="flex items-center justify-center gap-[0.2rem]">

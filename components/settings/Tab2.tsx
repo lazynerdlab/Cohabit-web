@@ -18,7 +18,7 @@ const Tab2 = () => {
           This is login information that you can update anytime.
         </p>
       </div>
-      <div className="grid grid-cols-[30%_70%] items-start gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid md:grid-cols-[30%_70%] items-start gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             Update Email
@@ -60,7 +60,7 @@ const Tab2 = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-[30%_70%] items-start gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid md:grid-cols-[30%_70%] items-start gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             New Password

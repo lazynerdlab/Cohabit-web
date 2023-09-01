@@ -126,7 +126,7 @@ const HelpCenter = () => {
   ];
   return (
     <>
-      <div className="w-[98%] mx-auto grid grid-cols-[35%_65%] gap-[0.5rem]">
+      <div className="w-[98%] mx-auto grid md:grid-cols-[35%_65%] gap-[0.5rem]">
         <div className="grid grid-cols-1">
           <div className="w-full mx-auto flex flex-col items-start justify-start gap-[1rem]">
             <label
@@ -156,7 +156,7 @@ const HelpCenter = () => {
               </div>
             ))}
           </div>
-          <div>
+          <div className="hidden md:block">
             <div
               style={{
                 backgroundImage: `url(${cardbg.src})`,
@@ -188,6 +188,30 @@ const HelpCenter = () => {
           </div>
           <div>
             <Collapse defaultActiveKey={1} items={items} />
+          </div>
+        </div>
+        <div className="md:hidden block">
+          <div
+            style={{
+              backgroundImage: `url(${cardbg.src})`,
+              backgroundSize: "cover",
+            }}
+            className="rounded-[8px] flex flex-col gap-[1rem] py-[1rem] px-[2rem]"
+          >
+            <span className="text-[20px] font-[500] text-[#FFF]">
+              Didn't find what you were looking for?
+            </span>
+            <span className="text-[#F8F8FD] text-[16px] font-[400]">
+              Contact our customer service
+            </span>
+            <div>
+              <Button
+                style={{ background: "#FFF" }}
+                className="text-colorPrimary"
+              >
+                Contact Us
+              </Button>
+            </div>
           </div>
         </div>
       </div>

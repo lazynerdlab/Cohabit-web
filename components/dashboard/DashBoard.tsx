@@ -127,7 +127,7 @@ const DashBoard = () => {
             View All
           </Button>
         </div>
-        <div className="grid md:grid-cols-3 gap-[1rem] w-[98%]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[1rem] w-[98%]">
           {arr.map((e, i) => (
             <HomeCard key={i} />
           ))}
@@ -138,7 +138,7 @@ const DashBoard = () => {
           </h5>
           <Button onClick={() => push("/dashboard/view-mate")}>View All</Button>
         </div>
-        <div className="grid md:grid-cols-3 gap-[1rem] w-[98%]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[1rem] w-[98%]">
           {arr.map((e, i) => (
             <MateCard key={i} />
           ))}
