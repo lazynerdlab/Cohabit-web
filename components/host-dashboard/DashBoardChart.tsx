@@ -7,7 +7,7 @@ import {
 } from "@/lib/AntDesignComponents";
 const DashBoardChart = () => {
   return (
-    <div className="mx-auto grid grid-cols-[70%_30%] justify-between items-stretch gap-[1rem]">
+    <div className="mx-auto grid grid-cols-1 md:grid-cols-[70%_30%] justify-between items-stretch gap-[1rem]">
       <div className="w-full border border-[#D6DDEB] p-[0.5rem] flex flex-col gap-[0.5rem]">
         <div className="border-b border-[#D6DDEB] pb-[0.3rem] flex items-center justify-between w-full mx-auto">
           <span>
@@ -22,7 +22,7 @@ const DashBoardChart = () => {
             <RadioGroup />
           </div>
         </div>
-        <div className="grid grid-cols-[70%_30%] items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-[70%_30%] items-stretch">
           <div className="w-full">
             <BarCharts />
           </div>

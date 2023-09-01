@@ -8,7 +8,7 @@ import PlusIcon from "@/assets/icons/PlusIcon";
 const HostHeader = ({ children }: HeaderType) => {
   const { replace } = useRouter();
   return (
-    <div className="grid grid-cols-[70%_10%_20%] items-center px-[1rem] sticky shadow-inner shadow-[#D6DDEB]">
+    <div className="grid grid-cols-[40%_20%_40%] md:grid-cols-[70%_10%_20%] items-center px-[1rem] sticky shadow-inner shadow-[#D6DDEB]">
       {children}
       <div className="flex justify-end">
         <Notification />
@@ -20,8 +20,10 @@ const HostHeader = ({ children }: HeaderType) => {
           type="primary"
         >
           <div className="flex items-center justify-center gap-[0.2rem]">
-            <PlusIcon className="fill-[#FFF]" />
-            <p className="text-[14px] font-[600]">Post an apartment</p>
+            <PlusIcon className="fill-[#FFF] hidden md:block" />
+            <p className="text-[12px] md:text-[14px] font-[600]">
+              Post an apartment
+            </p>
           </div>
         </Button>
       </div>

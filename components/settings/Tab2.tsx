@@ -18,7 +18,7 @@ const Tab2 = () => {
           This is login information that you can update anytime.
         </p>
       </div>
-      <div className="grid md:grid-cols-[30%_70%] items-start gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[30%_70%] items-start gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             Update Email
@@ -27,7 +27,7 @@ const Tab2 = () => {
             Update your email address to make sure it is safe
           </p>
         </div>
-        <div className="grid grid-cols-1 items-center gap-[1rem] w-[80%] mx-auto">
+        <div className="grid grid-cols-1 items-center gap-[1rem] w-full md:w-[80%] mx-auto">
           <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
             <div className="flex items-center">
               <h5 className="text-[#25324B] text-[16px] font-[500]">
@@ -60,7 +60,7 @@ const Tab2 = () => {
           </div>
         </div>
       </div>
-      <div className="grid md:grid-cols-[30%_70%] items-start gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[30%_70%] items-start gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             New Password
@@ -69,7 +69,7 @@ const Tab2 = () => {
             Manage your password to make sure it is safe
           </p>
         </div>
-        <div className="grid grid-cols-1 items-center gap-[1rem] w-[80%] mx-auto">
+        <div className="grid grid-cols-1 items-center gap-[1rem] w-full md:w-[80%] mx-auto">
           <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
             <label
               htmlFor="oldPassword"

@@ -56,18 +56,18 @@ const HelpCenter = () => {
     {
       key: "1",
       label: (
-        <p className="font-[500] text-[20px] text-[#25324B]">
+        <p className="font-[500] text-[16px] md:text-[20px] text-[#25324B]">
           What is Co-habit ?
         </p>
       ),
       children: (
         <div className="flex flex-col gap-[1rem]">
-          <span className="text-[#515B6F] text-[16px] font-[400] w[80%] mxauto p-[1rem] border-b border-[#D6DDEB]">
+          <span className="text-[#515B6F] text-[12px] md:text-[16px] font-[400] w[80%] mxauto p-[1rem] border-b border-[#D6DDEB]">
             Our mission is to help people find affordable homes with a seamless
             and rewarding shared experiences
           </span>
           <div className="flex items-center gap-[0.3rem]">
-            <span className="text-[#515B6F] text-[16px] font-[600]">
+            <span className="text-[#515B6F] text-[12px] md:text-[16px] font-[600]">
               Was this article helpful?
             </span>
             <IconButton
@@ -91,22 +91,22 @@ const HelpCenter = () => {
     {
       key: "2",
       label: (
-        <p className="font-[500] text-[20px] text-[#25324B]">
+        <p className="font-[500] text-[16px] md:text-[20px] text-[#25324B]">
           How do i get an apartment without being scammed
         </p>
       ),
       children: (
         <div className="flex flex-col gap-[1rem]">
-          <span className="text-[#515B6F] text-[16px] font-[400] w[80%] mxauto p-[1rem] border-b border-[#D6DDEB]">
+          <span className="text-[#515B6F] text-[12px] md:text-[16px] font-[400] w[80%] mxauto p-[1rem] border-b border-[#D6DDEB]">
             In co-habit we make sure that each apartment is being verified
             before showing our potential customers
           </span>
           <div className="flex items-center gap-[0.3rem]">
-            <span className="text-[#515B6F] text-[16px] font-[600]">
+            <span className="text-[#515B6F] text-[12px] md:text-[16px] font-[600]">
               Was this article helpful?
             </span>
             <IconButton
-              className="text-[#4640DE] text-[16px] font-[400]"
+              className="text-[#4640DE] text-[12px] md:text-[16px] font-[400]"
               icon={<ThumbUpIcon />}
             >
               Yes
@@ -164,7 +164,7 @@ const HelpCenter = () => {
               }}
               className="rounded-[8px] flex flex-col gap-[1rem] py-[1rem] px-[2rem]"
             >
-              <span className="text-[20px] font-[500] text-[#FFF]">
+              <span className="text-[16px] md:text-[20px] font-[500] text-[#FFF]">
                 Didn't find what you were looking for?
               </span>
               <span className="text-[#F8F8FD] text-[16px] font-[400]">
@@ -198,10 +198,10 @@ const HelpCenter = () => {
             }}
             className="rounded-[8px] flex flex-col gap-[1rem] py-[1rem] px-[2rem]"
           >
-            <span className="text-[20px] font-[500] text-[#FFF]">
+            <span className="text-[16px] md:text-[20px] font-[500] text-[#FFF]">
               Didn't find what you were looking for?
             </span>
-            <span className="text-[#F8F8FD] text-[16px] font-[400]">
+            <span className="text-[#F8F8FD] text-[12px] md:text-[16px] font-[400]">
               Contact our customer service
             </span>
             <div>

@@ -35,7 +35,7 @@ const Step3 = () => {
           Add the description of the apartment, pictures, and features.
         </p>
       </div>
-      <div className="grid grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             Upload the pictures of the apartment
@@ -45,7 +45,7 @@ const Step3 = () => {
             help recruiters recognize you!
           </p>
         </div>
-        <div className="flex flex-col items-stretch gap-[1rem] w-[80%] mx-auto">
+        <div className="flex flex-col items-stretch gap-[1rem] w-full md:w-[80%] mx-auto">
           <span className="text-[#202430] text-[16px] font-[500]">
             Upload pictures (Png, Jpeg). not less than 500mb
           </span>
@@ -59,7 +59,7 @@ const Step3 = () => {
           </Upload>
         </div>
       </div>
-      <div className="grid grid-cols-[40%_60%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             Apartment Description
@@ -68,7 +68,7 @@ const Step3 = () => {
             Full details about the apartment
           </p>
         </div>
-        <div className="flex flex-col items-stretch w-[80%] mx-auto">
+        <div className="flex flex-col items-stretch w-full md:w-[80%] mx-auto">
           <ReactQuill
             className="w-full"
             theme="snow"
@@ -76,7 +76,7 @@ const Step3 = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-[40%_60%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             Key Features
@@ -85,7 +85,7 @@ const Step3 = () => {
             Outline the key features of the apartment
           </p>
         </div>
-        <div className="w-[80%] mx-auto">
+        <div className="w-full md:w-[80%] mx-auto">
           <ReactQuill
             className="w-full"
             theme="snow"

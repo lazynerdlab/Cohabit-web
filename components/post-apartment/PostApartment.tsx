@@ -76,7 +76,7 @@ const PostApartment = () => {
               setCurrent((prev) => prev + 1);
             }}
             style={{ background: "#010886" }}
-            className="w-[20%] justify-self-end"
+            className="w-fit md:w-[20%] justify-self-end"
             type="primary"
           >
             Next Step
@@ -87,7 +87,7 @@ const PostApartment = () => {
               setOpen(true);
             }}
             style={{ background: "#010886" }}
-            className="w-[20%] justify-self-end"
+            className="w-fit md:w-[20%] justify-self-end"
             type="primary"
           >
             Post

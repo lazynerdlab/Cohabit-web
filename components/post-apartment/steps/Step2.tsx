@@ -42,7 +42,7 @@ const Step2 = () => {
           This information will be displayed publicly.
         </p>
       </div>
-      <div className="grid grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start self-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             Type of Apartment
@@ -51,7 +51,7 @@ const Step2 = () => {
             You can select type of apartment
           </p>
         </div>
-        <div className="flex items-center justify-start gap-[1rem] w-[80%] mx-auto">
+        <div className="flex items-center justify-start justify-self-start gap-[1rem] w-full md:w-[80%] mx-auto">
           <RadioGroup>
             <div className="flex flex-col gap-[0.3rem]">
               <Radio value={1}>
@@ -81,7 +81,7 @@ const Step2 = () => {
           </RadioGroup>
         </div>
       </div>
-      <div className="grid grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">Amount</h4>
           <p className="text-[16px] font-[400] text-[#515B6F]">
@@ -89,7 +89,7 @@ const Step2 = () => {
             leave this blank
           </p>
         </div>
-        <div className="flex justify-start w-[80%] mx-auto">
+        <div className="flex justify-start w-full md:w-[80%] mx-auto">
           <InputNumber
             className="w-[70%]"
             style={{
@@ -100,7 +100,7 @@ const Step2 = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             Number of slot
@@ -109,18 +109,18 @@ const Step2 = () => {
             List the number of people you want in an apartment
           </p>
         </div>
-        <div className="flex items-center gap-[1rem] w-[80%] mx-auto">
+        <div className="flex items-center gap-[1rem] w-full md:w-[80%] mx-auto">
           <InputNumber controls />
         </div>
       </div>
-      <div className="grid grid-cols-[40%_60%] items-start gap-[0.5rem] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start gap-[0.5rem] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">Location</h4>
           <p className="text-[16px] font-[400] text-[#515B6F]">
             You can select apartment location
           </p>
         </div>
-        <div className="w-[80%] mx-auto">
+        <div className="w-full md:w-[80%] mx-auto">
           <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
             <label
               htmlFor="status"

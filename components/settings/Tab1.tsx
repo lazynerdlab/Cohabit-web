@@ -66,7 +66,7 @@ const Tab1 = () => {
           This is your personal information that you can update anytime.
         </p>
       </div>
-      <div className="grid md:grid-cols-[30%_70%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[30%_70%] items-center gap-[1rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             Profile Photo
@@ -94,11 +94,11 @@ const Tab1 = () => {
           </Upload>
         </div>
       </div>
-      <div className="grid md:grid-cols-[30%_70%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[30%_70%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <h4 className="text-[16px] font-[500] text-[#25324B]">
           Personal Details
         </h4>
-        <div className="grid grid-cols-1 items-center gap-[1rem] w-[80%] mx-auto">
+        <div className="grid grid-cols-1 items-center gap-[1rem] w-full md:w-[80%] mx-auto">
           <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
             <label
               htmlFor="name"
@@ -166,7 +166,7 @@ const Tab1 = () => {
           </div>
         </div>
       </div>
-      <div className="grid md:grid-cols-[30%_70%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
+      <div className="grid grid-cols-1 md:grid-cols-[30%_70%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
         <div className="flex flex-col items-start gap-[0.2rem]">
           <h4 className="text-[16px] font-[500] text-[#25324B]">
             Account Type
@@ -175,8 +175,8 @@ const Tab1 = () => {
             You can update your account type
           </p>
         </div>
-        <RadioGroup style={{ color: "#4640DE" }}>
-          <div className="grid grid-cols-1 w-[80%] mx-auto">
+        <RadioGroup className="" style={{ color: "#4640DE" }}>
+          <div className="grid grid-cols-1 w-full md:w-[80%] mx-auto">
             <Radio value={"houseSeeker"}>
               <div className="flex flex-col items-start">
                 <h5 className="text-[#25324B] text-[16px] font-[500]">
