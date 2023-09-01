@@ -1,17 +1,22 @@
+"use client";
 import { useLayoutEffect, useState } from "react";
 
 const useWidth = () => {
-  const [width, setWidth] = useState<number>(600);
+  const [width, setWidth] = useState<number>(
+    typeof window !== "undefined" ? window.innerWidth : 600
+  );
+
   useLayoutEffect(() => {
-    window.addEventListener("resize", (e: Record<string, any>) => {
-      setWidth(e?.width);
+    setWidth(window.innerWidth);
+    window.addEventListener("resize", () => {
+      setWidth(window.innerWidth);
     });
     return () => {
-      window.removeEventListener("resize", (e: Record<string, any>) => {
-        setWidth(e?.width);
+      window.removeEventListener("resize", () => {
+        setWidth(window.innerWidth);
       });
     };
-  }, []);
+  }, [width]);
   return width;
 };
 
