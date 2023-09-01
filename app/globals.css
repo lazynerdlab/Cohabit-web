@@ -36,3 +36,9 @@ h6 {
 .carouselBtn button {
   background: #010886 !important;
 }
+
+@media screen and (max-width: 800px) {
+  .ant-steps {
+    display: none !important;
+  }
+}

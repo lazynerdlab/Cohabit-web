@@ -71,8 +71,8 @@ const UserOnboarding = () => {
   );
   return (
     <div className="w-[98%] md:w-[95%] mx-auto h-full grid grid-cols-1 gap-[0.5rem] py-[1.5rem] overflow-x-hidden">
-      <div className="grid grid-cols-[10%_95%] md:grid-cols-1 gap-[0.5rem]">
-        <Steps size="small" progressDot current={current} items={steps} />
+      <div className="grid grid-cols-1 gap-[0.5rem]">
+        <Steps size="small" current={current} items={steps} />
         <div className="w-full">{steps[current].content}</div>
       </div>
       {current !== 3 && (
@@ -81,7 +81,7 @@ const UserOnboarding = () => {
             setCurrent((prev) => prev + 1);
           }}
           style={{ background: "#010886" }}
-          className="w-[20%] justify-self-end"
+          className="w-fit md:w-[20%] justify-self-end"
           type="primary"
         >
           Next Step
