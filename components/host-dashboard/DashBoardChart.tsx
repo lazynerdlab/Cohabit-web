@@ -23,7 +23,7 @@ const DashBoardChart = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-[70%_30%] items-stretch">
-          <div className="w-full">
+          <div className="w-full min-h-[200px]">
             <BarCharts />
           </div>
           <div className="flex flex-col gap-[1rem]">
