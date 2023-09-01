@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from "react";
 
 const useWidth = () => {
-  const [width, setWidth] = useState<number>(window?.innerWidth);
+  const [width, setWidth] = useState<number>(600);
   useLayoutEffect(() => {
     window.addEventListener("resize", (e: Record<string, any>) => {
       setWidth(e?.width);
@@ -11,7 +11,7 @@ const useWidth = () => {
         setWidth(e?.width);
       });
     };
-  }, [window.innerWidth]);
+  }, []);
   return width;
 };
 
