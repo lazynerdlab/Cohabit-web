@@ -4,8 +4,8 @@ import CreatePassword from "@/components/create-password/CreatePassword";
 
 const ResetPassword = () => {
   return (
-    <div className="grid grid-cols-[45%_55%] min-h-[100vh]">
-      <div className="w-full bg-[#F8F8FD] grid grid-cols-1">
+    <div className="grid md:grid-cols-[45%_55%] min-h-[100vh]">
+      <div className="w-full bg-[#F8F8FD] md:grid grid-cols-1 hidden">
         <div
           style={{
             background: `url(${authImage.src})`,
