@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import HomeCard from "../cards/HomeCard";
 import Filter from "./Filter";

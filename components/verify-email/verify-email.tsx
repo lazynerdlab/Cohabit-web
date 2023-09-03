@@ -5,7 +5,7 @@ import {
 
 const VerifyEmailForm = () => {
   return (
-    <div className="grid grid-cols-1 gap-[1rem] m-auto items-center w-[60%]">
+    <div className="grid grid-cols-1 gap-[1rem] m-auto items-center w-[90%] md:w-[60%]">
       <div className="text-center text-gray-900 text-[32px] font-bold leading-[38.40px]">
         Verify your Email
       </div>
@@ -34,7 +34,7 @@ const VerifyEmailForm = () => {
         <h3 className="text-neutral-500 text-base font-normal leading-relaxed">
           Didn’t get the code?
         </h3>
-        <div className="text-center text-cyan-900 text-base font-semibold leading-normal">
+        <div className="text-center text-colorPrimary text-base font-semibold leading-normal">
           Click Resend
         </div>
       </div>

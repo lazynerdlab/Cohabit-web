@@ -2,13 +2,11 @@
 import Payment from "@/components/payment/Payment";
 import Header from "@/components/header/Header";
 import BackIcon from "@/assets/icons/BackIcon";
-import Registry from "@/app/dashboard/registry";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
   const { push } = useRouter();
   return (
-    <Registry>
       <div className="grid grid-cols-1 grid-rows-[10%_90%] max-h-screen overflow-y-scroll">
         <Header>
           <div className="flex items-center gap-[0.5rem]">
@@ -25,7 +23,6 @@ const Page = () => {
         </Header>
         <Payment />
       </div>
-    </Registry>
   );
 };
 

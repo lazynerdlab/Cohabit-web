@@ -4,7 +4,7 @@ import {
 } from "@/lib/AntDesignComponents";
 const CreatePassword = () => {
   return (
-    <div className="grid grid-cols-1 gap-[0.5rem] m-auto w-[60%]">
+    <div className="grid grid-cols-1 gap-[0.5rem] m-auto w-[90%] md:w-[60%]">
       <div className="text-center text-gray-900 text-[32px] font-bold leading-[38.40px]">
         Password
       </div>
