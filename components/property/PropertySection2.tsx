@@ -17,7 +17,7 @@ const PropertySection2 = () => {
   const arr = [1, 1, 1, 1];
   const { push } = useRouter();
   return (
-    <div className="flex flex-col gap-[0.5rem] w-[95%] mx-auto">
+    <div className="flex flex-col gap-[0.5rem] w-full md:w-[95%] mx-auto">
       <div className="flex flex-col items-center justify-center gap-[1rem] border border-[#D6DDEB] p-[0.5rem]">
         <div className="flex items-center justify-center gap-[0.5rem]">
           <SecondaryButton type="primary">
@@ -77,7 +77,7 @@ const PropertySection2 = () => {
           </div>
         </form>
       </div>
-      <div className="flex flex-col gap-[0.5rem]">
+      <div className="hidden md:flex flex-col gap-[0.5rem]">
         <h6 className="text-[18px] font-[400] text-[#000] text-center">
           Featured Property
         </h6>

@@ -33,8 +33,10 @@ const PropertyModal = ({ open, setOpen }: modalProps) => {
         <div className="border-[#D6DDEB] border-b py-[0.5rem] flex gap-[0.5rem] p-[1rem]">
           <Image width={80} height={80} alt="property" src={thumbnail} />
           <div className="flex flex-col gap-[0.5rem]">
-            <h5 className="text-[#25324B] text-[24px] font-[500]">Bungalow</h5>
-            <div className="text-[#515B6F] text-[18px] font-[500] flex gap-[0.2rem]">
+            <h5 className="text-[#25324B] text-[18px] md:text-[24px] font-[500]">
+              Bungalow
+            </h5>
+            <div className="text-[#515B6F] text-[12px] md:text-[18px] font-[500] flex gap-[0.2rem]">
               <p>Lagos, Nigeria</p>
               <p>. 2 Bedroom</p>
               <p>. Available</p>
@@ -47,17 +49,17 @@ const PropertyModal = ({ open, setOpen }: modalProps) => {
     >
       <div className="flex flex-col gap-[0.5rem] w-[98%] mx-auto">
         <div className="flex flex-col">
-          <h6 className="text-[#25324B] text-[24px] font-[500]">
+          <h6 className="text-[#25324B] text-[18px] md:text-[24px] font-[500]">
             Submit your requirement
           </h6>
-          <p className="text-[#7C8493] text-[16px] font-[400]">
+          <p className="text-[#7C8493] text-[12px] md:text-[16px] font-[400]">
             The folowing is required and will only shared with the host
           </p>
         </div>
         <div className="flex flex-col gap-[0.5rem]">
           <label
             htmlFor="name"
-            className="text-[#515B6F] text-[16px] font-[700]"
+            className="text-[#515B6F] text-[12px] md:text-[16px] font-[700]"
           >
             Full name
           </label>
@@ -66,7 +68,7 @@ const PropertyModal = ({ open, setOpen }: modalProps) => {
         <div className="flex flex-col gap-[0.5rem]">
           <label
             htmlFor="name"
-            className="text-[#515B6F] text-[16px] font-[700]"
+            className="text-[#515B6F] text-[12px] md:text-[16px] font-[700]"
           >
             Email Address
           </label>
@@ -75,7 +77,7 @@ const PropertyModal = ({ open, setOpen }: modalProps) => {
         <div className="flex flex-col gap-[0.5rem]">
           <label
             htmlFor="phone"
-            className="text-[#515B6F] text-[16px] font-[700]"
+            className="text-[#515B6F] text-[12px] md:text-[16px] font-[700]"
           >
             Phone Number
           </label>
@@ -84,7 +86,7 @@ const PropertyModal = ({ open, setOpen }: modalProps) => {
         <div className="flex flex-col gap-[0.5rem] border-[#D6DDEB] border-b py-[0.5rem]">
           <label
             htmlFor="select"
-            className="text-[#515B6F] text-[16px] font-[700]"
+            className="text-[#515B6F] text-[12px] md:text-[16px] font-[700]"
           >
             Do you want to share an apartment
           </label>
@@ -105,7 +107,7 @@ const PropertyModal = ({ open, setOpen }: modalProps) => {
         >
           Submit
         </Button>
-        <span className="text-[#515B6F] text-[14px] font-[400] pr-[1rem]">
+        <span className="text-[#515B6F] text-[12px] md:text-[14px] font-[400] pr-[1rem]">
           By clicking 'Continue', you acknowledge that you have read and accept
           the{" "}
           <Link className="text-[#4640DE]" href={"#"}>

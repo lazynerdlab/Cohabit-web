@@ -42,3 +42,11 @@ h6 {
     display: none !important;
   }
 }
+.mobile-hidden {
+  display: none !important;
+}
+@media (min-width: 768px) {
+  .mobile-hidden {
+    display: block !important;
+  }
+}
