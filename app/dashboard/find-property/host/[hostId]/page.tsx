@@ -18,7 +18,9 @@ const Page = () => {
               }}
               className="w-[40px] h-[40px] font-[400] text-[15px] cursor-pointer"
             />
-            <h4 className="text-[#25324B] text-[25px] font-[700]">View Host</h4>
+            <h4 className="text-[#25324B] text-[18px] md:text-[25px] font-[700]">
+              View Host
+            </h4>
           </div>
         </Header>
         <ViewHost />

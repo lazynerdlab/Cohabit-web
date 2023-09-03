@@ -15,7 +15,11 @@ const Profile = () => {
     <div className="w-[98%] mx-auto">
       <div className="w-full flex flex-col rounded-[10px] bg-[#FFF] shadow-sm shadow-[#B8C9C9]">
         <div className="w-full relative">
-          <Image alt="background" className="w-full" src={gradient} />
+          <Image
+            alt="background"
+            className="w-full hidden md:block"
+            src={gradient}
+          />
           <EditIcon className="absolute right-[2%] top-[2%] fill-[#FFF] cursor-pointer" />
         </div>
         <div className="p-[1rem] grid grid-cols-[20%_80%]">
