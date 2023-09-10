@@ -6,7 +6,7 @@ import Registry from "../../registry";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
-  const { push } = useRouter();
+  const { back } = useRouter();
   return (
     <Registry>
       <div className="grid grid-cols-1 grid-rows-[10%_90%] max-h-screen overflow-y-scroll">
@@ -14,7 +14,7 @@ const Page = () => {
           <div className="flex items-center gap-[0.5rem]">
             <BackIcon
               onClick={() => {
-                push("/dashboard/house-listing");
+                back();
               }}
               className="cursor-pointer"
             />

@@ -6,7 +6,7 @@ import Registry from "../../registry";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
-  const { push } = useRouter();
+  const router = useRouter();
   return (
     <Registry>
       <div className="grid grid-cols-1 grid-rows-[10%_90%] max-h-screen overflow-y-scroll">
@@ -14,7 +14,7 @@ const Page = () => {
           <div className="flex items-center gap-[0.5rem]">
             <BackIcon
               onClick={() => {
-                push("/dashboard");
+                router.back();
               }}
               className="w-[40px] h-[40px] font-[400] text-[15px] cursor-pointer"
             />
