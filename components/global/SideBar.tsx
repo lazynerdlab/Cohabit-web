@@ -35,7 +35,7 @@ function getItem(
 const Title = () => <Image className="mxauto py-[0.5rem]" alt="" src={Logo} />;
 
 const SideBar = () => {
-  const [active, setActive] = useState("/dashboard");
+  const [active, setActive] = useState("");
   const path = usePathname();
   const items: MenuProps["items"] = useMemo(
     () => [
