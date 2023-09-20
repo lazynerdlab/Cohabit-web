@@ -1,4 +1,1 @@
-export type Icon = {
-  className?: string;
-  onClick?: () => void;
-};
+export type Icon = React.SVGAttributes<SVGAElement>;
