@@ -1,1 +1,1 @@
-export type Icon = React.SVGAttributes<SVGAElement>;
+export type Icon = React.SVGAttributes<SVGSVGElement>;
