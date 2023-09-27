@@ -1,6 +1,5 @@
 import Header from "@/components/header/Header";
 import DashBoard from "@/components/dashboard/DashBoard";
-import Registry from "./registry";
 
 const Page = () => {
   return (

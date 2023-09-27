@@ -35,7 +35,7 @@ function getItem(
 const Title = () => <Image className="mxauto py-[0.5rem]" alt="" src={Logo} />;
 
 const SideBar = () => {
-  const [active, setActive] = useState("/dashboard");
+  const [active, setActive] = useState("");
   const path = usePathname();
   const items: MenuProps["items"] = useMemo(
     () => [
@@ -54,7 +54,7 @@ const SideBar = () => {
         "/dashboard/message",
         <MessageIcon
           className={`${
-            path === "/dashboard/message"
+            path.includes("message")
               ? "stroke-colorPrimary"
               : "stroke-[#7C8493]"
           } h-[18px]`}
@@ -65,7 +65,7 @@ const SideBar = () => {
         "/dashboard/find-property",
         <SearchIcon
           className={`${
-            path === "/dashboard/find-property"
+            path.includes("find-property")
               ? "stroke-colorPrimary"
               : "stroke-[#7C8493]"
           } h-[18px]`}
@@ -76,7 +76,7 @@ const SideBar = () => {
         "/dashboard/profile",
         <UserIcon
           className={`${
-            path === "/dashboard/profile"
+            path.includes("profile")
               ? "stroke-colorPrimary"
               : "stroke-[#7C8493]"
           } h-[18px]`}
@@ -90,7 +90,7 @@ const SideBar = () => {
         "/dashboard/settings",
         <SettingsIcon
           className={`${
-            path === "/dashboard/settings"
+            path.includes("settings")
               ? "stroke-colorPrimary"
               : "stroke-[#7C8493]"
           } h-[18px]`}
@@ -101,7 +101,7 @@ const SideBar = () => {
         "/dashboard/help-center",
         <HelpIcon
           className={`${
-            path === "/dashboard/help-center"
+            path.includes("help-center")
               ? "stroke-colorPrimary"
               : "stroke-[#7C8493]"
           } h-[18px]`}
@@ -111,7 +111,11 @@ const SideBar = () => {
     [path]
   );
   useEffect(() => {
-    setActive(path);
+    const rel = path.split("/");
+    setActive(() => {
+      if (rel[2]) return "/" + rel[1] + "/" + rel[2];
+      else return "/" + rel[1];
+    });
   }, [path]);
   const onClick: MenuProps["onClick"] = (e) => {
     setActive(e.key);

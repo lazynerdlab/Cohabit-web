@@ -1,4 +1,4 @@
-import SideBar from "@/components/side-bar/SideBar";
+import SideBar from "@/components/global/SideBar";
 import { ConfigProvider } from "antd";
 type children = {
   children: React.ReactNode;
