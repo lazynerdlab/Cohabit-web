@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import google from "@/assets/google.svg";
 import Logo from "@/assets/logo.svg";
 import Image from "next/image";
+import { useEffect, useState } from "react"
 import {
   CustomInput as Input,
   AuthButton as Button,
@@ -10,9 +12,54 @@ import {
 } from "@/lib/AntDesignComponents";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useLoginMutation } from "@/redux/api/authApi";
+import { usePathname } from 'next/navigation'
+import { message } from "antd";
+import { Spinner } from "../spinner/Spinner";
 
 const SignIn = () => {
   const { push } = useRouter();
+  const pathname = usePathname()
+  const [email, setEmail] = useState<string>()
+  const [password, setPassword] = useState<string>()
+
+  const [login, { isLoading, isSuccess, isError, error, data }] = useLoginMutation()
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevents the default form submission and page refresh
+    if (!email || !password) {
+      message.success("All fields are required")
+    }
+    console.log(email, password);
+
+    try {
+      await login({ email, password });
+    } catch (error) {
+      // Handle login error here
+      console.error("Login failed:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      message.success("Login Successfully")
+      setEmail("")
+      setPassword("")
+      sessionStorage.setItem("authToken", data?.data?.token)
+      sessionStorage.setItem("myId", data?.data?.user?.id)
+      localStorage.setItem("previousLocation", pathname)
+      if (data?.data?.user?.user_type === "house_seeker" && data?.data?.user?.has_onboarded === null) {
+        push("/on-board")
+      } else {
+        push("/dashboard")
+      }
+    }
+    if (isError) {
+      const errorMesg = error as any;
+      message.error(errorMesg?.data?.message)
+    }
+  }, [isSuccess, isError, error, push, data?.data?.token, pathname, data]);
+
   return (
     <div className="w-[90%] md:w-[55%] grid grid-cols-1 gap-[1rem] m-auto">
       <div className="grid grid-cols-1 gap-[0.8rem] w-full">
@@ -49,9 +96,13 @@ const SignIn = () => {
             </label>
             <Input
               className=""
-              placeholder="This is a placeholder"
+              placeholder="Email"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setEmail(e.target.value)
+              }}
               id="email"
               type="email"
+              value={email}
             />
           </div>
           <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
@@ -62,9 +113,13 @@ const SignIn = () => {
               Password
             </label>
             <PasswordInput
-              placeholder="This is a placeholder"
+              placeholder="Password"
               id="password"
               type="password"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setPassword(e.target.value.replace(/\s/g, ""))
+              }}
+              value={password}
             />
           </div>
           <div className="w-full mx-auto flex items-center justify-between">
@@ -79,13 +134,19 @@ const SignIn = () => {
               </label>
             </div>
           </div>
-          <Button
-            style={{ backgroundColor: "#010886" }}
-            onClick={() => push("/on-board")}
-            type="primary"
-          >
-            Login
-          </Button>
+          <div className="">
+            {
+              isLoading ? <Spinner /> : <Button
+                style={{ backgroundColor: "#010886" }}
+                type="primary"
+                onClick={(e: any) => {
+                  handleSubmit(e)
+                }}
+              >
+                Login
+              </Button>
+            }
+          </div>
         </form>
         <div className="flex items-center justify-center gap-[0.5rem]">
           <h3 className="font-[400] text-[16px] text-[#616A6A]">
