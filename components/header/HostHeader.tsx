@@ -16,8 +16,7 @@ const HostHeader = ({ children }: HeaderType) => {
       </div>
       <div className="flex justify-center">
         <Button
-          style={{ backgroundColor: "#010886" }}
-          className="flex items-center self-end"
+          className="flex items-center self-end !bg-[#010886]"
           type="primary"
         >
           <div className="flex items-center justify-center gap-[0.2rem]">

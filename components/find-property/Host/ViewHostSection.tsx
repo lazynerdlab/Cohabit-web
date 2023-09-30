@@ -33,7 +33,7 @@ const ViewHostSection = () => {
                 </h4>
                 <Rate />
               </span>
-              <Button type="primary" style={{ backgroundColor: "#515B6F" }}>
+              <Button type="primary" className="!bg-[#515B6F]">
                 Submit
               </Button>
             </div>
@@ -46,7 +46,7 @@ const ViewHostSection = () => {
         </div>
         <div className="p-[1rem] md:p-[2rem] flex flex-col items-center gap-[1rem]">
           <p>Thomas Last Active 10Hours Ago</p>
-          <Button style={{ backgroundColor: "#010886" }} type="primary">
+          <Button className="!bg-[#010886]" type="primary">
             Message
           </Button>
         </div>

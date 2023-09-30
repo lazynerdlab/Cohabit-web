@@ -3,7 +3,7 @@
 import google from "@/assets/google.svg";
 import Logo from "@/assets/logo.svg";
 import Image from "next/image";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import {
   CustomInput as Input,
   AuthButton as Button,
@@ -13,22 +13,23 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useLoginMutation } from "@/redux/api/authApi";
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 import { message } from "antd";
 import { Spinner } from "../spinner/Spinner";
 
 const SignIn = () => {
   const { push } = useRouter();
-  const pathname = usePathname()
-  const [email, setEmail] = useState<string>()
-  const [password, setPassword] = useState<string>()
+  const pathname = usePathname();
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
 
-  const [login, { isLoading, isSuccess, isError, error, data }] = useLoginMutation()
+  const [login, { isLoading, isSuccess, isError, error, data }] =
+    useLoginMutation();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevents the default form submission and page refresh
     if (!email || !password) {
-      message.success("All fields are required")
+      message.success("All fields are required");
     }
     console.log(email, password);
 
@@ -42,21 +43,24 @@ const SignIn = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      message.success("Login Successfully")
-      setEmail("")
-      setPassword("")
-      sessionStorage.setItem("authToken", data?.data?.token)
-      sessionStorage.setItem("myId", data?.data?.user?.id)
-      localStorage.setItem("previousLocation", pathname)
-      if (data?.data?.user?.user_type === "house_seeker" && data?.data?.user?.has_onboarded === null) {
-        push("/on-board")
+      message.success("Login Successfully");
+      setEmail("");
+      setPassword("");
+      sessionStorage.setItem("authToken", data?.data?.token);
+      sessionStorage.setItem("myId", data?.data?.user?.id);
+      localStorage.setItem("previousLocation", pathname);
+      if (
+        data?.data?.user?.user_type === "house_seeker" &&
+        data?.data?.user?.has_onboarded === null
+      ) {
+        push("/on-board");
       } else {
-        push("/dashboard")
+        push("/dashboard");
       }
     }
     if (isError) {
       const errorMesg = error as any;
-      message.error(errorMesg?.data?.message)
+      message.error(errorMesg?.data?.message);
     }
   }, [isSuccess, isError, error, push, data?.data?.token, pathname, data]);
 
@@ -98,7 +102,7 @@ const SignIn = () => {
               className=""
               placeholder="Email"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setEmail(e.target.value)
+                setEmail(e.target.value);
               }}
               id="email"
               type="email"
@@ -117,7 +121,7 @@ const SignIn = () => {
               id="password"
               type="password"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setPassword(e.target.value.replace(/\s/g, ""))
+                setPassword(e.target.value.replace(/\s/g, ""));
               }}
               value={password}
             />
@@ -135,17 +139,19 @@ const SignIn = () => {
             </div>
           </div>
           <div className="">
-            {
-              isLoading ? <Spinner /> : <Button
-                style={{ backgroundColor: "#010886" }}
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <Button
+                className="!bg-[#010886]"
                 type="primary"
                 onClick={(e: any) => {
-                  handleSubmit(e)
+                  handleSubmit(e);
                 }}
               >
                 Login
               </Button>
-            }
+            )}
           </div>
         </form>
         <div className="flex items-center justify-center gap-[0.5rem]">

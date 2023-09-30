@@ -73,7 +73,7 @@ const Property = () => {
                 NGN150,000
               </h5>
               <Button
-                style={{ backgroundColor: "#010886" }}
+                className="!bg-[#010886]"
                 onClick={() => setOpen(true)}
                 type="primary"
               >

@@ -55,7 +55,7 @@ const MateCard = () => {
           </div>
         </DangerButton>
         <Button
-          style={{ backgroundColor: "#010886" }}
+          className="!bg-[#010886]"
           onClick={() => push("/dashboard/view-mate/1")}
           type="primary"
         >

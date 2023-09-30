@@ -149,7 +149,7 @@ const PropertySection = () => {
               </h4>
               <Rate />
             </span>
-            <Button type="primary" style={{ backgroundColor: "#515B6F" }}>
+            <Button type="primary" className="!bg-[#515B6F]">
               Submit
             </Button>
           </div>

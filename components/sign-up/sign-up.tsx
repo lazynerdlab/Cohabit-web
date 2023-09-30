@@ -1,7 +1,14 @@
 "use client";
 import google from "@/assets/google.svg";
 import Image from "next/image";
-import { FormEvent, MouseEventHandler, SyntheticEvent, useCallback, useEffect, useState } from "react"
+import {
+  FormEvent,
+  MouseEventHandler,
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import {
   CustomInput as Input,
   AuthButton as Button,
@@ -16,47 +23,51 @@ import { Spinner } from "../spinner/Spinner";
 
 const SignUp = () => {
   const { push } = useRouter();
-  const pathname = usePathname()
-  const [firstName, setFirstName] = useState<string>()
-  const [lastName, setLastName] = useState<string>()
-  const [email, setEmail] = useState<string>()
-  const [checked, setChecked] = useState(false)
-  const [signup, { isLoading, isSuccess, isError, error, data }] = useSignupMutation()
+  const pathname = usePathname();
+  const [firstName, setFirstName] = useState<string>();
+  const [lastName, setLastName] = useState<string>();
+  const [email, setEmail] = useState<string>();
+  const [checked, setChecked] = useState(false);
+  const [signup, { isLoading, isSuccess, isError, error, data }] =
+    useSignupMutation();
 
-  const handleSubmit = useCallback(async (e: SyntheticEvent) => {
-    e.preventDefault(); // Prevents the default form submission and page refresh
-    if (!checked || !firstName || !lastName || !email) {
-      message.error("All fields are required");
-      return;
-    }
+  const handleSubmit = useCallback(
+    async (e: SyntheticEvent) => {
+      e.preventDefault(); // Prevents the default form submission and page refresh
+      if (!checked || !firstName || !lastName || !email) {
+        message.error("All fields are required");
+        return;
+      }
 
-    try {
-      const user = {
-        firstname: firstName,
-        lastname: lastName,
-        email: email,
-        user_type: "host",
-      };
+      try {
+        const user = {
+          firstname: firstName,
+          lastname: lastName,
+          email: email,
+          user_type: "host",
+        };
 
-      await signup(user);
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
-  }, [checked, firstName, lastName, email, signup]);
+        await signup(user);
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
+    },
+    [checked, firstName, lastName, email, signup]
+  );
 
   useEffect(() => {
     if (isSuccess) {
-      message.success("Login Successfully")
-      setFirstName("")
-      setLastName("")
-      setEmail("")
-      sessionStorage.setItem("authToken", data?.data?.token)
-      localStorage.setItem("previousLocation", pathname)
+      message.success("Login Successfully");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      sessionStorage.setItem("authToken", data?.data?.token);
+      localStorage.setItem("previousLocation", pathname);
       // push("/on-board")
     }
     if (isError) {
       const errorMesg = error as any;
-      message.error(errorMesg?.data?.message)
+      message.error(errorMesg?.data?.message);
     }
   }, [isSuccess, isError, error, push, data, pathname]);
 
@@ -81,7 +92,7 @@ const SignUp = () => {
           <p className="text-center">Or sign up with email</p>
           <span className="h-[1px] bg-[#B8c9c9] w-full"></span>
         </div>
-        <form className="grid gird-cols-1 gap-[0.5rem]" >
+        <form className="grid gird-cols-1 gap-[0.5rem]">
           <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.3rem]">
             <label
               htmlFor="first_name"
@@ -95,7 +106,7 @@ const SignUp = () => {
               id="first_name"
               value={firstName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setFirstName(e.target.value)
+                setFirstName(e.target.value);
               }}
             />
           </div>
@@ -112,7 +123,7 @@ const SignUp = () => {
               id="last_name"
               value={lastName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setLastName(e.target.value)
+                setLastName(e.target.value);
               }}
             />
           </div>
@@ -130,17 +141,17 @@ const SignUp = () => {
               type="email"
               value={email}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setEmail(e.target.value)
+                setEmail(e.target.value);
               }}
             />
           </div>
           <div className="w-full mx-auto flex items-start justify-start gap-[1rem]">
-            <Checkbox id="check"
+            <Checkbox
+              id="check"
               checked={checked}
               onChange={(e: CheckboxChangeEvent) => {
-                setChecked(e.target.checked)
+                setChecked(e.target.checked);
               }}
-
             />
             <label
               htmlFor="check"
@@ -158,17 +169,19 @@ const SignUp = () => {
               .
             </label>
           </div>
-          {
-            isLoading ? <Spinner /> : <Button
-              style={{ backgroundColor: "#010886" }}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <Button
+              className="!bg-[#010886]"
               type="primary"
               onClick={(e: any) => {
-                handleSubmit(e)
+                handleSubmit(e);
               }}
             >
               Get Started
             </Button>
-          }
+          )}
         </form>
         <div className="flex items-center justify-center gap-[0.5rem]">
           <h3 className="font-[400] text-[16px] text-[#616A6A]">

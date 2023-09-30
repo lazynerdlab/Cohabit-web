@@ -67,11 +67,7 @@ const Property = () => {
             <h5 className="text-[16px] font-[700] text-colorPrimary">
               NGN150,000
             </h5>
-            <Button
-              style={{ backgroundColor: "#010886" }}
-              onClick={() => {}}
-              type="primary"
-            >
+            <Button className="!bg-[#010886]" onClick={() => {}} type="primary">
               Boost Post
             </Button>
           </div>

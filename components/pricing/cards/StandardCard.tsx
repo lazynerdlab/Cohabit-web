@@ -46,7 +46,7 @@ const StandardCard = () => {
           Custom “Thank you” page
         </li>
       </ul>
-      <Button style={{ backgroundColor: "#010886" }} type="primary">
+      <Button className="!bg-[#010886]" type="primary">
         Upgrade
       </Button>
     </div>

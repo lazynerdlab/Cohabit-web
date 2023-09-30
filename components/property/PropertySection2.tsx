@@ -71,7 +71,7 @@ const PropertySection2 = () => {
             <TextArea id="description" placeholder="Description" />
           </div>
           <div className="flex items-center justify-center w-full">
-            <Button type="primary" style={{ backgroundColor: "#515B6F" }}>
+            <Button type="primary" className="!bg-[#515B6F]">
               Submit
             </Button>
           </div>

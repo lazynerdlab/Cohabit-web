@@ -58,8 +58,7 @@ const Profile = () => {
             </span>
           </div>
           <Button
-            style={{ backgroundColor: "#010886" }}
-            className="flex items-center justify-self-end"
+            className="flex items-center justify-self-end !bg-[#010886]"
             type="primary"
           >
             <div className="flex items-center justify-center gap-[0.2rem]">

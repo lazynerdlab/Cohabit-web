@@ -26,7 +26,7 @@ const VerifyEmailForm = () => {
             id="code"
           />
         </div>
-        <Button style={{ backgroundColor: "#010886" }} type="primary">
+        <Button className="!bg-[#010886]" type="primary">
           verify
         </Button>
       </form>

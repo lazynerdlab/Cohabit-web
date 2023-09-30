@@ -171,10 +171,7 @@ const HelpCenter = () => {
                 Contact our customer service
               </span>
               <div>
-                <Button
-                  style={{ background: "#FFF" }}
-                  className="text-colorPrimary"
-                >
+                <Button className="text-colorPrimary !bg-[#FFF]">
                   Contact Us
                 </Button>
               </div>
@@ -205,10 +202,7 @@ const HelpCenter = () => {
               Contact our customer service
             </span>
             <div>
-              <Button
-                style={{ background: "#FFF" }}
-                className="text-colorPrimary"
-              >
+              <Button className="text-colorPrimary !bg-[#FFF]">
                 Contact Us
               </Button>
             </div>

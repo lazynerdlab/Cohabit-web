@@ -16,7 +16,7 @@ const Step4 = () => {
             Awesome, your dashboard is ready .
           </span>
           <Button
-            style={{ backgroundColor: "#010886" }}
+            className="!bg-[#010886]"
             onClick={() => push("/dashboard")}
             type="primary"
           >

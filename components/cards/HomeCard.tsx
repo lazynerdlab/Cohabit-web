@@ -38,7 +38,7 @@ const HomeCard = () => {
           </p>
         </div>
         <Button
-          style={{ backgroundColor: "#010886" }}
+          className="!bg-[#010886]"
           onClick={() => push("dashboard/find-property/1")}
           type="primary"
         >

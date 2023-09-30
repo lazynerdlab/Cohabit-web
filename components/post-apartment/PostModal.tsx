@@ -35,7 +35,7 @@ const PostModal = ({ open, setOpen }: modalProps) => {
               The apartment you posted will be verified .
             </span>
             <Button
-              style={{ backgroundColor: "#010886" }}
+              className="!bg-[#010886]"
               onClick={() => push("/dashboard/host/house-listing/1")}
               type="primary"
             >

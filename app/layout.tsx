@@ -1,4 +1,3 @@
-
 import "./globals.css";
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
@@ -25,8 +24,7 @@ export default function RootLayout({
         <ReduxProvider>
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         </ReduxProvider>
-
       </body>
     </html>
   );
-};
+}
