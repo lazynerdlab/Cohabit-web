@@ -5,7 +5,7 @@ import DeliverIcon from "@/assets/icons/DeliverIcon";
 const OutgoingChat = () => {
   return (
     <div className="chat chat-end py-0 w-[98%] mx-auto">
-      <div className="chat-image avatar">
+      <div className="chat-image avatar hidden md:inline-flex">
         <Image alt="user" src={user} />
       </div>
       <div className="chat-bubble bg-colorPrimary">Hello</div>

@@ -5,7 +5,7 @@ import {
   CustomInput as Input,
 } from "@/lib/AntDesignComponents";
 import ActiveBadge from "@/assets/icons/ActiveBadge";
-import { useMemo, useState } from "react";
+import { SetStateAction, useMemo, useState } from "react";
 import Image from "next/image";
 import user from "@/assets/user.svg";
 import SearchIcon from "@/assets/icons/SearchIcon";
@@ -28,7 +28,13 @@ function getItem(
   } as MenuItem;
 }
 
-const SideBar = () => {
+const SideBar = ({
+  display,
+  setDisplay,
+}: {
+  display: boolean;
+  setDisplay: React.Dispatch<SetStateAction<boolean>>;
+}) => {
   const [active, setActive] = useState("1");
   const items: MenuProps["items"] = useMemo(
     () => [
@@ -183,11 +189,16 @@ const SideBar = () => {
   );
   const onClick: MenuProps["onClick"] = (e) => {
     setActive(e.key);
+    setDisplay((prev) => !prev);
   };
 
   return (
-    <div className="grid grid-cols-1 grid-rows-[10%_90%] md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#FFF] max-h-screen overflow-hidden">
-      <div className="flex items-center justify-between gap-[0.5rem] w-full p-[2%] border-b border-[#32475C1F]">
+    <div
+      className={`${
+        display ? "hidden" : "block"
+      } transition duration-500 ease-in-out md:grid grid-cols-1 grid-rows-[10%_90%] md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#FFF] max-h-screen overflow-hidden`}
+    >
+      <div className="sticky top-0 z-[9999999999] bg-[#FFF] flex items-center justify-between gap-[0.5rem] w-full p-[2%] border-b border-[#32475C1F]">
         <span className="relative">
           <Image alt="user" src={user} />
           <ActiveBadge className="absolute right-0 bottom-0" />
