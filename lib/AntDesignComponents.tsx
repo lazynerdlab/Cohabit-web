@@ -62,6 +62,19 @@ export const CustomInput = ({ ...props }: InputProps) => (
   </ConfigProvider>
 );
 
+export const CustomInlineInput = ({ ...props }: InputProps) => (
+  <ConfigProvider
+    theme={{
+      token: {
+        colorPrimary: "#010886",
+        borderRadius: 5,
+      },
+    }}
+  >
+    <Input {...props} />
+  </ConfigProvider>
+);
+
 export const CustomInputNumber = ({ ...props }: InputNumberProps) => (
   <ConfigProvider
     theme={{
@@ -349,6 +362,30 @@ export const CustomMenu = ({ ...props }: MenuProps) => (
       },
       components: {
         Menu: {},
+      },
+    }}
+  >
+    <Menu {...props} />
+  </ConfigProvider>
+);
+
+export const ChatMenu = ({ ...props }: MenuProps) => (
+  <ConfigProvider
+    theme={{
+      token: {
+        colorPrimary: "#010886",
+        borderRadius: 5,
+        fontSize: 16,
+        colorBgContainer: "#FFF",
+      },
+      components: {
+        Menu: {
+          itemActiveBg: "#010886",
+          itemHeight: 55,
+          itemSelectedBg: "#010886",
+          itemSelectedColor: "#FFF",
+          itemColor: "#32475C99",
+        },
       },
     }}
   >

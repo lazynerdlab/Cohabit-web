@@ -1,18 +1,14 @@
 "use client";
 import type { MenuProps } from "antd";
-import { CustomMenu as Menu } from "@/lib/AntDesignComponents";
-import HomeIconsm from "@/assets/icons/HomeIconsm";
-import MessageIcon from "@/assets/icons/MessageIcon";
-import SearchIcon from "@/assets/icons/SearchIcon";
-import UserIcon from "@/assets/icons/UserIcon";
-import HelpIcon from "@/assets/icons/HelpIcon";
-import SettingsIcon from "@/assets/icons/SettingsIcon";
-import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
+import {
+  ChatMenu as Menu,
+  CustomInput as Input,
+} from "@/lib/AntDesignComponents";
+import ActiveBadge from "@/assets/icons/ActiveBadge";
+import { useMemo, useState } from "react";
 import Image from "next/image";
-import Logo from "@/assets/logo.svg";
 import user from "@/assets/user.svg";
-import { usePathname } from "next/navigation";
+import SearchIcon from "@/assets/icons/SearchIcon";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -32,113 +28,184 @@ function getItem(
   } as MenuItem;
 }
 
-const Title = () => <Image className="mxauto py-[0.5rem]" alt="" src={Logo} />;
-
 const SideBar = () => {
-  const [active, setActive] = useState("");
-  const path = usePathname();
+  const [active, setActive] = useState("1");
   const items: MenuProps["items"] = useMemo(
     () => [
       getItem(
-        <Link href="/dashboard">Dashboard</Link>,
-        "/dashboard",
-        <HomeIconsm
-          className={`${
-            path === "/dashboard" ? "stroke-colorPrimary" : "stroke-[#7C8493]"
-          } h-[18px]`}
-        />
+        <h4 className="text-[#010886] text-[20px] font-[500]">Chats</h4>,
+        "grp1",
+        null,
+        [
+          getItem(
+            <div className="mb-[0.5rem] !h-[50px] flex flex-col relative">
+              <span className="text-[16px] flex justify-between gap-[0.5rem] !h-[15px] font-[400]">
+                <h4 className="!h-[15px]">Felecia Rower</h4>
+                <p className="!h-[15px]">July 20</p>
+              </span>
+              <span className="text-[14px] !h-[35px] font-[400] truncate">
+                I want to share an apartment with you.{" "}
+              </span>
+            </div>,
+            "1",
+            <div className="relative block my-auto">
+              <Image alt="user" src={user} />
+              <ActiveBadge className="absolute right-0 bottom-0" />
+            </div>
+          ),
+          getItem(
+            <div className="mb-[0.5rem] !h-[50px] flex flex-col relative">
+              <span className="text-[16px] flex justify-between gap-[0.5rem] !h-[15px] font-[400]">
+                <h4 className="!h-[15px]">Felecia Rower</h4>
+                <p className="!h-[15px]">July 20</p>
+              </span>
+              <span className="text-[14px] !h-[35px] font-[400] truncate">
+                I want to share an apartment with you.{" "}
+              </span>
+            </div>,
+            "2",
+            <div className="relative block my-auto">
+              <Image className="w-[45px] h-[45px]" alt="user" src={user} />
+              <ActiveBadge className="absolute right-0 bottom-0" />
+            </div>
+          ),
+          getItem(
+            <div className="mb-[0.5rem] !h-[50px] flex flex-col relative">
+              <span className="text-[16px] flex justify-between gap-[0.5rem] !h-[15px] font-[400]">
+                <h4 className="!h-[15px]">Felecia Rower</h4>
+                <p className="!h-[15px]">July 20</p>
+              </span>
+              <span className="text-[14px] !h-[35px] font-[400] truncate">
+                I want to share an apartment with you.{" "}
+              </span>
+            </div>,
+            "3",
+            <div className="relative block my-auto">
+              <Image alt="user" src={user} />
+              <ActiveBadge className="absolute right-0 bottom-0" />
+            </div>
+          ),
+          getItem(
+            <div className="mb-[0.5rem] !h-[50px] flex flex-col relative">
+              <span className="text-[16px] flex justify-between gap-[0.5rem] !h-[15px] font-[400]">
+                <h4 className="!h-[15px]">Felecia Rower</h4>
+                <p className="!h-[15px]">July 20</p>
+              </span>
+              <span className="text-[14px] !h-[35px] font-[400] truncate">
+                I want to share an apartment with you.{" "}
+              </span>
+            </div>,
+            "4",
+            <div className="relative block my-auto">
+              <Image alt="user" src={user} />
+              <ActiveBadge className="absolute right-0 bottom-0" />
+            </div>
+          ),
+        ],
+        "group"
       ),
-
       getItem(
-        <Link href="/dashboard/message">Messages</Link>,
-        "/dashboard/message",
-        <MessageIcon
-          className={`${
-            path.includes("message")
-              ? "stroke-colorPrimary"
-              : "stroke-[#7C8493]"
-          } h-[18px]`}
-        />
-      ),
-      getItem(
-        <Link href="/dashboard/find-property">Find property</Link>,
-        "/dashboard/find-property",
-        <SearchIcon
-          className={`${
-            path.includes("find-property")
-              ? "stroke-colorPrimary"
-              : "stroke-[#7C8493]"
-          } h-[18px]`}
-        />
-      ),
-      getItem(
-        <Link href="/dashboard/profile">My Public Profile</Link>,
-        "/dashboard/profile",
-        <UserIcon
-          className={`${
-            path.includes("profile")
-              ? "stroke-colorPrimary"
-              : "stroke-[#7C8493]"
-          } h-[18px]`}
-        />
-      ),
-
-      { type: "divider" },
-
-      getItem(
-        <Link href="/dashboard/settings">Settings</Link>,
-        "/dashboard/settings",
-        <SettingsIcon
-          className={`${
-            path.includes("settings")
-              ? "stroke-colorPrimary"
-              : "stroke-[#7C8493]"
-          } h-[18px]`}
-        />
-      ),
-      getItem(
-        <Link href="/dashboard/help-center">Help Center</Link>,
-        "/dashboard/help-center",
-        <HelpIcon
-          className={`${
-            path.includes("help-center")
-              ? "stroke-colorPrimary"
-              : "stroke-[#7C8493]"
-          } h-[18px]`}
-        />
+        <h4 className="text-[#010886] text-[20px] font-[500]">
+          Recently chatted with
+        </h4>,
+        "grp",
+        null,
+        [
+          getItem(
+            <div className="mb-[0.5rem] !h-[50px] flex flex-col relative">
+              <span className="text-[16px] flex justify-between gap-[0.5rem] !h-[15px] font-[400]">
+                <h4 className="!h-[15px]">Felecia Rower</h4>
+                <p className="!h-[15px]">July 20</p>
+              </span>
+              <span className="text-[14px] !h-[35px] font-[400] truncate">
+                I want to share an apartment with you.{" "}
+              </span>
+            </div>,
+            "5",
+            <div className="relative block my-auto">
+              <Image alt="user" src={user} />
+              <ActiveBadge className="absolute right-0 bottom-0" />
+            </div>
+          ),
+          getItem(
+            <div className="mb-[0.5rem] !h-[50px] flex flex-col relative">
+              <span className="text-[16px] flex justify-between gap-[0.5rem] !h-[15px] font-[400]">
+                <h4 className="!h-[15px]">Felecia Rower</h4>
+                <p className="!h-[15px]">July 20</p>
+              </span>
+              <span className="text-[14px] !h-[35px] font-[400] truncate">
+                I want to share an apartment with you.{" "}
+              </span>
+            </div>,
+            "6",
+            <div className="relative block my-auto">
+              <Image alt="user" src={user} />
+              <ActiveBadge className="absolute right-0 bottom-0" />
+            </div>
+          ),
+          getItem(
+            <div className="mb-[0.5rem] !h-[50px] flex flex-col relative">
+              <span className="text-[16px] flex justify-between gap-[0.5rem] !h-[15px] font-[400]">
+                <h4 className="!h-[15px]">Felecia Rower</h4>
+                <p className="!h-[15px]">July 20</p>
+              </span>
+              <span className="text-[14px] !h-[35px] font-[400] truncate">
+                I want to share an apartment with you.{" "}
+              </span>
+            </div>,
+            "7",
+            <div className="relative block my-auto">
+              <Image alt="user" src={user} />
+              <ActiveBadge className="absolute right-0 bottom-0" />
+            </div>
+          ),
+          getItem(
+            <div className="mb-[0.5rem] !h-[50px] flex flex-col relative">
+              <span className="text-[16px] flex justify-between gap-[0.5rem] !h-[15px] font-[400]">
+                <h4 className="!h-[15px]">Felecia Rower</h4>
+                <p className="!h-[15px]">July 20</p>
+              </span>
+              <span className="text-[14px] !h-[35px] font-[400] truncate">
+                I want to share an apartment with you.{" "}
+              </span>
+            </div>,
+            "8",
+            <div className="relative block my-auto">
+              <Image alt="user" src={user} />
+              <ActiveBadge className="absolute right-0 bottom-0" />
+            </div>
+          ),
+        ],
+        "group"
       ),
     ],
-    [path]
+    []
   );
-  useEffect(() => {
-    const rel = path.split("/");
-    setActive(() => {
-      if (rel[2]) return "/" + rel[1] + "/" + rel[2];
-      else return "/" + rel[1];
-    });
-  }, [path]);
   const onClick: MenuProps["onClick"] = (e) => {
     setActive(e.key);
   };
 
   return (
-    <div className="grid grid-cols-1 grid-rows-[5%_75%_15%] md:grid-rows-[10%_75%_15%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-screen overflow-y-hidden">
-      <Title />
+    <div className="grid grid-cols-1 grid-rows-[10%_90%] md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#FFF] max-h-screen overflow-hidden">
+      <div className="flex items-center justify-between gap-[0.5rem] w-full p-[2%] border-b border-[#32475C1F]">
+        <span className="relative">
+          <Image alt="user" src={user} />
+          <ActiveBadge className="absolute right-0 bottom-0" />
+        </span>
+        <Input
+          className="!rounded-[66px]"
+          prefix={<SearchIcon className="stroke-[#32475C]/[54%]" />}
+          placeholder="Search"
+        />
+      </div>
       <Menu
+        mode="inline"
         onClick={onClick}
+        className="overflow-y-scroll noscroll-bar"
         defaultSelectedKeys={[active]}
         selectedKeys={[active]}
         items={items}
       />
-      <div className="grid md:grid-cols-[20%_80%] mx-auto justify-between w-[80%] items-center gap-[1rem] py-[1rem]">
-        <Image alt="user" src={user} />
-        <div className="md:flex flex-col hidden">
-          <h4 className="text-[#202430] text-[18px] font-[600]">Jake Gyll</h4>
-          <p className="text-[#202430] text-opacity-[0.5] text-[14px] font-[400]">
-            jakegyll@email.com
-          </p>
-        </div>
-      </div>
     </div>
   );
 };

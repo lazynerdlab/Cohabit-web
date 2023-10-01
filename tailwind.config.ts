@@ -31,6 +31,9 @@ const config: Config = {
       mini: "1200px",
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light"],
+  },
 };
 export default config;

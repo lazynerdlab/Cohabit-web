@@ -1,4 +1,9 @@
 import { ConfigProvider } from "antd";
+import { Ubuntu } from "next/font/google";
+const ubuntu = Ubuntu({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+});
 
 const template = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -7,7 +12,7 @@ const template = ({ children }: { children: React.ReactNode }) => {
         token: {
           colorPrimary: "#010886",
           borderRadius: 5,
-          fontFamily: "ubuntu",
+          fontFamily: ubuntu.style.fontFamily,
         },
       }}
     >
