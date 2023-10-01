@@ -2,6 +2,7 @@
 import { useState, useMemo } from "react";
 import Step1 from "./steps/Step1";
 import Step3 from "./steps/Step3";
+import PreviewStep from "./steps/PreviewStep";
 import {
   AuthButton as Button,
   CustomSteps as Steps,
@@ -12,8 +13,7 @@ import DoneIcon from "@/assets/icons/DoneIcon";
 import StartIcon from "@/assets/icons/StartIcon";
 
 const UserOnboarding = () => {
-
-  const { push } = useRouter()
+  const { push } = useRouter();
   const [current, setCurrent] = useState<number>(1);
 
   const [formData, setFormData] = useState({
@@ -31,7 +31,9 @@ const UserOnboarding = () => {
     }));
   };
 
-  const handlePersonalIntroductionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handlePersonalIntroductionChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setFormData((prevData) => ({
       ...prevData,
       personalIntroduction: e.target.value,
@@ -46,7 +48,7 @@ const UserOnboarding = () => {
   };
   const handleSubmit = () => {
     console.log("submit");
-    push("/welcome")
+    push("/welcome");
   };
 
   const steps = useMemo(
@@ -55,13 +57,13 @@ const UserOnboarding = () => {
         title: <p className="text-[16px] text-[#2A2069]">Account</p>,
         content: "",
         icon: <DoneIcon className="h-[56px]" />,
-        description: <p className="text-[14px] text-[#2A2069]">Step 1/3</p>,
+        description: <p className="text-[14px] text-[#2A2069]">Step 1/4</p>,
       },
       {
         title: (
           <div className="flex flex-col font-[400] text-[#2A2069] leading-[28.80px]">
             <p className="text-[16px]">Preference</p>
-            <p className="text-[14px]">Step 2/3</p>
+            <p className="text-[14px]">Step 2/4</p>
           </div>
         ),
         content: <Step1 next={next} />,
@@ -75,13 +77,28 @@ const UserOnboarding = () => {
       {
         title: (
           <div className="flex flex-col font-[400] text-[#2A2069] leading-[28.80px]">
+            <p className="text-[16px]">Preview</p>
+            <p className="text-[14px]">Step 3/4</p>
+          </div>
+        ),
+        content: <PreviewStep next={next} prev={prev} />,
+        icon:
+          current > 2 ? (
+            <DoneIcon className="h-[56px]" />
+          ) : (
+            <StepIcon className="h-[56px]" />
+          ),
+      },
+      {
+        title: (
+          <div className="flex flex-col font-[400] text-[#2A2069] leading-[28.80px]">
             <p className="text-[16px]">Lifestyle</p>
-            <p className="text-[14px]">Step 3/3</p>
+            <p className="text-[14px]">Step 4/4</p>
           </div>
         ),
         content: <Step3 prev={prev} submit={handleSubmit} />,
         icon:
-          current > 2 ? (
+          current > 3 ? (
             <DoneIcon className="h-[56px]" />
           ) : (
             <StepIcon className="h-[56px]" />
@@ -108,14 +125,11 @@ const UserOnboarding = () => {
   return (
     <div className="flex flex-col justify-center items-center bg-opacity-[0.4] gap-[1rem] p-[1rem]">
       <div className="flex flex-col gap-[1.5rem]">
-
         <Steps size="small" current={current} items={steps} />
 
         <div className="w-full">{steps[current].content}</div>
       </div>
-      <div className="flex justify-between gap-[1rem] items-center mt-4">
-
-      </div>
+      <div className="flex justify-between gap-[1rem] items-center mt-4"></div>
     </div>
   );
 };
