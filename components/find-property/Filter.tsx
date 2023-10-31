@@ -125,22 +125,27 @@ const Filter = () => {
   );
 
   return (
-    <Menu
-      mode="inline"
-      defaultOpenKeys={openKeys}
-      items={items}
-      selectable={false}
-      onClick={(e) => {
-        setOptions((prev) => {
-          const modified = { ...prev };
-          const path = e.keyPath[1];
-          const element = e.key;
-          modified[path][element] = !prev[path][element];
-          return { ...modified };
-        });
-      }}
-      className="max-h-screen min-h-screen max-w-[80vw] overflow-y-scroll w-full absolute mini:relative z-[9999999]"
-    />
+    <div className="drawer-side z-[9999999999]">
+      <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+      <aside className="flex flex-col w-[16rem] h-screen overflow-hidden shadow-xl pt-[1rem] md:pt-0 bg-[#F8F8FD]">
+        <Menu
+          mode="inline"
+          defaultOpenKeys={openKeys}
+          items={items}
+          selectable={false}
+          onClick={(e) => {
+            setOptions((prev) => {
+              const modified = { ...prev };
+              const path = e.keyPath[1];
+              const element = e.key;
+              modified[path][element] = !prev[path][element];
+              return { ...modified };
+            });
+          }}
+          className="max-h-screen min-h-screen max-w-[80vw] overflow-y-scroll w-full z-[9999999]"
+        />
+      </aside>
+    </div>
   );
 };
 

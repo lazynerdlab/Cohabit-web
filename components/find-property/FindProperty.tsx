@@ -7,6 +7,7 @@ import {
   CustomPagination as Pagination,
 } from "@/lib/AntDesignComponents";
 import SortIcon from "@/assets/icons/SortIcon";
+// import Nav from "@/assets/icons/Nav";
 import SearchIcon from "@/assets/icons/SearchIcon";
 import { FiFilter } from "react-icons/fi";
 import useWidth from "../hooks/useWidth";
@@ -45,7 +46,7 @@ const FindProperty = () => {
   return (
     <div className="grid grid-cols-[5%_95%] mini:grid-cols-[25%_75%] max-h-screen min-h-screen">
       <div>
-        {Number(width) < 700 &&
+        {/* {Number(width) < 700 &&
           (filter ? (
             <SearchIcon
               onClick={() => {
@@ -60,8 +61,11 @@ const FindProperty = () => {
                 setFilter((prev) => !prev);
               }}
             />
-          ))}
-        {filter && <Filter />}
+          ))} */}
+        <label htmlFor="my-drawer-3" className="flex text-blue-800 px-3">
+          <FiFilter className="cursor-pointer" />
+        </label>
+        <Filter />
       </div>
       <div className="grid grid-cols-1 gap-[0.5rem] overflow-y-scroll">
         <div className="grid grid-cols-[40%_60%] md:grid-cols-[45%_50%_5%] items-center w-[98%] mx-auto">
