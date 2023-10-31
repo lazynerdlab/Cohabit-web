@@ -7,8 +7,17 @@ import {
 } from "@/lib/AntDesignComponents";
 import PlusIcon from "@/assets/icons/PlusIcon";
 import ProfileSection2 from "./ProfileSection2";
+import { useGetHostRecentlyUploadedQuery } from "@/redux/api/hostApi";
+import { useEffect, useState } from "react";
 
 const HostProfileSection = () => {
+  const { data, isLoading, isSuccess } = useGetHostRecentlyUploadedQuery({});
+  const [listingData, setListingData] = useState<Record<string, any>[]>([])
+  useEffect(() => {
+    if (isSuccess) {
+      setListingData(data?.data);
+    }
+  }, [data, isSuccess])
   return (
     <div className="grid grid-cols-[70%_30%] w-full py-[1rem]">
       <div className="flex flex-col gap-[0.5rem]">
@@ -19,61 +28,23 @@ const HostProfileSection = () => {
             </h4>
             <Button icon={<PlusIcon className="fill-[#010886]" />} />
           </div>
-          <div className="">
+          <div >
             <Carousel
               dots={{ className: "text-[#010886] carouselBtn" }}
               dotPosition="bottom"
               variableWidth
-              className=""
             >
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
+              {
+                listingData?.length === 0 ? <p className="font-medium text-[18px]">No listings found</p> : listingData?.map((item: Record<string, any>) => (
+                  <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]" key={item?.id}>
+                    <Image alt="apartment" src={item?.image} />
+                    <span className="text-[#25324B] text-[16px] font-[400]">
+                      {item?.location}
+                    </span>
+                  </div>
+                ))
+              }
+
             </Carousel>
           </div>
         </div>

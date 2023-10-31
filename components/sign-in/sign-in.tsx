@@ -16,13 +16,15 @@ import { useLoginMutation } from "@/redux/api/authApi";
 import { usePathname } from "next/navigation";
 import { message } from "antd";
 import { Spinner } from "../spinner/Spinner";
+import { useAppDispatch } from "@/redux/hook";
+import { SET_USER } from "@/redux/slice/userSlice";
 
 const SignIn = () => {
   const { push } = useRouter();
   const pathname = usePathname();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
-
+  const dispatch = useAppDispatch()
   const [login, { isLoading, isSuccess, isError, error, data }] =
     useLoginMutation();
 
@@ -31,7 +33,6 @@ const SignIn = () => {
     if (!email || !password) {
       message.success("All fields are required");
     }
-    console.log(email, password);
 
     try {
       await login({ email, password });
@@ -46,16 +47,20 @@ const SignIn = () => {
       message.success("Login Successfully");
       setEmail("");
       setPassword("");
+      dispatch(SET_USER(data))
       sessionStorage.setItem("authToken", data?.data?.token);
       sessionStorage.setItem("myId", data?.data?.user?.id);
       localStorage.setItem("previousLocation", pathname);
       if (
-        data?.data?.user?.user_type === "house_seeker" &&
-        data?.data?.user?.has_onboarded === null
+        data?.data?.user?.has_onboarded === false
       ) {
         push("/on-board");
       } else {
         push("/dashboard");
+      }
+
+      if (data?.data?.user?.user_type === "host") {
+        push("/host");
       }
     }
     if (isError) {

@@ -90,7 +90,7 @@ const PropertyModal = ({ open, setOpen }: modalProps) => {
           >
             Do you want to share an apartment
           </label>
-          <Select options={options} id="select" />
+          <Select options={options} id="select" size="large" />
         </div>
         <div className="border-[#D6DDEB] border-b py-[0.5rem]">
           <p>Additional information</p>

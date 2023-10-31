@@ -1,10 +1,12 @@
+import { Checkbox } from 'antd';
 import React from 'react';
 
 export interface Tag {
     id: number;
-    // _id: string;
-    label: string;
-    title: string;
+    label?: string;
+    title?: string;
+    area?: string
+    text?: string
 }
 
 interface MultiSelectTagsProps {
@@ -14,25 +16,12 @@ interface MultiSelectTagsProps {
 }
 
 export const MultiSelectTags: React.FC<MultiSelectTagsProps> = ({ options, selectedTags, onSelectTag }) => {
-    // const handleTagClick = (tag: Tag) => {
-    //     const tagIndex = selectedTags.findIndex((selectedTag) => selectedTag.id === tag.id);
-    //     if (tagIndex === -1) {
-    //         // If the tag is not already selected, add it to the selected tags.
-    //         onSelectTag([...selectedTags, tag]);
-    //     } else {
-    //         // If the tag is already selected, remove it from the selected tags.
-    //         const updatedTags = [...selectedTags];
-    //         updatedTags.splice(tagIndex, 1);
-    //         onSelectTag(updatedTags);
-    //     }
-    // };
     const isTagSelected = (tag: Tag) => selectedTags.some((selectedTag) => selectedTag.id === tag.id);
 
     const handleTagClick = (tag: Tag) => {
         const updatedTags = isTagSelected(tag)
             ? selectedTags.filter((selectedTag) => selectedTag.id !== tag.id)
             : [...selectedTags, tag];
-
         onSelectTag(updatedTags);
     };
 
@@ -58,5 +47,34 @@ export const MultiSelectTags: React.FC<MultiSelectTagsProps> = ({ options, selec
         </>
     );
 };
+
+export const FilterTags = ({ options, selectedTags, onSelectTag }: MultiSelectTagsProps) => {
+    const isTagSelected = (tag: Tag) => selectedTags?.some((selectedTag) => selectedTag.id === tag.id);
+
+    const handleTagClick = (tag: Tag) => {
+        const updatedTags = isTagSelected(tag)
+            ? selectedTags?.filter((selectedTag) => selectedTag.id !== tag.id)
+            : [...selectedTags, tag];
+
+        onSelectTag(updatedTags);
+    };
+
+    return (
+        <div className='flex flex-col gap-2'>
+            {options.map((tag) => (
+                <p
+                    key={tag.id}
+                    onClick={() => handleTagClick(tag)}
+                    className=' flex gap-2 text-center cursor-pointer'
+                >
+                    <Checkbox
+                        checked={isTagSelected(tag)}
+                    />
+                    {tag.title || tag.label || tag.text || tag.area}
+                </p>
+            ))}
+        </div>
+    );
+}
 
 

@@ -1,8 +1,36 @@
+"use client"
+import { useRouter } from "next/navigation";
+import { message } from "antd";
+import { useEffect, useState } from "react";
 import {
   CustomPasswordInput as Input,
   AuthButton as Button,
 } from "@/lib/AntDesignComponents";
+import { useCreatePasswordMutation } from "@/redux/api/authApi";
 const CreatePassword = () => {
+  const [password, setPassword] = useState<string>()
+  const [confirmPassword, setConfirmPassword] = useState<string>()
+  const [createPassword, { isLoading, isSuccess, isError, error, data }] = useCreatePasswordMutation();
+  const { push } = useRouter()
+  const handleCreatePassword = async () => {
+    if (!password || !confirmPassword) {
+      message.error("All fields are required")
+      return
+    }
+    await createPassword({ password, password_confirmation: confirmPassword })
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      message.success("Password Created Successfully")
+      push('/sign-in')
+    }
+
+    if (isError) {
+      const errMesg = error as any
+      message.error(errMesg?.data?.message)
+    }
+  }, [isSuccess, isError, push, error,])
   return (
     <div className="grid grid-cols-1 gap-[0.5rem] m-auto w-[90%] md:w-[60%]">
       <div className="text-center text-gray-900 text-[32px] font-bold leading-[38.40px]">
@@ -22,7 +50,9 @@ const CreatePassword = () => {
           <Input
             type="password"
             placeholder="This is a placeholder"
-            id="email"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.3rem]">
@@ -36,10 +66,12 @@ const CreatePassword = () => {
             type="password"
             placeholder="This is a placeholder"
             id="ConfirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
-        <Button className="!bg-[#010886]" type="primary">
-          Submit
+        <Button disabled={isLoading} className="!bg-[#010886]" type="primary" onClick={handleCreatePassword}>
+          {isLoading ? "Creating..." : "Create Password"}
         </Button>
       </form>
     </div>

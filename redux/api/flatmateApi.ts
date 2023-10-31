@@ -10,8 +10,7 @@ export const flatmateApi = createApi({
   tagTypes: ["Flatmates", "FlatmateDetails", "SavedFlatmates", "SaveFlatmate"],
   endpoints: (builder) => ({
     getFlatmates: builder.query({
-      query: ({ count, random }) =>
-        `houseSeeker/flatmate?count=${count}&random=${random}`,
+      query: ({ count }) => `houseSeeker/flatmate?count=${count}&random=0`,
       providesTags: ["Flatmates"],
     }),
     getFlatmateDetails: builder.query({
