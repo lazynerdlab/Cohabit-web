@@ -4,6 +4,7 @@ import type { MenuProps } from "antd";
 import {
   CustomMenu as Menu,
   CustomCheckBox as Checkbox,
+  CustomButton as Button,
 } from "@/lib/AntDesignComponents";
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -125,9 +126,9 @@ const Filter = () => {
   );
 
   return (
-    <div className="drawer-side z-[9999999999]">
+    <div className="drawer-side z-[999999999999999] md:left-[16rem]">
       <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-      <aside className="flex flex-col w-[16rem] h-screen overflow-hidden shadow-xl pt-[1rem] md:pt-0 bg-[#F8F8FD]">
+      <aside className="flex flex-col w-[16rem] h-screen overflow-hidden shadow-xl pt-[1rem] md:pt-0 bg-[#F8F8FD] gap-[0.5rem]">
         <Menu
           mode="inline"
           defaultOpenKeys={openKeys}
@@ -142,8 +143,11 @@ const Filter = () => {
               return { ...modified };
             });
           }}
-          className="max-h-screen min-h-screen max-w-[80vw] overflow-y-scroll w-full z-[9999999]"
+          className="max-w-[80vw] overflow-y-scroll w-full z-[9999999]"
         />
+        <Button className="mx-auto !w-[80%] !bg-[#010886]" type="primary">
+          Apply
+        </Button>
       </aside>
     </div>
   );
