@@ -10,7 +10,7 @@ const ForgetPassword = () => {
       </div>
       <div className="text-center text-neutral-500 text-lg font-normal leading-[28.80px]">
         Enter the email associated with your account and we’ll send an email
-        with instraction to reset your Password
+        with instruction to reset your Password
       </div>
       <form className="grid grid-cols-1 gap-[1.5rem]">
         <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.3rem]">

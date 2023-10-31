@@ -13,6 +13,7 @@ import Image from "next/image";
 import Logo from "@/assets/logo.svg";
 import user from "@/assets/user.svg";
 import { usePathname } from "next/navigation";
+import Nav from "@/assets/icons/Nav";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -32,7 +33,9 @@ function getItem(
   } as MenuItem;
 }
 
-const Title = () => <Image className="mxauto py-[0.5rem]" alt="" src={Logo} />;
+const Title = () => (
+  <Image className="py-[0.5rem] hidden md:block" alt="" src={Logo} />
+);
 
 const SideBar = () => {
   const [active, setActive] = useState("");
@@ -122,23 +125,28 @@ const SideBar = () => {
   };
 
   return (
-    <div className=" grid grid-cols-1 grid-rows-[5%_75%_15%] md:grid-rows-[10%_75%_15%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-screen overflow-y-hidden">
-      <Title />
-      <Menu
-        onClick={onClick}
-        defaultSelectedKeys={[active]}
-        selectedKeys={[active]}
-        items={items}
-      />
-      <div className="grid md:grid-cols-[20%_80%] mx-auto justify-between w-[80%] items-center gap-[1rem] py-[1rem]">
-        <Image alt="user" src={user} />
-        <div className="md:flex flex-col hidden">
-          <h4 className="text-[#202430] text-[18px] font-[600]">Jake Gyll</h4>
-          <p className="text-[#202430] text-opacity-[0.5] text-[14px] font-[400]">
-            jakegyll@email.com
-          </p>
+    <div className="drawer-side z-[9999999999]">
+      <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+      <aside className="flex flex-col w-[16rem] h-screen overflow-hidden shadow-xl pt-[1rem] md:pt-0 bg-[#F8F8FD]">
+        {/* <div className="grid grid-cols-1 grid-rows-[5%_75%_15%] md:grid-rows-[10%_75%_15%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-screen overflow-y-hidden"> */}
+        <Title />
+        <Menu
+          onClick={onClick}
+          defaultSelectedKeys={[active]}
+          selectedKeys={[active]}
+          items={items}
+        />
+        <div className="grid grid-cols-[20%_80%] mx-auto justify-between w-[80%] items-center gap-[1rem] py-[1rem] self-end justify-self-end">
+          <Image alt="user" src={user} />
+          <div className="flex flex-col">
+            <h4 className="text-[#202430] text-[18px] font-[600]">Jake Gyll</h4>
+            <p className="text-[#202430] text-opacity-[0.5] text-[14px] font-[400]">
+              jakegyll@email.com
+            </p>
+          </div>
         </div>
-      </div>
+        {/* </div> */}
+      </aside>
     </div>
   );
 };
