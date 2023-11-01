@@ -44,10 +44,16 @@ import {
 import type { CollapseProps } from "antd";
 import { TextAreaProps } from "antd/es/input";
 import { ReactNode } from "react";
-
+import { Ubuntu } from "next/font/google";
+const ubuntu = Ubuntu({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+});
 type children = {
   children: ReactNode;
 };
+
+const primaryConfig = { fontFamily: ubuntu.style.fontFamily };
 
 export const CustomInput = ({ ...props }: InputProps) => (
   <ConfigProvider
@@ -55,6 +61,7 @@ export const CustomInput = ({ ...props }: InputProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
     }}
   >
@@ -68,6 +75,7 @@ export const CustomInlineInput = ({ ...props }: InputProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
     }}
   >
@@ -81,6 +89,7 @@ export const CustomInputNumber = ({ ...props }: InputNumberProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
     }}
   >
@@ -94,6 +103,7 @@ export const CustomSearchInput = ({ ...props }: InputProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
     }}
   >
@@ -115,6 +125,7 @@ export const CustomPasswordInput = ({ ...props }: InputProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
     }}
   >
@@ -141,6 +152,7 @@ export const CustomButton = ({ ...props }: ButtonProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
     }}
   >
@@ -150,7 +162,9 @@ export const CustomButton = ({ ...props }: ButtonProps) => (
 
 export const SecondaryButton = ({ ...props }: ButtonProps) => (
   <ConfigProvider
-    theme={{ token: { colorPrimary: "#E5F6F3", borderRadius: 5 } }}
+    theme={{
+      token: { colorPrimary: "#E5F6F3", borderRadius: 5, ...primaryConfig },
+    }}
   >
     <Button {...props} />
   </ConfigProvider>
@@ -158,7 +172,9 @@ export const SecondaryButton = ({ ...props }: ButtonProps) => (
 
 export const SuccessButton = ({ ...props }: ButtonProps) => (
   <ConfigProvider
-    theme={{ token: { colorPrimary: "#1AD48E", borderRadius: 5 } }}
+    theme={{
+      token: { colorPrimary: "#1AD48E", borderRadius: 5, ...primaryConfig },
+    }}
   >
     <Button {...props} />
   </ConfigProvider>
@@ -166,7 +182,9 @@ export const SuccessButton = ({ ...props }: ButtonProps) => (
 
 export const DangerButton = ({ ...props }: ButtonProps) => (
   <ConfigProvider
-    theme={{ token: { colorPrimary: "#FEEEE5", borderRadius: 5 } }}
+    theme={{
+      token: { colorPrimary: "#FEEEE5", borderRadius: 5, ...primaryConfig },
+    }}
   >
     <Button {...props} />
   </ConfigProvider>
@@ -179,6 +197,7 @@ export const AuthButton = ({ ...props }: ButtonProps) => (
         colorPrimary: "#010886",
         borderRadius: 5,
         controlHeight: 45,
+        ...primaryConfig,
       },
     }}
   >
@@ -193,6 +212,7 @@ export const HeaderButton = ({ ...props }: ButtonProps) => (
         colorPrimary: "#010886",
         borderRadius: 5,
         controlHeight: 40,
+        ...primaryConfig,
       },
     }}
   >
@@ -207,6 +227,7 @@ export const CustomCheckBox = ({ ...props }: CheckboxProps) => (
         colorPrimary: "#010886",
         borderRadius: 4,
         padding: 24,
+        ...primaryConfig,
       },
     }}
   >
@@ -220,6 +241,7 @@ export const RadioButton = ({ ...props }: RadioProps) => (
       token: {
         colorPrimary: "#C4C4C4",
         borderRadius: 5,
+        ...primaryConfig,
       },
       components: {
         Radio: {
@@ -251,6 +273,7 @@ export const RadioGroup = ({ ...props }: RadioGroupProps) => (
       token: {
         colorPrimary: "#C4C4C4",
         borderRadius: 5,
+        ...primaryConfig,
       },
       components: {
         Radio: {
@@ -280,6 +303,7 @@ export const CustomRadio = ({ ...props }: RadioProps) => (
       token: {
         colorPrimary: "#4640DE",
         borderRadius: 5,
+        ...primaryConfig,
       },
     }}
   >
@@ -293,6 +317,7 @@ export const ThemeRadioButton = ({ ...props }: RadioProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
       components: {
         Radio: {
@@ -322,6 +347,7 @@ export const ThemeRadioGroup = ({ ...props }: RadioGroupProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
       components: {
         Radio: {
@@ -345,7 +371,9 @@ export const ThemeRadioGroup = ({ ...props }: RadioGroupProps) => (
 
 export const CustomSteps = ({ ...props }: StepsProps) => (
   <ConfigProvider
-    theme={{ token: { colorPrimary: "#010886", borderRadius: 5 } }}
+    theme={{
+      token: { colorPrimary: "#010886", borderRadius: 5, ...primaryConfig },
+    }}
   >
     <Steps {...props} />
   </ConfigProvider>
@@ -359,6 +387,7 @@ export const CustomMenu = ({ ...props }: MenuProps) => (
         borderRadius: 5,
         fontSize: 16,
         colorBgContainer: "#F8F8FD",
+        ...primaryConfig,
       },
       components: {
         Menu: {},
@@ -377,6 +406,7 @@ export const ChatMenu = ({ ...props }: MenuProps) => (
         borderRadius: 5,
         fontSize: 16,
         colorBgContainer: "#FFF",
+        ...primaryConfig,
       },
       components: {
         Menu: {
@@ -398,7 +428,9 @@ export const CustomDropDown = ({
   ...props
 }: DropdownProps | children) => (
   <ConfigProvider
-    theme={{ token: { colorPrimary: "#010886", borderRadius: 5 } }}
+    theme={{
+      token: { colorPrimary: "#010886", borderRadius: 5, ...primaryConfig },
+    }}
   >
     <Dropdown {...props}>{children}</Dropdown>
   </ConfigProvider>
@@ -406,7 +438,9 @@ export const CustomDropDown = ({
 
 export const CustomSelect = ({ ...props }: SelectProps) => (
   <ConfigProvider
-    theme={{ token: { colorPrimary: "#010886", borderRadius: 5 } }}
+    theme={{
+      token: { colorPrimary: "#010886", borderRadius: 5, ...primaryConfig },
+    }}
   >
     <Select
       {...props}
@@ -428,7 +462,7 @@ export const CustomSelect = ({ ...props }: SelectProps) => (
 export const CustomDivider = ({ ...props }: DividerProps) => (
   <ConfigProvider
     theme={{
-      token: { colorPrimary: "#010886", borderRadius: 5 },
+      token: { colorPrimary: "#010886", borderRadius: 5, ...primaryConfig },
       components: { Divider: {} },
     }}
   >
@@ -442,7 +476,7 @@ export const CustomDivider = ({ ...props }: DividerProps) => (
 export const CustomPagination = ({ ...props }: PaginationProps) => (
   <ConfigProvider
     theme={{
-      token: { colorPrimary: "#010886", borderRadius: 5 },
+      token: { colorPrimary: "#010886", borderRadius: 5, ...primaryConfig },
     }}
   >
     <Pagination {...props} />
@@ -452,7 +486,7 @@ export const CustomPagination = ({ ...props }: PaginationProps) => (
 export const CustomCarousel = ({ ...props }: CarouselProps) => (
   <ConfigProvider
     theme={{
-      token: { colorPrimary: "#010886", borderRadius: 5 },
+      token: { colorPrimary: "#010886", borderRadius: 5, ...primaryConfig },
       components: { Carousel: { colorPrimaryActive: "#FFF" } },
     }}
   >
@@ -464,21 +498,27 @@ export const CustomCarousel = ({ ...props }: CarouselProps) => (
 
 export const CustomProgress = ({ ...props }: ProgressProps) => (
   <ConfigProvider
-    theme={{ token: { colorPrimary: "#56CDAD", borderRadius: 5 } }}
+    theme={{
+      token: { colorPrimary: "#56CDAD", borderRadius: 5, ...primaryConfig },
+    }}
   >
     <Progress {...props} />
   </ConfigProvider>
 );
 
 export const CustomRate = ({ ...props }: RateProps) => (
-  <ConfigProvider theme={{ token: { colorPrimary: "#56CDAD" } }}>
+  <ConfigProvider
+    theme={{ token: { colorPrimary: "#56CDAD", ...primaryConfig } }}
+  >
     <Rate {...props} />
   </ConfigProvider>
 );
 
 export const CustomModal = ({ ...props }: ModalProps) => (
   <ConfigProvider
-    theme={{ token: { colorPrimary: "#010886", borderRadius: 5 } }}
+    theme={{
+      token: { colorPrimary: "#010886", borderRadius: 5, ...primaryConfig },
+    }}
   >
     <Modal centered maskClosable={false} footer={null} {...props}>
       {props.children}
@@ -492,6 +532,7 @@ export const CustomTabs = ({ ...props }: TabsProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
       components: { Tabs: { inkBarColor: "#010886" } },
     }}
@@ -506,6 +547,7 @@ export const CustomUpload = ({ ...props }: UploadProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
     }}
   >
@@ -519,6 +561,7 @@ export const CustomDatePicker = ({ ...props }: DatePickerProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
     }}
   >
@@ -532,6 +575,7 @@ export const CustomCollapse = ({ ...props }: CollapseProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
     }}
   >
@@ -545,6 +589,7 @@ export const CustomFloatButton = ({ ...props }: FloatButtonProps) => (
       token: {
         colorPrimary: "#010886",
         borderRadius: 5,
+        ...primaryConfig,
       },
     }}
   >

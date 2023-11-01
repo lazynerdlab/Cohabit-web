@@ -40,7 +40,9 @@ function getItem(
   } as MenuItem;
 }
 
-const Title = () => <Image className="mxauto py-[0.5rem]" alt="" src={Logo} />;
+const Title = () => (
+  <Image className="py-[0.5rem] hidden md:block" alt="" src={Logo} />
+);
 
 const SideBar = () => {
   const { push } = useRouter()

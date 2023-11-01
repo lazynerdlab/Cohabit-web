@@ -7,7 +7,7 @@ import PlusIcon from "@/assets/icons/PlusIcon";
 import HomeIconsm from "@/assets/icons/HomeIconsm";
 
 const HostHeader = ({ children }: HeaderType) => {
-  const { replace } = useRouter();
+  const { push } = useRouter();
   return (
     <div className="grid grid-cols-[50%_20%_30%] md:grid-cols-[60%_20%_20%] lg:grid-cols-[70%_10%_20%] items-center px-[0.5rem] lg:px-[1rem] sticky shadow-inner shadow-[#D6DDEB]">
       {children}
@@ -16,6 +16,7 @@ const HostHeader = ({ children }: HeaderType) => {
       </div>
       <div className="flex justify-center">
         <Button
+          onClick={() => push("host/post-apartment")}
           className="flex items-center self-end !bg-[#010886]"
           type="primary"
         >

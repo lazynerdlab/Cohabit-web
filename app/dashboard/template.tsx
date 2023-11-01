@@ -15,9 +15,10 @@ const Template = ({ children }: children) => {
     }
   }, [push])
   return (
-    <div className="grid grid-cols-[20%_80%] min-h-screen max-h-screen overflow-hidden">
+    <div className="drawer lg:drawer-open min-h-screen max-h-screen overflow-hidden">
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content bg-[#EEF2F7]">{children}</div>
       <SideBar />
-      {children}
     </div>
   );
 };

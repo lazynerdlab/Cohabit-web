@@ -148,7 +148,7 @@ const SignIn = () => {
               <Spinner />
             ) : (
               <Button
-                className="!bg-[#010886]"
+                className="!bg-[#010886] !w-full"
                 type="primary"
                 onClick={(e: any) => {
                   handleSubmit(e);
