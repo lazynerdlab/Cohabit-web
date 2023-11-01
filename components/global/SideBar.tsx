@@ -156,7 +156,7 @@ const SideBar = () => {
             </div>
             <span className=" cursor-pointer p-3 bg-[#e20000] text-[#fff] flex justify-center gap-3 items-center" onClick={
               () => {
-                push("/sign-in")
+                push("/")
                 window.sessionStorage.removeItem("authToken")
 
 

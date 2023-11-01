@@ -148,7 +148,7 @@ const HostSidebar = () => {
                         <span className=" cursor-pointer p-3 bg-[#e20000] text-[#fff] flex justify-center gap-3 items-center" onClick={
                             () => {
                                 window.sessionStorage.removeItem("authToken")
-                                push("/sign-in")
+                                push("/")
                             }
                         }> <MdLogout /> Log out</span>
                     </>
