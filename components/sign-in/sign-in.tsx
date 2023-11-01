@@ -40,6 +40,7 @@ const SignIn = () => {
     e.preventDefault(); // Prevents the default form submission and page refresh
     if (!email || !password) {
       message.success("All fields are required");
+      return
     }
 
     try {
