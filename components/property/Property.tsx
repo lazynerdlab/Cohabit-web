@@ -17,7 +17,6 @@ import BathIcon from "@/assets/icons/BathIcon";
 
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "@/redux/hook";
-import { SET_PROPERTY_LOADING } from "@/redux/slice/propertySlice";
 
 const Property = () => {
   const [open, setOpen] = useState(false);
