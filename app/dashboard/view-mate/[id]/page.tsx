@@ -3,9 +3,26 @@ import Header from "@/components/header/Header";
 import BackIcon from "@/assets/icons/BackIcon";
 import ViewMate from "@/components/dashboard/ViewMate";
 import { useRouter } from "next/navigation";
-
-const Page = () => {
+import { useGetFlatmateDetailsQuery } from "@/redux/api/flatmateApi";
+import { useEffect, useState } from "react";
+interface IProps {
+  params: {
+    id: string | number
+  }
+}
+const Page = ({ params }: IProps) => {
   const { back } = useRouter();
+  const { id } = params;
+  const { data, isLoading, isError, error, isSuccess } = useGetFlatmateDetailsQuery(id);
+  const [flatmate, setFlatmate] = useState<Record<string, any>>({});
+  useEffect(() => {
+    if (isSuccess) {
+      setFlatmate(data?.data)
+    }
+  }, [data, isSuccess])
+
+  console.log(flatmate);
+
   return (
     <div className="grid grid-cols-1 grid-rows-[10%_90%] max-h-screen overflow-y-scroll">
       <Header>
@@ -21,7 +38,7 @@ const Page = () => {
           </div>
         </div>
       </Header>
-      <ViewMate />
+      <ViewMate data={flatmate} />
     </div>
   );
 };

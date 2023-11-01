@@ -1,5 +1,6 @@
 import Header from "@/components/header/Header";
 import Profile from "@/components/profile/Profile";
+import { ReduxProvider } from "@/redux/provider";
 
 const page = () => {
   return (

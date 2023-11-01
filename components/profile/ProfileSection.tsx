@@ -10,8 +10,23 @@ import FlagIcon from "@/assets/icons/FlagIcon";
 import PlusIcon from "@/assets/icons/PlusIcon";
 import EditIcon from "@/assets/icons/EditIcon";
 import ProfileSection2 from "./ProfileSection2";
+import { useGetSavedApartmentsQuery } from "@/redux/api/houseApi";
+import { useEffect, useState } from "react";
 
-const ProfileSection = () => {
+interface Props {
+  data?: Record<string, any>
+}
+const ProfileSection = ({ data }: Props) => {
+  const { data: savedData, isSuccess, isLoading } = useGetSavedApartmentsQuery({})
+  const [saved, setSaved] = useState<Record<string, any>>([])
+  useEffect(() => {
+    if (isSuccess) {
+      setSaved(savedData?.data.data)
+    }
+  }, [savedData, isSuccess])
+
+  console.log(saved);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-[70%_30%] w-full py-[1rem]">
       <div className="flex flex-col gap-[0.5rem]">
@@ -23,10 +38,7 @@ const ProfileSection = () => {
             <Button icon={<EditIcon className="fill-colorPrimary" />} />
           </span>
           <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
-            I’m a product designer + filmmaker currently working remotely at
-            Twitter from beautiful Manchester, United Kingdom. I’m passionate
-            about designing digital products that have a positive impact on the
-            world..
+            {data?.preference?.personal_introduction}
           </p>
           <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
             I am playful person, lover of cat and i don’t like to smoke
@@ -47,7 +59,7 @@ const ProfileSection = () => {
                   Categories:
                 </h5>
                 <p className="text-[12px] md:text-[16px] font-[400]">
-                  One Bedroom, Bungalow
+                  {data?.house_type?.map((item: string) => item)}
                 </p>
               </span>
             </span>
@@ -58,7 +70,7 @@ const ProfileSection = () => {
                   Location:
                 </h5>
                 <p className="text-[12px] md:text-[16px] font-[400]">
-                  Lagos, Nigeria
+                  {data?.location}
                 </p>
               </span>
             </span>
@@ -69,51 +81,7 @@ const ProfileSection = () => {
                   Lifestyle:
                 </h5>
                 <p className="text-[12px] md:text-[16px] font-[400]">
-                  Friendly, Indoor
-                </p>
-              </span>
-            </span>
-            <span className="flex items-center gap-[0.5rem]">
-              <FlagIcon className="fill-[#32475C99]/[60%]" />
-              <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
-                <h5 className="text-[12px] md:text-[16px] font-[700]">
-                  Lifestyle:
-                </h5>
-                <p className="text-[12px] md:text-[16px] font-[400]">
-                  Friendly, Indoor
-                </p>
-              </span>
-            </span>
-            <span className="flex items-center gap-[0.5rem]">
-              <FlagIcon className="fill-[#32475C99]/[60%]" />
-              <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
-                <h5 className="text-[12px] md:text-[16px] font-[700]">
-                  Lifestyle:
-                </h5>
-                <p className="text-[12px] md:text-[16px] font-[400]">
-                  Friendly, Indoor
-                </p>
-              </span>
-            </span>
-            <span className="flex items-center gap-[0.5rem]">
-              <FlagIcon className="fill-[#32475C99]/[60%]" />
-              <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
-                <h5 className="text-[12px] md:text-[16px] font-[700]">
-                  Lifestyle:
-                </h5>
-                <p className="text-[12px] md:text-[16px] font-[400]">
-                  Friendly, Indoor
-                </p>
-              </span>
-            </span>
-            <span className="flex items-center gap-[0.5rem]">
-              <FlagIcon className="fill-[#32475C99]/[60%]" />
-              <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
-                <h5 className="text-[12px] md:text-[16px] font-[700]">
-                  Lifestyle:
-                </h5>
-                <p className="text-[12px] md:text-[16px] font-[400]">
-                  Friendly, Indoor
+                  {data?.lifestyle.map((item: string) => item)}
                 </p>
               </span>
             </span>
@@ -133,54 +101,17 @@ const ProfileSection = () => {
               variableWidth
               className="max-h-[250px]"
             >
-              <div className="w-fit hfit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
+              {
+                saved.length === 0 ? <div className="w-full h-[250px] flex justify-center items-center text-[#25324B] text-[16px] font-[400]">You have no saved searches</div> : saved.map((item: Record<string, any>) => (
+                  <div key={item?.id} className="w-fit hfit p-[1rem] flex flex-row gap-[0.2rem]">
+                    <Image alt="apartment" src={item?.image} width={100} height={100} className="h-[100px] w-[100px] " />
+                    <span className="text-[#25324B] text-[16px] font-[400]">
+                      {item?.location}
+                    </span>
+                  </div>
+                ))
+              }
+
             </Carousel>
           </div>
         </div>

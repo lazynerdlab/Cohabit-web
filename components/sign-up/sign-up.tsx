@@ -2,8 +2,6 @@
 import google from "@/assets/google.svg";
 import Image from "next/image";
 import {
-  FormEvent,
-  MouseEventHandler,
   SyntheticEvent,
   useCallback,
   useEffect,
@@ -17,7 +15,7 @@ import {
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useSignupMutation } from "@/redux/api/authApi";
-import { message } from "antd";
+import { Select, message } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { Spinner } from "../spinner/Spinner";
 
@@ -27,6 +25,8 @@ const SignUp = () => {
   const [firstName, setFirstName] = useState<string>();
   const [lastName, setLastName] = useState<string>();
   const [email, setEmail] = useState<string>();
+  const [gender, setGender] = useState<string>();
+  const [location, setLocation] = useState<string>();
   const [checked, setChecked] = useState(false);
   const [signup, { isLoading, isSuccess, isError, error, data }] =
     useSignupMutation();
@@ -34,7 +34,7 @@ const SignUp = () => {
   const handleSubmit = useCallback(
     async (e: SyntheticEvent) => {
       e.preventDefault(); // Prevents the default form submission and page refresh
-      if (!checked || !firstName || !lastName || !email) {
+      if (!checked || !firstName || !lastName || !email || !gender || !location) {
         message.error("All fields are required");
         return;
       }
@@ -44,6 +44,8 @@ const SignUp = () => {
           firstname: firstName,
           lastname: lastName,
           email: email,
+          gender: gender,
+          location: location,
           user_type: "host",
         };
 
@@ -52,7 +54,7 @@ const SignUp = () => {
         console.error("Login failed:", error);
       }
     },
-    [checked, firstName, lastName, email, signup]
+    [checked, firstName, lastName, email, gender, location, signup]
   );
 
   useEffect(() => {
@@ -61,9 +63,11 @@ const SignUp = () => {
       setFirstName("");
       setLastName("");
       setEmail("");
+      setGender("");
+      setLocation("");
       sessionStorage.setItem("authToken", data?.data?.token);
       localStorage.setItem("previousLocation", pathname);
-      // push("/on-board")
+      push("/host")
     }
     if (isError) {
       const errorMesg = error as any;
@@ -71,6 +75,12 @@ const SignUp = () => {
     }
   }, [isSuccess, isError, error, push, data, pathname]);
 
+  const handleGenderChange = (value: string) => {
+    setGender(value)
+  };
+  const handleLocationChange = (value: string) => {
+    setLocation(value)
+  };
   return (
     <div className="w-[90%] md:w-[60%] mx-auto">
       <div className="grid grid-cols-1 gap-[0.8rem] w-full">
@@ -102,7 +112,6 @@ const SignUp = () => {
             </label>
             <Input
               className=""
-              placeholder="This is a placeholder"
               id="first_name"
               value={firstName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,7 +128,6 @@ const SignUp = () => {
             </label>
             <Input
               className=""
-              placeholder="This is a placeholder"
               id="last_name"
               value={lastName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -136,7 +144,6 @@ const SignUp = () => {
             </label>
             <Input
               className=""
-              placeholder="This is a placeholder"
               id="email"
               type="email"
               value={email}
@@ -145,6 +152,50 @@ const SignUp = () => {
               }}
             />
           </div>
+          <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
+            <label
+              htmlFor="email"
+              className="text-[#0C1938] text-[16px] font-[700]"
+            >
+              Gender
+            </label>
+            <Select
+              defaultValue=""
+              size="large"
+              value={gender}
+              style={{ width: "100%", }}
+              onChange={handleGenderChange}
+              options={[
+                { value: '', label: 'Select an option' },
+                { value: "0", label: "Male" },
+                { value: "1", label: "Female" },
+                { value: "2", label: "Others" },
+
+              ]}
+            />
+          </div>
+          <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
+            <label
+              htmlFor="email"
+              className="text-[#0C1938] text-[16px] font-[700]"
+            >
+              Location
+            </label>
+            <Select
+              defaultValue=""
+              size="large"
+              value={location}
+              style={{ width: "100%", }}
+              onChange={handleLocationChange}
+              options={[
+                { value: '', label: 'Select an option' },
+                { value: "lagos", label: "Lagos" },
+                { value: "abuja", label: "Abuja" },
+
+              ]}
+            />
+          </div>
+
           <div className="w-full mx-auto flex items-start justify-start gap-[1rem]">
             <Checkbox
               id="check"

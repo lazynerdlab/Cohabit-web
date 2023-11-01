@@ -11,33 +11,37 @@ import ShareIcon from "@/assets/icons/ShareIcon";
 import HeartIcon from "@/assets/icons/HeartIcon";
 import { useRouter } from "next/navigation";
 
-const MateCard = () => {
+interface Props {
+  data: Record<string, any>;
+}
+const MateCard = ({ data }: Props) => {
   const { push } = useRouter();
+
   return (
     <div className="rounded-[8px] grid grid-cols-1 shadow shadow-[#CDCDCD] gap-[0.5rem] py-[0.5rem]">
       <div className="flex items-center justify-between w-[98%] mx-auto px-[2%]">
         <div className="flex flex-col items-start text-colorPrimary text-[16px] font-[500]">
-          <p>One Bedroom wanted</p>
-          <p>Male</p>
+          <p>{data?.house_type[0]?.value ? data?.house_type[0]?.value : "null"}</p>
+          <p>{data?.gender}</p>
         </div>
-        <h5 className="text-[#010886] text-[16px] font-[400]">Below 100k</h5>
+        <h5 className="text-[#010886] text-[16px] font-[400]">{data?.budget}</h5>
       </div>
       <div className="flex items-center justify-between px-[2%] w-[98%] mx-auto">
-        <p className="text-[16px] font-[500] text-[#616A6A]">Bungalow</p>
-        <h5 className="text-[16px] font-[700] text-colorPrimary">NGN150,000</h5>
+        <p className="text-[16px] font-[500] text-[#616A6A]">{data?.house_type[0]?.value ? data?.house_type[0]?.value : "null"}</p>
+        <h5 className="text-[16px] font-[700] text-colorPrimary">NGN{data?.budget}</h5>
       </div>
       <Divider />
       <div className="grid grid-cols-2 items-center w-[98%] mx-auto">
-        <Image alt="user" src={user} className="rounded-[8px]" />
+        <Image alt="user" src={data?.image === null || data?.image === "" ? "https://cdn-icons-png.flaticon.com/512/149/149071.png" : data?.image} className="rounded-[8px]" width={200} height={200} />
         <div className="flex flex-col gap-[0.5rem]">
           <p className="text-[#32475C99]/[60%] text-[13px] flex items-center gap-[0.5rem]">
-            Location: <p className="text-[11px]">Lagos, Nigeria</p>
+            Location: <p className="text-[11px]">{data?.location}</p>
           </p>
           <p className="text-[#32475C99]/[60%] text-[13px] flex items-center gap-[0.5rem]">
-            Lifestyle: <p className="text-[11px]">Friendly, Indoor</p>
+            Lifestyle: <p className="text-[11px]">{data?.lifestyle}</p>
           </p>
           <p className="text-[#32475C99]/[60%] text-[13px] flex items-center justify-between gap-[0.1rem]">
-            Language: <p className="text-[11px]">English, French</p>
+            Language: <p className="text-[11px]">{data?.language}</p>
           </p>
         </div>
       </div>
@@ -56,7 +60,7 @@ const MateCard = () => {
         </DangerButton>
         <Button
           className="!bg-[#010886]"
-          onClick={() => push("/dashboard/view-mate/1")}
+          onClick={() => push(`/dashboard/view-mate/${data?.id}`)}
           type="primary"
         >
           View

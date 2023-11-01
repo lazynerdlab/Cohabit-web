@@ -53,8 +53,8 @@ export const authApi = createApi({
         body: data,
       }),
     }),
-    profile: builder.query({
-      query: () => "profile",
+    getProfile: builder.query({
+      query: () => "me",
       providesTags: ["Profile"],
     }),
     logout: builder.query({
@@ -66,7 +66,7 @@ export const authApi = createApi({
 export const {
   useLoginMutation,
   useSignupMutation,
-  useProfileQuery,
+  useGetProfileQuery,
   useLogoutQuery,
   useCreatePasswordMutation,
   useForgetPasswordMutation,

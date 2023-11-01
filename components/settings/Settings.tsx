@@ -17,6 +17,7 @@ const items: TabsProps["items"] = [
 ];
 
 const Settings = () => {
+
   return (
     <div className="w-[98%] mx-auto py-[1rem]">
       <Tabs defaultActiveKey="1" items={items} />

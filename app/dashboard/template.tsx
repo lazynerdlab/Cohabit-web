@@ -1,8 +1,19 @@
+"use client"
 import SideBar from "@/components/global/SideBar";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 type children = {
   children: React.ReactNode;
 };
-const template = ({ children }: children) => {
+const Template = ({ children }: children) => {
+  const { push } = useRouter()
+  useEffect(() => {
+    const token = sessionStorage.getItem("authToken")
+    if (!token) {
+      push("/sign-in")
+    }
+  }, [push])
   return (
     <div className="drawer lg:drawer-open min-h-screen max-h-screen overflow-hidden">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -12,4 +23,4 @@ const template = ({ children }: children) => {
   );
 };
 
-export default template;
+export default Template;

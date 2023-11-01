@@ -4,10 +4,20 @@ import HomeCard from "../cards/HomeCard";
 import DashBoardChart from "./DashBoardChart";
 import { CustomButton as Button } from "@/lib/AntDesignComponents";
 import { useRouter } from "next/navigation";
+import { useGetHostRecentlyUploadedQuery } from "@/redux/api/hostApi";
+import { useEffect, useState } from "react";
+import { Spinner } from "../spinner/Spinner";
 
 const HostDashboard = () => {
   const { push } = useRouter();
-  const arr = [1, 1, 1];
+  const { data, isLoading, isSuccess } = useGetHostRecentlyUploadedQuery({})
+  const [listingData, setListingData] = useState<Record<string, any>[]>([])
+  useEffect(() => {
+    if (isSuccess) {
+      setListingData(data?.data);
+    }
+  }, [data, isSuccess])
+
   return (
     <div className="w-full mx-auto">
       <div className="w-[98%] mx-auto grid grid-cols-1 py-[0.5rem] gap-[0.5rem]">
@@ -47,8 +57,10 @@ const HostDashboard = () => {
           </Button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[1rem] w-[98%] mx-auto">
-          {arr.map((e, i) => (
-            <HomeCard key={i} />
+          {isLoading ? <Spinner /> : listingData.length === 0 ? <p className="font-medium">No listings found</p> : listingData.map((item: Record<string, any>, i: number) => (
+            <div key={i}>
+              <HomeCard data={item} />
+            </div>
           ))}
         </div>
       </div>

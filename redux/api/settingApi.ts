@@ -10,7 +10,7 @@ export const settingApi = createApi({
   tagTypes: ["Profile"],
   endpoints: (builder) => ({
     getProfile: builder.query({
-      query: () => "",
+      query: () => "profile",
       providesTags: ["Profile"],
     }),
     updateProfile: builder.mutation({

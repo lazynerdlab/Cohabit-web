@@ -16,11 +16,18 @@ export const houseApi = createApi({
     "filteredAreas",
     "HouseSeekerStatus",
     "SavedApartments",
+    "HouseSeekerProfile",
+    "ListingDetail",
+    "HostDetails",
   ],
   endpoints: (builder) => ({
     getHouseType: builder.query({
       query: () => "get_house_type",
       providesTags: ["HouseTypes"],
+    }),
+    getHostDetails: builder.query({
+      query: (id) => `houseSeeker/listings/${id}?type=host`,
+      providesTags: ["HostDetails"],
     }),
     getPersonalityTraits: builder.query({
       query: () => "get_personality_trait",
@@ -35,7 +42,7 @@ export const houseApi = createApi({
       providesTags: ["HouseStatus"],
     }),
     getAllAreas: builder.query({
-      query: () => "get_all_areas",
+      query: ({ path }) => `${path}`,
       providesTags: ["AllAreas"],
     }),
     filterAreas: builder.query({
@@ -51,11 +58,20 @@ export const houseApi = createApi({
       query: () => "houseSeeker/profile/saved_apartment",
       providesTags: ["SavedApartments"],
     }),
+    getHouseSeekerProfile: builder.query({
+      query: () => "houseSeeker/profile/me",
+      providesTags: ["HouseSeekerProfile"],
+    }),
+    getHouseSeekerListingDetail: builder.query({
+      query: (id) => `houseSeeker/listings/${id}`,
+      providesTags: ["ListingDetail"],
+    }),
   }),
 });
 
 export const {
   useGetHouseTypeQuery,
+  useGetHouseSeekerListingDetailQuery,
   useGetPersonalityTraitsQuery,
   useGetHouseBudgetQuery,
   useGetHouseStatusQuery,
@@ -63,4 +79,6 @@ export const {
   useFilterAreasQuery,
   useGetHouseSeekerStatusQuery,
   useGetSavedApartmentsQuery,
+  useGetHouseSeekerProfileQuery,
+  useGetHostDetailsQuery,
 } = houseApi;

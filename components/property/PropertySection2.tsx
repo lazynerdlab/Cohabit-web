@@ -10,12 +10,27 @@ import {
 import HomeCard from "../cards/HomeCard";
 import ShareIcon from "@/assets/icons/ShareIcon";
 import HeartIcon from "@/assets/icons/HeartIcon";
-import user from "@/assets/user.svg";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/hook";
+import { useEffect, useState } from "react";
+import { useGetListingsQuery } from "@/redux/api/landingPageApi";
+import { Spinner } from "../spinner/Spinner";
 
 const PropertySection2 = () => {
-  const arr = [1, 1, 1, 1];
   const { push } = useRouter();
+  const data = useAppSelector((state) => state.propertyData?.property);
+  const [property, setProperty] = useState([]);
+  const path = `listings?count=3&random=1`;
+  const { data: propertyData, isSuccess, isLoading } = useGetListingsQuery({
+    path,
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      setProperty(propertyData?.data);
+    }
+  }, [isSuccess, propertyData?.data]);
+
   return (
     <div className="flex flex-col gap-[0.5rem] w-full md:w-[95%] mx-auto">
       <div className="flex flex-col items-center justify-center gap-[1rem] border border-[#D6DDEB] p-[0.5rem]">
@@ -44,12 +59,12 @@ const PropertySection2 = () => {
       </div>
       <div className="border border-[#D6DDEB] p-[0.5rem]">
         <div
-          onClick={() => push("/dashboard/find-property/host/1")}
+          onClick={() => push(`/dashboard/find-property/host/${data?.host?.id}`)}
           className="bg-[#1B17E7] px-[1rem] py-[0.5rem] flex items-center gap-[1rem] cursor-pointer"
         >
-          <Image alt="host" src={user} />
+          <Image alt="host" src={data?.host?.image} width={80} height={80} className="rounded-[100%] w-[80px] h-[80px]" />
           <div className="flex flex-col gap-[0.5rem] text-[#FFF]">
-            <span>Tony James</span>
+            <span>{data?.host?.name}</span>
             <span>Host</span>
           </div>
         </div>
@@ -82,8 +97,10 @@ const PropertySection2 = () => {
           Featured Property
         </h6>
         <div className="grid grid-cols-1 gap-[0.5rem] w-[98%] mx-auto">
-          {arr.map((e, i) => (
-            <HomeCard key={i} />
+          {isLoading ? <Spinner /> : property?.map((item: Record<string, any>, i) => (
+            <div className="" key={i}>
+              <HomeCard key={i} data={item} />
+            </div>
           ))}
         </div>
       </div>

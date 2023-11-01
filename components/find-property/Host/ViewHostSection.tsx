@@ -7,6 +7,7 @@ import {
 } from "@/lib/AntDesignComponents";
 
 const ViewHostSection = () => {
+
   return (
     <div className="flex flex-col-reverse md:grid grid-cols-[60%_40%]">
       <div className="flex flex-col gap-[0.3rem]">
