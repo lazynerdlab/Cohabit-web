@@ -24,7 +24,7 @@ const Page = ({ params }: IProps) => {
       sessionStorage.setItem("propertyId", String(id))
       dispatch(SET_PROPERTY(data?.data))
     }
-  }, [data, dispatch, id, isSuccess])
+  }, [data?.data, dispatch, id, isSuccess])
   return (
     <div className="grid grid-cols-1 grid-rows-[10%_90%] max-h-screen overflow-y-scroll">
       <Header>

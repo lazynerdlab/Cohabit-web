@@ -32,7 +32,7 @@ const MateCard = ({ data }: Props) => {
       </div>
       <Divider />
       <div className="grid grid-cols-2 items-center w-[98%] mx-auto">
-        <Image alt="user" src={data?.image === null || data?.image === "" ? user : data?.image} className="rounded-[8px]" width={200} height={200} />
+        <Image alt="user" src={data?.image === null || data?.image === "" ? "https://cdn-icons-png.flaticon.com/512/149/149071.png" : data?.image} className="rounded-[8px]" width={200} height={200} />
         <div className="flex flex-col gap-[0.5rem]">
           <p className="text-[#32475C99]/[60%] text-[13px] flex items-center gap-[0.5rem]">
             Location: <p className="text-[11px]">{data?.location}</p>

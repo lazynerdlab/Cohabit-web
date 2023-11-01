@@ -156,11 +156,10 @@ const SideBar = () => {
             </div>
             <span className=" cursor-pointer p-3 bg-[#e20000] text-[#fff] flex justify-center gap-3 items-center" onClick={
               () => {
-                window.sessionStorage.removeItem("authToken")
-                dispatch(CLEAR_USER())
-                dispatch(CLEAR_PROPERTY())
-                dispatch(CLEAR_HOST())
                 push("/sign-in")
+                window.sessionStorage.removeItem("authToken")
+
+
               }
             }> <MdLogout /> Log out</span></>
         }

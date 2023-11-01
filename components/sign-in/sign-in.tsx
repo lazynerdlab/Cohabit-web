@@ -17,7 +17,8 @@ import { usePathname } from "next/navigation";
 import { message } from "antd";
 import { Spinner } from "../spinner/Spinner";
 import { useAppDispatch } from "@/redux/hook";
-import { SET_USER } from "@/redux/slice/userSlice";
+import { CLEAR_USER, SET_USER } from "@/redux/slice/userSlice";
+import { CLEAR_HOST, CLEAR_PROPERTY } from "@/redux/slice/propertySlice";
 
 const SignIn = () => {
   const { push } = useRouter();
@@ -28,6 +29,13 @@ const SignIn = () => {
   const [login, { isLoading, isSuccess, isError, error, data }] =
     useLoginMutation();
 
+
+  useEffect(() => {
+    sessionStorage.clear()
+    dispatch(CLEAR_USER())
+    dispatch(CLEAR_PROPERTY())
+    dispatch(CLEAR_HOST())
+  }, [])
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevents the default form submission and page refresh
     if (!email || !password) {

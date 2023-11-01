@@ -5,8 +5,7 @@ import HomeIconsm from "@/assets/icons/HomeIconsm";
 import MessageIcon from "@/assets/icons/MessageIcon";
 import SearchIcon from "@/assets/icons/SearchIcon";
 import UserIcon from "@/assets/icons/UserIcon";
-import HelpIcon from "@/assets/icons/HelpIcon";
-import SettingsIcon from "@/assets/icons/SettingsIcon";
+
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -16,12 +15,9 @@ import { usePathname } from "next/navigation";
 
 import { MdLogout } from "react-icons/md"
 import { useRouter } from "next/navigation";
-import { useGetHouseSeekerProfileQuery } from "@/redux/api/houseApi";
 import { useGetHostProfileQuery } from "@/redux/api/hostApi";
 import { Spinner } from "./spinner/Spinner";
-import { useAppDispatch } from "@/redux/hook";
-import { CLEAR_USER } from "@/redux/slice/userSlice";
-import { CLEAR_PROPERTY } from "@/redux/slice/propertySlice";
+
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -47,8 +43,7 @@ const HostSidebar = () => {
     const { data, isSuccess, isLoading, isError, error } = useGetHostProfileQuery({});
     const [profile, setProfile] = useState<Record<string, any>>()
     const [active, setActive] = useState("");
-    const path = usePathname();
-    const dispatch = useAppDispatch()
+    const path = usePathname()
 
     useEffect(() => {
         if (isSuccess) {
@@ -153,8 +148,6 @@ const HostSidebar = () => {
                         <span className=" cursor-pointer p-3 bg-[#e20000] text-[#fff] flex justify-center gap-3 items-center" onClick={
                             () => {
                                 window.sessionStorage.removeItem("authToken")
-                                dispatch(CLEAR_USER())
-                                dispatch(CLEAR_PROPERTY())
                                 push("/sign-in")
                             }
                         }> <MdLogout /> Log out</span>
