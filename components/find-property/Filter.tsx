@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
+
 import { useState, useMemo, useEffect, Dispatch, SetStateAction } from "react";
 import { Collapse, CollapseProps, type MenuProps } from "antd";
 
@@ -18,6 +19,7 @@ interface IProps {
   setLocations: Dispatch<SetStateAction<Tag[]>>;
   setAreas: Dispatch<SetStateAction<Tag[]>>;
   stateQuery?: string
+
 }
 
 export const locationOptions = [
@@ -132,6 +134,7 @@ const Filter = ({ setLocations,
     // console.log(key);
   };
   return (
+
     <>
       {/* <Menu
         mode="inline"
@@ -154,6 +157,7 @@ const Filter = ({ setLocations,
 
       </div>
     </>
+
 
   );
 };
