@@ -154,7 +154,7 @@ const FindProperty = () => {
 
         </div>
       </div>
-      <Filter />
+      {/* <Filter /> */}
     </div>
     // <div className="grid grid-cols-[5%_95%] mini:grid-cols-[25%_75%] max-h-screen min-h-screen">
     //   <div>
