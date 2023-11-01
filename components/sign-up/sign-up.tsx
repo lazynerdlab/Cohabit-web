@@ -240,7 +240,7 @@ const SignUp = () => {
           </h3>
           <Link
             className="text-[#1E5156] text-[16px] font-[700]"
-            href={"/sign-in"}
+            href={"/"}
           >
             Login
           </Link>

@@ -23,7 +23,7 @@ const CreatePassword = () => {
   useEffect(() => {
     if (isSuccess) {
       message.success("Password Created Successfully")
-      push('/sign-in')
+      push('/')
     }
 
     if (isError) {

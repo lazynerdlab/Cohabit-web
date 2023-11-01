@@ -12,7 +12,7 @@ const Template = ({ children }: children) => {
     useEffect(() => {
         const token = sessionStorage.getItem("authToken")
         if (!token) {
-            push("/sign-in")
+            push("/")
         }
     }, [push])
     return (
