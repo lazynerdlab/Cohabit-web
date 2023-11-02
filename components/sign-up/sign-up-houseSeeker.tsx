@@ -58,7 +58,7 @@ const SignUpHomeSeeker = () => {
       setEmail("");
       sessionStorage.setItem("authToken", data?.data?.token);
       localStorage.setItem("previousLocation", pathname);
-      // push("/on-board")
+      push("/on-board")
     }
     if (isError) {
       const errorMesg = error as any;
