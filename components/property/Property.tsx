@@ -26,12 +26,10 @@ const Property = () => {
   console.log(property);
 
   useEffect(() => {
-
     if (property) {
-      setPropertyData(property)
+      setPropertyData(property);
     }
   }, [dispatch, property]);
-
 
   const renderExtras = () => {
     if (propertyData.extras && propertyData.extras.length >= 2) {
@@ -40,9 +38,7 @@ const Property = () => {
       return (
         <div className="flex items-center gap-[0.2rem]">
           <RoomIcon />
-          <p className="text-[12px] text-[#515B6F] font-[400]">
-            {rooms} Rooms
-          </p>
+          <p className="text-[12px] text-[#515B6F] font-[400]">{rooms} Rooms</p>
           <div className="flex items-center gap-[0.2rem]">
             <BathIcon />
             <p className="text-[12px] text-[#515B6F] font-[400]">
@@ -65,20 +61,22 @@ const Property = () => {
             prevArrow={<CarouselBackIcon />}
             dots={false}
             variableWidth
-            className="mobile-hidden"
+            className="!hidden md:!block"
           >
-            {
-              propertyData?.images?.map((image: string, index: number) => (
-                <div key={index} className="w-full h-full relative">
-                  <Image alt="thumbnail" src={image} />
-                </div>
-              ))
-            }
-
+            {propertyData?.images?.map((image: string, index: number) => (
+              <div key={index} className="w-full h-full relative">
+                <Image alt="thumbnail" src={image} />
+              </div>
+            ))}
           </Carousel>
           <div className="grid grid-cols1 items-start grid-cols-[75%_25%] gap-[0.5rem] md:items-center shadow shadow-[#CDCDCD] px-[1rem] pt-[1rem] rounded-[8px] relative md:absolute md:top-[50%] md:left-[50%] md:translate-x-[-50%] md:w-[80%] w-full bg-[#FFF] pb-[10%] md:pb-[1rem]">
             <div className="grid grid-cols-[30%_70%] gap-[0.3rem]">
-              <Image alt="thumbnail" src={propertyData?.image} width={200} height={200} />
+              <Image
+                alt="thumbnail"
+                src={propertyData?.image}
+                width={200}
+                height={200}
+              />
               <div className="flex flex-col gap-[0.8rem]">
                 <span className="text-[#F6513B] text-[10px] md:text-[12px] font-[400] bg-[#FEECE5] rounded-[10px] md:px-[10px] md:py-[5px] px-[5px] py-[2px] w-fit">
                   {propertyData?.status}
@@ -104,7 +102,10 @@ const Property = () => {
               <Button
                 className="!bg-[#010886] text-[#FFF]"
                 onClick={() => setOpen(true)}
-                disabled={propertyData?.status === "Rented" || propertyData?.status === "Sold"}
+                disabled={
+                  propertyData?.status === "Rented" ||
+                  propertyData?.status === "Sold"
+                }
               >
                 Rent
               </Button>
