@@ -52,7 +52,8 @@ const SignUpHomeSeeker = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      message.success("Login Successfully");
+      message.success("Sign Up Successful");
+      message.success("Please check your email to verify your email");
       setFirstName("");
       setLastName("");
       setEmail("");

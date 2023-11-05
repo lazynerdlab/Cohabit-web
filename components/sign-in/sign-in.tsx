@@ -19,6 +19,7 @@ import { Spinner } from "../spinner/Spinner";
 import { useAppDispatch } from "@/redux/hook";
 import { CLEAR_USER, SET_USER } from "@/redux/slice/userSlice";
 import { CLEAR_HOST, CLEAR_PROPERTY } from "@/redux/slice/propertySlice";
+import { CLEAR_APARTMENT_FORM } from "@/redux/slice/apartmentSlice";
 
 const SignIn = () => {
   const { push } = useRouter();
@@ -29,12 +30,12 @@ const SignIn = () => {
   const [login, { isLoading, isSuccess, isError, error, data }] =
     useLoginMutation();
 
-
   useEffect(() => {
     sessionStorage.clear()
     dispatch(CLEAR_USER())
     dispatch(CLEAR_PROPERTY())
     dispatch(CLEAR_HOST())
+    dispatch(CLEAR_APARTMENT_FORM())
   }, [])
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevents the default form submission and page refresh
@@ -57,6 +58,7 @@ const SignIn = () => {
       setEmail("");
       setPassword("");
       dispatch(SET_USER(data))
+
       sessionStorage.setItem("authToken", data?.data?.token);
       sessionStorage.setItem("myId", data?.data?.user?.id);
       localStorage.setItem("previousLocation", pathname);
@@ -84,6 +86,7 @@ const SignIn = () => {
         <Image
           className="justify-self-center h-full md:hidden"
           alt=""
+
           src={Logo}
         />
         <div className="text-center text-gray-900 text-[32px] font-bold leading-[38.40px]">

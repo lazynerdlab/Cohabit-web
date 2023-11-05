@@ -1,14 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-
-import { useState, useMemo, useEffect, Dispatch, SetStateAction } from "react";
-import { Collapse, CollapseProps, type MenuProps } from "antd";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { Collapse, CollapseProps } from "antd";
 
 import { FilterTags, Tag } from "@/shared/UIs/Tags";
 import { useGetAllAreasQuery, useGetHouseBudgetQuery, useGetHouseTypeQuery } from "@/redux/api/houseApi";
-
-const { Panel } = Collapse;
-
 interface IProps {
   locations: Tag[]
   areas: Tag[]
@@ -19,7 +15,6 @@ interface IProps {
   setLocations: Dispatch<SetStateAction<Tag[]>>;
   setAreas: Dispatch<SetStateAction<Tag[]>>;
   stateQuery?: string
-
 }
 
 export const locationOptions = [
@@ -37,7 +32,6 @@ const Filter = ({ setLocations,
   budgets,
   stateQuery
 }: IProps) => {
-
 
   const [areasOptions, setAreasOptions] = useState([]);
   const [propertyOptions, setPropertyOptions] = useState([]);
@@ -74,7 +68,7 @@ const Filter = ({ setLocations,
     path
   })
   const { data: budgetData, isSuccess: budgetSuccess, isError: budgetIsError } = useGetHouseBudgetQuery({});
-  const { data, isLoading, isError, error, isSuccess, } =
+  const { data, isError, error, isSuccess, } =
     useGetHouseTypeQuery({});
   useEffect(() => {
     if (areaIsSuccess) {
@@ -130,35 +124,13 @@ const Filter = ({ setLocations,
       </div>,
     },
   ];
-  const onChange = (key: string | string[]) => {
-    // console.log(key);
-  };
+
   return (
-
     <>
-      {/* <Menu
-        mode="inline"
-        defaultOpenKeys={openKeys}
-        items={items}
-        selectable={false}
-        onClick={(e) => {
-          setOptions((prev) => {
-            const modified = { ...prev };
-            const path = e.keyPath[1];
-            const element = e.key;
-            modified[path][element] = !prev[path][element];
-            return { ...modified };
-          });
-        }}
-        className="max-h-screen min-h-screen max-w-[80vw] overflow-y-scroll w-full absolute mini:relative z-[9999999]"
-      /> */}
       <div className="">
-        <Collapse items={items} ghost expandIconPosition={"end"} defaultActiveKey={['1']} onChange={onChange} />
-
+        <Collapse items={items} ghost expandIconPosition={"end"} />
       </div>
     </>
-
-
   );
 };
 

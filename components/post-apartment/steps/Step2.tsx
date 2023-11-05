@@ -1,37 +1,82 @@
+"use client";
 import {
   RadioGroup,
   CustomRadio as Radio,
-  CustomInputNumber as InputNumber,
   CustomSelect as Select,
+  AuthButton as Button,
+  CustomInput,
 } from "@/lib/AntDesignComponents";
+import { useGetAllAreasQuery } from "@/redux/api/houseApi";
+import { useAppDispatch } from "@/redux/hook";
+import { SET_APARTMENT_FORM_ONE } from "@/redux/slice/apartmentSlice";
+import { RadioChangeEvent, message } from "antd";
+import { useEffect, useState } from "react";
 
-const Step2 = () => {
+interface Props {
+  next: () => void;
+}
+const Step2 = ({ next }: Props) => {
   const options = [
     {
-      value: "1",
-      label: "Not Identified",
+      value: "lagos",
+      label: "Lagos",
     },
     {
-      value: "2",
-      label: "Closed",
+      value: "abuja",
+      label: "Abuja",
     },
-    {
-      value: "3",
-      label: "Communicated",
-    },
-    {
-      value: "4",
-      label: "Identified",
-    },
-    {
-      value: "5",
-      label: "Resolved",
-    },
-    {
-      value: "6",
-      label: "Cancelled",
-    },
+
   ];
+  const dispatch = useAppDispatch()
+  const [apartmentType, setApartmentType] = useState<string>();
+  const [state, setState] = useState<string | null>();
+  const [areasOptions, setAreasOptions] = useState([]);
+
+  const [location, setLocation] = useState<string | null>();
+  const [amount, setAmount] = useState<number>(0);
+  const [slot, setSlot] = useState<number>(0);
+
+  const handleStateSelect = (value: string) => {
+    setState(value);
+  };
+  const handleLocationSelect = (value: string) => {
+    setLocation(value);
+  };
+  const [path, setPath] = useState<string>();
+
+  const { data: areaData, isSuccess: areaIsSuccess, isError: areaIsError } = useGetAllAreasQuery({
+    path
+  }, { skip: !state })
+
+  useEffect(() => {
+    if (state) {
+      setPath(`get_house_areas?count=30&random=1&state=${state}`)
+    }
+    if (areaIsSuccess) {
+      setAreasOptions(areaData?.data?.data)
+    }
+  }, [areaData?.data?.data, areaIsSuccess, state])
+
+  const handleStep1Submit = () => {
+    if (!apartmentType || !location || !amount || !slot || !state) {
+      message.error("All fields are required");
+      return
+    }
+    const payload = {
+      house_type: apartmentType,
+      state: state,
+      location: `${location}, ${state}`,
+      price: amount,
+      slots: slot
+    }
+
+    if (amount && slot && apartmentType && location && state) {
+      dispatch(SET_APARTMENT_FORM_ONE(payload))
+      next()
+    }
+  }
+
+
   return (
     <div className="grid grid-cols-1 gap-[0.5rem] w-[98%] mx-auto">
       <div className="flex flex-col items-start gap-[0.2rem] border-b border-[#D6DDEB]">
@@ -52,7 +97,7 @@ const Step2 = () => {
           </p>
         </div>
         <div className="flex items-center justify-start justify-self-start gap-[1rem] w-full md:w-[80%] mx-auto">
-          <RadioGroup>
+          <RadioGroup value={apartmentType} onChange={(e: RadioChangeEvent) => setApartmentType(e.target.value)}>
             <div className="flex flex-col gap-[0.3rem]">
               <Radio value={1}>
                 <p className="text-[#515B6F] text-[16px] font-[400]">
@@ -90,13 +135,15 @@ const Step2 = () => {
           </p>
         </div>
         <div className="flex justify-start w-full md:w-[80%] mx-auto">
-          <InputNumber
+          <CustomInput
             className="w-[70%]"
+            value={amount}
+            onChange={(e: any) => setAmount(e.target.value)}
             style={{
               width: "80%",
             }}
-            prefix={<p>N</p>}
-            controls={false}
+            prefix={<p>₦</p>}
+            type="number"
           />
         </div>
       </div>
@@ -110,7 +157,36 @@ const Step2 = () => {
           </p>
         </div>
         <div className="flex items-center gap-[1rem] w-full md:w-[80%] mx-auto">
-          <InputNumber controls />
+          <CustomInput type="number" min={0} value={slot} onChange={(e: any) => setSlot(e.target.value)} />
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start gap-[0.5rem] py-[0.5rem]">
+        <div className="flex flex-col items-start gap-[0.2rem]">
+          <h4 className="text-[16px] font-[500] text-[#25324B]">State</h4>
+          <p className="text-[16px] font-[400] text-[#515B6F]">
+            You can select apartment state
+          </p>
+        </div>
+        <div className="w-full md:w-[80%] mx-auto">
+          <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
+            <label
+              htmlFor="status"
+              className="text-[#0C1938] text-[16px] font-[700]"
+            >
+              Select Apartment State
+            </label>
+            <Select
+              className="w-full"
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+              id="status"
+              value={state}
+              onChange={handleStateSelect}
+              options={options}
+            />
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start gap-[0.5rem] py-[0.5rem]">
@@ -135,11 +211,23 @@ const Step2 = () => {
                 height: "100%",
               }}
               id="status"
-              options={options}
+              value={location}
+              onChange={handleLocationSelect}
+              options={areasOptions?.map((item: Record<string, any>) => ({
+                value: item?.area,
+                label: item?.area,
+              }))}
             />
           </div>
         </div>
       </div>
+      <Button
+        onClick={handleStep1Submit}
+        className="w-fit md:w-[20%] mt-4 justify-self-end !bg-[#010886]"
+        type="primary"
+      >
+        Next
+      </Button>
     </div>
   );
 };

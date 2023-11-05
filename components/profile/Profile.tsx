@@ -13,8 +13,10 @@ import ProfileSection from "./ProfileSection";
 import { useEffect, useState } from "react";
 
 import { useGetHouseSeekerProfileQuery } from "@/redux/api/houseApi";
+import { useRouter } from "next/navigation";
 
 const Profile = () => {
+  const { push } = useRouter()
   const [profile, setProfile] = useState<Record<string, any>>();
   const { data, isSuccess, isLoading, isError, error } = useGetHouseSeekerProfileQuery({});
 
@@ -78,6 +80,9 @@ const Profile = () => {
               <Button
                 className="flex items-center justify-self-end !bg-[#010886]"
                 type="primary"
+                onClick={() => {
+                  push("/dashboard/settings")
+                }}
               >
                 <div className="flex items-center justify-center gap-[0.2rem]">
                   <UserCheckIcon />

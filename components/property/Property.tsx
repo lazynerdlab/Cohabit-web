@@ -23,15 +23,12 @@ const Property = () => {
   const dispatch = useAppDispatch();
   const { property, loading } = useSelector((state: any) => state.propertyData);
   const [propertyData, setPropertyData] = useState<Record<string, any>>({});
-  console.log(property);
 
   useEffect(() => {
-
     if (property) {
       setPropertyData(property)
     }
   }, [dispatch, property]);
-
 
   const renderExtras = () => {
     if (propertyData.extras && propertyData.extras.length >= 2) {

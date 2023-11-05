@@ -1,3 +1,6 @@
+"use client";
+import { useGetHostBarChartQuery } from "@/redux/api/hostApi";
+import { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -9,75 +12,76 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { Spinner } from "../spinner/Spinner";
 
 const data = [
   {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
+    name: "January",
+    house_rented: 4000,
+    house_view: 2400,
+    // amt: 2400,
   },
   {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
+    name: "February",
+    house_rented: 3000,
+    house_view: 1398,
+    // amt: 2210,
   },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
+  // {
+  //   name: "Page C",
+  //   uv: 2000,
+  //   pv: 9800,
+  //   amt: 2290,
+  // },
+
+  // {
+  //   name: "Page G",
+  //   uv: 3490,
+  //   pv: 4300,
+  //   amt: 2100,
+  // },
 ];
 
+
 const BarCharts = () => {
+
+  const [timeFrame, setTimeFrame] = useState<string>("monthly")
+  const [statsData, setStatsData] = useState<Record<string, any>>({})
+  const { data: stats, isLoading, isSuccess } = useGetHostBarChartQuery({
+    timeframe: timeFrame
+  })
+  useEffect(() => {
+    if (isSuccess) {
+      setStatsData(stats?.data);
+    }
+  }, [isSuccess, stats])
+
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <BarChart
-        // width={800}
-        // height={}
-        data={data}
-        margin={{
-          top: 20,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        {/* <YAxis /> */}
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="pv" stackId="a" fill="#DF8026" />
-        <Bar dataKey="uv" stackId="a" fill="#010886" />
-      </BarChart>
-    </ResponsiveContainer>
+    <>
+      {
+        isLoading ? <Spinner /> : <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            // width={800}
+            // height={}
+            data={data}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            {/* <YAxis /> */}
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="house_view" stackId="a" fill="#DF8026" />
+            <Bar dataKey="house_rented" stackId="a" fill="#010886" />
+          </BarChart>
+        </ResponsiveContainer>
+      }
+    </>
   );
 };
 

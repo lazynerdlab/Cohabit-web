@@ -22,6 +22,7 @@ export const flatmateApi = createApi({
         url: `houseSeeker/flatmate/${id}/save`,
         method: "POST",
       }),
+      invalidatesTags: ["Flatmates"],
     }),
     getSaveFlatmates: builder.query({
       query: ({ count }) =>

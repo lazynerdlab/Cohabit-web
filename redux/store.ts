@@ -16,12 +16,14 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { hostApi } from "./api/hostApi";
 import propertySlice from "./slice/propertySlice";
+import apartmentSlice from "./slice/apartmentSlice";
 
 const rootReducer = combineReducers({
   api: authReducer,
   onboardingProcess: onboardingSlice,
   userData: userSlice,
   propertyData: propertySlice,
+  apartmentData: apartmentSlice,
   [authApi.reducerPath]: authApi.reducer,
   [dashboardApi.reducerPath]: dashboardApi.reducer,
   [landingPageApi.reducerPath]: landingPageApi.reducer,

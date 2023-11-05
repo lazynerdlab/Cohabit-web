@@ -6,17 +6,33 @@ import {
   CustomButton as Button,
   CustomDivider as Divider,
 } from "@/lib/AntDesignComponents";
-import user from "@/assets/mate.svg";
+
 import ShareIcon from "@/assets/icons/ShareIcon";
 import HeartIcon from "@/assets/icons/HeartIcon";
 import { useRouter } from "next/navigation";
+import { useSaveFlatmateMutation } from "@/redux/api/flatmateApi";
+import { useEffect } from "react";
+import { message } from "antd";
 
 interface Props {
   data: Record<string, any>;
 }
 const MateCard = ({ data }: Props) => {
   const { push } = useRouter();
+  const [saveFlatmate, { isSuccess, isError, isLoading }] = useSaveFlatmateMutation()
 
+  const handleSaveFlatmate = async (id: string | number) => {
+    await saveFlatmate(id)
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      message.success("Flat mate saved")
+    }
+    if (isError) {
+      message.error("An Error occured")
+    }
+  }, [isError, isSuccess])
   return (
     <div className="rounded-[8px] grid grid-cols-1 shadow shadow-[#CDCDCD] gap-[0.5rem] py-[0.5rem]">
       <div className="flex items-center justify-between w-[98%] mx-auto px-[2%]">
@@ -45,19 +61,25 @@ const MateCard = ({ data }: Props) => {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-[0.2rem] items-center justify-between w-[98%] mx-auto p-[2%]">
+      <div className="grid grid-cols-3 gap-[0.3rem] items-center justify-between w-[98%] mx-auto p-[2%]">
         <SecondaryButton type="primary">
           <div className="flex items-center gap-[0.1rem]">
             <ShareIcon />
             <p className="text-[#50E5B4]">Share</p>
           </div>
         </SecondaryButton>
-        <DangerButton type="primary">
-          <div className="flex items-center gap-[0.1rem]">
-            <HeartIcon />
-            <p className="text-[#FF3D00]">Save</p>
-          </div>
-        </DangerButton>
+        {
+          data.is_saved ? <>
+            <span className="text-[13px] p-1 text-center rounded-md cursor-pointer border-[1px] border-[#000]">Saved</span>
+          </> : <DangerButton type="primary">
+            <div className="flex items-center gap-[0.1rem]" onClick={() => {
+              handleSaveFlatmate(data?.id)
+            }} >
+              <HeartIcon />
+              <p className="text-[#FF3D00]">{isLoading ? "Saving.." : "Save"}</p>
+            </div>
+          </DangerButton>
+        }
         <Button
           className="!bg-[#010886]"
           onClick={() => push(`/dashboard/view-mate/${data?.id}`)}

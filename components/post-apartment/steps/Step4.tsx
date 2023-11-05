@@ -1,7 +1,6 @@
 "use client";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import Home from "@/assets/property.svg";
 import { useRouter } from "next/navigation";
 import {
@@ -9,36 +8,40 @@ import {
   CustomRadio as Radio,
   CustomInputNumber as InputNumber,
   CustomSelect as Select,
+  CustomInput,
+  AuthButton,
 } from "@/lib/AntDesignComponents";
+import { useAppSelector } from "@/redux/hook";
+import { Image, message } from "antd";
+import { usePostApartmentMutation } from "@/redux/api/hostApi";
+import { useEffect } from "react";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-const Step4 = () => {
+interface IProps {
+  prev: () => void
+}
+
+const Step4 = ({ prev }: IProps) => {
   const { push } = useRouter();
-  const options = [
-    {
-      value: "1",
-      label: "Not Identified",
-    },
-    {
-      value: "2",
-      label: "Closed",
-    },
-    {
-      value: "3",
-      label: "Communicated",
-    },
-    {
-      value: "4",
-      label: "Identified",
-    },
-    {
-      value: "5",
-      label: "Resolved",
-    },
-    {
-      value: "6",
-      label: "Cancelled",
-    },
-  ];
+
+  const { step1, step2 } = useAppSelector((state) => state.apartmentData);
+  const [postApartment, { isLoading, isSuccess, isError, error }] = usePostApartmentMutation()
+
+  const handlePostApartment = async () => {
+    await postApartment({
+      ...step1, ...step2
+    })
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      message.success("Apartment Created Successfully")
+      push("/host")
+    }
+    if (isError) {
+      const errMesg = error as any
+      message.error(errMesg?.data?.message)
+    }
+  }, [error, isError, isSuccess, push])
   return (
     <div className="flex flex-col">
       <div className="grid grid-cols-1 gap-[0.5rem] w-[98%] mx-auto">
@@ -58,7 +61,7 @@ const Step4 = () => {
             </p>
           </div>
           <div className="flex items-center justify-start gap-[1rem] w-full md:w-[80%] mx-auto">
-            <RadioGroup defaultValue={2}>
+            <RadioGroup value={step1?.house_type} disabled>
               <div className="flex flex-col gap-[0.3rem]">
                 <Radio value={1}>
                   <p className="text-[#515B6F] text-[16px] font-[400]">
@@ -98,14 +101,15 @@ const Step4 = () => {
             </p>
           </div>
           <div className="flex justify-start w-full md:w-[80%] mx-auto">
-            <InputNumber
+            <CustomInput
               className="w-[70%]"
-              value={500000}
+              value={step1?.price}
               style={{
                 width: "80%",
               }}
+              disabled
               prefix={<p>N</p>}
-              controls={false}
+              type="number"
             />
           </div>
         </div>
@@ -119,7 +123,7 @@ const Step4 = () => {
             </p>
           </div>
           <div className="flex items-center gap-[1rem] w-full md:w-[80%] mx-auto">
-            <InputNumber value={10} controls />
+            <CustomInput value={step1?.slots} disabled />
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
@@ -144,8 +148,8 @@ const Step4 = () => {
                   height: "100%",
                 }}
                 id="status"
-                defaultValue={options[3]}
-                options={options}
+                value={step1?.state}
+                disabled
               />
             </div>
           </div>
@@ -166,13 +170,14 @@ const Step4 = () => {
             <span className="text-[#202430] text-[16px] font-[500]">
               Upload pictures (Png, Jpeg). not less than 500mb
             </span>
-            <Image
-              alt="image"
-              src={Home}
-              width={500}
-              height={100}
-              className="w[250px] block rounded-[8px] h[200px]"
-            />
+            <Image.PreviewGroup
+              preview={{
+                // onChange: (current, prev) => console.log(`current index: ${current}, prev index: ${prev}`),
+              }}
+              items={step2?.images}
+            >
+              <Image width={200} height={150} className="rounded-[4px] object-cover" src={step2?.images[0]} alt="apartment images" />
+            </Image.PreviewGroup>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start gap-[0.5rem] border-b border-[#D6DDEB] py-[0.5rem]">
@@ -188,9 +193,8 @@ const Step4 = () => {
             <ReactQuill
               className="w-full"
               theme="snow"
-              placeholder="Enter apartment description"
               value={
-                "Welcome to your new home! This delightful 3-bedroom house, nestled in a peaceful and family-friendly neighborhood, offers comfort, convenience, and a warm sense of community. With its appealing curb appeal and well-maintained exterior, this property is sure to capture your heart from the moment you step inside."
+                step2?.description
               }
             />
           </div>
@@ -208,13 +212,29 @@ const Step4 = () => {
             <ReactQuill
               className="w-full"
               theme="snow"
-              placeholder="Enter apartment description"
               value={
-                "Welcome to your new home! This delightful 3-bedroom house, nestled in a peaceful and family-friendly neighborhood, offers comfort, convenience, and a warm sense of community. With its appealing curb appeal and well-maintained exterior, this property is sure to capture your heart from the moment you step inside."
+                step2?.features
               }
             />
           </div>
         </div>
+      </div>
+      <div className="flex justify-between items-center">
+        <AuthButton
+          onClick={prev}
+          className="w-fit md:w-[20%] mt-4 justify-self-end !bg-[#010886]"
+          type="primary"
+        >
+          Prev
+        </AuthButton>
+        <AuthButton
+          onClick={handlePostApartment}
+          className="w-fit md:w-[20%] mt-4 justify-self-end !bg-[#010886]"
+          type="primary"
+          disabled={isLoading}
+        >
+          {isLoading ? "Creating" : "Create"}
+        </AuthButton>
       </div>
     </div>
   );

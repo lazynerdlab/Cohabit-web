@@ -146,8 +146,7 @@ const FindProperty = () => {
             pageSize={rowsPerPage}
             total={data?.meta?.total}
             current={data?.meta?.current_page}
-            onChange={(page, count) => {
-              setRowsPerPage(count || 10);
+            onChange={(page) => {
               setPage(page);
             }}
           />

@@ -43,22 +43,44 @@ const statusOptions = [
   },
 ];
 
+const MAX_FILE_SIZE_MB = 5;
 
 const Tab1 = () => {
   const user = useAppSelector((state) => state.userData.user);
   const { data, isSuccess, isLoading, isError, error } = useGetHouseSeekerProfileQuery({});
   const userData = user?.data?.user
+  const [accessToken, setAccessToken] = useState<string>()
+  const [image, setImage] = useState<string>();
+
+  useEffect(() => {
+    const token = sessionStorage.getItem('authToken')
+    if (token) {
+      setAccessToken(token)
+    }
+  }, [])
 
   const props: UploadProps = {
     name: "file",
-    multiple: false,
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+    multiple: true,
+    action: `${process.env.NEXT_PUBLIC_BASE_URL}attachment`,
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    },
+    beforeUpload(file) {
+      const fileSizeInMB = file.size / 1024 / 1024; // Convert file size to megabytes
+      if (fileSizeInMB > MAX_FILE_SIZE_MB) {
+        message.error(`File size must be less than ${MAX_FILE_SIZE_MB}MB.`);
+        return false; // Prevent the upload
+      }
+      return true; // Allow the upload
+    },
     onChange(info) {
       const { status } = info.file;
       if (status !== "uploading") {
-        console.log(info.file, info.fileList);
+
       }
       if (status === "done") {
+        setImage(info?.file?.response?.data?.file)
         message.success(`${info.file.name} file uploaded successfully.`);
       } else if (status === "error") {
         message.error(`${info.file.name} file upload failed.`);
@@ -76,7 +98,6 @@ const Tab1 = () => {
   const [userStatus, setUserStatus] = useState<string>();
   const [dob, setDOB] = useState<any>();
   const [email, setEmail] = useState<string>();
-  const [image, setImage] = useState<string>();
   const [userType, setUserType] = useState<string>();
 
   const handleGenderChange = (value: string) => {
@@ -110,7 +131,7 @@ const Tab1 = () => {
       setEmail(data?.data?.email)
       setPhoneNo(data?.data?.phone)
       setGender(data?.data?.gender)
-      setUserStatus(data?.data?.user_status)
+      setUserStatus(data?.data?.house_seeker_status)
       setDOB(data?.data?.dob)
     }
 
@@ -132,12 +153,16 @@ const Tab1 = () => {
       image: image,
       lastname: lastName,
       phone_no: phoneNo,
-      gender,
+      gender: gender === "female" || gender === "FEMALE" ? 1 : gender === "male" || gender === "MALE" ? 2 : 0,
       dob: date,
       status: userStatus,
       account_type: userType
     });
   };
+
+  console.log(dob);
+  console.log(userStatus);
+
   return (
     <>
       {
@@ -244,6 +269,7 @@ const Tab1 = () => {
                     Date of Birth *
                   </label>
                   <DatePicker className="w-full" value={dob} onChange={dateOnChange} />
+
                 </div>
                 <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
                   <label
