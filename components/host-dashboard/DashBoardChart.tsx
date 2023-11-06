@@ -7,18 +7,25 @@ import {
   CustomProgress as Progress,
 } from "@/lib/AntDesignComponents";
 import { useEffect, useState } from "react";
-import { useGetHostStatisticsAnalyticsQuery } from "@/redux/api/hostApi";
+import { useGetHostBarChartQuery, useGetHostStatisticsAnalyticsQuery } from "@/redux/api/hostApi";
 import { Spinner } from "../spinner/Spinner";
 const DashBoardChart = () => {
-  const { data, isLoading, isSuccess } = useGetHostStatisticsAnalyticsQuery({})
-
+  const [timeFrame, setTimeFrame] = useState<string>("monthly")
   const [statsData, setStatsData] = useState<Record<string, any>>({})
+  const [chartData, setChartData] = useState<Record<string, any>>({})
+  const { data, isLoading, isSuccess } = useGetHostStatisticsAnalyticsQuery({})
+  const { data: stats, isLoading: statsLoading, isSuccess: statsSuccess } = useGetHostBarChartQuery({
+    timeframe: timeFrame
+  })
+
   useEffect(() => {
     if (isSuccess) {
       setStatsData(data?.data);
     }
-  }, [data, isSuccess])
-
+    if (statsSuccess) {
+      setChartData(stats?.data);
+    }
+  }, [data, isSuccess, stats?.data, statsSuccess])
   return (
     <>
       {
@@ -39,7 +46,7 @@ const DashBoardChart = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-[70%_30%] items-stretch">
               <div className="w-full min-h-[200px]">
-                <BarCharts />
+                <BarCharts isLoading={statsLoading} data={chartData} />
               </div>
               <div className="flex flex-col gap-[1rem]">
                 <div className="p-[16px] flex flex-col border border-[#D6DDEB]">
@@ -50,7 +57,7 @@ const DashBoardChart = () => {
                     <ViewIcon />
                   </div>
                   <span className="text-[#25324B] text-[36px] font-[500]">
-                    {statsData?.summary?.reviews}
+                    {chartData?.house_review}
                   </span>
                 </div>
                 <div className="p-[16px] flex flex-col border border-[#D6DDEB]">
@@ -60,7 +67,7 @@ const DashBoardChart = () => {
                     </h4>
                     <CtaIcon />
                   </div>
-                  <span className="text-[#25324B] text-[36px] font-[500]">{statsData?.summary?.rated === null ? 0 : statsData?.summary?.rented}</span>
+                  <span className="text-[#25324B] text-[36px] font-[500]"> {chartData?.house_rented}</span>
                 </div>
               </div>
             </div>
@@ -80,17 +87,12 @@ const DashBoardChart = () => {
                 House-seekers Summary
               </h4>
               <div className="flex items-end gap-[0.2rem]">
-                <h1 className="text-[#25324B] text-[50px] font-[700]">67</h1>
+                <h1 className="text-[#25324B] text-[50px] font-[700]">{statsData?.house_open}</h1>
                 <p className="text-[#7C8493] text-[20px] font-[300] pb-[1rem]">
                   House Opened
                 </p>
               </div>
-              {/* <Progress
-            className="w-full"
-            percent={100}
-            steps={4}
-            strokeColor={["#010886", "#16DD97", "#DF8026", "#F6513B"]}
-          /> */}
+
               <div className="grid grid-cols-[40%_20%_20%_20%] w-full">
                 <span className="bg-[#010886] h-[16px]"></span>
                 <span className="bg-[#16DD97] h-[16px]"></span>

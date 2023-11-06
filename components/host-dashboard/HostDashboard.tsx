@@ -57,8 +57,8 @@ const HostDashboard = () => {
         <div className="w-full max-w-[98%]">
           <DashBoardChart />
         </div>
-        <div className="w-[98%] mx-auto flex md:grid md:grid-cols-[60%_10%] items-center justify-between">
-          <h4>Recently Uploaded</h4>
+        <div className="w-[98%] mt-4 mx-auto flex md:grid md:grid-cols-[60%_10%] items-center justify-between">
+          <h4 className="font-medium text-[22px]">Recently Uploaded</h4>
           <Button onClick={() => push("/dashboard/find-property")}>
             View All
           </Button>
