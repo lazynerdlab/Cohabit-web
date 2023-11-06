@@ -44,7 +44,7 @@ const Step2 = ({ next }: Props) => {
   };
   const [path, setPath] = useState<string>();
 
-  const { data: areaData, isSuccess: areaIsSuccess, isError: areaIsError } = useGetAllAreasQuery({
+  const { data: areaData, isSuccess: areaIsSuccess } = useGetAllAreasQuery({
     path
   }, { skip: !state })
 
@@ -57,6 +57,8 @@ const Step2 = ({ next }: Props) => {
     }
   }, [areaData?.data?.data, areaIsSuccess, state])
 
+  const areaId = location?.slice(-2)
+
   const handleStep1Submit = () => {
     if (!apartmentType || !location || !amount || !slot || !state) {
       message.error("All fields are required");
@@ -67,7 +69,8 @@ const Step2 = ({ next }: Props) => {
       state: state,
       location: `${location}, ${state}`,
       price: amount,
-      slots: slot
+      slots: slot,
+      area_id: areaId
     }
 
     if (amount && slot && apartmentType && location && state) {
@@ -214,7 +217,7 @@ const Step2 = ({ next }: Props) => {
               value={location}
               onChange={handleLocationSelect}
               options={areasOptions?.map((item: Record<string, any>) => ({
-                value: item?.area,
+                value: `${item?.area} ${item?.id}`,
                 label: item?.area,
               }))}
             />

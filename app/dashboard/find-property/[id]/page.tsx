@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useGetHouseSeekerListingDetailQuery } from "@/redux/api/houseApi";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/redux/hook";
-import { SET_PROPERTY } from "@/redux/slice/propertySlice";
+import { SET_PROPERTY, SET_PROPERTY_LOADING } from "@/redux/slice/propertySlice";
 
 interface IProps {
   params: {
@@ -22,6 +22,7 @@ const Page = ({ params }: IProps) => {
   useEffect(() => {
     if (isSuccess) {
       sessionStorage.setItem("propertyId", String(id))
+      dispatch(SET_PROPERTY_LOADING(true))
       dispatch(SET_PROPERTY(data?.data))
     }
   }, [data?.data, dispatch, id, isSuccess])

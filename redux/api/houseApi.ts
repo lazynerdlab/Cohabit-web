@@ -79,9 +79,10 @@ export const houseApi = createApi({
       invalidatesTags: ["ListingDetail"],
     }),
     createListingReview: builder.mutation({
-      query: () => ({
+      query: (data) => ({
         url: `houseSeeker/listings/reviews`,
         method: "POST",
+        body: data,
       }),
       invalidatesTags: ["ListingDetail", "ListingRating"],
     }),
@@ -102,4 +103,5 @@ export const {
   useGetHostDetailsQuery,
   useSaveListingMutation,
   useCreateListingReviewMutation,
+  useGetListingRatingQuery,
 } = houseApi;
