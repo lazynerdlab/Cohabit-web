@@ -22,7 +22,7 @@ const Property = () => {
           prevArrow={<CarouselBackIcon />}
           dots={false}
           variableWidth
-          className="mobile-hidden"
+          className="!hidden md:!block !h-[200px]"
         >
           <Image alt="slide" src={slide} className="w[60vw] h-[200px]" />
           <Image alt="slide" src={slide2} className="w[60vw] h-[200px]" />

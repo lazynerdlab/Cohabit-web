@@ -41,9 +41,7 @@ const Property = () => {
       return (
         <div className="flex items-center gap-[0.2rem]">
           <RoomIcon />
-          <p className="text-[12px] text-[#515B6F] font-[400]">
-            {rooms} Rooms
-          </p>
+          <p className="text-[12px] text-[#515B6F] font-[400]">{rooms} Rooms</p>
           <div className="flex items-center gap-[0.2rem]">
             <BathIcon />
             <p className="text-[12px] text-[#515B6F] font-[400]">

@@ -8,7 +8,7 @@ import Nav from "@/assets/icons/Nav";
 const Header = ({ children }: HeaderType) => {
   const { replace } = useRouter();
   return (
-    <div className="sticky top-0 bg-[#FFF] z-[999999] grid md:grid-cols-[70%_20%_10%] grid-cols-[10%_60%_20%_10%] items-center px-[2%] shadow-inner shadow-[#D6DDEB]">
+    <div className="sticky top-0 bg-[#FFF] z-[999] grid md:grid-cols-[70%_20%_10%] grid-cols-[10%_60%_20%_10%] items-center px-[2%] shadow-inner shadow-[#D6DDEB]">
       <label
         htmlFor="my-drawer-2"
         className="flex lg:hidden text-blue-800 px-3"
