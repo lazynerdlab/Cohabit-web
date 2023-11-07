@@ -72,11 +72,11 @@ const FindProperty = () => {
       if (values) {
         const filteredValues = Array.isArray(values)
           ? values
-              .map((value: Record<string, any>) => value.value || value.id)
-              .filter(Boolean)
+            .map((value: Record<string, any>) => value.value || value.id)
+            .filter(Boolean)
           : [values]
-              .map((value: Record<string, any>) => value.value || value.id)
-              .filter(Boolean);
+            .map((value: Record<string, any>) => value.value || value.id)
+            .filter(Boolean);
 
         if (filteredValues.length > 0) {
           const encodedValues = filteredValues
@@ -121,157 +121,41 @@ const FindProperty = () => {
                 -Showing {data?.meta?.total} results
               </p>
             </div>
-            {/* <div className="flex items-center gap-[0.1rem] w-full">
-              <p className="text-[#7C8493] text-[10px] md:text-[16px] font-[400]">
-                Sort by:
-              </p>
-              <Select options={options} defaultValue={"Most Relevant"} />
-            </div>
-            <SortIcon className="hidden md:block" /> */}
+
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-[1rem] w-[98%] mx-auto">
             {loading ? (
               <> Loading...</>
-            ) : (
-              <>
-                {" "}
-                {houseData?.map(
-                  (item: Record<string, any>, i: number | string) => (
-                    <HomeCard key={i} data={item} />
-                  )
-                )}
-              </>
-            )}
+            ) :
+              <> {houseData?.map((item: Record<string, any>, i: number | string) => (
+                <HomeCard key={i} data={item} />
+              ))}</>
+            }
           </div>
-          <div className="w-full flex justify-center">
-            <Pagination total={50} />
+          <div className="w-full flex justify-center mt-4">
+            <Pagination
+              pageSize={rowsPerPage}
+              total={data?.meta?.total}
+              current={data?.meta?.current_page}
+              onChange={(page) => {
+                setPage(page);
+              }}
+            />
+
           </div>
         </div>
+        <Filter
+          locations={locations}
+          setLocations={setLocations}
+          areas={areas}
+          setAreas={setAreas}
+          propertyTypes={propertyType}
+          setPropertyType={setPropertyType}
+          budgets={budgets}
+          setBudgets={setBudgets}
+        />
       </div>
-      <Filter
-        locations={locations}
-        setLocations={setLocations}
-        areas={areas}
-        setAreas={setAreas}
-        propertyTypes={propertyType}
-        setPropertyType={setPropertyType}
-        budgets={budgets}
-        setBudgets={setBudgets}
-      />
     </div>
-    // <div className="grid grid-cols-[5%_95%] mini:grid-cols-[25%_75%] max-h-screen min-h-screen">
-    //   <div>
-    //     {Number(width) < 700 &&
-    //       (filter ? (
-    //         <SearchIcon
-    //           onClick={() => {
-    //             setFilter((prev) => !prev);
-    //           }}
-    //           className="cursor-pointer stroke-colorPrimary"
-    //         />
-    //       ) : (
-    //         <FiFilter
-    //           className="cursor-pointer"
-    //           onClick={() => {
-    //             setFilter((prev) => !prev);
-    //           }}
-    //         />
-    //       ))}
-    //     {filter && <Filter locations={locations} setLocations={setLocations} areas={areas} setAreas={setAreas} propertyTypes={propertyType} setPropertyType={setPropertyType} budgets={budgets} setBudgets={setBudgets} />}
-    //   </div>
-    //   <div className="flex flex-col gap-3">
-    //     <div className="grid grid-cols-[40%_60%] md:grid-cols-[45%_50%_5%] w-[98%] mx-auto">
-    //       <div className="text-[#25324B] flex flex-col gap-[0.1rem]">
-    //         <h4 className="lg:text-[24px] text-[12px] md:text-[18px] font-[700]">
-    //           All Property
-    //         </h4>
-    //         <p className="text-[10px] md:text-[16px] font-[400]">
-    //           Showing {data?.meta?.total}  results
-    //         </p>
-    //       </div>
-    //     </div>
-    //     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[1rem] w-[98%] mx-auto">
-    // {
-    //   loading ? (
-    //     <> Loading...</>
-    //   ) :
-    //     <> {houseData?.map((item: Record<string, any>, i: number | string) => (
-    //       <HomeCard key={i} data={item} />
-    //     ))}</>
-
-    // }
-
-    //     </div>
-    //     <div className="w-full flex justify-center mt-4">
-    //       <Pagination
-    //         pageSize={rowsPerPage}
-    //         total={data?.meta?.total}
-    //         current={data?.meta?.current_page}
-    //         onChange={(page, count) => {
-    //           setRowsPerPage(count || 10);
-    //           setPage(page);
-    //         }}
-    //       />
-
-    //     </div>
-    //   </div>
-    //   {/* <Filter /> */}
-    // </div>
-    // <div className="grid grid-cols-[5%_95%] mini:grid-cols-[25%_75%] max-h-screen min-h-screen">
-    //   <div>
-    //     {/* {Number(width) < 700 &&
-    //       (filter ? (
-    //         <SearchIcon
-    //           onClick={() => {
-    //             setFilter((prev) => !prev);
-    //           }}
-    //           className="cursor-pointer stroke-colorPrimary"
-    //         />
-    //       ) : (
-    //         <FiFilter
-    //           className="cursor-pointer"
-    //           onClick={() => {
-    //             setFilter((prev) => !prev);
-    //           }}
-    //         />
-    //       ))} */}
-    // <label htmlFor="my-drawer-3" className="flex text-blue-800 px-3">
-    //   <FiFilter className="cursor-pointer" />
-    // </label>
-    //   </div>
-    //   <div className="grid grid-cols-1 gap-[0.5rem] overflow-y-scroll">
-    //     <div className="grid grid-cols-[40%_60%] md:grid-cols-[45%_50%_5%] items-center w-[98%] mx-auto">
-    //       <div className="text-[#25324B] flex flex-col gap-[0.1rem]">
-    //         <h4 className="lg:text-[24px] text-[12px] md:text-[18px] font-[700]">
-    //           All Property
-    //         </h4>
-    //         <p className="text-[10px] md:text-[16px] font-[400]">
-    //           Showing 73 results
-    //         </p>
-    //       </div>
-    //       <div className="flex items-center gap-[0.1rem] w-full">
-    //         <p className="text-[#7C8493] text-[10px] md:text-[16px] font-[400]">
-    //           Sort by:
-    //         </p>
-    //         <Select
-    //           // size="small"
-    //           options={options}
-    //           defaultValue={"Most Relevant"}
-    //         />
-    //       </div>
-    //       <SortIcon className="hidden md:block" />
-    //     </div>
-    //     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[1rem] w-[98%] mx-auto">
-    //       {arr.map((e, i) => (
-    //         <HomeCard key={i} />
-    //       ))}
-    //     </div>
-    //     <div className="w-full flex justify-center">
-    //       <Pagination total={50} />
-    //     </div>
-    //   </div>
-    //   <Filter />
-    // </div>
   );
 };
 

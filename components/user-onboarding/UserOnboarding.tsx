@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useState, useMemo } from "react";
 import Step1 from "./steps/Step1";
@@ -99,7 +100,6 @@ const UserOnboarding = () => {
 
         <div className="w-full">{steps[current].content}</div>
       </div>
-      <div className="flex justify-between gap-[1rem] items-center mt-4"></div>
     </div>
   );
 };

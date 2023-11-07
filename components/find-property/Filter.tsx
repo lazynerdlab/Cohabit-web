@@ -57,11 +57,11 @@ const Filter = ({
     if (locations) {
       const filteredAreas = Array.isArray(locations)
         ? locations
-            .map((state: Record<string, any>) => state.value || state.id)
-            .filter(Boolean)
+          .map((state: Record<string, any>) => state.value || state.id)
+          .filter(Boolean)
         : [locations]
-            .map((state: Record<string, any>) => state.value || state.id)
-            .filter(Boolean);
+          .map((state: Record<string, any>) => state.value || state.id)
+          .filter(Boolean);
 
       if (filteredAreas.length > 0) {
         const encodedAreas = filteredAreas
@@ -174,61 +174,11 @@ const Filter = ({
       ),
     },
   ];
-  const onChange = (key: string | string[]) => {
-    // console.log(key);
-  };
+
   return (
     <>
-      {/* <Menu
-        mode="inline"
-        defaultOpenKeys={openKeys}
-        items={items}
-        selectable={false}
-        onClick={(e) => {
-          setOptions((prev) => {
-            const modified = { ...prev };
-            const path = e.keyPath[1];
-            const element = e.key;
-            modified[path][element] = !prev[path][element];
-            return { ...modified };
-          });
-        }}
-        className="max-h-screen min-h-screen max-w-[80vw] overflow-y-scroll w-full absolute mini:relative z-[9999999]"
-      /> */}
-      {/* <div className="">
-        <Collapse items={items} ghost expandIconPosition={"end"} defaultActiveKey={['1']} onChange={onChange} />
-
-      </div> */}
-      <div className="drawer-side z-[999999999999999] md:left-[16rem]">
-        <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-        <aside className="flex flex-col w-[16rem] h-screen overflow-hidden shadow-xl pt-[1rem] md:pt-0 bg-[#F8F8FD] gap-[0.5rem]">
-          {/* <Menu
-          mode="inline"
-          defaultOpenKeys={openKeys}
-          items={items}
-          selectable={false}
-          onClick={(e) => {
-            setOptions((prev) => {
-              const modified = { ...prev };
-              const path = e.keyPath[1];
-              const element = e.key;
-              modified[path][element] = !prev[path][element];
-              return { ...modified };
-            });
-          }}
-          className="max-w-[80vw] overflow-y-scroll w-full z-[9999999]"
-        /> */}
-          <Collapse
-            items={items}
-            ghost
-            expandIconPosition={"end"}
-            defaultActiveKey={["1"]}
-            onChange={onChange}
-          />
-          <Button className="mx-auto !w-[80%] !bg-[#010886]" type="primary">
-            Apply
-          </Button>
-        </aside>
+      <div className="">
+        <Collapse items={items} ghost expandIconPosition={"end"} />
       </div>
     </>
   );

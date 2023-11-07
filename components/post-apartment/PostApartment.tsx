@@ -15,6 +15,13 @@ import PostModal from "./PostModal";
 const PostApartment = () => {
   const [current, setCurrent] = useState<number>(0);
   const [open, setOpen] = useState(false);
+  const next = () => {
+    setCurrent(current + 1);
+  };
+
+  const prev = () => {
+    setCurrent(current - 1);
+  };
   const steps = useMemo(
     () => [
       {
@@ -24,7 +31,7 @@ const PostApartment = () => {
             <p className="text-[14px]">Apartment Information</p>
           </div>
         ),
-        content: <Step2 />,
+        content: <Step2 next={next} />,
         icon:
           current > 0 ? (
             <DoneIcon className="h-[56px]" />
@@ -39,7 +46,7 @@ const PostApartment = () => {
             <p className="text-[14px]">Apartment Description</p>
           </div>
         ),
-        content: <Step3 />,
+        content: <Step3 next={next} prev={prev} />,
         icon:
           current > 1 ? (
             <DoneIcon className="h-[56px]" />
@@ -54,7 +61,7 @@ const PostApartment = () => {
             <p className="text-[14px]">Benefit</p>
           </div>
         ),
-        content: <Step4 />,
+        content: <Step4 prev={prev} />,
         icon:
           current === 2 ? (
             <StartIcon className="h-[56px]" />
@@ -70,7 +77,7 @@ const PostApartment = () => {
       <div className="w-[95%] mx-auto h-full grid grid-cols-1 gap-[0.5rem] py-[1.5rem]">
         <Steps current={current} items={steps} />
         <div className="w-full">{steps[current].content}</div>
-        {current !== 2 ? (
+        {/* {current !== 2 ? (
           <Button
             onClick={() => {
               setCurrent((prev) => prev + 1);
@@ -90,7 +97,7 @@ const PostApartment = () => {
           >
             Post
           </Button>
-        )}
+        )} */}
       </div>
       <PostModal open={open} setOpen={setOpen} />
     </>

@@ -52,13 +52,14 @@ const SignUpHomeSeeker = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      message.success("Login Successfully");
+      message.success("Sign Up Successful");
+      message.success("Please check your email to verify your email");
       setFirstName("");
       setLastName("");
       setEmail("");
       sessionStorage.setItem("authToken", data?.data?.token);
       localStorage.setItem("previousLocation", pathname);
-      // push("/on-board")
+      push("/on-board")
     }
     if (isError) {
       const errorMesg = error as any;

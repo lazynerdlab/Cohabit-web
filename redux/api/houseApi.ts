@@ -19,6 +19,7 @@ export const houseApi = createApi({
     "HouseSeekerProfile",
     "ListingDetail",
     "HostDetails",
+    "ListingRating",
   ],
   endpoints: (builder) => ({
     getHouseType: builder.query({
@@ -66,6 +67,25 @@ export const houseApi = createApi({
       query: (id) => `houseSeeker/listings/${id}`,
       providesTags: ["ListingDetail"],
     }),
+    getListingRating: builder.query({
+      query: (id) => `houseSeeker/listings/${id}/ratings`,
+      providesTags: ["ListingRating"],
+    }),
+    saveListing: builder.mutation({
+      query: (id) => ({
+        url: `houseSeeker/listings/${id}/save`,
+        method: "POST",
+      }),
+      invalidatesTags: ["ListingDetail"],
+    }),
+    createListingReview: builder.mutation({
+      query: (data) => ({
+        url: `houseSeeker/listings/reviews`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["ListingDetail", "ListingRating"],
+    }),
   }),
 });
 
@@ -81,4 +101,7 @@ export const {
   useGetSavedApartmentsQuery,
   useGetHouseSeekerProfileQuery,
   useGetHostDetailsQuery,
+  useSaveListingMutation,
+  useCreateListingReviewMutation,
+  useGetListingRatingQuery,
 } = houseApi;

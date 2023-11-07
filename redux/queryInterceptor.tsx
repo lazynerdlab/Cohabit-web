@@ -45,10 +45,10 @@ export const baseQueryWithInterceptor: BaseQueryFn<
     }
     if (result.error?.status === 403 || result.error?.originalStatus === 403) {
         // api.dispatch(setNotAuthorized())
-        message.error("Method Not Allowed");
+        // message.error("Method Not Allowed");
     }
     if (result.error?.status === 404 || result.error?.originalStatus === 404) {
-        message.error("Not Found");
+        // message.error("Not Found");
     }
     if (result.error?.status === 503 || result.error?.originalStatus === 503) {
         // api.dispatch(setNotAuthorized())

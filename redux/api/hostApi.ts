@@ -7,11 +7,32 @@ export const hostApi = createApi({
   refetchOnReconnect: true,
   refetchOnMountOrArgChange: 10,
   baseQuery: baseQueryWithInterceptor,
-  tagTypes: ["HostListings", "HostProfile", "HostReview", "HostListing"],
+  tagTypes: [
+    "HostListings",
+    "HostProfile",
+    "HostReview",
+    "HostListing",
+    "HostDashboard",
+    "HostStatistics",
+    "HostBarChart",
+  ],
   endpoints: (builder) => ({
     getHostRecentlyUploaded: builder.query({
-      query: () => `hosts/apartment?count=6`,
+      query: () => `hosts/apartment?count=10`,
       providesTags: ["HostListings"],
+    }),
+    getHostStatistcs: builder.query({
+      query: () => `hosts/dashboard`,
+      providesTags: ["HostDashboard"],
+    }),
+    getHostStatisticsAnalytics: builder.query({
+      query: () => `hosts/dashboard/analytics`,
+      providesTags: ["HostStatistics"],
+    }),
+    getHostBarChart: builder.query({
+      query: ({ timeframe }) =>
+        `hosts/dashboard/analytics?timeframe=${timeframe}&type=barchart`,
+      providesTags: ["HostBarChart"],
     }),
     postApartment: builder.mutation({
       query: (data) => ({
@@ -75,4 +96,7 @@ export const {
   useGetHostRecentlyUploadedQuery,
   useVerifyTokenMutation,
   useResendOtpMutation,
+  useGetHostStatistcsQuery,
+  useGetHostStatisticsAnalyticsQuery,
+  useGetHostBarChartQuery,
 } = hostApi;
