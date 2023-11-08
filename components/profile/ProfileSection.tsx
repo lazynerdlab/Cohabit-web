@@ -25,8 +25,6 @@ const ProfileSection = ({ data }: Props) => {
     }
   }, [savedData, isSuccess])
 
-  console.log(saved);
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-[70%_30%] w-full py-[1rem]">
       <div className="flex flex-col gap-[0.5rem]">
@@ -130,6 +128,24 @@ const ProfileSection = ({ data }: Props) => {
               className="max-h-[250px]"
             >
               <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
+                <Image alt="apartment" src={room} width={100} height={100} />
+                <span className="text-[#25324B] text-[16px] font-[400]">
+                  A bungalow
+                </span>
+              </div>
+              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
+                <Image alt="apartment" src={room} width={100} height={100} />
+                <span className="text-[#25324B] text-[16px] font-[400]">
+                  A bungalow
+                </span>
+              </div>
+              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
+                <Image alt="apartment" src={room} width={100} height={100} />
+                <span className="text-[#25324B] text-[16px] font-[400]">
+                  A bungalow
+                </span>
+              </div>
+              {/* <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
                 <Image alt="apartment" src={room} />
                 <span className="text-[#25324B] text-[16px] font-[400]">
                   A bungalow
@@ -158,25 +174,7 @@ const ProfileSection = ({ data }: Props) => {
                 <span className="text-[#25324B] text-[16px] font-[400]">
                   A bungalow
                 </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
-              <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
-                <Image alt="apartment" src={room} />
-                <span className="text-[#25324B] text-[16px] font-[400]">
-                  A bungalow
-                </span>
-              </div>
+              </div> */}
             </Carousel>
           </div>
         </div>

@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import Home from "@/assets/property.svg";
 import RoomIcon from "@/assets/icons/RoomIcon";
 import BathIcon from "@/assets/icons/BathIcon";
 import PinLocation from "@/assets/icons/PinLocation";
@@ -16,6 +15,25 @@ interface Props {
 const HomeCard = ({ data }: Props) => {
   const { push } = useRouter();
 
+  const renderExtras = () => {
+    if (!data.extras === null) {
+      const rooms = data?.extras?.rooms || 0;
+      const baths = data?.extras?.baths || 0;
+      return (
+        <div className="flex items-center gap-[0.2rem]">
+          <RoomIcon />
+          <p className="text-[12px] text-[#515B6F] font-[400]">{rooms} Rooms</p>
+          <div className="flex items-center gap-[0.2rem]">
+            <BathIcon />
+            <p className="text-[12px] text-[#515B6F] font-[400]">
+              {baths} Baths
+            </p>
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
   return (
     <div className="rounded-[8px] grid grid-cols-1 shadow shadow-[#CDCDCD] gap-[0.5rem]">
       <Image alt="property" className="w-full" src={data?.image} width={200} height={200} />
@@ -24,14 +42,7 @@ const HomeCard = ({ data }: Props) => {
         <h5 className="text-[16px] font-[700] text-colorPrimary">NGN{data?.amount}</h5>
       </div>
       <div className="flex items-center w-full mx-auto justify-between px-[2%]">
-        <div className="flex items-center gap-[0.2rem]">
-          <RoomIcon />
-          <p className="text-[14px] text-[#515B6F] font-[400]"> {data?.extras[1]?.value} Beds</p>
-        </div>
-        <div className="flex items-center gap-[0.2rem]">
-          <BathIcon />
-          <p className="text-[14px] text-[#515B6F] font-[400]"> {data?.extras[0]?.value} Rooms</p>
-        </div>
+        {renderExtras()}
       </div>
       <Divider />
       <div className="flex items-center justify-between p-[0.5rem] py[1rem]">
