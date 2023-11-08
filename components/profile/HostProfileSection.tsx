@@ -37,8 +37,8 @@ const HostProfileSection = () => {
               {
                 listingData?.length === 0 ? <p className="font-medium text-[18px]">No listings found</p> : listingData?.map((item: Record<string, any>) => (
                   <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]" key={item?.id}>
-                    <Image alt="apartment" src={item?.image} />
-                    <span className="text-[#25324B] text-[16px] font-[400]">
+                    <Image alt="apartment" src={item?.image} width={180} height={180} />
+                    <span className="text-[#25324B] text-[16px] mt-2 font-[400]">
                       {item?.location}
                     </span>
                   </div>
