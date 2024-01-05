@@ -1,8 +1,6 @@
 "use client";
 import HomeCard from "../cards/HomeCard";
-import {
-  CustomPagination as Pagination,
-} from "@/lib/AntDesignComponents";
+import { CustomPagination as Pagination } from "@/lib/AntDesignComponents";
 import { useGetHostListingQuery } from "@/redux/api/hostApi";
 import { useEffect, useState } from "react";
 import { Spinner } from "../spinner/Spinner";
@@ -13,7 +11,9 @@ const HouseListings = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [path] = useState(`hosts/apartment?count=${rowsPerPage}&page=${page}`);
   const [listingData, setListingData] = useState<Record<string, any>[]>([]);
-  const { data, isSuccess, isLoading, isError, error } = useGetHostListingQuery({ path })
+  const { data, isSuccess, isLoading, isError, error } = useGetHostListingQuery(
+    { path }
+  );
   const [loading, setLoading] = useState(isLoading);
 
   useEffect(() => {
@@ -26,29 +26,41 @@ const HouseListings = () => {
     }
 
     if (isError) {
-      const errMesg = error as any
-      message.error(errMesg?.data?.message)
+      const errMesg = error as any;
+      message.error(errMesg?.data?.message);
     }
-  }, [data?.data, data?.meta?.current_page, data?.meta?.per_page, error, isError, isSuccess])
+  }, [
+    data?.data,
+    data?.meta?.current_page,
+    data?.meta?.per_page,
+    error,
+    isError,
+    isSuccess,
+  ]);
 
   return (
     <div className="grid grid-cols-1 gap-[0.5rem]">
       <div className="ml-[1rem]">
         <div className="text-[#25324B] flex flex-col gap-[0.1rem]">
-
           <p className="text-[10px] md:text-[16px] font-[400]">
             Showing {data?.meta?.total} results
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[1rem] w-[98%] ">
-        {loading ? <Spinner /> : listingData?.length === 0 ? <p className="font-medium ml-[1rem]">No listings found</p> : listingData?.map((item: Record<string, any>, i) => (
-          <HomeCard key={i} data={item} />
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[1rem] w-[98%]">
+        {loading ? (
+          <Spinner />
+        ) : listingData?.length === 0 ? (
+          <p className="font-medium ml-[1rem]">No listings found</p>
+        ) : (
+          listingData?.map((item: Record<string, any>, i) => (
+            <HomeCard key={i} data={item} />
+          ))
+        )}
       </div>
       <div className="w-full flex justify-center">
-        {
-          data?.meta?.total === 0 ? null : <Pagination
+        {data?.meta?.total === 0 ? null : (
+          <Pagination
             pageSize={rowsPerPage}
             total={data?.meta?.total}
             current={data?.meta?.current_page}
@@ -57,7 +69,7 @@ const HouseListings = () => {
               setPage(page);
             }}
           />
-        }
+        )}
       </div>
     </div>
   );
