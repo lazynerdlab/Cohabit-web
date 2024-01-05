@@ -72,11 +72,11 @@ const FindProperty = () => {
       if (values) {
         const filteredValues = Array.isArray(values)
           ? values
-            .map((value: Record<string, any>) => value.value || value.id)
-            .filter(Boolean)
+              .map((value: Record<string, any>) => value.value || value.id)
+              .filter(Boolean)
           : [values]
-            .map((value: Record<string, any>) => value.value || value.id)
-            .filter(Boolean);
+              .map((value: Record<string, any>) => value.value || value.id)
+              .filter(Boolean);
 
         if (filteredValues.length > 0) {
           const encodedValues = filteredValues
@@ -121,16 +121,20 @@ const FindProperty = () => {
                 -Showing {data?.meta?.total} results
               </p>
             </div>
-
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-[1rem] w-[98%] mx-auto">
             {loading ? (
               <> Loading...</>
-            ) :
-              <> {houseData?.map((item: Record<string, any>, i: number | string) => (
-                <HomeCard key={i} data={item} />
-              ))}</>
-            }
+            ) : (
+              <>
+                {" "}
+                {houseData?.map(
+                  (item: Record<string, any>, i: number | string) => (
+                    <HomeCard key={i} data={item} />
+                  )
+                )}
+              </>
+            )}
           </div>
           <div className="w-full flex justify-center mt-4">
             <Pagination
@@ -141,20 +145,19 @@ const FindProperty = () => {
                 setPage(page);
               }}
             />
-
           </div>
         </div>
-        <Filter
-          locations={locations}
-          setLocations={setLocations}
-          areas={areas}
-          setAreas={setAreas}
-          propertyTypes={propertyType}
-          setPropertyType={setPropertyType}
-          budgets={budgets}
-          setBudgets={setBudgets}
-        />
       </div>
+      <Filter
+        locations={locations}
+        setLocations={setLocations}
+        areas={areas}
+        setAreas={setAreas}
+        propertyTypes={propertyType}
+        setPropertyType={setPropertyType}
+        budgets={budgets}
+        setBudgets={setBudgets}
+      />
     </div>
   );
 };
