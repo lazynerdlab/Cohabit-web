@@ -16,21 +16,57 @@ import RoomIcon from "@/assets/icons/RoomIcon";
 import BathIcon from "@/assets/icons/BathIcon";
 
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { Spinner } from "../spinner/Spinner";
 import { SET_PROPERTY_LOADING } from "@/redux/slice/propertySlice";
+import { useInitializePaymentMutation } from "@/redux/api/paymentApi";
+import { usePaystackPayment } from "react-paystack";
+import { message } from "antd";
 
 const Property = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const { property, loading } = useSelector((state: any) => state.propertyData);
+  const user = useAppSelector((state) => state.userData?.user);
+  const { property, loading } = useAppSelector((state) => state.propertyData);
   const [propertyData, setPropertyData] = useState<Record<string, any>>({});
+  const [initializePayment, { data, isSuccess, isError, error, isLoading }] = useInitializePaymentMutation()
 
+  const config = {
+    reference: (new Date()).getTime().toString(),
+    email: data?.data?.email,
+    amount: data?.data?.amount * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+    publicKey: data?.data?.key,
+  };
+
+
+  const initializePaystackPayment = usePaystackPayment(config);
+
+  useEffect(() => {
+    if (isSuccess) {
+      initializePaystackPayment()
+    }
+
+    if (isError) {
+      const errMesg = error as any
+      message.error(errMesg?.data?.message)
+    }
+  }, [data, error, initializePaystackPayment, isError, isSuccess])
+  const onHandleBoost = async () => {
+    if (property) {
+      const data = {
+        type: "boost",
+        listing_id: property?.id,
+        amount: 100,
+        boost_level: "0",
+        duration: "1",
+      }
+      await initializePayment(data)
+    }
+  }
   useEffect(() => {
     if (property) {
       setPropertyData(property)
       dispatch(SET_PROPERTY_LOADING(false))
-
     }
   }, [dispatch, property]);
 
@@ -70,7 +106,7 @@ const Property = () => {
               {
                 propertyData?.images?.map((image: string, index: number) => (
                   <div key={index} className="w-full h-full relative">
-                    <Image alt="thumbnail" src={image} />
+                    <Image alt="thumbnail" src={image} width={500} height={500} />
                   </div>
                 ))
               }
@@ -101,13 +137,20 @@ const Property = () => {
                 <h5 className="text-[10px] md:text-[16px] font-[700] text-colorPrimary">
                   NGN {propertyData?.amount}
                 </h5>
-                <Button
+                {user?.data?.user?.user_type === "host" ? <Button
+                  className="!bg-[#010886] text-[#FFF]"
+                  onClick={() => onHandleBoost()}
+                  loading={isLoading}
+                  disabled={isLoading}
+                >
+                  Boost ads
+                </Button> : <Button
                   className="!bg-[#010886] text-[#FFF]"
                   onClick={() => setOpen(true)}
                   disabled={propertyData?.status === "Rented" || propertyData?.status === "Sold"}
                 >
                   Rent
-                </Button>
+                </Button>}
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import 'react-phone-input-2/lib/style.css'
 import { Ubuntu } from "next/font/google";
 import StyledComponentsRegistry from "@/lib/AntdRegistry";
 import { ReduxProvider } from "@/redux/provider";

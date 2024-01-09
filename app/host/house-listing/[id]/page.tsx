@@ -3,13 +3,14 @@ import Property from "@/components/property/Property";
 import HostHeader from "@/components/header/HostHeader";
 import BackIcon from "@/assets/icons/BackIcon";
 import { useRouter } from "next/navigation";
-import { useGetHouseSeekerListingDetailQuery } from "@/redux/api/houseApi";
-import { useEffect, useState } from "react";
+
+import { useEffect, } from "react";
 import { useAppDispatch } from "@/redux/hook";
 import {
   SET_PROPERTY,
   SET_PROPERTY_LOADING,
 } from "@/redux/slice/propertySlice";
+import { useGetHostListingDetailQuery } from "@/redux/api/hostApi";
 
 interface IProps {
   params: {
@@ -20,7 +21,7 @@ const Page = ({ params }: IProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { id } = params;
-  const { data, isSuccess } = useGetHouseSeekerListingDetailQuery(id);
+  const { data, isSuccess } = useGetHostListingDetailQuery(id);
 
   useEffect(() => {
     if (isSuccess) {

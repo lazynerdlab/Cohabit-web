@@ -18,6 +18,17 @@ const Tab2 = () => {
   const handleChangePassword = async () => {
     if (password !== confirmPassword) {
       message.error("Passwords don't match");
+      return
+    }
+
+    if (password.length < 6) {
+      message.error("Password must be at least 6 characters");
+      return
+    }
+
+    if (oldPassword && password && confirmPassword) {
+      message.error("All are required");
+      return
     }
     await updatePassword({ old_password: oldPassword, password: password, password_confirmation: confirmPassword });
   }
