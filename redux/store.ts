@@ -17,6 +17,9 @@ import storage from "redux-persist/lib/storage";
 import { hostApi } from "./api/hostApi";
 import propertySlice from "./slice/propertySlice";
 import apartmentSlice from "./slice/apartmentSlice";
+import { chatApi } from "./api/chatApi";
+import chatSlice from "./slice/chatSlice";
+import { paymentApi } from "./api/paymentApi";
 
 const rootReducer = combineReducers({
   api: authReducer,
@@ -24,6 +27,8 @@ const rootReducer = combineReducers({
   userData: userSlice,
   propertyData: propertySlice,
   apartmentData: apartmentSlice,
+  chatData: chatSlice,
+  [paymentApi.reducerPath]: paymentApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [dashboardApi.reducerPath]: dashboardApi.reducer,
   [landingPageApi.reducerPath]: landingPageApi.reducer,
@@ -33,6 +38,7 @@ const rootReducer = combineReducers({
   [houseApi.reducerPath]: houseApi.reducer,
   [attachmentApi.reducerPath]: attachmentApi.reducer,
   [hostApi.reducerPath]: hostApi.reducer,
+  [chatApi.reducerPath]: chatApi.reducer,
 });
 
 const persistConfig = {
@@ -58,6 +64,9 @@ const store = configureStore({
       settingApi.middleware,
       attachmentApi.middleware,
       hostApi.middleware,
+      chatApi.middleware,
+      paymentApi.middleware,
+
     ]),
   // .concat(logger),
 });

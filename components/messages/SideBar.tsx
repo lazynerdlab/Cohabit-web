@@ -5,10 +5,13 @@ import {
   CustomInput as Input,
 } from "@/lib/AntDesignComponents";
 import ActiveBadge from "@/assets/icons/ActiveBadge";
-import { SetStateAction, useMemo, useState } from "react";
+import { SetStateAction, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import user from "@/assets/user.svg";
 import SearchIcon from "@/assets/icons/SearchIcon";
+import { useAppDispatch } from "@/redux/hook";
+import { SET_CURRENT_CHAT } from "@/redux/slice/chatSlice";
+import { useGetChatsQuery } from "@/redux/api/chatApi";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -28,6 +31,20 @@ function getItem(
   } as MenuItem;
 }
 
+const recentChats = [
+  {
+    id: "1",
+    name: "Felecia Rower",
+    time: "July 20",
+    message: "I want to share an apartment with you. ",
+  },
+  {
+    id: "2",
+    name: "Prisca Rower",
+    time: "July 20",
+    message: "I want to share an apartment with you. ",
+  }
+]
 const SideBar = ({
   display,
   setDisplay,
@@ -187,16 +204,27 @@ const SideBar = ({
     ],
     []
   );
+  const dispatch = useAppDispatch()
   const onClick: MenuProps["onClick"] = (e) => {
     setActive(e.key);
     setDisplay((prev) => !prev);
   };
 
+  const { data: chats, isLoading, error, isSuccess, isError } = useGetChatsQuery({})
+  const [onGoingChats, setOnGoingChats] = useState<Record<string, any>[]>([])
+  useEffect(() => {
+    if (isSuccess) {
+      setOnGoingChats(chats)
+    }
+    if (isError) {
+      const errMesg = error as any
+      console.log(errMesg?.data?.message)
+    }
+  }, [chats, error, isError, isSuccess])
   return (
     <div
-      className={`${
-        display ? "hidden" : "block"
-      } transition duration-500 ease-in-out md:grid grid-cols-1 grid-rows-[10%_90%] md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#FFF] max-h-screen overflow-hidden`}
+      className={`${display ? "hidden" : "block"
+        } transition duration-500 ease-in-out md:grid grid-cols-1 grid-rows-[10%_90%] md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#FFF] max-h-screen overflow-hidden`}
     >
       <div className="sticky top-0 z-[9999999999] bg-[#FFF] flex items-center justify-between gap-[0.5rem] w-full p-[2%] border-b border-[#32475C1F]">
         <span className="relative">
@@ -209,14 +237,41 @@ const SideBar = ({
           placeholder="Search"
         />
       </div>
-      <Menu
+      <div className="flex flex-col gap-3 my-2 p-2">
+        {
+          isLoading ? <div>Loading</div> : onGoingChats.map((item: Record<string, any>) => (
+            <div className="flex items-center gap-3 bg-[#F9F9F9] cursor-pointer p-2 rounded-[8px]" key={item.id} onClick={() => {
+              const payload = {
+                receiverId: item?.id,
+                name: item?.name,
+                avatar: item?.avatar
+              }
+              dispatch(SET_CURRENT_CHAT(payload))
+              setDisplay((prev) => !prev);
+            }}>
+              <div className="relative">
+                <Image alt="user" src={user} />
+                <ActiveBadge className="absolute right-0 bottom-0" />
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center justify-between">
+                  <h4 className="font-semibold">{item?.name}</h4>
+                  <span className="text-[11px]">{item?.time}</span>
+                </div>
+                <span className="text-[12px]">{item.message.length > 30 ? item?.message.slice(0, 30) + "..." : item?.message}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      {/* <Menu
         mode="inline"
         onClick={onClick}
         className="overflow-y-scroll noscroll-bar"
         defaultSelectedKeys={[active]}
         selectedKeys={[active]}
         items={items}
-      />
+      /> */}
     </div>
   );
 };

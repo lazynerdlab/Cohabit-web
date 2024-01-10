@@ -76,7 +76,7 @@ const PreviewStep = ({ prev }: Props) => {
     }
     if (onBoardIsError) {
       const errMesg = onBoardError as any
-      message.error(errMesg?.data?.mesg)
+      message.error(errMesg?.data?.message)
     }
   }, [onBoardError, onBoardIsError, onBoardIsSuccess, push])
   const handleSubmitDetails = async () => {
@@ -91,7 +91,6 @@ const PreviewStep = ({ prev }: Props) => {
     await onBoardingProcess({
       ...payload, ...step1
     })
-    // next()
   }
   return (
     <div>

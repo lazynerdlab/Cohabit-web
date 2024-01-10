@@ -52,11 +52,11 @@ export const baseQueryWithInterceptor: BaseQueryFn<
     }
     if (result.error?.status === 503 || result.error?.originalStatus === 503) {
         // api.dispatch(setNotAuthorized())
-        message.error("Under Maintenance");
+        // message.error("Under Maintenance");
     }
     if (result.error?.status === 500 || result.error?.originalStatus === 500) {
         api.dispatch(setServerError())
-        message.error("Server Error");
+        // message.error("Server Error");
         // window.location.href = "/serverError";
     }
     return result;

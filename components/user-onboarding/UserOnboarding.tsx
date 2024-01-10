@@ -60,36 +60,7 @@ const UserOnboarding = () => {
             <StepIcon className="h-[56px]" />
           ),
       },
-      // {
-      //   title: (
-      //     <div className="flex flex-col font-[400] text-[#2A2069] leading-[28.80px]">
-      //       <p className="text-[16px]">Lifestyle</p>
-      //       <p className="text-[14px]">Step 4/4</p>
-      //     </div>
-      //   ),
-      //   content: <Step3 prev={prev} submit={handleSubmit} />,
-      //   icon:
-      //     current > 3 ? (
-      //       <DoneIcon className="h-[56px]" />
-      //     ) : (
-      //       <StepIcon className="h-[56px]" />
-      //     ),
-      // },
-      // {
-      //   title: (
-      //     <div className="flex flex-col font-[400] text-[#2A2069] leading-[28.80px]">
-      //       <p className="text-[16px]">Start</p>
-      //       <p className="text-[14px]">Step 4/4</p>
-      //     </div>
-      //   ),
-      //   content: <Step4 />,
-      //   icon:
-      //     current === 3 ? (
-      //       <StartIcon className="h-[56px]" />
-      //     ) : (
-      //       <StepIcon className="h-[56px]" />
-      //     ),
-      // },
+
     ],
     [current]
   );

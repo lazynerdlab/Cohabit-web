@@ -30,7 +30,7 @@ const ViewMate = ({ data }: Props) => {
           <Image alt="avatar" src={data?.image === null ? "https://cdn-icons-png.flaticon.com/512/149/149071.png" : data?.image} width={100} height={100} className="rounded-[100%] w-[120px] h-[120px]" />
           <div className="flex flex-col items-start justify-between">
             <h4 className="text-[rgba(50, 71, 92, 0.87)] text-[24px] font-[500] p-0">
-              John Doe
+              {data?.name}
             </h4>
             <span className="flex items-center gap-[0.5rem] bg-[#56CDAD]/[50%] px-[24px] py-[12px] rounded-[8px]">
               <FlagIcon className="fill-[#56CDAD]" />

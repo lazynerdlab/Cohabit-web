@@ -12,6 +12,7 @@ export const hostApi = createApi({
     "HostProfile",
     "HostReview",
     "HostListing",
+    "HostListingDetails",
     "HostDashboard",
     "HostStatistics",
     "HostBarChart",
@@ -41,6 +42,10 @@ export const hostApi = createApi({
         body: data,
       }),
       invalidatesTags: ["HostListings"],
+    }),
+    getHostListingDetail: builder.query({
+      query: (id) => `hosts/apartment/${id}`,
+      providesTags: ["HostListingDetails"],
     }),
     getHostProfile: builder.query({
       query: () => `hosts/profile/me`,
@@ -99,4 +104,5 @@ export const {
   useGetHostStatistcsQuery,
   useGetHostStatisticsAnalyticsQuery,
   useGetHostBarChartQuery,
+  useGetHostListingDetailQuery,
 } = hostApi;

@@ -6,10 +6,8 @@ import HomeCard from "../cards/HomeCard";
 import Filter from "./Filter";
 import {
   CustomPagination as Pagination,
-  CustomSelect as Select,
 } from "@/lib/AntDesignComponents";
 
-import SearchIcon from "@/assets/icons/SearchIcon";
 import { FiFilter } from "react-icons/fi";
 import useWidth from "../hooks/useWidth";
 import { useGetListingsQuery } from "@/redux/api/landingPageApi";
@@ -72,11 +70,11 @@ const FindProperty = () => {
       if (values) {
         const filteredValues = Array.isArray(values)
           ? values
-              .map((value: Record<string, any>) => value.value || value.id)
-              .filter(Boolean)
+            .map((value: Record<string, any>) => value.value || value.id)
+            .filter(Boolean)
           : [values]
-              .map((value: Record<string, any>) => value.value || value.id)
-              .filter(Boolean);
+            .map((value: Record<string, any>) => value.value || value.id)
+            .filter(Boolean);
 
         if (filteredValues.length > 0) {
           const encodedValues = filteredValues

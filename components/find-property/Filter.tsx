@@ -25,7 +25,6 @@ interface IProps {
 }
 
 export const locationOptions = [
-  { value: "", label: "Select a Location", id: 1 },
   { value: "lagos", label: "Lagos", id: 2 },
   { value: "abuja", label: "Abuja", id: 3 },
 ];
@@ -56,11 +55,11 @@ const Filter = ({
     if (locations) {
       const filteredAreas = Array.isArray(locations)
         ? locations
-            .map((state: Record<string, any>) => state.value || state.id)
-            .filter(Boolean)
+          .map((state: Record<string, any>) => state.value || state.id)
+          .filter(Boolean)
         : [locations]
-            .map((state: Record<string, any>) => state.value || state.id)
-            .filter(Boolean);
+          .map((state: Record<string, any>) => state.value || state.id)
+          .filter(Boolean);
 
       if (filteredAreas.length > 0) {
         const encodedAreas = filteredAreas

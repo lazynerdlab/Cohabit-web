@@ -123,11 +123,11 @@ const Tab1 = () => {
     if (updateProfileIsError) {
       console.log(updateProfileError);
     }
-  }, [data?.data, updateProfileError, updateProfileIsError, updateProfileSuccess]);
+  }, [updateProfileError, updateProfileIsError, updateProfileSuccess]);
 
   useEffect(() => {
     if (isSuccess) {
-      setImage(data?.data.image)
+      setImage(data?.data?.image)
       setEmail(data?.data?.email)
       setPhoneNo(data?.data?.phone)
       setGender(data?.data?.gender)
@@ -147,6 +147,7 @@ const Tab1 = () => {
 
 
   let date = moment(dob?.$d).format("YYYY-MM-DD")
+
   const handleProfileUpdate = async () => {
     await updateProfile({
       firstname: firstName,
@@ -154,14 +155,11 @@ const Tab1 = () => {
       lastname: lastName,
       phone_no: phoneNo,
       gender: gender === "female" || gender === "FEMALE" ? 1 : gender === "male" || gender === "MALE" ? 2 : 0,
-      dob: date,
+      dob,
       status: userStatus,
       account_type: userType
     });
   };
-
-  console.log(dob);
-  console.log(userStatus);
 
   return (
     <>
@@ -268,8 +266,8 @@ const Tab1 = () => {
                   >
                     Date of Birth *
                   </label>
-                  <DatePicker className="w-full" value={dob} onChange={dateOnChange} />
-
+                  {/* <DatePicker className="w-full" value={dob} onChange={dateOnChange} /> */}
+                  <input type="date" name="" id="" value={dob} className="w-full p-[0.15rem]" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDOB(e.target.value)} />
                 </div>
                 <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
                   <label

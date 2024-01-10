@@ -10,6 +10,8 @@ const Page = () => {
   useEffect(() => {
     const token = sessionStorage.getItem("authToken");
     const pathname = localStorage.getItem("pathname")
+    console.log(pathname);
+
     if (!token) {
       push(pathname ?? "");
       localStorage.clear();
