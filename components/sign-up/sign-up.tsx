@@ -1,12 +1,7 @@
 "use client";
 import google from "@/assets/google.svg";
 import Image from "next/image";
-import {
-  SyntheticEvent,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { SyntheticEvent, useCallback, useEffect, useState } from "react";
 import {
   CustomInput as Input,
   AuthButton as Button,
@@ -34,7 +29,14 @@ const SignUp = () => {
   const handleSubmit = useCallback(
     async (e: SyntheticEvent) => {
       e.preventDefault(); // Prevents the default form submission and page refresh
-      if (!checked || !firstName || !lastName || !email || !gender || !location) {
+      if (
+        !checked ||
+        !firstName ||
+        !lastName ||
+        !email ||
+        !gender ||
+        !location
+      ) {
         message.error("All fields are required");
         return;
       }
@@ -67,7 +69,7 @@ const SignUp = () => {
       setLocation("");
       sessionStorage.setItem("authToken", data?.data?.token);
       localStorage.setItem("previousLocation", pathname);
-      push("/host")
+      push("/host");
     }
     if (isError) {
       const errorMesg = error as any;
@@ -76,10 +78,10 @@ const SignUp = () => {
   }, [isSuccess, isError, error, push, data, pathname]);
 
   const handleGenderChange = (value: string) => {
-    setGender(value)
+    setGender(value);
   };
   const handleLocationChange = (value: string) => {
-    setLocation(value)
+    setLocation(value);
   };
   return (
     <div className="w-[90%] md:w-[60%] mx-auto">
@@ -102,7 +104,7 @@ const SignUp = () => {
           <p className="text-center">Or sign up with email</p>
           <span className="h-[1px] bg-[#B8c9c9] w-full"></span>
         </div>
-        <form className="grid gird-cols-1 gap-[0.5rem]">
+        <form onSubmit={handleSubmit} className="grid gird-cols-1 gap-[0.5rem]">
           <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.3rem]">
             <label
               htmlFor="first_name"
@@ -114,6 +116,7 @@ const SignUp = () => {
               className=""
               id="first_name"
               value={firstName}
+              required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setFirstName(e.target.value);
               }}
@@ -130,6 +133,7 @@ const SignUp = () => {
               className=""
               id="last_name"
               value={lastName}
+              required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setLastName(e.target.value);
               }}
@@ -147,6 +151,7 @@ const SignUp = () => {
               id="email"
               type="email"
               value={email}
+              required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setEmail(e.target.value);
               }}
@@ -163,14 +168,13 @@ const SignUp = () => {
               defaultValue=""
               size="large"
               value={gender}
-              style={{ width: "100%", }}
+              style={{ width: "100%" }}
               onChange={handleGenderChange}
               options={[
-                { value: '', label: 'Select an option' },
+                { value: "", label: "Select an option" },
                 { value: "0", label: "Male" },
                 { value: "1", label: "Female" },
                 { value: "2", label: "Others" },
-
               ]}
             />
           </div>
@@ -185,13 +189,12 @@ const SignUp = () => {
               defaultValue=""
               size="large"
               value={location}
-              style={{ width: "100%", }}
+              style={{ width: "100%" }}
               onChange={handleLocationChange}
               options={[
-                { value: '', label: 'Select an option' },
+                { value: "", label: "Select an option" },
                 { value: "lagos", label: "Lagos" },
                 { value: "abuja", label: "Abuja" },
-
               ]}
             />
           </div>
@@ -220,28 +223,20 @@ const SignUp = () => {
               .
             </label>
           </div>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <Button
-              className="!bg-[#010886]"
-              type="primary"
-              onClick={(e: any) => {
-                handleSubmit(e);
-              }}
-            >
-              Get Started
-            </Button>
-          )}
+          <Button
+            className="!bg-[#010886]"
+            type="primary"
+            htmlType="submit"
+            loading={isLoading}
+          >
+            Get Started
+          </Button>
         </form>
         <div className="flex items-center justify-center gap-[0.5rem]">
           <h3 className="font-[400] text-[16px] text-[#616A6A]">
             Already have an account?
           </h3>
-          <Link
-            className="text-[#1E5156] text-[16px] font-[700]"
-            href={"/"}
-          >
+          <Link className="text-[#1E5156] text-[16px] font-[700]" href={"/"}>
             Login
           </Link>
         </div>

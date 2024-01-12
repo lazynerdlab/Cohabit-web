@@ -29,28 +29,28 @@ const Property = () => {
   const user = useAppSelector((state) => state.userData?.user);
   const { property, loading } = useAppSelector((state) => state.propertyData);
   const [propertyData, setPropertyData] = useState<Record<string, any>>({});
-  const [initializePayment, { data, isSuccess, isError, error, isLoading }] = useInitializePaymentMutation()
+  const [initializePayment, { data, isSuccess, isError, error, isLoading }] =
+    useInitializePaymentMutation();
 
   const config = {
-    reference: (new Date()).getTime().toString(),
+    reference: new Date().getTime().toString(),
     email: data?.data?.email,
     amount: data?.data?.amount * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
     publicKey: data?.data?.key,
   };
 
-
   const initializePaystackPayment = usePaystackPayment(config);
 
   useEffect(() => {
     if (isSuccess) {
-      initializePaystackPayment()
+      initializePaystackPayment();
     }
 
     if (isError) {
-      const errMesg = error as any
-      message.error(errMesg?.data?.message)
+      const errMesg = error as any;
+      message.error(errMesg?.data?.message);
     }
-  }, [data, error, initializePaystackPayment, isError, isSuccess])
+  }, [data, error, initializePaystackPayment, isError, isSuccess]);
   const onHandleBoost = async () => {
     if (property) {
       const data = {
@@ -59,14 +59,14 @@ const Property = () => {
         amount: 100,
         boost_level: "0",
         duration: "1",
-      }
-      await initializePayment(data)
+      };
+      await initializePayment(data);
     }
-  }
+  };
   useEffect(() => {
     if (property) {
-      setPropertyData(property)
-      dispatch(SET_PROPERTY_LOADING(false))
+      setPropertyData(property);
+      dispatch(SET_PROPERTY_LOADING(false));
     }
   }, [dispatch, property]);
 
@@ -92,8 +92,10 @@ const Property = () => {
 
   return (
     <>
-      {
-        loading ? <Spinner /> : <div className="w-[95%] mx-auto">
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="w-[95%] mx-auto">
           <div className="relative mt-[1.5rem]">
             <Carousel
               arrows={true}
@@ -103,18 +105,20 @@ const Property = () => {
               variableWidth
               className="mobile-hidden"
             >
-              {
-                propertyData?.images?.map((image: string, index: number) => (
-                  <div key={index} className="w-full h-full relative">
-                    <Image alt="thumbnail" src={image} width={500} height={500} />
-                  </div>
-                ))
-              }
-
+              {propertyData?.images?.map((image: string, index: number) => (
+                <div key={index} className="w-full h-full relative">
+                  <Image alt="thumbnail" src={image} width={500} height={500} />
+                </div>
+              ))}
             </Carousel>
             <div className="grid grid-cols1 items-start grid-cols-[75%_25%] gap-[0.5rem] md:items-center shadow shadow-[#CDCDCD] px-[1rem] pt-[1rem] rounded-[8px] relative md:absolute md:top-[50%] md:left-[50%] md:translate-x-[-50%] md:w-[80%] w-full bg-[#FFF] pb-[10%] md:pb-[1rem]">
               <div className="grid grid-cols-[30%_70%] gap-[0.3rem]">
-                <Image alt="thumbnail" src={propertyData?.image} width={200} height={200} />
+                <Image
+                  alt="thumbnail"
+                  src={propertyData?.image}
+                  width={200}
+                  height={200}
+                />
                 <div className="flex flex-col gap-[0.8rem]">
                   <span className="text-[#F6513B] text-[10px] md:text-[12px] font-[400] bg-[#FEECE5] rounded-[10px] md:px-[10px] md:py-[5px] px-[5px] py-[2px] w-fit">
                     {propertyData?.status}
@@ -137,28 +141,35 @@ const Property = () => {
                 <h5 className="text-[10px] md:text-[16px] font-[700] text-colorPrimary">
                   NGN {propertyData?.amount}
                 </h5>
-                {user?.data?.user?.user_type === "host" ? <Button
-                  className="!bg-[#010886] text-[#FFF]"
-                  onClick={() => onHandleBoost()}
-                  loading={isLoading}
-                  disabled={isLoading}
-                >
-                  Boost ads
-                </Button> : <Button
-                  className="!bg-[#010886] text-[#FFF]"
-                  onClick={() => setOpen(true)}
-                  disabled={propertyData?.status === "Rented" || propertyData?.status === "Sold"}
-                >
-                  Rent
-                </Button>}
+                {user?.data?.user?.user_type === "host" ? (
+                  <Button
+                    className="!bg-[#010886] text-[#FFF]"
+                    onClick={() => onHandleBoost()}
+                    loading={isLoading}
+                    disabled={isLoading}
+                  >
+                    Boost ads
+                  </Button>
+                ) : (
+                  <Button
+                    className="!bg-[#010886] text-[#FFF]"
+                    onClick={() => setOpen(true)}
+                    disabled={
+                      propertyData?.status === "Rented" ||
+                      propertyData?.status === "Sold"
+                    }
+                  >
+                    Rent
+                  </Button>
+                )}
               </div>
             </div>
           </div>
-          <div className="mt-[12rem]">
+          <div className="mt-[0.5rem]">
             <PropertySection />
           </div>
         </div>
-      }
+      )}
       <PropertyModal open={open} setOpen={setOpen} />
     </>
   );

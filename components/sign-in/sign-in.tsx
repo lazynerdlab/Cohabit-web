@@ -26,22 +26,22 @@ const SignIn = () => {
   const pathname = usePathname();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [login, { isLoading, isSuccess, isError, error, data }] =
     useLoginMutation();
 
   useEffect(() => {
-    sessionStorage.clear()
-    dispatch(CLEAR_USER())
-    dispatch(CLEAR_PROPERTY())
-    dispatch(CLEAR_HOST())
-    dispatch(CLEAR_APARTMENT_FORM())
-  }, [])
+    sessionStorage.clear();
+    dispatch(CLEAR_USER());
+    dispatch(CLEAR_PROPERTY());
+    dispatch(CLEAR_HOST());
+    dispatch(CLEAR_APARTMENT_FORM());
+  }, []);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevents the default form submission and page refresh
     if (!email || !password) {
-      message.success("All fields are required");
-      return
+      message.error("All fields are required");
+      return;
     }
 
     try {
@@ -57,14 +57,12 @@ const SignIn = () => {
       message.success("Login Successfully");
       setEmail("");
       setPassword("");
-      dispatch(SET_USER(data))
+      dispatch(SET_USER(data));
 
       sessionStorage.setItem("authToken", data?.data?.token);
       sessionStorage.setItem("myId", data?.data?.user?.id);
       localStorage.setItem("previousLocation", pathname);
-      if (
-        data?.data?.user?.has_onboarded === false
-      ) {
+      if (data?.data?.user?.has_onboarded === false) {
         push("/on-board");
       } else {
         push("/dashboard");
@@ -86,7 +84,6 @@ const SignIn = () => {
         <Image
           className="justify-self-center h-full md:hidden"
           alt=""
-
           src={Logo}
         />
         <div className="text-center text-gray-900 text-[32px] font-bold leading-[38.40px]">
@@ -107,7 +104,7 @@ const SignIn = () => {
           <p className="text-center">Or login with email</p>
           <span className="h-[1px] bg-[#B8c9c9] w-full"></span>
         </div>
-        <form className="grid gird-cols-1 gap-[1rem]">
+        <form onSubmit={handleSubmit} className="grid gird-cols-1 gap-[1rem]">
           <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
             <label
               htmlFor="email"
@@ -155,20 +152,19 @@ const SignIn = () => {
               </label>
             </div>
           </div>
-          <div className="">
-            {isLoading ? (
+          <div className="flex items-center">
+            {/* {isLoading ? (
               <Spinner />
-            ) : (
-              <Button
-                className="!bg-[#010886] !w-full"
-                type="primary"
-                onClick={(e: any) => {
-                  handleSubmit(e);
-                }}
-              >
-                Login
-              </Button>
-            )}
+            ) : ( */}
+            <Button
+              className="!bg-[#010886] !w-full"
+              type="primary"
+              htmlType="submit"
+              loading={isLoading}
+            >
+              Login
+            </Button>
+            {/* )} */}
           </div>
         </form>
         <div className="flex items-center justify-center gap-[0.5rem]">
