@@ -143,15 +143,17 @@ const SideBar = () => {
   return (
     <div className="drawer-side z-[9999999999] h-screen">
       <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-      <aside className="flex flex-col w-[16rem] h-screen overflow-hidden shadow-xl pt-[1rem] md:pt-0 bg-[#F8F8FD]">
+      <aside className="flex flex-col justify-between w-[16rem] h-screen overflow-hidden shadow-xl pt-[1rem] md:pt-0 bg-[#F8F8FD]">
         {/* <div className="grid grid-cols-1 grid-rows-[5%_75%_15%] md:grid-rows-[10%_75%_15%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-screen overflow-y-hidden"> */}
-        <Title />
-        <Menu
-          onClick={onClick}
-          defaultSelectedKeys={[active]}
-          selectedKeys={[active]}
-          items={items}
-        />
+        <div>
+          <Title />
+          <Menu
+            onClick={onClick}
+            defaultSelectedKeys={[active]}
+            selectedKeys={[active]}
+            items={items}
+          />
+        </div>
         <div className="flex flex-col gap-[1rem] justify-self-end">
           {isLoading ? (
             <Spinner />
