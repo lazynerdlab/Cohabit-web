@@ -15,17 +15,17 @@ import { useRouter } from "next/navigation";
 import { useGetRecentlyUploadedQuery } from "@/redux/api/landingPageApi";
 import { useGetFlatmatesQuery } from "@/redux/api/flatmateApi";
 import { message } from "antd";
-import { useGetAllAreasQuery } from "@/redux/api/houseApi";
+import { useGetHouseTypeQuery } from "@/redux/api/houseApi";
 
 const DashBoard = () => {
   const [currentFilter, setCurrentFilter] = useState("All");
-  const arr = [1, 1, 1];
   const filter = [
     { label: "All", value: "All" },
     { label: "Popular", value: "Popular" },
     { label: "Recommended", value: "Recommended" },
     { label: "Nearest", value: "Nearest" },
   ];
+  const { data: houseTypes } = useGetHouseTypeQuery({});
   const options = [
     {
       value: "1",
@@ -53,9 +53,6 @@ const DashBoard = () => {
     },
   ];
   const { push } = useRouter();
-  const { data: AreasList } = useGetAllAreasQuery({
-    path: "get_house_areas/all",
-  });
   const [listing, setListing] = useState<Record<string, any>[]>();
   const [homeMates, setHomeMates] = useState<Record<string, any>[]>();
   const count = 10;
@@ -115,7 +112,12 @@ const DashBoard = () => {
                 console.log(e);
               }}
               placeholder="Property"
-              options={options}
+              options={
+                houseTypes?.data?.map((e: Record<string, any>) => ({
+                  value: e.id,
+                  label: e.title,
+                })) || []
+              }
             />
           </div>
           <div className="md:block hidden self-stretch w-[1px] bg-[#202430]"></div>
@@ -135,12 +137,10 @@ const DashBoard = () => {
                 console.log(e);
               }}
               placeholder="Location"
-              options={
-                AreasList?.data?.map((e: any) => ({
-                  label: e.state,
-                  value: e.id,
-                })) || []
-              }
+              options={[
+                { value: "lagos", label: "lagos" },
+                { value: "Abuja", label: "Abuja" },
+              ]}
             />
           </div>
           <Button style={{ backgroundColor: "#010886" }} type="primary">
