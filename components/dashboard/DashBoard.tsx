@@ -25,33 +25,8 @@ const DashBoard = () => {
     { label: "Recommended", value: "Recommended" },
     { label: "Nearest", value: "Nearest" },
   ];
+  const [filterParam, setFilterParam] = useState({ state: "", property: "" });
   const { data: houseTypes } = useGetHouseTypeQuery({});
-  const options = [
-    {
-      value: "1",
-      label: "Not Identified",
-    },
-    {
-      value: "2",
-      label: "Closed",
-    },
-    {
-      value: "3",
-      label: "Communicated",
-    },
-    {
-      value: "4",
-      label: "Identified",
-    },
-    {
-      value: "5",
-      label: "Resolved",
-    },
-    {
-      value: "6",
-      label: "Cancelled",
-    },
-  ];
   const { push } = useRouter();
   const [listing, setListing] = useState<Record<string, any>[]>();
   const [homeMates, setHomeMates] = useState<Record<string, any>[]>();
@@ -109,7 +84,7 @@ const DashBoard = () => {
                 borderColor: "#D6DDEB",
               }}
               onSelect={(e) => {
-                console.log(e);
+                setFilterParam({ state: filterParam.state, property: e });
               }}
               placeholder="Property"
               options={
@@ -134,7 +109,7 @@ const DashBoard = () => {
                 borderColor: "#D6DDEB",
               }}
               onSelect={(e) => {
-                console.log(e);
+                setFilterParam({ state: e, property: filterParam.property });
               }}
               placeholder="Location"
               options={[
@@ -143,7 +118,15 @@ const DashBoard = () => {
               ]}
             />
           </div>
-          <Button style={{ backgroundColor: "#010886" }} type="primary">
+          <Button
+            onClick={() =>
+              push(
+                `/dashboard/find-property?state=${filterParam.state}&property=${filterParam.property} `
+              )
+            }
+            style={{ backgroundColor: "#010886" }}
+            type="primary"
+          >
             Search
           </Button>
         </div>

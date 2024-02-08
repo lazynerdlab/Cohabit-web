@@ -1,39 +1,56 @@
 "use client";
-
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import HomeCard from "../cards/HomeCard";
 import Filter from "./Filter";
-import {
-  CustomPagination as Pagination,
-} from "@/lib/AntDesignComponents";
+import { CustomPagination as Pagination } from "@/lib/AntDesignComponents";
 
 import { FiFilter } from "react-icons/fi";
 import useWidth from "../hooks/useWidth";
-import { useGetListingsQuery } from "@/redux/api/landingPageApi";
+import {
+  useGetListingsQuery,
+  useLazyGetListingsQuery,
+} from "@/redux/api/landingPageApi";
 import { Tag } from "@/shared/UIs/Tags";
 
 const FindProperty = () => {
   const width = useWidth();
+  const param = useSearchParams();
+  const [getListings, { data, isSuccess, isLoading, isError, error }] =
+    useLazyGetListingsQuery();
   const [filter, setFilter] = useState(Number(width) > 700);
-
-  const [propertyType, setPropertyType] = useState<Tag[]>([]);
-  const [budgets, setBudgets] = useState<Tag[]>([]);
+  const [propertyType, setPropertyType] = useState<string[]>([]);
+  const [budgets, setBudgets] = useState<string[]>([]);
   const [searchValue, setSearchValue] = useState("");
-  const [areas, setAreas] = useState<Tag[]>([]);
+  const [areas, setAreas] = useState<string[]>([]);
 
-  const [locations, setLocations] = useState<Tag[]>([]);
+  const [locations, setLocations] = useState("");
   const [houseData, setHouseData] = useState<Record<string, any>[]>([]);
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [path, setPath] = useState(`listings?page=${page}&count=10`);
-
-  let updatedPath = `listings?page=${page}&count=10`;
-
-  const { data, isSuccess, isLoading, isError, error } = useGetListingsQuery({
-    path,
-  });
-
+  const [stateQuery, setStateQuery] = useState("");
+  useEffect(() => {
+    if (param.get("state")) {
+      setLocations(param.get("state")!);
+    }
+    if (param.get("property")) {
+      setPropertyType((prev) => [...prev, param.get("property")!]);
+    }
+  }, [param]);
+  useEffect(() => {
+    getListings({
+      path: `listings?page=${page}&count=10${
+        locations ? `&state=${locations}` : ""
+      }${areas.length > 0 ? areas?.map((e) => `&area[]=${e}`).join("") : ""}${
+        budgets.length > 0 ? budgets?.map((e) => `&budget[]=${e}`).join("") : ""
+      }${
+        propertyType.length > 0
+          ? propertyType?.map((e) => `&property_type[]=${e}`).join("")
+          : ""
+      }`,
+    });
+  }, [page, locations, areas, propertyType, budgets]);
   const [loading, setLoading] = useState(isLoading);
   useEffect(() => {
     if (isSuccess) {
@@ -48,58 +65,6 @@ const FindProperty = () => {
     }
   }, [isSuccess, isError, data, error]);
 
-  const generateUpdatedQueryString = () => {
-    const queryParams = [];
-
-    queryParams.push(`page=${page}`);
-    queryParams.push(`count=${rowsPerPage}`);
-
-    if (searchValue) {
-      queryParams.push(`keyword=${searchValue}`);
-    }
-    const filterParams = [
-      { param: "budget[]", values: budgets },
-      { param: "property_type[]", values: propertyType },
-      { param: "state[]", values: locations },
-      { param: "area[]", values: areas },
-    ];
-
-    for (const filter of filterParams) {
-      const { param, values } = filter;
-
-      if (values) {
-        const filteredValues = Array.isArray(values)
-          ? values
-            .map((value: Record<string, any>) => value.value || value.id)
-            .filter(Boolean)
-          : [values]
-            .map((value: Record<string, any>) => value.value || value.id)
-            .filter(Boolean);
-
-        if (filteredValues.length > 0) {
-          const encodedValues = filteredValues
-            .map((value) => encodeURIComponent(value))
-            .join(`&${param}=`);
-          const decodedValue = decodeURIComponent(encodedValues);
-          queryParams.push(`${param}=${decodedValue}`);
-        }
-      }
-    }
-    const updatedPath = `listings?${queryParams.join("&")}`;
-    return updatedPath;
-  };
-
-  useEffect(() => {
-    if (searchValue || page || rowsPerPage) {
-      setPath(updatedPath);
-    }
-  }, [searchValue, page, rowsPerPage, updatedPath]);
-
-  useEffect(() => {
-    const updatedPath = generateUpdatedQueryString();
-    setPath(updatedPath);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue, page, budgets, propertyType, locations, areas]);
   return (
     <div className="drawer relative min-h-screen max-h-screen overflow-hidden">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />

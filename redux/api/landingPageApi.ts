@@ -28,4 +28,5 @@ export const {
   useGetListingsQuery,
   useGetRecentlyUploadedQuery,
   useFindByLocationQuery,
+  useLazyGetListingsQuery,
 } = landingPageApi;

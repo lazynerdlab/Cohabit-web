@@ -104,4 +104,5 @@ export const {
   useSaveListingMutation,
   useCreateListingReviewMutation,
   useGetListingRatingQuery,
+  useLazyGetAllAreasQuery,
 } = houseApi;
