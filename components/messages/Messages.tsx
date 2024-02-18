@@ -1,6 +1,6 @@
 "use client";
 import SideBar from "./SideBar";
-import Echo from 'laravel-echo';
+import Echo from "laravel-echo";
 import ActiveBadge from "@/assets/icons/ActiveBadge";
 import Image from "next/image";
 import user from "@/assets/user.svg";
@@ -16,19 +16,36 @@ import IncomingChat from "./IncomingChat";
 import OutgoingChat from "./OutgoingChat";
 import { useEffect, useState } from "react";
 import { Message } from "@/shared/models";
-import { useGetMessagesQuery, useSendMessageMutation } from "@/redux/api/chatApi";
+import {
+  useGetMessagesQuery,
+  useSendMessageMutation,
+} from "@/redux/api/chatApi";
 import { useAppSelector } from "@/redux/hook";
 
 const Messages = () => {
   const [mobileToggle, setMobileToggle] = useState(false);
-  const [sentmessage, setSentMessage] = useState('');
+  const [sentmessage, setSentMessage] = useState("");
   const [receivedMessages, setReceivedMessages] = useState<Message[]>([]);
   const [sentMessages, setSentMessages] = useState<Message[]>([]);
 
-  const receiverId: string = useAppSelector(state => state.chatData.chat.receiverId);
+  const receiverId: string = useAppSelector(
+    (state) => state.chatData.chat.receiverId
+  );
 
-  const { data: messagesData, isSuccess: messagesSuccess, isError: messagesError } = useGetMessagesQuery(receiverId)
-  const [sendMessage, { isLoading: sendIsLoading, isSuccess: sendIsSuccess, isError: sendIsError, error: sendError }] = useSendMessageMutation();
+  const {
+    data: messagesData,
+    isSuccess: messagesSuccess,
+    isError: messagesError,
+  } = useGetMessagesQuery(receiverId);
+  const [
+    sendMessage,
+    {
+      isLoading: sendIsLoading,
+      isSuccess: sendIsSuccess,
+      isError: sendIsError,
+      error: sendError,
+    },
+  ] = useSendMessageMutation();
   const newMessage: Message = {
     id: sentMessages.length + 1, // Generate a unique ID (you may want to handle this differently)
     receiverId,
@@ -37,56 +54,64 @@ const Messages = () => {
     // created_at: new Date().toISOString(), // Include a timestamp
   };
   const onHandlesendMessage = async () => {
-    // Send the message 
+    // Send the message
     await sendMessage(newMessage);
   };
 
   useEffect(() => {
     if (sendIsSuccess) {
       setSentMessages((prevMessages) => [...prevMessages, newMessage]);
-      setSentMessage('');
+      setSentMessage("");
     }
     if (messagesSuccess) {
       setReceivedMessages(messagesData?.data);
     }
     if (sendIsError || messagesError) {
-      const errMesg = sendError as any
-      message.error(errMesg?.data?.message)
+      const errMesg = sendError as any;
+      message.error(errMesg?.data?.message);
     }
-  }, [messagesData?.data, messagesError, messagesSuccess, sendError, sendIsError, sendIsSuccess]);
+  }, [
+    messagesData?.data,
+    messagesError,
+    messagesSuccess,
+    sendError,
+    sendIsError,
+    sendIsSuccess,
+  ]);
 
-  useEffect(() => {
-    const echo = new Echo({
-      broadcaster: 'pusher',
-      key: process.env.PUSHER_APP_KEY,
-      cluster: process.env.PUSHER_APP_CLUSTER,
-      encrypted: true,
-      enabledTransports: ['ws', 'wss'],
-      wsHost: process.env.PUSHER_APP_HOST,
-      wsPort: process.env.PUSHER_APP_WS_PORT ?? 80,
-      wssPort: process.env.PUSHER_APP_WSS_PORT ?? 443,
+  // useEffect(() => {
+  //   const echo = new Echo({
+  //     broadcaster: 'pusher',
+  //     key: process.env.PUSHER_APP_KEY,
+  //     cluster: process.env.PUSHER_APP_CLUSTER,
+  //     encrypted: true,
+  //     enabledTransports: ['ws', 'wss'],
+  //     wsHost: process.env.PUSHER_APP_HOST,
+  //     wsPort: process.env.PUSHER_APP_WS_PORT ?? 80,
+  //     wssPort: process.env.PUSHER_APP_WSS_PORT ?? 443,
 
-    })
+  //   })
 
-    // Subscribe to the chat channel
-    const channel = echo.private(`chat.${receiverId}`);
+  //   // Subscribe to the chat channel
+  //   const channel = echo.private(`chat.${receiverId}`);
 
-    // Listen for incoming messages
-    channel.listen('ChatMessageEvent', (event: Message) => {
-      setReceivedMessages((prevMessages) => [...prevMessages, event]);
-    });
+  //   // Listen for incoming messages
+  //   channel.listen('ChatMessageEvent', (event: Message) => {
+  //     setReceivedMessages((prevMessages) => [...prevMessages, event]);
+  //   });
 
-    // Clean up event listeners when the component unmounts
-    return () => {
-      channel.stopListening('ChatMessageEvent');
-    };
-  }, [receiverId]);
+  //   // Clean up event listeners when the component unmounts
+  //   return () => {
+  //     channel.stopListening('ChatMessageEvent');
+  //   };
+  // }, [receiverId]);
   return (
     <div className="grid grid-cols-1 md:grid-cols-[30%_70%]">
       <SideBar setDisplay={setMobileToggle} display={mobileToggle} />
       <div
-        className={`${mobileToggle ? "block" : "hidden"
-          } bg-[#32475C]/[4%] md:grid grid-cols-1 grid-rows-[10%_90%] transition duration-500 ease-in-out md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] max-h-screen`}
+        className={`${
+          mobileToggle ? "block" : "hidden"
+        } bg-[#32475C]/[4%] md:grid grid-cols-1 grid-rows-[10%_90%] transition duration-500 ease-in-out md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] max-h-screen`}
       >
         <div className="sticky md:top-0 top-[10%] z-[9999999999] bg-[#FFF] md:bg-[#32475C]/[4%] flex justify-between items-center w-full p-[2%] border-b border-[#32475C1F]">
           <div className="flex gap-[0.5rem] items-center">

@@ -10,6 +10,8 @@ import CarouselBackIcon from "@/assets/icons/CarouselBackIcon";
 import CarouselNextIcon from "@/assets/icons/CarouselNextIcon";
 import PropertySection from "./PropertySection";
 import Image from "next/image";
+import slide from "@/assets/slide.jpg";
+import slide2 from "@/assets/slide2.jpg";
 
 import PinLocation from "@/assets/icons/PinLocation";
 import RoomIcon from "@/assets/icons/RoomIcon";
@@ -96,21 +98,44 @@ const Property = () => {
         <Spinner />
       ) : (
         <div className="w-[95%] mx-auto">
-          <div className="relative mt-[1.5rem]">
-            <Carousel
-              arrows={true}
-              nextArrow={<CarouselNextIcon />}
-              prevArrow={<CarouselBackIcon />}
-              dots={false}
-              variableWidth
-              className="mobile-hidden"
-            >
-              {propertyData?.images?.map((image: string, index: number) => (
-                <div key={index} className="w-full h-full relative">
-                  <Image alt="thumbnail" src={image} width={500} height={500} />
-                </div>
-              ))}
-            </Carousel>
+          <div className="relative mt-[1.5rem] mb-[10%]">
+            {propertyData?.images?.length > 2 ? (
+              <Carousel
+                arrows={true}
+                nextArrow={<CarouselNextIcon />}
+                prevArrow={<CarouselBackIcon />}
+                dots={false}
+                variableWidth
+                className="mobile-hidden !flex"
+              >
+                {propertyData?.images?.map((image: string, index: number) => (
+                  <div key={index} className="w-full h-full relative">
+                    <Image
+                      alt="thumbnail"
+                      src={image}
+                      width={500}
+                      height={500}
+                    />
+                  </div>
+                ))}
+              </Carousel>
+            ) : (
+              <Carousel
+                arrows={true}
+                nextArrow={<CarouselNextIcon />}
+                prevArrow={<CarouselBackIcon />}
+                dots={false}
+                variableWidth
+                className="mobile-hidden !flex"
+              >
+                <Image alt="slide" src={slide} className="w[60vw] h-[200px]" />
+                <Image alt="slide" src={slide2} className="w[60vw] h-[200px]" />
+                <Image alt="slide" src={slide} className="w[60vw] h-[200px]" />
+                <Image alt="slide" src={slide2} className="w[60vw] h-[200px]" />
+                <Image alt="slide" src={slide} className="w[60vw] h-[200px]" />
+                <Image alt="slide" src={slide2} className="w[60vw] h-[200px]" />
+              </Carousel>
+            )}
             <div className="grid grid-cols1 items-start grid-cols-[75%_25%] gap-[0.5rem] md:items-center shadow shadow-[#CDCDCD] px-[1rem] pt-[1rem] rounded-[8px] relative md:absolute md:top-[50%] md:left-[50%] md:translate-x-[-50%] md:w-[80%] w-full bg-[#FFF] pb-[10%] md:pb-[1rem]">
               <div className="grid grid-cols-[30%_70%] gap-[0.3rem]">
                 <Image
