@@ -75,7 +75,9 @@ const Filter = ({
       null,
       houseTypes?.data?.map((item: Record<string, any>) =>
         getItem(
-          item.title,
+          <label className="cursor-pointer" htmlFor={`type-${item.id}`}>
+            {item.title}
+          </label>,
           item.id,
           <Checkbox
             onChange={(e) => {
@@ -87,29 +89,45 @@ const Filter = ({
                 );
               }
             }}
-            checked={propertyTypes.includes(item.id.toString())}
+            id={`type-${item.id}`}
+            checked={propertyTypes.includes(item.id)}
           />
         )
       ) || []
     ),
     getItem("Location", "location", null, [
       getItem(
-        "Abuja",
-        "one",
+        <label className="cursor-pointer" htmlFor="abuja">
+          Abuja
+        </label>,
+        "abuja",
         <Checkbox
           onChange={(e) => {
-            setLocations("abuja");
+            if (e.target.checked) {
+              setLocations("abuja");
+            } else {
+              setLocations("");
+            }
           }}
+          id="abuja"
           checked={locations === "abuja"}
         />
       ),
       getItem(
-        "Lagos",
-        "two",
+        <label className="cursor-pointer" htmlFor="lagos">
+          Lagos
+        </label>,
+        "lagos",
         <Checkbox
           onChange={(e) => {
-            setLocations("lagos");
+            console.log(locations);
+            if (e.target.checked) {
+              setLocations("lagos");
+            } else {
+              setLocations("");
+            }
           }}
+          id="lagos"
           checked={locations === "lagos"}
         />
       ),
@@ -120,7 +138,9 @@ const Filter = ({
       null,
       areasData?.data?.map((item: Record<string, any>) =>
         getItem(
-          item.area,
+          <label className="cursor-pointer" htmlFor={`area-${item?.id}`}>
+            {item.area}
+          </label>,
           item.id,
           <Checkbox
             onChange={(e) => {
@@ -130,13 +150,16 @@ const Filter = ({
                 setAreas((prev) => prev.filter((type) => type !== item.id));
               }
             }}
-            checked={propertyTypes.includes(item.id.toString())}
+            id={`area-${item?.id}`}
+            checked={areas.includes(item.id)}
           />
         )
       ) ||
         areasData?.data?.data?.map((item: Record<string, any>) =>
           getItem(
-            item.area,
+            <label className="cursor-pointer" htmlFor={`area-${item?.id}`}>
+              item.area
+            </label>,
             item.id,
             <Checkbox
               onChange={(e) => {
@@ -146,7 +169,8 @@ const Filter = ({
                   setAreas((prev) => prev.filter((type) => type !== item.id));
                 }
               }}
-              checked={propertyTypes.includes(item.id.toString())}
+              id={`area-${item?.id}`}
+              checked={areas.includes(item.id)}
             />
           )
         ) ||
@@ -158,7 +182,12 @@ const Filter = ({
       null,
       budgetList?.data?.map((item: Record<string, any>) =>
         getItem(
-          item.text,
+          <label
+            className="cursor-pointer w-full"
+            htmlFor={`budget-${item.id}`}
+          >
+            {item.text}
+          </label>,
           item.id,
           <Checkbox
             onChange={(e) => {
@@ -170,7 +199,8 @@ const Filter = ({
                 );
               }
             }}
-            checked={budgets.includes(item.id.toString())}
+            id={`budget-${item.id}`}
+            checked={budgets.includes(item.id)}
           />
         )
       ) || []

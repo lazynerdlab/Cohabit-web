@@ -46,7 +46,7 @@ const MateCard = ({ data }: Props) => {
         </h5>
       </div>
       <Divider />
-      <div className="grid grid-cols-2 gap-[0.2rem] items-center w-[98%] mx-auto">
+      <div className="grid grid-cols-2 gap-[0.5rem] items-center w-[98%] mx-auto">
         <Image
           alt="user"
           src={

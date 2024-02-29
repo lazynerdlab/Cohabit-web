@@ -66,7 +66,7 @@ const DashBoard = () => {
             View All
           </Button>
         </div> */}
-      <div className="w-[98%] mx-auto grid grid-cols-1 py-[0.5rem] gap-[0.5rem]">
+      <div className="w-[98%] mx-auto grid grid-cols-1 py-[0.5rem] gap-[1rem]">
         <h5 className="text-[#25324B] mb-[0.5rem] text-[16px] md:text-[18px] font-bold leading-[28.80px]">
           Find your apartment to stay
         </h5>

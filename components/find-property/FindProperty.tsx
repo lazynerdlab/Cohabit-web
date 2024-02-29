@@ -13,6 +13,7 @@ import {
   useLazyGetListingsQuery,
 } from "@/redux/api/landingPageApi";
 import { Tag } from "@/shared/UIs/Tags";
+import { MdMenuOpen } from "react-icons/md";
 
 const FindProperty = () => {
   const width = useWidth();
@@ -68,12 +69,13 @@ const FindProperty = () => {
   return (
     <div className="drawer relative min-h-screen max-h-screen overflow-hidden">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content overflow-y-scroll bg-[#EEF2F7]">
+      <div className="drawer-content overflow-y-scroll bg-[#FFFFFF]">
         <div className="grid grid-cols-1 gap-[0.5rem] overflow-y-scroll">
           <div className="grid grid-cols-[40%_60%] md:grid-cols-[45%_50%_5%] items-center w-[98%] mx-auto">
             <div className="flex items-center">
               <label htmlFor="my-drawer-3" className="flex text-blue-800 px-3">
-                <FiFilter className="cursor-pointer" />
+                {/* <FiFilter className="cursor-pointer" /> */}
+                <MdMenuOpen className="cursor-pointer" />
               </label>
               <div className="text-[#25324B] flex flex-col gap-[0.1rem]">
                 <h4 className="lg:text-[24px] text-[12px] md:text-[18px] font-[700]">
