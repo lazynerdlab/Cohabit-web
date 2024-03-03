@@ -23,7 +23,7 @@ const HostHeader = ({ children }: HeaderType) => {
       </div>
       <div className="flex justify-center">
         <Button
-          onClick={() => push("host/post-apartment")}
+          onClick={() => push("/host/post-apartment")}
           className="flex items-center self-end !bg-[#010886]"
           type="primary"
         >
