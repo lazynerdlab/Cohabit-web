@@ -16,7 +16,8 @@ export interface IBudget {
 
 export interface Message {
   id: number;
-  receiverId: number | string;
+  receiverId?: number | string;
   message: string;
-  file: Record<string, any>
+  messageType: string;
+  file?: Record<string, any>;
 }
