@@ -28,15 +28,19 @@ const Messages = () => {
   const [receivedMessages, setReceivedMessages] = useState<Message[]>([]);
   const [sentMessages, setSentMessages] = useState<Message[]>([]);
 
-  const receiverId: string = useAppSelector(
-    (state) => state.chatData.chat.receiverId
-  );
+  // Hardcoded value for testing
+  const receiverId: string = "sample_receiver_id";
+
+  // const receiverId: string = useAppSelector(
+  //   (state) => state.chatData.chat.receiverId
+  // );
 
   const {
     data: messagesData,
     isSuccess: messagesSuccess,
     isError: messagesError,
   } = useGetMessagesQuery(receiverId);
+
   const [
     sendMessage,
     {
@@ -46,17 +50,36 @@ const Messages = () => {
       error: sendError,
     },
   ] = useSendMessageMutation();
+
   const newMessage: Message = {
-    id: sentMessages.length + 1, // Generate a unique ID (you may want to handle this differently)
+    id: sentMessages.length + 1,
     receiverId,
-    file: {},
     message: sentmessage,
-    // created_at: new Date().toISOString(), // Include a timestamp
+    messageType: "text", // Set the messageType field
   };
+
+  // const newMessage: Message = {
+  //   id: sentMessages.length + 1, // Generate a unique ID (you may want to handle this differently)
+  //   receiverId,
+  //   file: {},
+  //   message: sentmessage,
+  //   // created_at: new Date().toISOString(), // Include a timestamp
+  // };
+
   const onHandlesendMessage = async () => {
+    // Check if receiverId is available
+    if (!receiverId) {
+      message.error("Receiver ID is required.");
+      return;
+    }
     // Send the message
     await sendMessage(newMessage);
   };
+
+  // const onHandlesendMessage = async () => {
+  //   // Send the message
+  //   await sendMessage(newMessage);
+  // };
 
   useEffect(() => {
     if (sendIsSuccess) {
@@ -64,7 +87,12 @@ const Messages = () => {
       setSentMessage("");
     }
     if (messagesSuccess) {
-      setReceivedMessages(messagesData?.data);
+      console.log("Messages data:", messagesData); // Add this log
+      if (messagesData && messagesData.data && messagesData.data.length > 0) {
+        setReceivedMessages(messagesData.data);
+      } else {
+        setReceivedMessages([]); // No messages, set empty array
+      }
     }
     if (sendIsError || messagesError) {
       const errMesg = sendError as any;
@@ -105,6 +133,7 @@ const Messages = () => {
   //     channel.stopListening('ChatMessageEvent');
   //   };
   // }, [receiverId]);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-[30%_70%]">
       <SideBar setDisplay={setMobileToggle} display={mobileToggle} />
@@ -130,7 +159,7 @@ const Messages = () => {
           </div>
           <VerticalSeeMore className="cursor-pointer" />
         </div>
-        <div className="flex flex-col gap-[0.5rem] max-h[78vh] justify-between overflowhidden md:overflow-y-scroll mb-[3%] relative">
+        <div className="flex flex-col gap-[0.5rem] max-h[78vh] justify-between overflow-hidden md:overflow-y-scroll mb-[3%] relative">
           <div className="flex flex-col justify-end bg-[#32475C]/[4%] overflowy-scroll md:overflowy-scroll">
             {receivedMessages.map((msg) => (
               <div key={msg.id}>
@@ -168,8 +197,15 @@ const Messages = () => {
                 autoSize={{ maxRows: 4 }}
                 placeholder="Type Your Message here..."
                 value={sentmessage}
+                onChange={(e) => setSentMessage(e.target.value)} // Ensure onChange handler
               />
-              <input className="hidden" type="file" id="file" />
+
+              <input
+                className="hidden"
+                type="file"
+                id="file"
+                title="Select File"
+              />
               <label
                 htmlFor="file"
                 className="absolute right-[2%] cursor-pointer top-[50%] translate-y-[-50%]"

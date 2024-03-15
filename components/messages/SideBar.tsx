@@ -43,8 +43,8 @@ const recentChats = [
     name: "Prisca Rower",
     time: "July 20",
     message: "I want to share an apartment with you. ",
-  }
-]
+  },
+];
 const SideBar = ({
   display,
   setDisplay,
@@ -204,27 +204,41 @@ const SideBar = ({
     ],
     []
   );
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const onClick: MenuProps["onClick"] = (e) => {
     setActive(e.key);
     setDisplay((prev) => !prev);
   };
 
-  const { data: chats, isLoading, error, isSuccess, isError } = useGetChatsQuery({})
-  const [onGoingChats, setOnGoingChats] = useState<Record<string, any>[]>([])
+  const {
+    data: chats,
+    isLoading,
+    error,
+    isSuccess,
+    isError,
+  } = useGetChatsQuery({});
+  const [onGoingChats, setOnGoingChats] = useState<Record<string, any>[]>([]);
+
   useEffect(() => {
     if (isSuccess) {
-      setOnGoingChats(chats)
+      console.log("Chats data:", chats); // Add this log
+      if (chats && chats.length > 0) {
+        setOnGoingChats(chats);
+      } else {
+        setOnGoingChats([]); // Set to empty array if no chats available
+      }
     }
     if (isError) {
-      const errMesg = error as any
-      console.log(errMesg?.data?.message)
+      const errMesg = error as any;
+      console.log(errMesg?.data?.message);
     }
-  }, [chats, error, isError, isSuccess])
+  }, [chats, error, isError, isSuccess]);
+
   return (
     <div
-      className={`${display ? "hidden" : "block"
-        } transition duration-500 ease-in-out md:grid grid-cols-1 grid-rows-[10%_90%] md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#FFF] max-h-screen overflow-hidden`}
+      className={`${
+        display ? "hidden" : "block"
+      } transition duration-500 ease-in-out md:grid grid-cols-1 grid-rows-[10%_90%] md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#FFF] max-h-screen overflow-hidden`}
     >
       <div className="sticky top-0 z-[9999999999] bg-[#FFF] flex items-center justify-between gap-[0.5rem] w-full p-[2%] border-b border-[#32475C1F]">
         <span className="relative">
@@ -238,17 +252,23 @@ const SideBar = ({
         />
       </div>
       <div className="flex flex-col gap-3 my-2 p-2">
-        {
-          isLoading ? <div>Loading</div> : onGoingChats.map((item: Record<string, any>) => (
-            <div className="flex items-center gap-3 bg-[#F9F9F9] cursor-pointer p-2 rounded-[8px]" key={item.id} onClick={() => {
-              const payload = {
-                receiverId: item?.id,
-                name: item?.name,
-                avatar: item?.avatar
-              }
-              dispatch(SET_CURRENT_CHAT(payload))
-              setDisplay((prev) => !prev);
-            }}>
+        {isLoading ? (
+          <div>Loading</div>
+        ) : (
+          onGoingChats.map((item: Record<string, any>) => (
+            <div
+              className="flex items-center gap-3 bg-[#F9F9F9] cursor-pointer p-2 rounded-[8px]"
+              key={item.id}
+              onClick={() => {
+                const payload = {
+                  receiverId: item?.id,
+                  name: item?.name,
+                  avatar: item?.avatar,
+                };
+                dispatch(SET_CURRENT_CHAT(payload));
+                setDisplay((prev) => !prev);
+              }}
+            >
               <div className="relative">
                 <Image alt="user" src={user} />
                 <ActiveBadge className="absolute right-0 bottom-0" />
@@ -258,11 +278,15 @@ const SideBar = ({
                   <h4 className="font-semibold">{item?.name}</h4>
                   <span className="text-[11px]">{item?.time}</span>
                 </div>
-                <span className="text-[12px]">{item.message.length > 30 ? item?.message.slice(0, 30) + "..." : item?.message}</span>
+                <span className="text-[12px]">
+                  {item.message.length > 30
+                    ? item?.message.slice(0, 30) + "..."
+                    : item?.message}
+                </span>
               </div>
             </div>
           ))
-        }
+        )}
       </div>
       {/* <Menu
         mode="inline"
