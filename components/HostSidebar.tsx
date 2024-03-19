@@ -196,3 +196,11 @@ const HostSidebar = () => {
 };
 
 export default HostSidebar;
+function dispatch(arg0: any) {
+  throw new Error("Function not implemented.");
+}
+
+function SET_USER_NAME(payload: any): any {
+  throw new Error("Function not implemented.");
+}
+

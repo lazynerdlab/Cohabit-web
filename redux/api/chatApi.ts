@@ -22,7 +22,7 @@ export const chatApi = createApi({
       providesTags: ["messages"],
     }),
     getSearchedMessages: builder.query({
-      query: (query: string) => `chats?type=search&query=${query}`,
+      query: ({id, query}) => `chats/${id}?type=search&query=${query}`,
       providesTags: ["messages"],
     }),
     sendMessage: builder.mutation({

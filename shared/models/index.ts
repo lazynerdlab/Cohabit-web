@@ -15,9 +15,16 @@ export interface IBudget {
 // }
 
 export interface Message {
+  sender?: {
+    image: string | undefined;
+    name: string;
+    // Other sender properties...
+  };
+ 
   id: number;
-  receiverId?: number | string;
+  receiver_id?: number | string;
   message: string;
   messageType: string;
   file?: Record<string, any>;
+  
 }
