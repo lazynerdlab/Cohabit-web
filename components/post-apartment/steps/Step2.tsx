@@ -50,12 +50,13 @@ const Step2 = ({ next }: Props) => {
 
   useEffect(() => {
     if (state) {
-      setPath(`get_house_areas?count=30&random=1&state=${state}`)
+      setPath(`get_house_areas?count=30&state=${state}`)
     }
     if (areaIsSuccess) {
-      setAreasOptions(areaData?.data?.data)
+      setAreasOptions(areaData?.data)
+      console.log(areasOptions)
     }
-  }, [areaData?.data?.data, areaIsSuccess, state])
+  }, [areaData?.data, areaIsSuccess, state])
 
   const areaId = location?.slice(-2)
 

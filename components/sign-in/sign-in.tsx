@@ -61,6 +61,7 @@ const SignIn = () => {
 
       sessionStorage.setItem("authToken", data?.data?.token);
       sessionStorage.setItem("myId", data?.data?.user?.id);
+      sessionStorage.setItem("userType", data?.data?.user?.user_type);
       localStorage.setItem("previousLocation", pathname);
       if (data?.data?.user?.has_onboarded === false) {
         push("/on-board");

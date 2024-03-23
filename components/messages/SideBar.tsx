@@ -14,7 +14,7 @@ import { SET_CURRENT_CHAT } from "@/redux/slice/chatSlice";
 import { useGetChatsQuery, useGetSearchedChatsQuery } from "@/redux/api/chatApi";
 
 
-const SideBar = ({display,  setDisplay}: {display: boolean;  setDisplay: React.Dispatch<SetStateAction<boolean>>}) => {
+const SideBar = ({ display, setDisplay }: { display: boolean; setDisplay: React.Dispatch<SetStateAction<boolean>> }) => {
 
   const dispatch = useAppDispatch();
   const [activeChat, setActiveChat] = useState<string | null>(null);
@@ -28,7 +28,7 @@ const SideBar = ({display,  setDisplay}: {display: boolean;  setDisplay: React.D
     const day = date.getDate();
     return `${month} ${day}`;
   };
-  
+
   const {
     data: chats,
     isLoading,
@@ -39,27 +39,52 @@ const SideBar = ({display,  setDisplay}: {display: boolean;  setDisplay: React.D
 
   const {
     data: searchedChats,
-    isLoading:searchedLoading,
+    isLoading: searchedLoading,
     error: searchedError,
     isSuccess: searchedSuccess,
     isError: isSearchedError,
   } = useGetSearchedChatsQuery(searchQuery);
 
+  let currentUserType = sessionStorage.getItem('userType')
+  const currentUserTypeIdString = sessionStorage.getItem('myId');
+  const currentUserTypeId = currentUserTypeIdString !== null ? parseInt(currentUserTypeIdString, 10) : null;
+
+
+
+
+
   useEffect(() => {
     if (isSuccess) {
       if (chats && chats.data.users && chats.data.users.length > 0) {
         setOnGoingChats(chats.data.users);
-       
+
         console.log(chats.data);
-        setActiveChat(chats.data.users[0].receiver_id)
-        const payload = {
-          receiverId: chats.data.users[0].receiver_id,
-          name: chats.data.users[0].receiver.name,
-          avatar: chats.data.users[0].receiver.image,
-        };
-        dispatch(SET_CURRENT_CHAT(payload))
+        console.log(chats.data.users);
+        console.log(chats.data.users[0].receiver_id);
+       
+        const sender = chats.data.users[0];
+        const receiver = chats.data.users[0];
+         // Assign properties based on currentUserTypeId
+      let receiverId, name, avatar;
+      if (currentUserTypeId === sender.sender_id) {
+        receiverId = receiver.receiver_id;
+        name = receiver.receiver.name;
+        avatar = receiver.receiver.image;
       } else {
-        setOnGoingChats([]); 
+        receiverId = sender.sender_id;
+        name = sender.sender.name;
+        avatar = sender.sender.image;
+      }
+      const payload = {
+        receiverId: receiverId,
+        name: name,
+        avatar: avatar,
+      };
+       
+        dispatch(SET_CURRENT_CHAT(payload))
+        setActiveChat(payload?.receiverId)
+      } else {
+        setOnGoingChats([]);
         setActiveChat(null);
       }
     }
@@ -67,17 +92,17 @@ const SideBar = ({display,  setDisplay}: {display: boolean;  setDisplay: React.D
       const errMesg = error as any;
       console.log(errMesg?.data?.message);
     }
-  }, [chats, error, isError, isSuccess]);
+  }, [chats?.data, error, isError, isSuccess]);
 
   useEffect(() => {
     console.log("Chats searching:", searchedLoading);
     // Log isLoading value
     if (searchedSuccess) {
       if (searchedChats && searchedChats.data && searchedChats.data.users && searchedChats.data.users.length > 0) {
-        setOnGoingChats(searchedChats.data.users); 
-        console.log(searchedChats.data); 
+        setOnGoingChats(searchedChats.data.users);
+        console.log(searchedChats.data);
       } else {
-        setOnGoingChats([]); 
+        //setOnGoingChats([]);
       }
     }
     if (isSearchedError) {
@@ -87,15 +112,14 @@ const SideBar = ({display,  setDisplay}: {display: boolean;  setDisplay: React.D
   }, [searchedChats, searchedError, isSearchedError, searchedSuccess]);
 
   const handleSearch = (value: string) => {
-    setSearchQuery(value); 
+    setSearchQuery(value);
   };
 
 
   return (
     <div
-      className={`${
-        display ? "hidden" : "block"
-      } transition duration-500 ease-in-out md:grid grid-cols-1 grid-rows-[10%_90%] md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#FFF] max-h-screen overflow-hidden`}
+      className={`${display ? "hidden" : "block"
+        } transition duration-500 ease-in-out md:grid grid-cols-1 grid-rows-[10%_90%] md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#FFF] max-h-screen overflow-hidden`}
     >
       <div className="sticky top-0 z-[9999999999] bg-[#FFF] flex items-center justify-between gap-[0.5rem] w-full p-[2%] border-b border-[#32475C1F]">
         <span className="relative">
@@ -110,45 +134,48 @@ const SideBar = ({display,  setDisplay}: {display: boolean;  setDisplay: React.D
         />
       </div>
       <div className="flex flex-col gap-3 my-2 p-2">
-      <h4 className="text-[#010886] text-[20px] font-[500]">Chats</h4>
-        {isLoading || searchedLoading  ? (
+        <h4 className="text-[#010886] text-[20px] font-[500]">Chats</h4>
+        {isLoading || searchedLoading ? (
           <div>Loading</div>
-    
+
         ) : (
           onGoingChats.map((item: Record<string, any>) => (
-            <div
-            className={`flex items-center gap-3 bg-[#F9F9F9] cursor-pointer p-2 rounded-[8px] ${
-              activeChat === item.receiver_id ? 'bg-colorPrimary text-neutral-50' : '' // Apply active background color if active
-            }`}
-              key={item.id}
-              onClick={() => {
-                const payload = {
-                  receiverId: item?.receiver_id,
-                  name: item?.receiver.name,
-                  avatar: item?.receiver.image,
-                };
-                dispatch(SET_CURRENT_CHAT(payload));
-                setActiveChat(item.receiver_id); // Set active chat item
-                setDisplay((prev) => !prev);
-              }}
-            >
-              <div className="relative" >
-                <img alt="user" src={item?.receiver.image} style={{  width: "30px", height: "30px", borderRadius: "50%", overflow: "hidden" , objectFit:"cover" }}/>
-                
-                <ActiveBadge className="absolute right-0 bottom-0" />
-              </div>
-              <div className="flex flex-col w-full">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-semibold">{item?.receiver.name}</h4>
-                  <span className="text-[11px]">{formatDate(item?.created_at)}</span>
+            console.log(activeChat, item.receiver_id),
+           
+              
+              <div
+                className={`flex items-center gap-3 bg-[#F9F9F9] cursor-pointer p-2 rounded-[8px] ${activeChat === item.receiver_id ? 'bg-colorPrimary text-neutral-50' : '' // Apply active background color if active
+                  }`}
+                key={item.id}
+                onClick={() => {
+                  const payload = {
+                    receiverId: currentUserType === 'host' ? item?.sender_id : item?.receiver_id,
+                    name: currentUserType === 'host' ? item?.sender.name : item?.receiver.name,
+                    avatar: currentUserType === 'host' ? item?.sender.image : item?.receiver.image,
+                  };
+                  dispatch(SET_CURRENT_CHAT(payload));
+                  setActiveChat(item.receiver_id); // Set active chat item
+                  setDisplay((prev) => !prev);
+                }}
+              >
+                <div className="relative" >
+                  <img alt="user" src={currentUserType === 'host' ? item?.sender.image : item?.receiver.image} style={{ width: "30px", height: "30px", borderRadius: "50%", overflow: "hidden", objectFit: "cover" }} />
+
+                  <ActiveBadge className="absolute right-0 bottom-0" />
                 </div>
-                <span className="text-[12px]">
-                  {item.message.length > 30
-                    ? item?.message.slice(0, 30) + "..."
-                    : item?.message}
-                </span>
+                <div className="flex flex-col w-full">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-semibold">{currentUserType === 'host' ? item?.sender.name : item?.receiver.name}</h4>
+                    <span className="text-[11px]">{formatDate(item?.created_at)}</span>
+                  </div>
+                  <span className="text-[12px]">
+                    {item?.message?.length > 30
+                      ? item?.message.slice(0, 30) + "..."
+                      : item?.message}
+                  </span>
+                </div>
               </div>
-            </div>
+            
           ))
         )}
       </div>
@@ -157,3 +184,4 @@ const SideBar = ({display,  setDisplay}: {display: boolean;  setDisplay: React.D
 };
 
 export default SideBar;
+

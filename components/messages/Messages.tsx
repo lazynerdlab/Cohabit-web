@@ -29,15 +29,15 @@ import { useGetHostProfileQuery } from "@/redux/api/hostApi";
 const Messages = () => {
   const [mobileToggle, setMobileToggle] = useState(false);
   const [sentmessage, setSentMessage] = useState("");
-  const [receivedMessages, setReceivedMessages] = useState<Message[]>([]);
+  //const [receivedMessages, setReceivedMessages] = useState<Message[]>([]);
   const [sentMessages, setSentMessages] = useState<Message[]>([]);
   const [searchMessageQuery, setSearchMessageQuery] = useState<string>(""); // State to hold search query
 
   // Hardcoded value for testing
-  //const receiver_id = 2;
-  useGetHostProfileQuery
+  //const receiver_id = 1;
+  //useGetHostProfileQuery
   const receiver_id: string = useAppSelector(
-    (state) => state.chatData.chat.receiverId
+  (state) => state.chatData.chat.receiverId
   );
   const chatt_name: string = useAppSelector(
     (state) => state.chatData.chat.name
@@ -45,7 +45,11 @@ const Messages = () => {
   const avatar: string = useAppSelector(
     (state) => state.chatData.chat.avatar
   );
+
+  const currentUserTypeIdString = sessionStorage.getItem('myId');
+  const currentUserTypeId = currentUserTypeIdString !== null ? parseInt(currentUserTypeIdString, 10) : null;
  
+
 
   const {
     data: messagesData,
@@ -121,12 +125,12 @@ const Messages = () => {
     if (messagesSuccess) {
       console.log("Messages data:", messagesData); // Add this log
       setSentMessages(messagesData.data.chats)
-      if (messagesData && messagesData.data && messagesData.data.length > 0) {
-        setReceivedMessages(messagesData.data);
+      if (messagesData && messagesData.data && messagesData.data.chats.length > 0) {
+        //setReceivedMessages(messagesData.data.chats);
 
         console.log(sentMessages)
       } else {
-        setReceivedMessages([]); // No messages, set empty array
+       // setReceivedMessages([]); // No messages, set empty array
       }
     }
     if (sendIsError || messagesError) {
@@ -134,7 +138,7 @@ const Messages = () => {
       message.error(errMesg?.data?.message);
     }
   }, [
-    messagesData?.data,
+    messagesData,
     messagesError,
     messagesSuccess,
     sendError,
@@ -172,6 +176,8 @@ const Messages = () => {
     setSearchMessageQuery(value); // Trigger search when user types in the search input
   };
 
+ 
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-[30%_70%]">
       <SideBar setDisplay={setMobileToggle} display={mobileToggle} />
@@ -208,23 +214,20 @@ const Messages = () => {
         </div>
         <div className="flex flex-col gap-[0.5rem] max-h[78vh] justify-between overflow-hidden md:overflow-y-scroll mb-[3%] relative">
           <div className="flex flex-col justify-end bg-[#32475C]/[4%] overflowy-scroll md:overflowy-scroll">
-            {receivedMessages.map((msg) => (
-              <div key={msg.id}>
-                <IncomingChat user_name="Felecia Rower" message={msg.message} />
-
-                {/* You can add more details like sender information or timestamp */}
-              </div>
-            ))}
             {
-              sentMessages.length > 0 ? (
                 sentMessages.map((msg) => (
+                  console.log( (typeof currentUserTypeId), (typeof msg.receiver_id)),
                   <div key={msg.id}>
-                    <OutgoingChat user_name={msg.sender?.name} image={msg.sender?.image} message={msg.message} />
+                   
+                    {currentUserTypeId === parseInt(msg?.sender_id ?? '', 10) ? (
+                      <OutgoingChat user_name={msg.sender?.name} image={msg.sender?.image} message={msg.message} />
+                     
+                    ) : (
+                      <IncomingChat user_name={msg.sender?.name} message={msg.message} image={msg.sender?.image} /> 
+                    )}
                   </div>
                 ))
-              ) : (
-                <div className=" h-[300px] flex items-center justify-center">Getting Chats.</div>
-              )
+              
             }
 
           </div>

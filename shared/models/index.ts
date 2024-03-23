@@ -15,7 +15,13 @@ export interface IBudget {
 // }
 
 export interface Message {
+  sender_id?: string;
   sender?: {
+    image: string | undefined;
+    name: string;
+    // Other sender properties...
+  };
+  receiver?: {
     image: string | undefined;
     name: string;
     // Other sender properties...

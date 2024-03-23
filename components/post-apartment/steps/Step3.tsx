@@ -77,7 +77,7 @@ const Step3 = ({ next, prev }: Props) => {
       images: documentUpload,
       features,
     }
-    // console.log(payload);
+     console.log(payload);
     if (desc && features && documentUpload) {
       dispatch(SET_APARTMENT_FORM_TWO(payload));
       next();
