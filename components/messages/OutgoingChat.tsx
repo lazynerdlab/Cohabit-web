@@ -1,14 +1,16 @@
 import Image from "next/image";
-import user from "@/assets/user.svg";
 import DeliverIcon from "@/assets/icons/DeliverIcon";
+
+import { IoCheckmark } from "react-icons/io5";
 
 interface IProps {
   image?: string;
   user_name: any;
   message: string;
   time?: string;
+  status: any
 }
-const OutgoingChat = ({ image, user_name, message, time }: IProps) => {
+const OutgoingChat = ({ image, user_name, message, time, status }: IProps) => {
   return (
     <div className="chat chat-end py-0 w-[98%] mx-auto">
        {image && (
@@ -22,7 +24,12 @@ const OutgoingChat = ({ image, user_name, message, time }: IProps) => {
       <span>{user_name}</span>
       <div className="chat-bubble bg-colorPrimary">{message}</div>
       <div className="chat-footer opacity-50 flex justify-end">
-        <DeliverIcon className="fill-[#71DD37]" />
+        {
+          status === "sent" ?  
+          <IoCheckmark className="fill-[#71DD37] text-xl" />
+          :
+          <DeliverIcon className="fill-[#71DD37]" />
+        }
         <time>{time}</time>
       </div>
     </div>

@@ -15,6 +15,7 @@ export interface IBudget {
 // }
 
 export interface Message {
+  status?: string;
   sender_id?: string;
   sender?: {
     image: string | undefined;

@@ -24,18 +24,20 @@ import {
 
 import { useAppSelector } from "@/redux/hook";
 import SearchIcon from "@/assets/icons/SearchIcon";
-import { useGetHostProfileQuery } from "@/redux/api/hostApi";
+import useDebounce from "../hooks/useSearchDebounce";
 
 const Messages = () => {
   const [mobileToggle, setMobileToggle] = useState(false);
   const [sentmessage, setSentMessage] = useState("");
-  //const [receivedMessages, setReceivedMessages] = useState<Message[]>([]);
   const [sentMessages, setSentMessages] = useState<Message[]>([]);
   const [searchMessageQuery, setSearchMessageQuery] = useState<string>(""); // State to hold search query
 
   // Hardcoded value for testing
-  //const receiver_id = 1;
+  //const receiver_id = 2;
   //useGetHostProfileQuery
+  const debounceDelay = 300;
+  // Use the custom debouncing hook
+  const debouncedSearchQuery = useDebounce(searchMessageQuery, debounceDelay);
   const receiver_id: string = useAppSelector(
   (state) => state.chatData.chat.receiverId
   );
@@ -44,6 +46,9 @@ const Messages = () => {
   );
   const avatar: string = useAppSelector(
     (state) => state.chatData.chat.avatar
+  );
+  const userType: string = useAppSelector(
+    (state) => state.chatData.chat.userType
   );
 
   const currentUserTypeIdString = sessionStorage.getItem('myId');
@@ -64,7 +69,7 @@ const Messages = () => {
     isError: isSearchedError,
   } = useGetSearchedMessagesQuery({
     id: receiver_id,
-    query: searchMessageQuery
+    query: debouncedSearchQuery
   });
 
   const [
@@ -96,13 +101,9 @@ const Messages = () => {
     await sendMessage(newMessage);
   };
   useEffect(() => {
-    // console.log("Chats searching:", searchedLoading);
-    // Log isLoading value
     if (searchedSuccess) {
       if (searchedMessages && searchedMessages.data && searchedMessages.data.chats && searchedMessages.data.chats.length > 0) {
         setSentMessages(searchedMessages.data.chats); // Update ongoing chats with searched chats
-        console.log(searchedMessages.data.chats); // Update ongoing chats with searched chats
-        console.log(searchedMessages.data); // Update ongoing chats with searched chats
       } else {
         setSentMessages([]); // Set to empty array if no searched chats available
       }
@@ -146,32 +147,7 @@ const Messages = () => {
     sendIsSuccess,
   ]);
 
-  // useEffect(() => {
-  //   const echo = new Echo({
-  //     broadcaster: 'pusher',
-  //     key: process.env.PUSHER_APP_KEY,
-  //     cluster: process.env.PUSHER_APP_CLUSTER,
-  //     encrypted: true,
-  //     enabledTransports: ['ws', 'wss'],
-  //     wsHost: process.env.PUSHER_APP_HOST,
-  //     wsPort: process.env.PUSHER_APP_WS_PORT ?? 80,
-  //     wssPort: process.env.PUSHER_APP_WSS_PORT ?? 443,
-
-  //   })
-
-  //   // Subscribe to the chat channel
-  //   const channel = echo.private(`chat.${receiverId}`);
-
-  //   // Listen for incoming messages
-  //   channel.listen('ChatMessageEvent', (event: Message) => {
-  //     setReceivedMessages((prevMessages) => [...prevMessages, event]);
-  //   });
-
-  //   // Clean up event listeners when the component unmounts
-  //   return () => {
-  //     channel.stopListening('ChatMessageEvent');
-  //   };
-  // }, [receiverId]);
+ 
   const handleSearch = (value: string) => {
     setSearchMessageQuery(value); // Trigger search when user types in the search input
   };
@@ -200,7 +176,7 @@ const Messages = () => {
             </span>
             <span className={`flex flex-col text-[#32475C99] font-[500] `}>
               <p>{chatt_name}</p>
-              <p>Host</p>
+              <p>{userType}</p>
             </span>
           </div>
           <Input
@@ -216,11 +192,10 @@ const Messages = () => {
           <div className="flex flex-col justify-end bg-[#32475C]/[4%] overflowy-scroll md:overflowy-scroll">
             {
                 sentMessages.map((msg) => (
-                  console.log( (typeof currentUserTypeId), (typeof msg.receiver_id)),
                   <div key={msg.id}>
                    
                     {currentUserTypeId === parseInt(msg?.sender_id ?? '', 10) ? (
-                      <OutgoingChat user_name={msg.sender?.name} image={msg.sender?.image} message={msg.message} />
+                      <OutgoingChat user_name={msg.sender?.name} image={msg.sender?.image} message={msg.message} status={msg.status} />
                      
                     ) : (
                       <IncomingChat user_name={msg.sender?.name} message={msg.message} image={msg.sender?.image} /> 
