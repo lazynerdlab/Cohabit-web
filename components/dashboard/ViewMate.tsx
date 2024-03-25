@@ -14,11 +14,36 @@ import FlagIcon from "@/assets/icons/FlagIcon";
 import LocationIcon from "@/assets/icons/LocationIcon";
 import ShareIcon from "@/assets/icons/ShareIcon";
 import HeartIcon from "@/assets/icons/HeartIcon";
-
+import { useAppDispatch } from "@/redux/hook";
+import { SET_CURRENT_CHAT } from "@/redux/slice/chatSlice";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from 'next/navigation'
+import session from "redux-persist/lib/storage/session";
 interface Props {
   data: Record<string, any>;
 }
 const ViewMate = ({ data }: Props) => {
+  const router = useRouter(); // Initialize useRouter
+  const dispatch = useAppDispatch();
+  const searchParams = useSearchParams()
+  const id = searchParams.get('id')
+
+  async function handleMessageClick() {
+    const payload = {
+      messageId: data.id,
+      messageName: data.name,
+      avatar: data.image,
+    };
+    try {
+       dispatch(SET_CURRENT_CHAT(payload));
+       localStorage.setItem("messageid", payload.messageId)
+      // console.log(payload.messageId)
+      router.push("/dashboard/message");
+    } catch (error) {
+      console.error("Error setting current chat:", error);
+    }
+  }
+
   return (
     <div className="w-[98%] mx-auto">
       <div className="w-full flex flex-col rounded-[10px] bg-[#FFF] shadow-sm shadow-[#B8C9C9]">
@@ -82,6 +107,7 @@ const ViewMate = ({ data }: Props) => {
             <Button
               className="flex items-center self-end !bg-[#010886]"
               type="primary"
+              onClick={handleMessageClick}
             >
               <p className="text-[14px] font-[600]">Message</p>
             </Button>

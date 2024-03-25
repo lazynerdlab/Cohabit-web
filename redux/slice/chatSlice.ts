@@ -2,12 +2,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IState {
+    name: Record<string, any>;
     chat: Record<string, any>;
     messages: Record<string, any>[];
     loading: boolean
 }
 
 const initialState: IState = {
+    name:{},
     chat: {},
     messages: [],
     loading: false
@@ -17,6 +19,12 @@ const chatSlice = createSlice({
     name: "chats",
     initialState,
     reducers: {
+        SET_USER_NAME: (state, action) => {
+            return {
+                ...state,
+                name: action.payload,
+            };
+        },
         SET_CURRENT_CHAT: (state, action) => {
             return {
                 ...state,
@@ -49,11 +57,14 @@ const chatSlice = createSlice({
 
             };
         },
+        
+       
     },
 });
 
 export default chatSlice.reducer;
 export const {
+    SET_USER_NAME,
     SET_CURRENT_CHAT,
     SET_MESSAGES,
     CLEAR_CURREMT_CHAT,
