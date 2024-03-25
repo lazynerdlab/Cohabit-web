@@ -5,10 +5,10 @@ import { IoCheckmark } from "react-icons/io5";
 
 interface IProps {
   image?: string;
-  user_name: any;
+  user_name?: string;
   message: string;
   time?: string;
-  status: any
+  status?: string
 }
 const OutgoingChat = ({ image, user_name, message, time, status }: IProps) => {
   return (

@@ -94,7 +94,7 @@ window.addEventListener('beforeunload', () => {
         dispatch(SET_CURRENT_CHAT(payload1))
         dispatch(SET_USER_NAME(payload))
         setActiveChat(payload1?.receiverId)
-        console.log(payload1)
+        //console.log(payload1)
 
       } else {
         setOnGoingChats([]);
@@ -103,7 +103,7 @@ window.addEventListener('beforeunload', () => {
     }
     if (isError) {
       const errMesg = error as any;
-      console.log(errMesg?.data?.message);
+      //console.log(errMesg?.data?.message);
     }
   }, [chats, error, isError, isSuccess]);
 
@@ -120,7 +120,7 @@ window.addEventListener('beforeunload', () => {
     }
     if (isSearchedError) {
       const errMesg = searchedError as any;
-      console.log(errMesg?.data?.message);
+      //console.log(errMesg?.data?.message);
     }
   }, [searchedChats, searchedError, isSearchedError, searchedSuccess, searchQuery]);
 

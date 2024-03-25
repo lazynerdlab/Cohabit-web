@@ -61,7 +61,7 @@ const userType: string = useAppSelector(
   (state) => state.chatData.chat.userType
 );
 
-console.log(receiver_id)
+//console.log(receiver_id)
 
 const currentUserTypeIdString = sessionStorage.getItem('myId');
 const currentUserTypeId = currentUserTypeIdString !== null ? parseInt(currentUserTypeIdString, 10) : null;
@@ -123,7 +123,7 @@ useEffect(() => {
   }
   if (isSearchedError) {
     const errMesg = searchedError as any;
-    console.log(errMesg?.data?.message);
+    //console.log(errMesg?.data?.message);
   }
 }, [searchedMessages, searchedError, isSearchedError, searchedSuccess]);
 

@@ -2,7 +2,7 @@ import Image from "next/image";
 import user from "@/assets/user.svg";
 interface IProps {
   image?: string;
-  user_name: any;
+  user_name: string | undefined;
   message: string;
   time?: string;
 }

@@ -37,7 +37,7 @@ const ViewMate = ({ data }: Props) => {
     try {
        dispatch(SET_CURRENT_CHAT(payload));
        localStorage.setItem("messageid", payload.messageId)
-       console.log(payload.messageId)
+      // console.log(payload.messageId)
       router.push("/dashboard/message");
     } catch (error) {
       console.error("Error setting current chat:", error);
