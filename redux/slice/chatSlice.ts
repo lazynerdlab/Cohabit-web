@@ -64,6 +64,7 @@ const chatSlice = createSlice({
 
 export default chatSlice.reducer;
 export const {
+    SET_USER_NAME,
     SET_CURRENT_CHAT,
     SET_MESSAGES,
     CLEAR_CURREMT_CHAT,

@@ -11,6 +11,7 @@ import user from "@/assets/user.svg";
 import SearchIcon from "@/assets/icons/SearchIcon";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { SET_CURRENT_CHAT } from "@/redux/slice/chatSlice";
+import { SET_USER_NAME } from "@/redux/slice/chatSlice";
 import { useGetChatsQuery, useGetSearchedChatsQuery } from "@/redux/api/chatApi";
 import useDebounce from "../hooks/useSearchDebounce";
 
@@ -30,9 +31,23 @@ const SideBar = ({ display, setDisplay }: { display: boolean; setDisplay: React.
     return `${month} ${day}`;
   };
 
+  
+  const removeLocalStorageItem = (itemName: string) => {
+    localStorage.removeItem(itemName);
+};
+
+// Attach the event listener to the window's beforeunload event
+window.addEventListener('beforeunload', () => {
+    removeLocalStorageItem('messageid');
+});
+  
+ 
+
+  
+
   const debounceDelay = 300;
    // Use the custom debouncing hook
-   const debouncedSearchQuery = useDebounce(searchQuery, debounceDelay);
+ const debouncedSearchQuery = useDebounce(searchQuery, debounceDelay);
   const {data: chats, isLoading, error, isSuccess, isError} = useGetChatsQuery({});
 
   const { data: searchedChats, isLoading: searchedLoading, error: searchedError, isSuccess: searchedSuccess, isError: isSearchedError } = useGetSearchedChatsQuery(debouncedSearchQuery);
@@ -64,16 +79,22 @@ const SideBar = ({ display, setDisplay }: { display: boolean; setDisplay: React.
         const sender = chats.data.users[0];
         const receiver = chats.data.users[0];
         // Assign properties based on currentUserTypeId
+        const receiverM = Number(localStorage.getItem('messageid'))
+        const payload1 = {
+          receiverId: receiverM || ( // Use receiverM if truthy, otherwise...
+            currentUserTypeId === sender.sender_id ? receiver.receiver_id : sender.sender.sender_id
+          ),
+        };
           const payload = {
-            receiverId: currentUserTypeId === sender.sender_id ? receiver.receiver_id : sender.sender.sender_id,
             name: currentUserTypeId === sender.sender_id ? receiver.receiver.name : sender.sender.name,
             userType: currentUserTypeId === sender.sender_id ? receiver.receiver.user_type : sender.sender.user_type,
             avatar: currentUserTypeId === sender.sender_id ? receiver.receiver.image : sender.sender.image,
           };
-
-        dispatch(SET_CURRENT_CHAT(payload))
-        setActiveChat(payload?.receiverId)
-        console.log(currentUserTypeId === sender.sender_id ? receiver.receiver_id : sender.sender.sender_id)
+          console.log(receiverM)
+        dispatch(SET_CURRENT_CHAT(payload1))
+        dispatch(SET_USER_NAME(payload))
+        setActiveChat(payload1?.receiverId)
+        console.log(payload1)
 
       } else {
         setOnGoingChats([]);
@@ -84,12 +105,9 @@ const SideBar = ({ display, setDisplay }: { display: boolean; setDisplay: React.
       const errMesg = error as any;
       console.log(errMesg?.data?.message);
     }
-  }, [chats, error, isError, isSuccess, searchQuery]);
+  }, [chats, error, isError, isSuccess]);
 
-  if (isError) {
-    const errMesg = error as any;
-    console.log(errMesg?.data?.message);
-  }
+ 
 
   useEffect(() => {
     if (searchedSuccess) {
