@@ -157,11 +157,11 @@ window.addEventListener('beforeunload', () => {
     <div>Loading</div>
   ) : (
     onGoingChats.length > 0 ? (
-    distinctUserNames.map((item: Record<string, any>) => {
+      distinctUserNames.map((item: Record<string, any> | null) => {
+        if (item) { // Check if item is not null
           return (
             <div
-              className={`flex items-center gap-3 bg-[#F9F9F9] cursor-pointer p-2 rounded-[8px] ${activeChat === item.receiver_id ? 'bg-colorPrimary text-neutral-50' : '' // Apply active background color if active
-                }`}
+              className={`flex items-center gap-3 bg-[#F9F9F9] cursor-pointer p-2 rounded-[8px] ${activeChat === item.receiver_id ? 'bg-colorPrimary text-neutral-50' : ''}`}
               key={item.id}
               onClick={() => {
                 const payload = {
@@ -171,7 +171,7 @@ window.addEventListener('beforeunload', () => {
                   avatar: currentUserTypeId === item?.receiver_id ? item?.sender.image : item?.receiver.image,
                 };
                 dispatch(SET_CURRENT_CHAT(payload));
-                setActiveChat(payload?.receiverId); // Set active chat item
+                setActiveChat(payload?.receiverId);
                 setDisplay((prev) => !prev);
               }}
             >
@@ -181,7 +181,7 @@ window.addEventListener('beforeunload', () => {
               </div>
               <div className="flex flex-col w-full">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-semibold">{currentUserTypeId === item?.sender_id ? item?.receiver.name : item?.sender.name}</h4>{/**chat user name */}
+                  <h4 className="font-semibold">{currentUserTypeId === item?.sender_id ? item?.receiver.name : item?.sender.name}</h4>
                   <span className="text-[11px]">{formatDate(item?.created_at)}</span>
                 </div>
                 <span className="text-[12px]">
@@ -192,9 +192,10 @@ window.addEventListener('beforeunload', () => {
               </div>
             </div>
           );
-      })////
-    ) :
-    (
+        }
+        return null; // Return null if item is null
+      })
+    ) : (
       <div className="text-center text-gray-500">No User found for your search.</div>
     )
   )}

@@ -123,7 +123,7 @@ useEffect(() => {
   }
   if (isSearchedError) {
     const errMesg = searchedError as any;
-    //console.log(errMesg?.data?.message);
+    console.log(errMesg?.data?.message);
   }
 }, [searchedMessages, searchedError, isSearchedError, searchedSuccess]);
 
@@ -138,13 +138,7 @@ useEffect(() => {
   if (messagesSuccess) {
     console.log("Messages data:", messagesData); // Add this log
     setSentMessages(messagesData.data.chats)
-    if (messagesData && messagesData.data && messagesData.data.chats.length > 0) {
-      //setReceivedMessages(messagesData.data.chats);
-
-      console.log(sentMessages)
-    } else {
-      // setReceivedMessages([]); // No messages, set empty array
-    }
+   
   }
   if (sendIsError || messagesError) {
     const errMesg = sendError as any;
