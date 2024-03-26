@@ -39,7 +39,21 @@ const SideBar = ({ display, setDisplay }: { display: boolean; setDisplay: React.
 // Attach the event listener to the window's beforeunload event
 window.addEventListener('beforeunload', () => {
     removeLocalStorageItem('messageid');
+    removeLocalStorageItem('messageName');
 });
+
+const receiver_id = useAppSelector(
+  (state) => state.chatData.chat.messageId
+);
+const chatt_name: string = useAppSelector(
+  (state) => state.chatData.chat.messageName
+);
+const avatar: string = useAppSelector(
+(state) => state.chatData.chat.avatarM
+);
+const userType: string = useAppSelector(
+(state) => state.chatData.chat.userTypeM
+);
   
  
 
@@ -79,19 +93,31 @@ window.addEventListener('beforeunload', () => {
         const sender = chats.data.users[0];
         const receiver = chats.data.users[0];
         // Assign properties based on currentUserTypeId
-        const receiverM = Number(localStorage.getItem('messageid'))
+        //const receiverM = Number(localStorage.getItem('messageid'))
+        //const receiverName = localStorage.getItem('messageName')
         const payload1 = {
-          receiverId: receiverM || ( // Use receiverM if truthy, otherwise...
+          receiverId: receiver_id || ( // Use receiverM if truthy, otherwise...
             currentUserTypeId === sender.sender_id ? receiver.receiver_id : sender.sender.sender_id
           ),
         };
           const payload = {
-            name: currentUserTypeId === sender.sender_id ? receiver.receiver.name : sender.sender.name,
-            userType: currentUserTypeId === sender.sender_id ? receiver.receiver.user_type : sender.sender.user_type,
-            avatar: currentUserTypeId === sender.sender_id ? receiver.receiver.image : sender.sender.image,
+            receiverId: receiver_id || ( // Use receiverM if truthy, otherwise...
+            currentUserTypeId === sender.sender_id ? receiver.receiver_id : sender.sender.sender_id
+          ),
+          name: chatt_name || ( // Use receiverM if truthy, otherwise...
+          currentUserTypeId === sender.sender_id ? receiver.receiver.name : sender.sender.name
+          ),
+          userType: userType || ( // Use receiverM if truthy, otherwise...
+          currentUserTypeId === sender.sender_id ? receiver.receiver.user_type : sender.sender.user_type
+          ),
+          avatar: avatar || ( // Use receiverM if truthy, otherwise...
+          currentUserTypeId === sender.sender_id ? receiver.receiver.image : sender.sender.image
+          ),
+            //name: currentUserTypeId === sender.sender_id ? receiver.receiver.name : sender.sender.name,
+           
           };
-          console.log(receiverM)
-        dispatch(SET_CURRENT_CHAT(payload1))
+          console.log(receiver_id)
+        dispatch(SET_CURRENT_CHAT(payload))
         dispatch(SET_USER_NAME(payload))
         setActiveChat(payload1?.receiverId)
         //console.log(payload1)
