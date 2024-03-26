@@ -112,21 +112,6 @@ const onHandlesendMessage = async () => {
   // Send the message
   await sendMessage(newMessage);
 };
-useEffect(() => {
-  if (searchedSuccess) {
-    if (searchedMessages && searchedMessages.data && searchedMessages.data.chats && searchedMessages.data.chats.length > 0) {
-      setSentMessages(searchedMessages.data.chats); // Update ongoing chats with searched chats
-    } else {
-      setSentMessages([]); // Set to empty array if no searched chats available
-    }
-
-  }
-  if (isSearchedError) {
-    const errMesg = searchedError as any;
-    console.log(errMesg?.data?.message);
-  }
-}, [searchedMessages, searchedError, isSearchedError, searchedSuccess]);
-
 
 
 useEffect(() => {
@@ -152,6 +137,19 @@ useEffect(() => {
   sendIsError,
   sendIsSuccess,
 ]);
+
+useEffect(() => {
+  if (searchedMessages && searchedMessages.data && searchedMessages.data.chats) {
+    setSentMessages(searchedMessages.data.chats); // Update ongoing chats with searched chats
+    console.log("render")
+  }
+
+  if (isSearchedError) {
+    const errMesg = searchedError as any;
+    console.log(errMesg?.data?.message);
+  }
+}, [searchedMessages, searchedError, isSearchedError]);
+
 
 
 const handleSearch = (value: string) => {

@@ -7,6 +7,7 @@ const nextConfig = {
       "cdn-icons-png.flaticon.com",
     ], // Add the domain(s) of your image sources
   },
+  reactStrictMode: false
 };
 
 module.exports = nextConfig;
