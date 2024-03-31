@@ -44,7 +44,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["userData", "propertyData"], // Whitelist the reducers you want to persist
+  whitelist: ["userData", "propertyData", "chatData"], // Whitelist the reducers you want to persist
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

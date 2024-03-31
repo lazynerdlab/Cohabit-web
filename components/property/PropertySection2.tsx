@@ -11,15 +11,17 @@ import HomeCard from "../cards/HomeCard";
 import ShareIcon from "@/assets/icons/ShareIcon";
 import HeartIcon from "@/assets/icons/HeartIcon";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "@/redux/hook";
+import { useAppSelector, useAppDispatch } from "@/redux/hook";
 import { useEffect, useState } from "react";
 import { useGetListingsQuery } from "@/redux/api/landingPageApi";
 import { Spinner } from "../spinner/Spinner";
 import { useSaveListingMutation } from "@/redux/api/houseApi";
 import { message } from "antd";
+import { SET_CURRENT_CHAT } from "@/redux/slice/chatSlice";
 
 const PropertySection2 = () => {
   const { push } = useRouter();
+  //const router = useRouter(); // Initialize useRouter
   const data = useAppSelector((state) => state.propertyData?.property);
   const [property, setProperty] = useState([]);
   const path = `listings?count=3&random=1`;
@@ -56,6 +58,25 @@ const PropertySection2 = () => {
       message.success("Listing saved successfully!");
     }
   }, [errorSave, isErrorSave, isSuccess, propertyData?.data, successSave]);
+  const router = useRouter(); // Initialize useRouter
+  const dispatch = useAppDispatch();
+  async function handleMessageClick() {
+    const payload = {
+      messageId: data?.host?.id,
+      messageName: data?.host?.name,
+      avatarM: data?.host?.image,
+     userTypeM: "Host"
+    };
+    try {
+      dispatch(SET_CURRENT_CHAT(payload))
+       localStorage.setItem("messageid", payload.messageId)
+       localStorage.setItem("messageName", payload.messageName)
+      // console.log(payload.messageId)
+      router.push("/dashboard/message");
+    } catch (error) {
+      console.error("Error setting current chat:", error);
+    }
+  }
 
   const onCopyClick = async () => {
     try {
@@ -116,29 +137,11 @@ const PropertySection2 = () => {
             <span>Host</span>
           </div>
         </div>
-        <form className="grid grid-cols-1 gap-[0.5rem] text-[#0C1938]">
-          <div className="flex flex-col items-start gap-[0.5rem]">
-            <label htmlFor="name">Full Name</label>
-            <Input id="name" placeholder="This is a Placeholder" />
-          </div>
-          <div className="flex flex-col items-start gap-[0.5rem]">
-            <label htmlFor="email">Email</label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="This is a Placeholder"
-            />
-          </div>
-          <div className="flex flex-col items-start gap-[0.5rem]">
-            <label htmlFor="description">Description</label>
-            <TextArea id="description" placeholder="Description" />
-          </div>
-          <div className="flex items-center justify-center w-full">
-            <Button type="primary" className="!bg-[#515B6F]">
-              Submit
-            </Button>
-          </div>
-        </form>
+        <div className=" flex justify-center">
+          <Button type="primary" className="!bg-[#515B6F] mt-16" onClick={handleMessageClick}>
+            Message
+          </Button>
+        </div>
       </div>
       <div className="hidden md:flex flex-col gap-[0.5rem]">
         <h6 className="text-[18px] font-[400] text-[#000] text-center">

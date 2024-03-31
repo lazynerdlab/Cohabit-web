@@ -32,11 +32,13 @@ const ViewMate = ({ data }: Props) => {
     const payload = {
       messageId: data.id,
       messageName: data.name,
-      avatar: data.image,
+      avatarM: data.image,
+     userTypeM: "User"
     };
     try {
-       dispatch(SET_CURRENT_CHAT(payload));
+      dispatch(SET_CURRENT_CHAT(payload))
        localStorage.setItem("messageid", payload.messageId)
+       localStorage.setItem("messageName", payload.messageName)
       // console.log(payload.messageId)
       router.push("/dashboard/message");
     } catch (error) {
