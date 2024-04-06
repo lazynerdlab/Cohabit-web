@@ -67,10 +67,10 @@ const FindProperty = () => {
   }, [isSuccess, isError, data, error]);
 
   return (
-    <div className="drawer relative min-h-screen max-h-screen overflow-hidden">
+    <div className="drawer relative min-h-screen h-full ">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content overflow-y-scroll bg-[#FFFFFF]">
-        <div className="grid grid-cols-1 gap-[0.5rem] overflow-y-scroll">
+      <div className="drawer-content  bg-[#FFFFFF]">
+        <div className="grid grid-cols-1 gap-[0.5rem] ">
           <div className="grid grid-cols-[40%_60%] md:grid-cols-[45%_50%_5%] items-center w-[98%] mx-auto">
             <div className="flex items-center">
               <label htmlFor="my-drawer-3" className="flex text-blue-800 px-3">
@@ -101,7 +101,7 @@ const FindProperty = () => {
               </>
             )}
           </div>
-          <div className="w-full flex justify-center mt-4">
+          <div className="w-full flex justify-center mt-4 mb-9">
             <Pagination
               pageSize={rowsPerPage}
               total={data?.meta?.total}

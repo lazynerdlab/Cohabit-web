@@ -146,7 +146,7 @@ const HostSidebar = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 grid-rows-[5%_75%_15%] md:grid-rows-[10%_75%_15%] border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-screen overflow-y-hidden">
+    <div className="flex flex-col relative  border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-screen overflow-y-hidden">
       <Title />
       <Menu
         onClick={onClick}
@@ -159,8 +159,8 @@ const HostSidebar = () => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <>
-            <div className="flex gap-5 ml-[1rem] items-center">
+          <div className=" absolute bottom-0 w-full">
+            <div className="flex gap-5 ml-[1rem] items-center mb-3">
               <Image
                 alt="user"
                 src={
@@ -179,7 +179,7 @@ const HostSidebar = () => {
               </div>
             </div>
             <span
-              className=" cursor-pointer p-3 bg-[#e20000] text-[#fff] flex justify-center gap-3 items-center"
+              className=" cursor-pointer p-3 bg-[#e20000] text-[#fff] flex justify-center gap-3 items-center  "
               onClick={() => {
                 window.sessionStorage.removeItem("authToken");
                 push("/");
@@ -188,7 +188,7 @@ const HostSidebar = () => {
               {" "}
               <MdLogout /> Log out
             </span>
-          </>
+          </div>
         )}
       </div>
     </div>
