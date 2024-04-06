@@ -92,19 +92,21 @@ const ProfileSection = ({ data }: Props) => {
             </h4>
             <Button icon={<PlusIcon className="fill-[#010886]" />} />
           </div>
-          <div className="hfit">
+          <div className="h-fit">
             <Carousel
               dots={{ className: "text-[#010886] carouselBtn" }}
               // dotPosition="top"
               variableWidth
-              className="max-h-[250px]"
+             
+              className="max-h-[250px] pb-5 max-w-fit"
+             
             >
               {
                 saved.length === 0 ? <div className="w-full h-[250px] flex justify-center items-center text-[#25324B] text-[16px] font-[400]">You have no saved searches</div> : saved.map((item: Record<string, any>) => (
                   <div key={item?.id} className="w-fit hfit p-[1rem] flex flex-row gap-[0.2rem]">
-                    <Image alt="apartment" src={item?.image} width={100} height={100} className="h-[100px] w-[100px] " />
-                    <span className="text-[#25324B] text-[16px] font-[400]">
-                      {item?.location}
+                    <Image alt="apartment" src={item?.listing?.image} width={100} height={100} className="h-[100px] w-[100px] " />
+                    <span className="text-[#25324B] text-[14px] font-[400]">
+                      {item?.listing?.location}
                     </span>
                   </div>
                 ))
@@ -125,7 +127,7 @@ const ProfileSection = ({ data }: Props) => {
               dots={{ className: "text-[#010886] carouselBtn" }}
               dotPosition="bottom"
               variableWidth
-              className="max-h-[250px]"
+              className="max-h-[250px] pb-5"
             >
               <div className="w-fit p-[1rem] flex flex-row gap-[0.2rem]">
                 <Image alt="apartment" src={room} width={100} height={100} />

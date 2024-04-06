@@ -21,21 +21,21 @@ const ProfileSection2 = () => {
           <EmailIcon className="self-start" />
           <span className="flex flex-col gap-[0.3rem] text-[12px] md:text-[16px] font-[400]">
             <h5 className="text-[#7C8493]">Email</h5>
-            <p className="text-[#25324B]">{user.data.user?.email}</p>
+            <p className="text-[#25324B]">{user?.data?.user?.email}</p>
           </span>
         </div>
         <div className="grid grid-cols-[15%_85%] gap-[0.2rem]">
           <PhoneIcon className="self-start" />
           <span className="flex flex-col gap-[0.3rem] text-[12px] md:text-[16px] font-[400]">
             <h5 className="text-[#7C8493]">Phone</h5>
-            <p className="text-[#25324B]">{user.data.user?.phone}</p>
+            <p className="text-[#25324B]">{user?.data?.user?.phone}</p>
           </span>
         </div>
         <div className="grid grid-cols-[15%_85%] gap-[0.2rem]">
           <LanguageIcon className="self-start" />
           <span className="flex flex-col gap-[0.3rem] text-[12px] md:text-[16px] font-[400]">
             <h5 className="text-[#7C8493]">Languages</h5>
-            <p className="text-[#25324B]">{user.data.user?.user_profile?.language}</p>
+            <p className="text-[#25324B]">{user?.data?.user?.user_profile?.language}</p>
           </span>
         </div>
       </div>

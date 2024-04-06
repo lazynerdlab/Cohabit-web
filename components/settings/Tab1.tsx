@@ -114,13 +114,14 @@ const Tab1 = () => {
     setDOB(date);
   };
 
-  const [updateProfile, { isLoading: updateProfileLoading, isSuccess: updateProfileSuccess, isError: updateProfileIsError, error: updateProfileError }] = useUpdateProfileMutation();
+  const [updateProfile, { isLoading: updateProfileLoading, isSuccess: updateProfileSuccess, isError: updateProfileIsError, error: updateProfileError}] = useUpdateProfileMutation();
 
   useEffect(() => {
     if (updateProfileSuccess) {
       message.success("Profile updated successfully");
     }
     if (updateProfileIsError) {
+      //message.error(updateProfileError?.data?.message);
       console.log(updateProfileError);
     }
   }, [updateProfileError, updateProfileIsError, updateProfileSuccess]);
@@ -149,6 +150,11 @@ const Tab1 = () => {
   let date = moment(dob?.$d).format("YYYY-MM-DD")
 
   const handleProfileUpdate = async () => {
+    if (!firstName || !lastName || !image || !phoneNo || !gender || !dob || !userStatus || !userType) {
+      // Handle the case where any field is empty
+      message.error("Please fill in all fields.");
+      return;
+    }
     await updateProfile({
       firstname: firstName,
       image: image,

@@ -51,7 +51,7 @@ const ViewMate = ({ data }: Props) => {
       <div className="w-full flex flex-col rounded-[10px] bg-[#FFF] shadow-sm shadow-[#B8C9C9]">
         <div className="w-full relative">
           <Image alt="background" className="w-full" src={gradient} />
-          <EditIcon className="absolute right-[2%] top-[2%] fill-[#FFF] cursor-pointer" />
+          {/**<EditIcon className="absolute right-[2%] top-[2%] fill-[#FFF] cursor-pointer" /> */}
         </div>
         <div className="p-[1rem] grid grid-cols-[15%_65%_20%]">
           <Image alt="avatar" src={data?.image === null ? "https://cdn-icons-png.flaticon.com/512/149/149071.png" : data?.image} width={100} height={100} className="rounded-[100%] w-[120px] h-[120px]" />

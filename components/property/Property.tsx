@@ -106,15 +106,17 @@ const Property = () => {
                 prevArrow={<CarouselBackIcon />}
                 dots={false}
                 variableWidth
-                className="mobile-hidden !flex"
+                className="mobile-hidden  min-h-[200px] bg-[black]"
               >
                 {propertyData?.images?.map((image: string, index: number) => (
                   <div key={index} className="w-full h-full relative">
                     <Image
                       alt="thumbnail"
                       src={image}
-                      width={500}
-                      height={500}
+                      width={300}
+                      height={300}
+                     //style={{ height: "100% !important"}}
+                     className=" !h-[200px] !w-[300px]"
                     />
                   </div>
                 ))}

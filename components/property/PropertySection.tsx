@@ -79,6 +79,12 @@ const PropertySection = () => {
     ratingData,
     successReview,
   ]);
+  const removeHTMLTags = (str: string) => {
+    if (typeof str === 'string') {
+      return str.replace(/<[^>]*>/g, '');
+    }
+    return '';
+  };
 
   return (
     <>
@@ -92,7 +98,7 @@ const PropertySection = () => {
                 Description
               </h4>
               <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
-                {data?.description}
+                {removeHTMLTags(data?.description)}
               </p>
             </div>
             <div className="p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.3rem]">
@@ -101,7 +107,7 @@ const PropertySection = () => {
               </h4>
               <ol className="list-decimal list-inside">
                 <li className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
-                  {data?.features}
+                  {removeHTMLTags(data?.features)}
                 </li>
               </ol>
             </div>

@@ -56,7 +56,7 @@ const DashBoard = () => {
   }, [data, isError, isSuccess, mateData?.data, mateIsError, mateIsSuccess]);
 
   return (
-    <div className="w-full mx-auto overflow-scroll p-3">
+    <div className="w-full mx-auto overflow-scroll noscroll-bar p-3">
       {/* <div className=" mx-auto grid grid-cols-1 py-[0.5rem] gap-[0.5rem]">
         <div className="flex justify-between  items-center">
           <h5 className="text-[#25324B] mb-[0.5rem] text-[16px] md:text-[18px] font-bold leading-[28.80px]">
@@ -133,7 +133,7 @@ const DashBoard = () => {
         <div className="text-[16px] font-[400] text-[#515B6F] text-opacity-[0.7] border-b border-[#D6DDEB] p-[0.5rem] w-[98%] hidden md:block">
           Popular : Apartment, Flat, Workspace
         </div>
-        <div className="md:w-[98%] overflow-x-scroll mxauto flex md:grid md:grid-cols-[60%_10%] items-center justify-between gap-[1rem] md:gap-0">
+        <div className="md:w-[98%] overflow-x-scroll noscroll-bar mxauto flex md:grid md:grid-cols-[60%_10%] items-center justify-between gap-[1rem] md:gap-0">
           <RadioGroup
             optionType="button"
             defaultValue={"All"}
