@@ -159,11 +159,11 @@ const handleSearch = (value: string) => {
 
 
 return (
-  <div className="grid grid-cols-1 md:grid-cols-[30%_70%] min-h-[95svh] ">
+  <div className="grid grid-cols-1 md:grid-cols-[30%_70%] min-h-[85svh] ">
     <SideBar setDisplay={setMobileToggle} display={mobileToggle} />
     <div
       className={`${mobileToggle ? "block" : "hidden"
-        } bg-[#32475C]/[4%] md:grid grid-cols-1 grid-rows-[10%_90%] transition duration-500 ease-in-out md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] max-h-[95svh] `}
+        } bg-[#32475C]/[4%] md:grid grid-cols-1 grid-rows-[10%_90%] transition duration-500 ease-in-out md:grid-rows-[10%_90%] border-solid border-r-[1px] border-[#D6DDEB] max-h-[85svh] `}
     >
       <div className={`sticky md:top-0 top-[10%] z-[9999999999] bg-[#FFF] md:bg-[#32475C]/[4%] flex justify-between items-center w-full p-[2%] border-b border-[#32475C1F] `}>
         <div className={`flex gap-[0.5rem] items-center ${!chatt_name && ' hidden'}`}>

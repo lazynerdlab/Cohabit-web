@@ -85,7 +85,7 @@ const Step3 = ({ next, prev }: Props) => {
 
 
   return (
-    <div className="grid grid-cols-1 gap-[0.5rem] w-[98%] mx-auto">
+    <div className="grid grid-cols-1 gap-[0.5rem] w-[98%] mx-auto mb-5">
       <div className="flex flex-col items-start gap-[0.2rem] border-b border-[#D6DDEB]">
         <h4 className="text-[18px] font-[700] text-[#202430]">Details</h4>
         <p className="text-[16px] font-[400] text-[#515B6F]">
@@ -98,19 +98,20 @@ const Step3 = ({ next, prev }: Props) => {
             Upload the pictures of the apartment
           </h4>
           <p className="text-[16px] font-[400] text-[#515B6F]">
-            This image will be shown publicly as your profile picture, it will
-            help recruiters recognize you!
+            This image will be shown publicly as the images of the house, it will
+            help house seekers recognize you!
           </p>
         </div>
         <div className="flex flex-col items-stretch gap-[1rem] w-full md:w-[80%] mx-auto">
           <span className="text-[#202430] text-[16px] font-[500]">
-            Upload pictures (Png, Jpeg). not less than 500mb
+            Upload pictures (Png, Jpeg). not less than 500mb<br/>
+            <span className=" font-bold">First image is your cover image</span>
           </span>
           <Upload {...props}>
             <div className="flex gap-[0.3rem] p-[0.5rem]">
               <LinkIcon />
               <h4 className="text-[#0C1938] text-[16px] font-[500]">
-                Attach image of the reciept
+                Attach image of the house
               </h4>
             </div>
           </Upload>
