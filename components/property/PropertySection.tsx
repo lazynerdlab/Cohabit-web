@@ -77,14 +77,13 @@ const PropertySection = () => {
       setData(propertyData);
       dispatch(SET_PROPERTY_LOADING(false));
     }
-    if (isErrorReview) {
+    if (isErrorReview && typeof errorReview !== 'undefined') {
       if ('data' in errorReview) {
-        console.error("well:", errorReview.data);
+          console.error(errorReview.data);
       } else {
-        console.log(errorReview)
+          console.log(errorReview);
       }
-
-    }
+  }
     if (successReview) {
       if (successReview && dataRes?.data.lenght > 0) {
         message.success("Review submitted successfully!");
