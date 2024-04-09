@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import {
   useCreateListingReviewMutation,
   useGetListingRatingQuery,
+  useGetListingReviewQuery,
 } from "@/redux/api/houseApi";
 import { useEffect, useState } from "react";
 import { Spinner } from "../spinner/Spinner";
@@ -25,15 +26,23 @@ const PropertySection = () => {
     isLoading,
   } = useGetListingRatingQuery(propertyData?.id);
 
+  const {
+    data: reviewData,
+    isSuccess: reviewSuccess,
+    isLoading: reviewIsLoading,
+  } = useGetListingReviewQuery(propertyData?.id);
+
   const [rating, setRating] = useState<number>(0);
   const [data, setData] = useState<Record<string, any>>({});
 
   const [reviewRating, setReviewRating] = useState<number>();
+  const [review, setReview] = useState<Record<string, any>[]>([]);
   const [reviewComment, setReviewComment] = useState<string>();
 
   const [
     createListingReview,
     {
+      data: dataRes,
       isLoading: loadingReview,
       isSuccess: successReview,
       isError: isErrorReview,
@@ -53,22 +62,41 @@ const PropertySection = () => {
       });
     }
   };
+  if (reviewSuccess && reviewData?.message) {
+    message.warning(reviewData?.message)
+  }
   useEffect(() => {
     if (isSuccess) {
       setRating(ratingData?.data?.averageRating);
     }
+    if (reviewSuccess) {
+      setReview(reviewData?.data);
+    }
+   
     if (data) {
       setData(propertyData);
       dispatch(SET_PROPERTY_LOADING(false));
     }
     if (isErrorReview) {
-      console.error(errorReview);
+      if ('data' in errorReview) {
+        console.error("well:", errorReview.data);
+      } else {
+        console.log(errorReview)
+      }
+
     }
     if (successReview) {
-      message.success("Review submitted successfully!");
-      setReviewRating(0);
-      setReviewComment("");
+      if (successReview && dataRes?.data.lenght > 0) {
+        message.success("Review submitted successfully!");
+        console.log(dataRes)
+        setReviewRating(0);
+        setReviewComment("");
+      }else{
+        message.warning(dataRes?.message);
+      }
     }
+  
+   
   }, [
     data,
     dispatch,
@@ -78,6 +106,8 @@ const PropertySection = () => {
     propertyData,
     ratingData,
     successReview,
+    reviewSuccess,
+    reviewData
   ]);
   const removeHTMLTags = (str: string) => {
     if (typeof str === 'string') {
@@ -144,17 +174,26 @@ const PropertySection = () => {
                 )}
               </div>
             </div>
-            <div className="p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.3rem]">
+            <div className="p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.3rem] overflow-y-scroll max-h-[200px] h-full">
               <h4 className="text-[#25324B] text-[16px] md:text-[24px] font-[700]">
-                Review
+                Reviews
               </h4>
-              <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
-                The house is conveniently situated in a peaceful neighborhood
-                with easy access to local amenities such as schools, parks,
-                shopping centers, and public transportation. The quiet
-                surroundings and friendly neighbors make it an excellent place
-                to call home
-              </p>
+
+              {
+                reviewIsLoading ? <Spinner /> :
+                  review.length > 0 ?
+                    review?.map((e, index) => (
+                      <div key={index} className=" mb-3">
+                        <h3 className=" font-semibold text-sm">{e?.user?.firstname} {e?.user?.lastname}</h3>
+                        <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
+                          {removeHTMLTags(e?.review)}
+                        </p>
+                      </div>
+                    ))
+                    :
+                    <h1>No reviews </h1>
+              }
+
             </div>
             <div className="p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.3rem]">
               <h4 className="text-[#25324B] text-[16px] md:text-[24px] font-[700]">

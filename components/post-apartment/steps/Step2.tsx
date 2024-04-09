@@ -82,7 +82,7 @@ const Step2 = ({ next }: Props) => {
 
 
   return (
-    <div className="grid grid-cols-1 gap-[0.5rem] w-[98%] mx-auto">
+    <div className="grid grid-cols-1 gap-[0.5rem] w-[98%] mx-auto mb-5">
       <div className="flex flex-col items-start gap-[0.2rem] border-b border-[#D6DDEB]">
         <h4 className="text-[18px] font-[700] text-[#202430]">
           Basic Information

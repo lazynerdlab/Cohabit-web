@@ -20,6 +20,7 @@ export const houseApi = createApi({
     "ListingDetail",
     "HostDetails",
     "ListingRating",
+    "ListingReview"
   ],
   endpoints: (builder) => ({
     getHouseType: builder.query({
@@ -86,6 +87,10 @@ export const houseApi = createApi({
       }),
       invalidatesTags: ["ListingDetail", "ListingRating"],
     }),
+    getListingReview: builder.query({
+      query: (id) => `houseSeeker/listings/${id}/reviews?count=10&page`,
+      providesTags: ["ListingReview"],
+    }),
   }),
 });
 
@@ -105,4 +110,5 @@ export const {
   useCreateListingReviewMutation,
   useGetListingRatingQuery,
   useLazyGetAllAreasQuery,
+  useGetListingReviewQuery
 } = houseApi;

@@ -47,7 +47,7 @@ const HouseListings = () => {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[1rem] w-[98%]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[1rem] w-[98%] pl-5">
         {loading ? (
           <Spinner />
         ) : listingData?.length === 0 ? (
@@ -58,7 +58,7 @@ const HouseListings = () => {
           ))
         )}
       </div>
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center mt-5 mb-5">
         {data?.meta?.total === 0 ? null : (
           <Pagination
             pageSize={rowsPerPage}

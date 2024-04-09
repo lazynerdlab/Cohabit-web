@@ -122,6 +122,17 @@ const Tab1 = () => {
     }
     if (updateProfileIsError) {
       //message.error(updateProfileError?.data?.message);
+      /**
+       *  if ('status' in updateProfileError){
+        //const messErr = updateProfileError.data;
+        setUserErr(updateProfileError?.data);
+        message.error(userErr?.message);
+        //message.useMessage(updateProfileError?.data)
+        //console.error("well:", updateProfileError.data);
+      }else{
+        console.log(updateProfileError)
+      }
+       */
       console.log(updateProfileError);
     }
   }, [updateProfileError, updateProfileIsError, updateProfileSuccess]);
