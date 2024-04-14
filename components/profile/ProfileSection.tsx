@@ -14,9 +14,11 @@ import { useGetSavedApartmentsQuery } from "@/redux/api/houseApi";
 import { useEffect, useState } from "react";
 
 interface Props {
-  data?: Record<string, any>
+  data?: Record<string, any>;
+  handleClick1: () => void;
+  handleClick2: () => void;
 }
-const ProfileSection = ({ data }: Props) => {
+const ProfileSection = ({ data, handleClick1, handleClick2 }: Props) => {
   const { data: savedData, isSuccess, isLoading } = useGetSavedApartmentsQuery({})
   const [saved, setSaved] = useState<Record<string, any>>([])
   useEffect(() => {
@@ -33,7 +35,7 @@ const ProfileSection = ({ data }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               About Me
             </h4>
-            <Button icon={<EditIcon className="fill-colorPrimary" />} />
+            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={handleClick2} />
           </span>
           <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
             {data?.preference?.personal_introduction}
@@ -47,7 +49,7 @@ const ProfileSection = ({ data }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               Preferences
             </h4>
-            <Button icon={<EditIcon className="fill-colorPrimary" />} />
+            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={handleClick1} />
           </span>
           <div className="grid grid-cols-1 gap-[0.3rem]">
             <span className="flex items-center gap-[0.5rem]">

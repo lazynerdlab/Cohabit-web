@@ -18,6 +18,9 @@ import { message, Rate } from "antd";
 const PropertySection = () => {
   const propertyData = useAppSelector((state) => state.propertyData?.property);
   const loading = useAppSelector((state) => state.propertyData?.loading);
+  const you = useAppSelector((state) => state.userData?.user?.data?.user);
+
+
   const dispatch = useAppDispatch();
 
   const {
@@ -28,6 +31,7 @@ const PropertySection = () => {
 
   const {
     data: reviewData,
+     refetch: refetchReview,
     isSuccess: reviewSuccess,
     isLoading: reviewIsLoading,
   } = useGetListingReviewQuery(propertyData?.id);
@@ -39,10 +43,14 @@ const PropertySection = () => {
   const [review, setReview] = useState<Record<string, any>[]>([]);
   const [reviewComment, setReviewComment] = useState<string>();
 
+  let Aname = you?.firstname + ' ' + you?.lastname;
+  const userNames = review?.map((e) => e?.user?.firstname + ' ' + e?.user?.lastname);
+  const exists = userNames.includes(Aname);
+
   const [
     createListingReview,
     {
-      data: dataRes,
+      //data: dataRes,
       isLoading: loadingReview,
       isSuccess: successReview,
       isError: isErrorReview,
@@ -61,10 +69,10 @@ const PropertySection = () => {
         apartment_id: propertyData?.id,
       });
     }
+    // After successfully submitting the review, refetch the review data
+    refetchReview();
   };
-  if (reviewSuccess && reviewData?.message) {
-    message.warning(reviewData?.message)
-  }
+
   useEffect(() => {
     if (isSuccess) {
       setRating(ratingData?.data?.averageRating);
@@ -72,30 +80,25 @@ const PropertySection = () => {
     if (reviewSuccess) {
       setReview(reviewData?.data);
     }
-   
+
     if (data) {
       setData(propertyData);
       dispatch(SET_PROPERTY_LOADING(false));
     }
     if (isErrorReview && typeof errorReview !== 'undefined') {
       if ('data' in errorReview) {
-          console.error(errorReview.data);
+        console.error(errorReview.data);
       } else {
-          console.log(errorReview);
-      }
-  }
-    if (successReview) {
-      if (successReview && dataRes?.data.lenght > 0) {
-        message.success("Review submitted successfully!");
-        console.log(dataRes)
-        setReviewRating(0);
-        setReviewComment("");
-      }else{
-        message.warning(dataRes?.message);
+        console.log(errorReview);
       }
     }
-  
-   
+    if (successReview) {
+      message.success("Review submitted successfully!");
+      setReviewRating(0);
+      setReviewComment("");
+    }
+
+
   }, [
     data,
     dispatch,
@@ -104,15 +107,15 @@ const PropertySection = () => {
     isSuccess,
     propertyData,
     ratingData,
-    successReview,
     reviewSuccess,
-    reviewData
+    reviewData,
+
   ]);
   const removeHTMLTags = (str: string) => {
-    if (typeof str === 'string') {
-      return str.replace(/<[^>]*>/g, '');
+    if (typeof str === "string") {
+      return str.replace(/<[^>]*>/g, "");
     }
-    return '';
+    return "";
   };
 
   return (
@@ -183,7 +186,7 @@ const PropertySection = () => {
                   review.length > 0 ?
                     review?.map((e, index) => (
                       <div key={index} className=" mb-3">
-                        <h3 className=" font-semibold text-sm">{e?.user?.firstname} {e?.user?.lastname}</h3>
+                        <h3 className=" font-semibold text-sm UserName">{e?.user?.firstname + ' ' + e?.user?.lastname}</h3>
                         <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
                           {removeHTMLTags(e?.review)}
                         </p>
@@ -194,7 +197,7 @@ const PropertySection = () => {
               }
 
             </div>
-            <div className="p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.3rem]">
+            <div className={`p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.3rem] Review ${successReview || exists ? 'hidden' : ''}`}>
               <h4 className="text-[#25324B] text-[16px] md:text-[24px] font-[700]">
                 Write a review
               </h4>
