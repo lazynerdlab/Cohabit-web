@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { languageData, petData, vibeData, workData } from "./editData"
 import { CustomButton as Button } from "@/lib/AntDesignComponents";
 import { IoArrowBackSharp } from "react-icons/io5";
@@ -7,11 +8,19 @@ interface Props {
   }
 
 const SeekerEdit2 = ({handleClick}: Props) => {
+    const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, []);
     return (
-        <main className=" h-fit bg-[#E7F6FD] mr-7 ml-3 min-h-[100svh] overflow-y-auto mb-14 noscroll-bar">
+        <main className=" h-fit bg-[#E7F6FD] mr-7 ml-3 min-h-[100svh] overflow-y-auto mb-14 noscroll-bar" ref={mainRef}>
             <section className=" p-3 pr-[100px]">
                 <div className=" mb-10">
-                {<IoArrowBackSharp className="fill-colorPrimary text-3xl mb-5 hover:cursor-pointer" onClick={handleClick} />} 
+                    <span><IoArrowBackSharp className="fill-colorPrimary text-3xl mb-5 hover:cursor-pointer" onClick={handleClick} /></span>
+                
                     <h2 className=" text-[#101C1D] font-semibold text-lg mb-5">Edit your categories</h2>
                     <textarea
 
