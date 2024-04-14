@@ -65,12 +65,12 @@ const PropertySection2 = () => {
       messageId: data?.host?.id,
       messageName: data?.host?.name,
       avatarM: data?.host?.image,
-     userTypeM: "Host"
+      userTypeM: "Host"
     };
     try {
       dispatch(SET_CURRENT_CHAT(payload))
-       localStorage.setItem("messageid", payload.messageId)
-       localStorage.setItem("messageName", payload.messageName)
+      localStorage.setItem("messageid", payload.messageId)
+      localStorage.setItem("messageName", payload.messageName)
       // console.log(payload.messageId)
       router.push("/dashboard/message");
     } catch (error) {
