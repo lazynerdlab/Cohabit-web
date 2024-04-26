@@ -31,38 +31,38 @@ const SideBar = ({ display, setDisplay }: { display: boolean; setDisplay: React.
     return `${month} ${day}`;
   };
 
-  
+
   const removeLocalStorageItem = (itemName: string) => {
     localStorage.removeItem(itemName);
-};
+  };
 
-// Attach the event listener to the window's beforeunload event
-window.addEventListener('beforeunload', () => {
+  // Attach the event listener to the window's beforeunload event
+  window.addEventListener('beforeunload', () => {
     removeLocalStorageItem('messageid');
     removeLocalStorageItem('messageName');
-});
+  });
 
-const receiver_id = useAppSelector(
-  (state) => state.chatData.chat.messageId
-);
-const chatt_name: string = useAppSelector(
-  (state) => state.chatData.chat.messageName
-);
-const avatar: string = useAppSelector(
-(state) => state.chatData.chat.avatarM
-);
-const userType: string = useAppSelector(
-(state) => state.chatData.chat.userTypeM
-);
-  
- 
+  const receiver_id = useAppSelector(
+    (state) => state.chatData.chat.receiverId
+  );
+  const chatt_name: string = useAppSelector(
+    (state) => state.chatData.chat.messageName
+  );
+  const avatar: string = useAppSelector(
+    (state) => state.chatData.chat.avatarM
+  );
+  const userType: string = useAppSelector(
+    (state) => state.chatData.chat.userTypeM
+  );
 
-  
+
+
+
 
   const debounceDelay = 300;
-   // Use the custom debouncing hook
- const debouncedSearchQuery = useDebounce(searchQuery, debounceDelay);
-  const {data: chats, isLoading, error, isSuccess, isError} = useGetChatsQuery({});
+  // Use the custom debouncing hook
+  const debouncedSearchQuery = useDebounce(searchQuery, debounceDelay);
+  const { data: chats, isLoading, error, isSuccess, isError } = useGetChatsQuery({});
 
   const { data: searchedChats, isLoading: searchedLoading, error: searchedError, isSuccess: searchedSuccess, isError: isSearchedError } = useGetSearchedChatsQuery(debouncedSearchQuery);
 
@@ -88,39 +88,36 @@ const userType: string = useAppSelector(
 
   useEffect(() => {
     if (isSuccess) {
+      if (!chats || !chats.data.users || chats.data.users.length === 0) {
+        return; // Exit the useEffect hook if data is empty
+      }
       if (chats && chats.data.users && chats.data.users.length > 0) {
         setOnGoingChats(chats.data.users);
         const sender = chats.data.users[0];
         const receiver = chats.data.users[0];
-        // Assign properties based on currentUserTypeId
-        //const receiverM = Number(localStorage.getItem('messageid'))
-        //const receiverName = localStorage.getItem('messageName')
-        const payload1 = {
-          receiverId: receiver_id || ( // Use receiverM if truthy, otherwise...
+       
+        const payload = {
+          receiverId: receiver_id || (
             currentUserTypeId === sender.sender_id ? receiver.receiver_id : sender.sender.sender_id
           ),
+          name: chatt_name || ( 
+            currentUserTypeId === sender.sender_id ? receiver.receiver.name : sender.sender.name
+          ),
+          userType: userType || ( 
+            currentUserTypeId === sender.sender_id ? receiver.receiver.user_type : sender.sender.user_type
+          ),
+          avatar: avatar || ( 
+            currentUserTypeId === sender.sender_id ? receiver.receiver.image : sender.sender.image
+          ),
+
         };
-          const payload = {
-            receiverId: receiver_id || ( // Use receiverM if truthy, otherwise...
-            currentUserTypeId === sender.sender_id ? receiver.receiver_id : sender.sender.sender_id
-          ),
-          name: chatt_name || ( // Use receiverM if truthy, otherwise...
-          currentUserTypeId === sender.sender_id ? receiver.receiver.name : sender.sender.name
-          ),
-          userType: userType || ( // Use receiverM if truthy, otherwise...
-          currentUserTypeId === sender.sender_id ? receiver.receiver.user_type : sender.sender.user_type
-          ),
-          avatar: avatar || ( // Use receiverM if truthy, otherwise...
-          currentUserTypeId === sender.sender_id ? receiver.receiver.image : sender.sender.image
-          ),
-            //name: currentUserTypeId === sender.sender_id ? receiver.receiver.name : sender.sender.name,
-           
-          };
-          console.log(receiver_id)
+        console.log(receiver_id)
         dispatch(SET_CURRENT_CHAT(payload))
         dispatch(SET_USER_NAME(payload))
-        setActiveChat(payload1?.receiverId)
+        setActiveChat(payload?.receiverId)
         //console.log(payload1)
+
+        
 
       } else {
         setOnGoingChats([]);
@@ -133,7 +130,7 @@ const userType: string = useAppSelector(
     }
   }, [chats, error, isError, isSuccess]);
 
- 
+
 
   useEffect(() => {
     if (searchedSuccess) {
@@ -163,9 +160,9 @@ const userType: string = useAppSelector(
       <div className="sticky top-0 z-[9999999999] bg-[#FFF] flex items-center justify-between gap-[0.5rem] w-full p-[2%] border-b border-[#32475C1F]">
         {currentUserAvi && ( // Check if currentUserAvi is not null
           <span className="relative" style={{ width: "35px", height: "35px", borderRadius: "50%", overflow: "hidden" }}>
-            <Image alt="user" src={currentUserAvi} 
-            fill
-            style={{objectFit:"cover"}}
+            <Image alt="user" src={currentUserAvi}
+              fill
+              style={{ objectFit: "cover" }}
             />
             <ActiveBadge className="absolute right-0 bottom-0" />
           </span>
@@ -178,54 +175,56 @@ const userType: string = useAppSelector(
         />
       </div>
       <div className="flex flex-col gap-3 my-2 p-2">
-  <h4 className="text-[#010886] text-[20px] font-[500]">Chats</h4>
-  {isLoading || searchedLoading ? (
-    <div>Loading</div>
-  ) : (
-    onGoingChats.length > 0 ? (
-      distinctUserNames.map((item: Record<string, any> | null) => {
-        if (item) { // Check if item is not null
-          return (
-            <div
-              className={`flex items-center gap-3 bg-[#F9F9F9] cursor-pointer p-2 rounded-[8px] ${activeChat === item.receiver_id ? 'bg-colorPrimary text-neutral-50' : ''}`}
-              key={item.id}
-              onClick={() => {
-                const payload = {
-                  receiverId: currentUserTypeId === item?.receiver_id ? item?.sender_id : item?.receiver_id,
-                  name: currentUserTypeId === item?.receiver_id ? item?.sender.name : item?.receiver.name,
-                  userType: currentUserTypeId === item?.receiver_id ? item?.sender.user_type : item?.receiver.user_type,
-                  avatar: currentUserTypeId === item?.receiver_id ? item?.sender.image : item?.receiver.image,
-                };
-                dispatch(SET_CURRENT_CHAT(payload));
-                setActiveChat(payload?.receiverId);
-                setDisplay((prev) => !prev);
-              }}
-            >
-              <div className="relative">
-                <img alt="user" src={currentUserTypeId === item?.sender_id ? item?.receiver.image : item?.sender.image} style={{ width: "30px", height: "30px", borderRadius: "50%", overflow: "hidden", objectFit: "cover" }} />
-                <ActiveBadge className="absolute right-0 bottom-0" />
-              </div>
-              <div className="flex flex-col w-full">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-semibold">{currentUserTypeId === item?.sender_id ? item?.receiver.name : item?.sender.name}</h4>
-                  <span className="text-[11px]">{formatDate(item?.created_at)}</span>
-                </div>
-                <span className="text-[12px]">
-                  {item?.message?.length > 30
-                    ? item?.message.slice(0, 30) + "..."
-                    : item?.message}
-                </span>
-              </div>
-            </div>
-          );
-        }
-        return null; // Return null if item is null
-      })
-    ) : (
-      <div className="text-center text-gray-500">No User found for your search.</div>
-    )
-  )}
-</div>
+        <h4 className="text-[#010886] text-[20px] font-[500]">Chats</h4>
+        {isLoading || searchedLoading ? (
+          <div>Loading</div>
+        ) : (
+          onGoingChats.length > 0 ? (
+            distinctUserNames.map((item: Record<string, any> | null) => {
+              if (item) { // Check if item is not null
+                return (
+                  <div
+                    className={`flex items-center gap-3 bg-[#F9F9F9] cursor-pointer p-2 rounded-[8px] ${activeChat === (currentUserTypeId === item?.receiver_id ? item?.sender_id  :  item?.receiver_id) ? 'bg-colorPrimary text-neutral-50' : ''}`}
+                    key={item.id}
+                    onClick={() => {
+                      const payload = {
+                        receiverId: currentUserTypeId === item?.receiver_id ? item?.sender_id : item?.receiver_id,
+                        name: currentUserTypeId === item?.receiver_id ? item?.sender.name : item?.receiver.name,
+                        userType: currentUserTypeId === item?.receiver_id ? item?.sender.user_type : item?.receiver.user_type,
+                        avatar: currentUserTypeId === item?.receiver_id ? item?.sender.image : item?.receiver.image,
+                      };
+                      dispatch(SET_CURRENT_CHAT(payload));
+                      setActiveChat(payload?.receiverId);
+                      setDisplay((prev) => !prev);
+                      console.log(payload?.receiverId)
+                      console.log(item?.receiver_id)
+                    }}
+                  >
+                    <div className="relative">
+                      <img alt="user" src={currentUserTypeId === item?.sender_id ? item?.receiver.image : item?.sender.image} style={{ width: "30px", height: "30px", borderRadius: "50%", overflow: "hidden", objectFit: "cover" }} />
+                      <ActiveBadge className="absolute right-0 bottom-0" />
+                    </div>
+                    <div className="flex flex-col w-full">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-semibold">{currentUserTypeId === item?.sender_id ? item?.receiver.name : item?.sender.name}</h4>
+                        <span className="text-[11px]">{formatDate(item?.created_at)}</span>
+                      </div>
+                      <span className="text-[12px]">
+                        {item?.message?.length > 30
+                          ? item?.message.slice(0, 30) + "..."
+                          : item?.message}
+                      </span>
+                    </div>
+                  </div>
+                );
+              }
+              return null; // Return null if item is null
+            })
+          ) : (
+            <div className="text-center text-gray-500">No User found for your search.</div>
+          )
+        )}
+      </div>
     </div>
   );
 };
