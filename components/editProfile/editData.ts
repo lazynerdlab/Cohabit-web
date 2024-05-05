@@ -21,9 +21,9 @@ export const locationData = [
     "Abuja",
 ]
 export const genderData = [
-    {value:"Male", id:1},
-    {value:"Female", id: 2},
-    {value:"Others", id:3},
+    {value:"Male", id:0},
+    {value:"Female", id: 1},
+    {value:"Others", id:2},
 ]
 export const vibeData = [
     {value:"Friendly", id:1},
