@@ -121,6 +121,7 @@ const Tab1 = () => {
       message.success("Profile updated successfully");
     }
     if (updateProfileIsError) {
+      message.error("Profile update failed");
       //message.error(updateProfileError?.data?.message);
       /**
        *  if ('status' in updateProfileError){

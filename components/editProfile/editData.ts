@@ -1,43 +1,41 @@
 export const catData = [
-    "one Bedroom",
-    "Bungalow",
-    "2 Bedroom",
-    "Workspace",
-    "Flats",
-    "Selfcon",
-    "Lands",
-    "Studio flat",
-    "3 bedroom apartment",
-    "Service Apartment"
+    {value:"one Bedroom flat", id: 1},
+    {value:"Bungalow", id:2},
+    {value:"2 Bedroom flat", id:3},
+    {value:"Workspace", id:4},
+    {value:"Flats", id:5},
+    {value:"Selfcon", id:6},
+    {value:"Lands", id:7},
+    {value:"Studio flat", id:8},
+    {value:"3 bedroom apartment", id:9},
+    {value:"Service Apartment", id:10}
 ]
 export const budgetData = [
-    "Below 100k",
-    "100k-500k",
-    "600k-800k",
-    "900k above",
+   { value:"Below 100K", id: 1},
+    {value:"100K - 500K", id: 2},
+    {value:"600K - 800K", id: 3},
+    {value:"900K above", id:4},
 ]
 export const locationData = [
     "Lagos",
     "Abuja",
-    "600k-800k",
-    "900k above",
 ]
 export const genderData = [
-    "Male",
-    "Female",
-    "Others",
+    {value:"Male", id:1},
+    {value:"Female", id: 2},
+    {value:"Others", id:3},
 ]
 export const vibeData = [
-    "Friendly",
-    "Prooud",
-    "Dirty",
-    "Neat",
-    "Social",
-    "Indoor person",
-    "Life of the party",
-    "Loves cooking",
-    "crranky",
-    "Stubborn"
+    {value:"Friendly", id:1},
+    {value:"Proud", id:2},
+    {value:"Dirty", id:3},
+    {value:"Neat", id:4},
+    {value:"Social", id:5},
+    {value:"Indoor person", id:6},
+    {value:"Life of the party", id:7},
+   {value: "Loves cooking", id:8},
+    {value:"cranky", id:9},
+    {value:"Stubborn", id:10}
 ]
 export const languageData = [
     "English",
@@ -46,12 +44,14 @@ export const languageData = [
     "Others",
 ]
 export const petData = [
-    "Male",
-    "Female",
-    "Others",
+    "Dog",
+    "Cat",
+    "Have dog and cat",
+    "No dog and cat"
 ]
 export const workData = [
-    "Male",
-    "Female",
-    "Others",
+    "Self-employed",
+    "Employed",
+    "Not employed",
 ]
+
