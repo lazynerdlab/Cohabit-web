@@ -20,6 +20,7 @@ import apartmentSlice from "./slice/apartmentSlice";
 import { chatApi } from "./api/chatApi";
 import chatSlice from "./slice/chatSlice";
 import { paymentApi } from "./api/paymentApi";
+import { seekerApi } from "./api/seekerApi";
 
 const rootReducer = combineReducers({
   api: authReducer,
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   [attachmentApi.reducerPath]: attachmentApi.reducer,
   [hostApi.reducerPath]: hostApi.reducer,
   [chatApi.reducerPath]: chatApi.reducer,
+  [seekerApi.reducerPath]: seekerApi.reducer,
 });
 
 const persistConfig = {
@@ -66,6 +68,7 @@ const store = configureStore({
       hostApi.middleware,
       chatApi.middleware,
       paymentApi.middleware,
+      seekerApi.middleware
 
     ]),
   // .concat(logger),

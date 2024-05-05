@@ -12,13 +12,13 @@ import EditIcon from "@/assets/icons/EditIcon";
 import ProfileSection2 from "./ProfileSection2";
 import { useGetSavedApartmentsQuery } from "@/redux/api/houseApi";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   data?: Record<string, any>;
-  handleClick1: () => void;
-  handleClick2: () => void;
 }
-const ProfileSection = ({ data, handleClick1, handleClick2 }: Props) => {
+const ProfileSection = ({ data }: Props) => {
+  const { push } = useRouter();
   const { data: savedData, isSuccess, isLoading } = useGetSavedApartmentsQuery({})
   const [saved, setSaved] = useState<Record<string, any>>([])
   useEffect(() => {
@@ -35,21 +35,19 @@ const ProfileSection = ({ data, handleClick1, handleClick2 }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               About Me
             </h4>
-            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={handleClick2} />
+            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={()=> push("profile/editAboutMe")} />
           </span>
           <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
             {data?.preference?.personal_introduction}
           </p>
-          <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
-            I am playful person, lover of cat and i don’t like to smoke
-          </p>
+        
         </div>
         <div className="p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.3rem]">
           <span className="flex items-center justify-between gap-[0.5rem]">
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               Preferences
             </h4>
-            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={handleClick1} />
+            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={()=> push("profile/editPreference")} />
           </span>
           <div className="grid grid-cols-1 gap-[0.3rem]">
             <span className="flex items-center gap-[0.5rem]">
