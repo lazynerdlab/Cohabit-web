@@ -26,7 +26,7 @@ export const seekerApi = createApi({
         method: "PUT",
         body: data,
       }),
-      //invalidatesTags: ["Banner"],
+     
     }),
     updateAboutMe: builder.mutation({
       query: (data) => ({

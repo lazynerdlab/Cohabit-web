@@ -56,9 +56,15 @@ const ProfileSection = ({ data }: Props) => {
                 <h5 className="text-[12px] md:text-[16px] font-[700]">
                   Categories:
                 </h5>
-                <p className="text-[12px] md:text-[16px] font-[400]">
-                  {data?.house_type?.map((item: string) => item)}
+                {
+                  data?.house_type?.map((item: string, index: number) => (
+                    <p className="text-[12px] md:text-[16px] font-[400]" key={index}>
+                  {item}
+                 
                 </p>
+                ))
+                }
+               
               </span>
             </span>
             <span className="flex items-center gap-[0.5rem]">
@@ -78,9 +84,14 @@ const ProfileSection = ({ data }: Props) => {
                 <h5 className="text-[12px] md:text-[16px] font-[700]">
                   Lifestyle:
                 </h5>
-                <p className="text-[12px] md:text-[16px] font-[400]">
-                  {data?.lifestyle.map((item: string) => item)}
+                {
+                  data?.lifestyle?.map((item: string, index: number) => (
+                    <p className="text-[12px] md:text-[16px] font-[400]" key={index}>
+                  {item}
+                 
                 </p>
+                ))
+                }
               </span>
             </span>
           </div>

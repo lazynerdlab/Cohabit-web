@@ -10,6 +10,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { message, Skeleton } from "antd";
 
 
+
 const SeekerEdit2 = () => {
     const [aboutMe, setAboutMe] = useState<{
         personal_introduction: string,
@@ -29,6 +30,7 @@ const SeekerEdit2 = () => {
     const [updateAboutMe, { isLoading: updateLoading }] = useUpdateAboutMeMutation()
     const { data: traits } = useGetPersonalityTraitsQuery({})
     const { push } = useRouter()
+  
 
     useEffect(() => {
         if (!isLoading && data && traits) {
