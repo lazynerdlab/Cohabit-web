@@ -1,4 +1,3 @@
-
 import SeekerEdit2 from "@/components/editProfile/seekerEdit2";
 import Header from "@/components/header/Header";
 

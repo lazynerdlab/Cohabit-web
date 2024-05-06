@@ -1,4 +1,3 @@
-"use-client"
 import SeekerEdit1 from "@/components/editProfile/seekerEdit1";
 import Header from "@/components/header/Header";
 
