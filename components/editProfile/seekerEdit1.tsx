@@ -1,7 +1,6 @@
 "use client";
-import { budgetData, catData, genderData, locationData } from "./editData"
+import { genderData, locationData } from "./editData"
 import { CustomButton as Button } from "@/lib/AntDesignComponents";
-import { IoArrowBackSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useGetHouseBudgetQuery, useGetHouseSeekerProfileQuery, useGetHouseTypeQuery } from "@/redux/api/houseApi";
 import { useUpdatePreferenceMutation } from "@/redux/api/seekerApi";

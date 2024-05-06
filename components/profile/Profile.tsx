@@ -16,7 +16,6 @@ import { useGetHouseSeekerProfileQuery } from "@/redux/api/houseApi";
 import { useRouter } from "next/navigation";
 import { message, Upload, UploadProps } from "antd";
 import { useUpdateSeekerBannerMutation } from "@/redux/api/seekerApi";
-import { useDispatch } from "react-redux";
 
 
 const MAX_FILE_SIZE_MB = 5;
@@ -25,10 +24,9 @@ const Profile = () => {
   const { push } = useRouter();
   const [profile, setProfile] = useState<Record<string, any>>();
   const [accessToken, setAccessToken] = useState<string>()
-  const [image, setImage] = useState<string>();
   const { data, isSuccess, isLoading, isError, error, refetch } = useGetHouseSeekerProfileQuery({});
   const [uploadBanner,{}] = useUpdateSeekerBannerMutation()
-  const dispatch = useDispatch()
+
   
 
   useEffect(() => {
@@ -68,7 +66,6 @@ const Profile = () => {
 
       }
       if (status === "done") {
-        setImage(info?.file?.response?.data?.file)
         handleBannerUpload(info?.file?.response?.data?.file)
         //message.success(`${info.file.name} file uploaded successfully.`);
       } else if (status === "error") {

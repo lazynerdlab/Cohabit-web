@@ -35,7 +35,7 @@ const ProfileSection = ({ data }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               About Me
             </h4>
-            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={()=> push("profile/editAboutMe")} />
+            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={()=> push("profile/edit-me")} />
           </span>
           <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
             {data?.preference?.personal_introduction}
@@ -47,7 +47,7 @@ const ProfileSection = ({ data }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               Preferences
             </h4>
-            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={()=> push("profile/editPreference")} />
+            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={()=> push("profile/edit-preference")} />
           </span>
           <div className="grid grid-cols-1 gap-[0.3rem]">
             <span className="flex items-center gap-[0.5rem]">
