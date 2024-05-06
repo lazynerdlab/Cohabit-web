@@ -28,12 +28,12 @@ const SeekerEdit2 = () => {
 
     const { data, isLoading } = useGetHouseSeekerProfileQuery({})
     const [updateAboutMe, { isLoading: updateLoading }] = useUpdateAboutMeMutation()
-    const { data: traits } = useGetPersonalityTraitsQuery({})
+    const { data: traits, isLoading: traitsLoading } = useGetPersonalityTraitsQuery({})
     const { push } = useRouter()
   
 
     useEffect(() => {
-        if (!isLoading && data && traits) {
+        if (!isLoading && data && traits  && !traitsLoading) {
             // Set default values for preference properties if data is null or undefined
             const defaultPreference = {
                 personal_introduction: data?.data?.preference?.personal_introduction,
@@ -48,7 +48,7 @@ const SeekerEdit2 = () => {
 
             setAboutMe(defaultPreference);
         }
-    }, [data, isLoading, traits]);
+    }, [data, isLoading, traits, traitsLoading]);
 
     const handleSectionClick = (section: string, value: string) => {
         setAboutMe(prevAboutMe => ({
@@ -58,23 +58,16 @@ const SeekerEdit2 = () => {
     }
 
     const handleTraitClick = (value: string) => {
-        const trait = traits?.data?.find((vibes: { title: string; }) => vibes.title.toLowerCase() === value.toLowerCase());
+        const trait = traits?.data?.find((vibe: { title: string }) => vibe.title.toLowerCase() === value.toLowerCase());
         if (trait) {
-            if (aboutMe.personality_trait.includes(trait.id)) {
-                // If trait exists, remove it from the array
-                setAboutMe(prevAboutMe => ({
-                    ...prevAboutMe,
-                    personality_trait: prevAboutMe.personality_trait.filter(id => id !== trait.id)
-                }));
-            } else {
-                // If trait doesn't exist, add it to the array
-                setAboutMe(prevAboutMe => ({
-                    ...prevAboutMe,
-                    personality_trait: [...prevAboutMe.personality_trait, trait.id]
-                }));
-            }
+            setAboutMe(prevAboutMe => ({
+                ...prevAboutMe,
+                personality_trait: prevAboutMe.personality_trait.includes(trait.id) ?
+                    prevAboutMe.personality_trait.filter(id => id !== trait.id) :
+                    [...prevAboutMe.personality_trait, trait.id]
+            }));
         }
-    }
+    };
 
     const handleUpdate = () => {
         updateAboutMe(aboutMe).unwrap()
@@ -96,7 +89,7 @@ const SeekerEdit2 = () => {
                         isLoading ? <Skeleton active /> :
                             <textarea
                                 className=" bg-transparent border-[2px] border-[#B8C9C9] w-full h-[140px] focus:outline-none resize-none p-5"
-                                value={aboutMe.personal_introduction}
+                                value={aboutMe?.personal_introduction}
                                 onChange={(e) => setAboutMe(prevAboutMe => ({
                                     ...prevAboutMe,
                                     personal_introduction: e.target.value
