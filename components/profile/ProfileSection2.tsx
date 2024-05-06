@@ -5,9 +5,19 @@ import PhoneIcon from "@/assets/icons/PhoneIcon";
 import LanguageIcon from "@/assets/icons/LanguageIcon";
 import { useAppSelector } from "@/redux/hook";
 import { useGetProfileQuery } from "@/redux/api/authApi";
+import { useEffect, useState } from "react";
 
 const ProfileSection2 = () => {
-  const {data} = useGetProfileQuery({})
+  const {data: addData, isLoading, isSuccess, isError, error} = useGetProfileQuery({})
+  const [data, setData] =  useState<Record<string, any>>([])
+  useEffect(() => {
+    if (isSuccess) {
+      setData(addData);
+    }
+    if (isError) {
+      console.log(error);
+    }
+  }, [data, isSuccess, isError, error]);
   //const user = useAppSelector((state) => state.userData?.user);
 
   return (
