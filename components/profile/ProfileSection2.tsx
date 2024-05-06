@@ -17,7 +17,7 @@ const ProfileSection2 = () => {
     if (isError) {
       console.log(error);
     }
-  }, [data, isSuccess, isError, error]);
+  }, [addData, isSuccess, isError, error]);
   //const user = useAppSelector((state) => state.userData?.user);
 
   return (
