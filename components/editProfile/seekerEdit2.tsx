@@ -25,11 +25,20 @@ const SeekerEdit2 = () => {
         pets: "",
         employment: ""
     });
-
-    const { data, isLoading } = useGetHouseSeekerProfileQuery({})
+    const [data, setData] = useState<Record<string, any>>([])
+    const [traits, setTraits] = useState<Record<string, any>>([])
+    const { data: datas, isLoading, isSuccess } = useGetHouseSeekerProfileQuery({})
     const [updateAboutMe, { isLoading: updateLoading }] = useUpdateAboutMeMutation()
-    const { data: traits, isLoading: traitsLoading } = useGetPersonalityTraitsQuery({})
+    const { data: allTraits, isLoading: traitsLoading, isSuccess:traitSuccess } = useGetPersonalityTraitsQuery({})
     const { push } = useRouter()
+
+    useEffect(()=>{
+            if(isSuccess && traitSuccess){
+                setData(datas)
+                setTraits(allTraits)
+            }
+       
+    },[datas,allTraits, isSuccess, traitSuccess ])
   
 
     useEffect(() => {
@@ -38,7 +47,7 @@ const SeekerEdit2 = () => {
             const defaultPreference = {
                 personal_introduction: data?.data?.preference?.personal_introduction,
                 personality_trait: data?.data?.lifestyle?.map((trait_Type: string) => {
-                    const trait = traits?.data?.find((vibes: { title: string; }) => vibes.title.toLowerCase() === trait_Type.toLowerCase());
+                    const trait = traits?.data?.find((vibes: { title: string; }) => vibes.title?.toLowerCase() === trait_Type?.toLowerCase());
                     return trait ? trait.id : null;
                 }).filter((id: null) => id !== null),
                 language: data?.data?.preference?.language,
@@ -58,7 +67,7 @@ const SeekerEdit2 = () => {
     }
 
     const handleTraitClick = (value: string) => {
-        const trait = traits?.data?.find((vibe: { title: string }) => vibe.title.toLowerCase() === value.toLowerCase());
+        const trait = traits?.data?.find((vibe: { title: string }) => vibe.title?.toLowerCase() === value?.toLowerCase());
         if (trait) {
             setAboutMe(prevAboutMe => ({
                 ...prevAboutMe,
@@ -133,7 +142,7 @@ const SeekerEdit2 = () => {
 
                                         <div key={id}
                                             className={`border-[#B8C9C9] border rounded-3xl px-6 py-1 text-[#616A6A] hover: cursor-pointer
-                                ${language?.toLowerCase() === aboutMe.language.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
+                                ${language?.toLowerCase() === aboutMe?.language?.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
                                             onClick={() => handleSectionClick('language', language)}
                                         >
                                             {language}
@@ -156,7 +165,7 @@ const SeekerEdit2 = () => {
 
                                         <div key={id}
                                             className={`border-[#B8C9C9] border rounded-3xl px-6 py-1 text-[#616A6A] hover: cursor-pointer
-                                ${pet?.toLowerCase() === aboutMe.pets.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
+                                ${pet?.toLowerCase() === aboutMe.pets?.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
                                             onClick={() => handleSectionClick('pets', pet)}
                                         >
                                             {pet}
@@ -179,7 +188,7 @@ const SeekerEdit2 = () => {
 
                                         <div key={id}
                                             className={`border-[#B8C9C9] border rounded-3xl px-6 py-1 text-[#616A6A] hover: cursor-pointer
-                                ${work?.toLowerCase() === aboutMe.employment.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
+                                ${work?.toLowerCase() === aboutMe.employment?.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
                                             onClick={() => handleSectionClick('employment', work)}
                                         >
                                             {work}

@@ -19,7 +19,6 @@ interface Props {
   data?: Record<string, any>;
 }
 const ProfileSection = ({ data }: Props) => {
-  const { push } = useRouter();
   const { data: savedData, isSuccess, isLoading } = useGetSavedApartmentsQuery({})
   const [saved, setSaved] = useState<Record<string, any>>([])
   useEffect(() => {
