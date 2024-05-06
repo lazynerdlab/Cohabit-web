@@ -13,6 +13,7 @@ import ProfileSection2 from "./ProfileSection2";
 import { useGetSavedApartmentsQuery } from "@/redux/api/houseApi";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Props {
   data?: Record<string, any>;
@@ -35,7 +36,9 @@ const ProfileSection = ({ data }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               About Me
             </h4>
-            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={()=> push("profile/edit-me")} />
+            <Link href="profile/edit-me">
+            <Button icon={<EditIcon className="fill-colorPrimary" />} />
+            </Link>
           </span>
           <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
             {data?.preference?.personal_introduction}
@@ -47,7 +50,9 @@ const ProfileSection = ({ data }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               Preferences
             </h4>
-            <Button icon={<EditIcon className="fill-colorPrimary" />} onClick={()=> push("profile/edit-preference")} />
+            <Link href="profile/edit-preference">
+            <Button icon={<EditIcon className="fill-colorPrimary" />} />
+            </Link>
           </span>
           <div className="grid grid-cols-1 gap-[0.3rem]">
             <span className="flex items-center gap-[0.5rem]">
@@ -113,7 +118,7 @@ const ProfileSection = ({ data }: Props) => {
              
             >
               {
-                saved.length === 0 ? <div className="w-full h-[250px] flex justify-center items-center text-[#25324B] text-[16px] font-[400]">You have no saved searches</div> : saved.map((item: Record<string, any>) => (
+                saved?.length === 0 ? <div className="w-full h-[250px] flex justify-center items-center text-[#25324B] text-[16px] font-[400]">You have no saved searches</div> : saved.map((item: Record<string, any>) => (
                   <div key={item?.id} className="w-fit hfit p-[1rem] flex flex-row gap-[0.2rem]">
                     <Image alt="apartment" src={item?.listing?.image} width={100} height={100} className="h-[100px] w-[100px] " />
                     <span className="text-[#25324B] text-[14px] font-[400]">

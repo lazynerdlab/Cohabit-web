@@ -109,7 +109,7 @@ const SeekerEdit2 = () => {
 
                                         <div key={index}
                                             className={`border-[#B8C9C9] border rounded-3xl px-6 py-1 text-[#616A6A] hover: cursor-pointer
-                                    ${aboutMe.personality_trait?.includes(vibe.id) ? 'bg-colorPrimary text-[white]' : ''}`}
+                                    ${aboutMe?.personality_trait?.includes(vibe.id) ? 'bg-colorPrimary text-[white]' : ''}`}
                                             onClick={() => handleTraitClick(vibe.title)}
                                         >
                                             {vibe.title}
@@ -129,11 +129,11 @@ const SeekerEdit2 = () => {
                         isLoading ? <Skeleton active /> :
                             <div className=" flex flex-wrap gap-4">
                                 {
-                                    languageData.map((language, id) => (
+                                    languageData?.map((language, id) => (
 
                                         <div key={id}
                                             className={`border-[#B8C9C9] border rounded-3xl px-6 py-1 text-[#616A6A] hover: cursor-pointer
-                                ${language.toLowerCase() === aboutMe.language.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
+                                ${language?.toLowerCase() === aboutMe.language.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
                                             onClick={() => handleSectionClick('language', language)}
                                         >
                                             {language}
@@ -152,11 +152,11 @@ const SeekerEdit2 = () => {
                         isLoading ? <Skeleton active /> :
                             <div className=" flex flex-wrap gap-4">
                                 {
-                                    petData.map((pet, id) => (
+                                    petData?.map((pet, id) => (
 
                                         <div key={id}
                                             className={`border-[#B8C9C9] border rounded-3xl px-6 py-1 text-[#616A6A] hover: cursor-pointer
-                                ${pet.toLowerCase() === aboutMe.pets.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
+                                ${pet?.toLowerCase() === aboutMe.pets.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
                                             onClick={() => handleSectionClick('pets', pet)}
                                         >
                                             {pet}
@@ -175,11 +175,11 @@ const SeekerEdit2 = () => {
                         isLoading ? <Skeleton active /> :
                             <div className=" flex flex-wrap gap-4">
                                 {
-                                    workData.map((work, id) => (
+                                    workData?.map((work, id) => (
 
                                         <div key={id}
                                             className={`border-[#B8C9C9] border rounded-3xl px-6 py-1 text-[#616A6A] hover: cursor-pointer
-                                ${work.toLowerCase() === aboutMe.employment.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
+                                ${work?.toLowerCase() === aboutMe.employment.toLowerCase() ? 'bg-colorPrimary text-[white]' : ''}`}
                                             onClick={() => handleSectionClick('employment', work)}
                                         >
                                             {work}
