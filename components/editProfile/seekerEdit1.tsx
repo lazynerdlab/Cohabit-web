@@ -17,10 +17,13 @@ const SeekerEdit1 = () => {
         gender: number | null;
     }>({
         house_type: [],
-        budget: null,
+        budget: 0,
         location: '',
-        gender: null
+        gender: 0
     });
+    const [allBudget, setAllBudget] = useState<Record<string, any>>([])
+    const [allHouses, setAllHouses] = useState<Record<string, any>>([])
+    const [profile, setProfile] = useState<Record<string, any>>([])
     const { data, isLoading } = useGetHouseSeekerProfileQuery({})
     const [updatePrefrence, { isLoading: updateLoading }] = useUpdatePreferenceMutation()
     const { data: budgets } = useGetHouseBudgetQuery({})
@@ -45,9 +48,9 @@ const SeekerEdit1 = () => {
                     const category = houses?.data?.find((cat: { title: string; }) => cat.title.toLowerCase() === house.toLowerCase());
                     return category ? category.id : null;
                 }).filter((id: null) => id !== null),
-                budget: getIdFromValue(data.data?.budget) || null,
-                location: data.data?.location || '',
-                gender: getIdGender(data.data?.gender) || null
+                budget: getIdFromValue(data?.data?.budget) || null,
+                location: data?.data?.location || '',
+                gender: getIdGender(data?.data?.gender) || null
             };
 
             setPreference(defaultPreference);
@@ -121,7 +124,7 @@ const SeekerEdit1 = () => {
                                         houses?.data?.map((Categories: any, id: any) => (
 
                                             <div key={id} className={`border-[#B8C9C9] border rounded-3xl px-6 py-1 text-[#616A6A] hover: cursor-pointer  
-                                ${preference.house_type?.some(id => houses?.data?.find((cat: { id: number; }) => cat.id === id)?.title.toLowerCase() === Categories.title.toLowerCase()) ? 'bg-colorPrimary text-[white]' : ''}`}
+                                ${preference?.house_type?.some(id => houses?.data?.find((cat: { id: number; }) => cat.id === id)?.title.toLowerCase() === Categories.title.toLowerCase()) ? 'bg-colorPrimary text-[white]' : ''}`}
                                                 onClick={() => handleCategoryClick(Categories.title)}
                                             >
                                                 {Categories.title}
@@ -144,7 +147,7 @@ const SeekerEdit1 = () => {
 
                                             <div key={index}
                                                 className={`border-[#B8C9C9] border rounded-3xl px-6 py-1 text-[#616A6A] hover: cursor-pointer 
-                                    ${budget.id === preference.budget ? 'bg-colorPrimary text-[white]' : ''}`}
+                                    ${budget?.id === preference.budget ? 'bg-colorPrimary text-[white]' : ''}`}
                                                 onClick={() => handleBudgetClick('budget', budget.text)}
                                             >
                                                 {budget.text}
@@ -187,11 +190,11 @@ const SeekerEdit1 = () => {
                             isLoading ? <Skeleton active /> :
                                 <div className=" flex flex-wrap gap-4">
                                     {
-                                        genderData.map((gender, id) => (
+                                        genderData?.map((gender, id) => (
 
                                             <div key={id}
                                                 className={`border-[#B8C9C9] border rounded-3xl px-6 py-1 text-[#616A6A] hover: cursor-pointer 
-                                        ${gender.id === preference.gender ? 'bg-colorPrimary text-[white]' : ''}`}
+                                        ${gender?.id === preference.gender ? 'bg-colorPrimary text-[white]' : ''}`}
                                                 onClick={() => handleGenderClick('gender', gender.value)}
                                             >
                                                 {gender.value}
