@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${ubuntu.className} overflow-x-hidden `}>
         <ReduxProvider>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          <StyledComponentsRegistry >{children}</StyledComponentsRegistry>
         </ReduxProvider>
       </body>
     </html>
