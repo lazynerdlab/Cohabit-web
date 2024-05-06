@@ -111,7 +111,7 @@ const SeekerEdit1 = () => {
     return (
         <>
             <div className=" h-full bg-[#E7F6FD] mr-7 ml-3 max-h-[100svh] overflow-y-scroll noscroll-bar " >
-                <section className=" p-3 pr-[100px]">
+                <section className=" p-3 md:pr-[100px] pr-[20px]">
                     <div className=" mb-10">
 
                         <h2 className=" text-[#101C1D] font-semibold text-lg mb-5">Edit your categories</h2>
