@@ -21,6 +21,7 @@ import { useAppSelector } from "@/redux/hook";
 import { useUpdateProfileMutation } from "@/redux/api/settingApi";
 import moment from "moment";
 import { Spinner } from "../spinner/Spinner";
+import { useGetHostProfileQuery } from "@/redux/api/hostApi";
 
 const options = [
   { value: "0", label: "Male" },
@@ -48,16 +49,23 @@ const MAX_FILE_SIZE_MB = 5;
 const Tab1 = () => {
   const user = useAppSelector((state) => state.userData.user);
   const { data, isSuccess, isLoading, isError, error } = useGetHouseSeekerProfileQuery({});
+  const { data: host, isSuccess: hostSuccess } = useGetHostProfileQuery({});
   const userData = user?.data?.user
   const [accessToken, setAccessToken] = useState<string>()
   const [image, setImage] = useState<string>();
+
+   // Use house seeker or host profile query based on userType
+  
 
   useEffect(() => {
     const token = sessionStorage.getItem('authToken')
     if (token) {
       setAccessToken(token)
     }
+    
   }, [])
+
+  
 
   const props: UploadProps = {
     name: "file",
@@ -99,6 +107,10 @@ const Tab1 = () => {
   const [dob, setDOB] = useState<any>();
   const [email, setEmail] = useState<string>();
   const [userType, setUserType] = useState<string>();
+
+  //const { data, isSuccess, isLoading, isError, error } = userType === 'host' 
+  //? useGetHostProfileQuery({}) 
+  //: useGetHouseSeekerProfileQuery({});
 
   const handleGenderChange = (value: string) => {
     setGender(value);
@@ -147,6 +159,14 @@ const Tab1 = () => {
       setUserStatus(data?.data?.house_seeker_status)
       setDOB(data?.data?.dob)
     }
+    if (hostSuccess && userData?.user_type === 'host') {
+      setImage(host?.image)
+      setEmail(host?.email)
+      setPhoneNo(host?.phone)
+      setGender(host?.gender)
+      setUserStatus(host?.house_seeker_status)
+      setDOB(host?.dob)
+    }
 
     if (user) {
       setUserType(userData?.user_type)
@@ -156,7 +176,7 @@ const Tab1 = () => {
     if (isError) {
       console.log(error);
     }
-  }, [data, isSuccess, isError, error, userData]);
+  }, [data, isSuccess, isError, error, userData, hostSuccess]);
 
 
   let date = moment(dob?.$d).format("YYYY-MM-DD")
