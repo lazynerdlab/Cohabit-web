@@ -1,11 +1,11 @@
 "use client";
-import { languageData, petData, vibeData, workData } from "./editData"
+import { languageData, petData, workData } from "./editData"
 import { CustomButton as Button } from "@/lib/AntDesignComponents";
 import { useGetHouseSeekerProfileQuery, useGetPersonalityTraitsQuery } from "@/redux/api/houseApi";
 import { useUpdateAboutMeMutation } from "@/redux/api/seekerApi";
 import { useEffect, useState } from "react";
 import { IoArrowBackSharp } from "react-icons/io5";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { LoadingOutlined } from "@ant-design/icons";
 import { message, Skeleton } from "antd";
 

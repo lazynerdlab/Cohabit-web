@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  disableManifest: true,
-  cacheBust: true,
   images: {
     domains: [
       "via.placeholder.com",
