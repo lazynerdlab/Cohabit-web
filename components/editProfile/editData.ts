@@ -1,3 +1,4 @@
+"use client";
 export const catData = [
     {value:"one Bedroom flat", id: 1},
     {value:"Bungalow", id:2},

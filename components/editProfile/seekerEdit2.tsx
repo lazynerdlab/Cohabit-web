@@ -5,7 +5,7 @@ import { useGetHouseSeekerProfileQuery, useGetPersonalityTraitsQuery } from "@/r
 import { useUpdateAboutMeMutation } from "@/redux/api/seekerApi";
 import { useEffect, useState } from "react";
 import { IoArrowBackSharp } from "react-icons/io5";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { LoadingOutlined } from "@ant-design/icons";
 import { message, Skeleton } from "antd";
 
@@ -82,6 +82,7 @@ const SeekerEdit2 = () => {
         updateAboutMe(aboutMe).unwrap()
             .then(() => {
                 message.success("saved")
+                
                 push("/dashboard/profile")
             }).catch(() => {
                 message.error("save failed")
