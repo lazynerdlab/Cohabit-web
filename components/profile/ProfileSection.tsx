@@ -49,7 +49,7 @@ const ProfileSection = ({ data }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               Preferences
             </h4>
-            <Link href="profile/edit-preference">
+            <Link href="/dashboard/profile/preference">
             <Button icon={<EditIcon className="fill-colorPrimary" />} />
             </Link>
           </span>
