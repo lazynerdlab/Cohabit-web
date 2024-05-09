@@ -47,7 +47,7 @@ const SeekerEdit2 = () => {
             const defaultPreference = {
                 personal_introduction: data?.data?.preference?.personal_introduction,
                 personality_trait: data?.data?.lifestyle?.map((trait_Type: string) => {
-                    const trait = traits?.data?.find((vibes: { title: string; }) => vibes.title?.toLowerCase() === trait_Type?.toLowerCase());
+                    const trait = traits?.data ? traits.data.find((vibes: { title: string; }) => vibes.title?.toLowerCase() === trait_Type?.toLowerCase()) : null;
                     return trait ? trait.id : null;
                 }).filter((id: null) => id !== null),
                 language: data?.data?.preference?.language,

@@ -1,15 +1,15 @@
 import SeekerEdit1 from "@/components/editProfile/seekerEdit1";
 import Header from "@/components/header/Header";
 
-const Preference = () => {
+const Page = () => {
   return (
     <div className="grid grid-cols-1 grid-rows-[10%_90%] max-h-screen overflow-y-scroll">
-      <Header>
+      <div className=" p-4">
         <h4 className="text-[#25324B] text-[25px] font-[700]">Edit Profile</h4>
-      </Header>
+        </div>
       <SeekerEdit1 />
     </div>
   );
 };
 
-export default Preference;
+export default Page;
