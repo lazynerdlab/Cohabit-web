@@ -21,9 +21,7 @@ const SeekerEdit1 = () => {
         location: '',
         gender: 0
     });
-    const [allBudget, setAllBudget] = useState<Record<string, any>>([])
-    const [allHouses, setAllHouses] = useState<Record<string, any>>([])
-    const [profile, setProfile] = useState<Record<string, any>>([])
+    
     const { data, isLoading } = useGetHouseSeekerProfileQuery({})
     const [updatePrefrence, { isLoading: updateLoading }] = useUpdatePreferenceMutation()
     const { data: budgets } = useGetHouseBudgetQuery({})
