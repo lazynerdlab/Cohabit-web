@@ -41,15 +41,12 @@ const FindProperty = () => {
   }, [param]);
   useEffect(() => {
     getListings({
-      path: `listings?page=${page}&count=10${
-        locations ? `&state=${locations}` : ""
-      }${areas.length > 0 ? areas?.map((e) => `&area[]=${e}`).join("") : ""}${
-        budgets.length > 0 ? budgets?.map((e) => `&budget[]=${e}`).join("") : ""
-      }${
-        propertyType.length > 0
+      path: `listings?page=${page}&count=10${locations ? `&state=${locations}` : ""
+        }${areas.length > 0 ? areas?.map((e) => `&area[]=${e}`).join("") : ""}${budgets.length > 0 ? budgets?.map((e) => `&budget[]=${e}`).join("") : ""
+        }${propertyType.length > 0
           ? propertyType?.map((e) => `&property_type[]=${e}`).join("")
           : ""
-      }`,
+        }`,
     });
   }, [page, locations, areas, propertyType, budgets]);
   const [loading, setLoading] = useState(isLoading);

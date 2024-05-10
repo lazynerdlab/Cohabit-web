@@ -13,7 +13,7 @@ import ProfileSection2 from "./ProfileSection2";
 import { useGetSavedApartmentsQuery } from "@/redux/api/houseApi";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+
 
 interface Props {
   data?: Record<string, any>;
@@ -36,48 +36,48 @@ const ProfileSection = ({ data }: Props) => {
               About Me
             </h4>
             <a href="profile/edit-me">
-            <Button icon={<EditIcon className="fill-colorPrimary" />} />
+              <Button icon={<EditIcon className="fill-colorPrimary" />} />
             </a>
           </span>
           <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
             {data?.preference?.personal_introduction}
           </p>
-        
+
         </div>
-        <div className="p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.3rem]">
+        <div className="p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.4rem]">
           <span className="flex items-center justify-between gap-[0.5rem]">
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               Preferences
             </h4>
             <a href="/dashboard/profile/preference">
-            <Button icon={<EditIcon className="fill-colorPrimary" />} />
+              <Button icon={<EditIcon className="fill-colorPrimary" />} />
             </a>
           </span>
-          <div className="grid grid-cols-1 gap-[0.3rem]">
+          <div className="grid grid-cols-1 gap-[0.7rem]">
             <span className="flex items-center gap-[0.5rem]">
               <Checkicon />
               <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
-                <h5 className="text-[12px] md:text-[16px] font-[700]">
+                <h5 className="text-[12px] md:text-[16px] font-[700] text-[#32475C]/[50%]">
                   Categories:
                 </h5>
                 {
                   data?.house_type?.map((item: string, index: number) => (
-                    <p className="text-[12px] md:text-[16px] font-[400]" key={index}>
-                  {item}
-                 
-                </p>
-                ))
+                    <p className="text-[12px] md:text-[16px] font-[400] text-[#32475C]/[60%]" key={index}>
+                      {item}
+
+                    </p>
+                  ))
                 }
-               
+
               </span>
             </span>
             <span className="flex items-center gap-[0.5rem]">
               <RateIcon />
               <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
-                <h5 className="text-[12px] md:text-[16px] font-[700]">
+                <h5 className="text-[12px] md:text-[16px] font-[700] text-[#32475C]/[50%]">
                   Location:
                 </h5>
-                <p className="text-[12px] md:text-[16px] font-[400]">
+                <p className="text-[12px] md:text-[16px] font-[400] text-[#32475C]/[60%]">
                   {data?.location}
                 </p>
               </span>
@@ -85,24 +85,79 @@ const ProfileSection = ({ data }: Props) => {
             <span className="flex items-center gap-[0.5rem]">
               <FlagIcon className="fill-[#32475C99]/[60%]" />
               <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
-                <h5 className="text-[12px] md:text-[16px] font-[700]">
+                <h5 className="text-[12px] md:text-[16px] font-[700] text-[#32475C]/[50%]">
                   Lifestyle:
                 </h5>
                 {
                   data?.lifestyle?.map((item: string, index: number) => (
-                    <p className="text-[12px] md:text-[16px] font-[400]" key={index}>
-                  {item}
-                 
-                </p>
-                ))
+                    <p className="text-[12px] md:text-[16px] font-[400] text-[#32475C]/[60%]" key={index}>
+                      {item}
+
+                    </p>
+                  ))
                 }
+              </span>
+            </span>
+            <span className="flex items-center gap-[0.5rem]">
+              <FlagIcon className="fill-[#32475C99]/[60%]" />
+              <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
+                <h5 className="text-[12px] md:text-[16px] font-[700] text-[#32475C]/[50%]">
+                  Language:
+                </h5>
+                <p className="text-[12px] md:text-[16px] font-[400] text-[#32475C]/[60%]" >
+                  {data?.preference?.language}
+                </p>
+              </span>
+            </span>
+            <span className="flex items-center gap-[0.5rem]">
+              <FlagIcon className="fill-[#32475C99]/[60%]" />
+              <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
+                <h5 className="text-[12px] md:text-[16px] font-[700] text-[#32475C]/[50%]">
+                  Budget:
+                </h5>
+                <p className="text-[12px] md:text-[16px] font-[400] text-[#32475C]/[60%]" >
+                  {data?.budget}
+                </p>
+              </span>
+            </span>
+            <span className="flex items-center gap-[0.5rem]">
+              <FlagIcon className="fill-[#32475C99]/[60%]" />
+              <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
+                <h5 className="text-[12px] md:text-[16px] font-[700] text-[#32475C]/[50%]">
+                  Pet:
+                </h5>
+                <p className="text-[12px] md:text-[16px] font-[400] text-[#32475C]/[60%]" >
+                  {data?.preference?.pets}
+                </p>
+              </span>
+            </span>
+            <span className="flex items-center gap-[0.5rem]">
+              <FlagIcon className="fill-[#32475C99]/[60%]" />
+              <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
+                <h5 className="text-[12px] md:text-[16px] font-[700] text-[#32475C]/[50%]">
+                Gender:
+                </h5>
+                <p className="text-[12px] md:text-[16px] font-[400] text-[#32475C]/[60%]" >
+                  {data?.gender}
+                </p>
+              </span>
+            </span>
+            <span className="flex items-center gap-[0.5rem]">
+              <FlagIcon className="fill-[#32475C99]/[60%]" />
+              <span className="flex gap-[0.2rem] text-[rgba(50, 71, 92, 0.60)]">
+                <h5 className="text-[12px] md:text-[16px] font-[700] text-[#32475C]/[50%]">
+                Employment:
+                </h5>
+                <p className="text-[12px] md:text-[16px] font-[400] text-[#32475C]/[60%]" >
+                  {data?.preference?.employment}
+                </p>
               </span>
             </span>
           </div>
         </div>
         <div className="p-[0.5rem] border border-[#D6DDEB] px[20px] py[13px] flex flex-col gap-[0.3rem]">
           <div className="flex items-center justify-between">
-            <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
+            <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700] ">
               Favorite and Saved Searches
             </h4>
             <Button icon={<PlusIcon className="fill-[#010886]" />} />
@@ -112,9 +167,9 @@ const ProfileSection = ({ data }: Props) => {
               dots={{ className: "text-[#010886] carouselBtn" }}
               // dotPosition="top"
               variableWidth
-             
+
               className="max-h-[250px] pb-5 max-w-fit"
-             
+
             >
               {
                 saved?.length === 0 ? <div className="w-full h-[250px] flex justify-center items-center text-[#25324B] text-[16px] font-[400]">You have no saved searches</div> : saved.map((item: Record<string, any>) => (

@@ -124,7 +124,7 @@ const PropertySection = () => {
         <Spinner />
       ) : (
         <div className="flex flex-col-reverse md:grid md:grid-cols-[75%_25%] w-full md:mt-[1rem]">
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <div className="p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.3rem]">
               <h4 className="text-[#25324B] text-[16px] md:text-[24px] font-[700]">
                 Description
@@ -176,7 +176,7 @@ const PropertySection = () => {
                 )}
               </div>
             </div>
-            <div className="p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.3rem] overflow-y-scroll max-h-[200px] h-full">
+            <div className="p-[0.5rem] border border-[#D6DDEB] px-[20px] py-[13px] flex flex-col gap-[0.3rem] overflow-y-scroll noscroll-bar max-h-[200px] h-full">
               <h4 className="text-[#25324B] text-[16px] md:text-[24px] font-[700]">
                 Reviews
               </h4>

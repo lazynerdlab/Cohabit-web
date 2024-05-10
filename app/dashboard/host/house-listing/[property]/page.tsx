@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 const Page = () => {
   const { back } = useRouter();
   return (
-    <div className="grid grid-cols-1 grid-rows-[10%_90%] max-h-screen overflow-y-scroll">
+    <div className="grid grid-cols-1 grid-rows-[12%_88%] max-h-screen overflow-y-scroll">
       <HostHeader>
         <div className="flex items-center gap-[0.5rem]">
           <BackIcon

@@ -35,6 +35,13 @@ export const seekerApi = createApi({
         body: data,
       }),
     }),
+    createHostReview: builder.mutation({
+      query: (data) => ({
+        url: "houseSeeker/host/review",
+        method: "POST",
+        body: data,
+      }),
+    }),
    
   }),
 });
@@ -42,7 +49,8 @@ export const seekerApi = createApi({
 export const {
   useUpdateSeekerBannerMutation,
   useUpdatePreferenceMutation,
-  useUpdateAboutMeMutation
+  useUpdateAboutMeMutation,
+  useCreateHostReviewMutation
  
   
 } = seekerApi;

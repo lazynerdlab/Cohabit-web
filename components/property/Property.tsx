@@ -165,7 +165,7 @@ const Property = () => {
                 </div>
               </div>
               <div className="flex flex-col items-end gap-[0.8rem] pr-[1rem]">
-                <h5 className="text-[10px] md:text-[16px] font-[700] text-colorPrimary">
+                <h5 className="text-[10px] md:text-[16px] font-[700] text-[#4640DE]">
                   NGN {propertyData?.amount}
                 </h5>
                 {user?.data?.user?.user_type === "host" ? (
@@ -179,7 +179,7 @@ const Property = () => {
                   </Button>
                 ) : (
                   <Button
-                    className="!bg-[#010886] text-[#FFF]"
+                    className="!bg-[#4640DE] text-[#FFF] !rounded-none h-[40px] w-[100px]"
                     onClick={() => setOpen(true)}
                     disabled={
                       propertyData?.status === "Rented" ||

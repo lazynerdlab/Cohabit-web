@@ -99,7 +99,7 @@ const Profile = () => {
 
           <div className="w-[98%] mx-auto">
             <div className="w-full flex flex-col rounded-[10px] bg-[#FFF] shadow-sm shadow-[#B8C9C9]">
-              <div className="w-full relative">
+              <div className="w-full relative mt-3">
                 <Image
                   alt="background"
                   className="w-full hidden md:block"
