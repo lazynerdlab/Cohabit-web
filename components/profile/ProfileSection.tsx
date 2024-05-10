@@ -35,9 +35,9 @@ const ProfileSection = ({ data }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               About Me
             </h4>
-            <Link href="profile/edit-me">
+            <a href="profile/edit-me">
             <Button icon={<EditIcon className="fill-colorPrimary" />} />
-            </Link>
+            </a>
           </span>
           <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
             {data?.preference?.personal_introduction}
@@ -49,9 +49,9 @@ const ProfileSection = ({ data }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               Preferences
             </h4>
-            <Link href="/dashboard/profile/preference">
+            <a href="/dashboard/profile/preference">
             <Button icon={<EditIcon className="fill-colorPrimary" />} />
-            </Link>
+            </a>
           </span>
           <div className="grid grid-cols-1 gap-[0.3rem]">
             <span className="flex items-center gap-[0.5rem]">
