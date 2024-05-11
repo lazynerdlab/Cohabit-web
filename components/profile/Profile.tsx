@@ -117,7 +117,7 @@ const Profile = () => {
                 </Upload>
                 
               </div>
-              <div className="p-[1rem] grid grid-cols-[20%_80%]">
+              <div className="p-[1rem] flex gap-5 items-center w-full">
                 <Image
                   alt="avatar"
                   src={
@@ -129,11 +129,11 @@ const Profile = () => {
                   height={90}
                   className="h-[90px] rounded-md object-cover w-[90px] mr-1"
                 />
-                <div className="flex flex-col items-start justify-between">
+                <div className="flex flex-col gap-3 items-start justify-between w-[90%]">
                   <h4 className="text-[rgba(50, 71, 92, 0.87)] text-[15px] md:text-[24px] font-[500] p-0">
                     {profile?.name}
                   </h4>
-                  <span className="flex items-center gap-[0.5rem] bg-[#56CDAD]/[50%] px-[12px] py-[6px] md:px-[24px] md:py-[12px] rounded-[8px]">
+                  <span className="flex items-center gap-[0.5rem] bg-[#56CDAD]/[10%] px-[12px] py-[6px] md:px-[24px] md:py-[12px] rounded-[8px]">
                     <FlagIcon className="fill-[#56CDAD]" />
                     <p className="text-[#56CDAD] text-[10px] md:text-[16px] uppercase font-[500]">
                       {profile?.house_seeker_status === null
@@ -141,12 +141,15 @@ const Profile = () => {
                         : profile?.house_seeker_status}
                     </p>
                   </span>
-                  <div className="flex justify-between items-center gap-[0.2rem] w-full">
+                  <div className="flex justify-between items-center gap-[1rem] w-full">
                     <div className="flex items-start gap-[0.2rem]">
                       <span className="flex gap-[0.2rem]">
                         <VerifiedIcon />
                         <p className="text-[rgba(50, 71, 92, 0.60)] text-[10px] md:text-[16px] font-[500]">
-                          {profile?.host_status}
+                          {
+                          profile?.has_onboarded === true ?
+                          "VERIFIED" : "NOT VERIFIED"
+                          }
                         </p>
                       </span>
                       <span className="flex gap-[0.2rem]">
@@ -165,7 +168,7 @@ const Profile = () => {
                       </span>
                     </div>
                     <Button
-                      className="flex items-center justify-self-end !bg-[#010886]"
+                      className="flex items-center !bg-[#010886]"
                       type="primary"
                       onClick={() => {
                         push("/dashboard/settings");

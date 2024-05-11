@@ -10,6 +10,7 @@ import CarouselBackIcon from "@/assets/icons/CarouselBackIcon";
 import CarouselNextIcon from "@/assets/icons/CarouselNextIcon";
 import PropertySection from "./PropertySection";
 import Image from "next/image";
+import { Image as AntImage } from 'antd';
 import slide from "@/assets/slide.jpg";
 import slide2 from "@/assets/slide2.jpg";
 
@@ -106,17 +107,17 @@ const Property = () => {
                 prevArrow={<CarouselBackIcon />}
                 dots={false}
                 variableWidth
-                className="mobile-hidden  min-h-[200px] bg-[black]"
+                className="mobile-hidden  min-h-[200px] "
               >
                 {propertyData?.images?.map((image: string, index: number) => (
                   <div key={index} className="w-full h-full relative">
-                    <Image
+                    <AntImage
                       alt="thumbnail"
                       src={image}
                       width={300}
-                      height={300}
+                      height={200}
                      //style={{ height: "100% !important"}}
-                     className=" !h-[200px] !w-[300px]"
+                     className=" "
                     />
                   </div>
                 ))}
