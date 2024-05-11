@@ -10,6 +10,7 @@ import CarouselBackIcon from "@/assets/icons/CarouselBackIcon";
 import CarouselNextIcon from "@/assets/icons/CarouselNextIcon";
 import PropertySection from "./PropertySection";
 import Image from "next/image";
+import { Image as AntImage } from 'antd';
 import slide from "@/assets/slide.jpg";
 import slide2 from "@/assets/slide2.jpg";
 
@@ -106,17 +107,17 @@ const Property = () => {
                 prevArrow={<CarouselBackIcon />}
                 dots={false}
                 variableWidth
-                className="mobile-hidden  min-h-[200px] bg-[black]"
+                className="mobile-hidden  min-h-[200px] "
               >
                 {propertyData?.images?.map((image: string, index: number) => (
                   <div key={index} className="w-full h-full relative">
-                    <Image
+                    <AntImage
                       alt="thumbnail"
                       src={image}
                       width={300}
-                      height={300}
+                      height={200}
                      //style={{ height: "100% !important"}}
-                     className=" !h-[200px] !w-[300px]"
+                     className=" "
                     />
                   </div>
                 ))}
@@ -165,7 +166,7 @@ const Property = () => {
                 </div>
               </div>
               <div className="flex flex-col items-end gap-[0.8rem] pr-[1rem]">
-                <h5 className="text-[10px] md:text-[16px] font-[700] text-colorPrimary">
+                <h5 className="text-[10px] md:text-[16px] font-[700] text-[#4640DE]">
                   NGN {propertyData?.amount}
                 </h5>
                 {user?.data?.user?.user_type === "host" ? (
@@ -179,7 +180,7 @@ const Property = () => {
                   </Button>
                 ) : (
                   <Button
-                    className="!bg-[#010886] text-[#FFF]"
+                    className="!bg-[#4640DE] text-[#FFF] !rounded-none h-[40px] w-[100px]"
                     onClick={() => setOpen(true)}
                     disabled={
                       propertyData?.status === "Rented" ||

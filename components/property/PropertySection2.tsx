@@ -92,8 +92,8 @@ const PropertySection2 = () => {
     <div className="flex flex-col gap-[0.5rem] w-full md:w-[95%] mx-auto">
       <div className="flex flex-col items-center justify-center gap-[1rem] border border-[#D6DDEB] p-[0.5rem]">
         <div className="flex items-center justify-center gap-[0.5rem] w-full">
-          <SecondaryButton type="primary" onClick={onCopyClick}>
-            <div className="flex items-center gap-[0.1rem]">
+          <SecondaryButton type="primary" onClick={onCopyClick} className="bg-[#E5F6F3] !rounded-none">
+            <div className="flex items-center gap-[0.1rem] ">
               <ShareIcon />
               <p className="text-[#50E5B4]">Share</p>
             </div>
@@ -101,8 +101,8 @@ const PropertySection2 = () => {
           {loadingSave ? (
             "Saving"
           ) : (
-            <DangerButton type="primary" onClick={onSaveListing}>
-              <div className="flex items-center gap-[0.1rem]">
+            <DangerButton type="primary" onClick={onSaveListing} className="bg-[#FEEEE5] !rounded-none">
+              <div className="flex items-center gap-[0.1rem] ">
                 <HeartIcon />
                 <p className="text-[#FF3D00]">Save</p>
               </div>
@@ -130,7 +130,7 @@ const PropertySection2 = () => {
             src={data?.host?.image}
             width={80}
             height={80}
-            className="rounded-[100%] w-[80px] h-[80px]"
+            className="rounded-[100%] w-[40px] h-[40px]"
           />
           <div className="flex flex-col gap-[0.5rem] text-[#FFF]">
             <span>{data?.host?.name}</span>
@@ -138,7 +138,7 @@ const PropertySection2 = () => {
           </div>
         </div>
         <div className=" flex justify-center">
-          <Button type="primary" className="!bg-[#515B6F] mt-16" onClick={handleMessageClick}>
+          <Button type="primary" className="!bg-[#515B6F] h-[50px] w-[150px] mt-16 !rounded-none" onClick={handleMessageClick}>
             Message
           </Button>
         </div>
