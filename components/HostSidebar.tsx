@@ -167,7 +167,7 @@ const HostSidebar = () => {
   };
 
   return (
-    <div className="flex flex-col relative  border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-screen overflow-y-hidden"
+    <div className="flex flex-col relative  border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-[100svh] overflow-y-hidden"
    
     >
       <div className=" !absolute !bottom-0 !h-[350px] !w-full">
