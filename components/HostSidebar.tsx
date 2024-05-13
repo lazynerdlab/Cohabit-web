@@ -1,5 +1,6 @@
 "use client";
 import type { MenuProps } from "antd";
+import { Dropdown } from 'antd';
 import { CustomMenu as Menu } from "@/lib/AntDesignComponents";
 import HomeIconsm from "@/assets/icons/HomeIconsm";
 import MessageIcon from "@/assets/icons/MessageIcon";
@@ -19,6 +20,7 @@ import { MdLogout } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { useGetHostProfileQuery } from "@/redux/api/hostApi";
 import { Spinner } from "./spinner/Spinner";
+import sideImg from "@/assets/sidebar.svg"
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -53,7 +55,7 @@ const HostSidebar = () => {
       setProfile(data);
     }
   }, [data, isSuccess]);
-  const items: MenuProps["items"] = useMemo(
+  const menuItems: MenuProps["items"] = useMemo(
     () => [
       getItem(
         <Link href="/host">Dashboard</Link>,
@@ -134,6 +136,25 @@ const HostSidebar = () => {
     ],
     [path]
   );
+
+  const items: MenuProps['items'] = [
+    {
+      label: (
+        <span
+          className=" cursor-pointer p-3 bg-[#e20000] text-[#fff] flex justify-center gap-3 items-center "
+          onClick={() => {
+            push("/");
+            window.sessionStorage.removeItem("authToken");
+          }}
+        >
+          {" "}
+          <MdLogout /> Log out
+        </span>
+      ),
+      key: '0',
+    },
+
+  ];
   useEffect(() => {
     const rel = path.split("/");
     setActive(() => {
@@ -146,13 +167,23 @@ const HostSidebar = () => {
   };
 
   return (
-    <div className="flex flex-col relative  border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-screen overflow-y-hidden">
+    <div className="flex flex-col relative  border-solid border-r-[1px] border-[#D6DDEB] bg-[#F8F8FD] max-h-screen overflow-y-hidden"
+   
+    >
+      <div className=" !absolute !bottom-0 !h-[350px] !w-full">
+      <Image
+      alt=""
+      src={sideImg}
+      fill
+      className=" "
+      />
+      </div>
       <Title />
       <Menu
         onClick={onClick}
         defaultSelectedKeys={[active]}
         selectedKeys={[active]}
-        items={items}
+        items={menuItems}
       />
       {/* <span>Logout</span> */}
       <div className="flex flex-col gap-[1rem] ">
@@ -160,7 +191,8 @@ const HostSidebar = () => {
           <Spinner />
         ) : (
           <div className=" absolute bottom-0 w-full">
-            <div className="flex gap-5 ml-[1rem] items-center mb-3">
+            <Dropdown menu={{ items }} trigger={['click']} >
+            <div className="flex gap-5 ml-[1rem] items-center p-2 mb-5 hover:cursor-pointer">
               <Image
                 alt="user"
                 src={
@@ -168,26 +200,20 @@ const HostSidebar = () => {
                     ? "https://cdn-icons-png.flaticon.com/512/149/149071.png"
                     : profile?.image
                 }
-                width={50}
-                height={50}
-                className="h-[50px] rounded-full w-[50px]"
+                width={40}
+                height={40}
+                className="h-[40px] rounded-full w-[40px]"
               />
-              <div className="md:flex flex-col hidden">
+              <div className="md:flex flex-col">
                 <h4 className="text-[#202430] text-[18px] font-[600]">
                   {profile?.name}
                 </h4>
+                <p className="text-[#202430]/[50%] text-[14px] font-[600]">
+                      {profile?.email}
+                    </p>
               </div>
             </div>
-            <span
-              className=" cursor-pointer p-3 bg-[#e20000] text-[#fff] flex justify-center gap-3 items-center  "
-              onClick={() => {
-                window.sessionStorage.removeItem("authToken");
-                push("/");
-              }}
-            >
-              {" "}
-              <MdLogout /> Log out
-            </span>
+            </Dropdown>
           </div>
         )}
       </div>
