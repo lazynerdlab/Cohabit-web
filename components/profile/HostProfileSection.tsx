@@ -7,17 +7,29 @@ import {
 } from "@/lib/AntDesignComponents";
 import PlusIcon from "@/assets/icons/PlusIcon";
 import ProfileSection2 from "./ProfileSection2";
-import { useGetHostRecentlyUploadedQuery } from "@/redux/api/hostApi";
+import { useGetHostRecentlyUploadedQuery, useGetHostReviewsQuery } from "@/redux/api/hostApi";
 import { useEffect, useState } from "react";
 
 const HostProfileSection = () => {
   const { data, isLoading, isSuccess } = useGetHostRecentlyUploadedQuery({});
+  const { data: review, isLoading: reviewLoading, isSuccess: reviewSucces } = useGetHostReviewsQuery({});
   const [listingData, setListingData] = useState<Record<string, any>[]>([])
+  const [reviewData, setReviewData] = useState<Record<string, any>[]>([])
   useEffect(() => {
     if (isSuccess) {
       setListingData(data?.data);
     }
-  }, [data, isSuccess])
+    if (reviewSucces) {
+      setReviewData(review?.data?.reviews);
+    }
+  }, [data, isSuccess, reviewSucces, review])
+
+  const removeHTMLTags = (str: string) => {
+    if (typeof str === "string") {
+      return str.replace(/<[^>]*>/g, "");
+    }
+    return "";
+  };
   return (
     <div className="grid grid-cols-[70%_30%] w-full py-[1rem]">
       <div className="flex flex-col gap-[0.5rem]">
@@ -52,10 +64,20 @@ const HostProfileSection = () => {
           <div className="flex items-center justify-between">
             <h4 className="text-[#25324B] text-[24px] font-[700]">Reviews</h4>
           </div>
-          <Rate value={4} />
-          <p className="text-[#515B6F] text-[16px] font-[400]">
-            He is so polite and respectful, he gave me so much atentions.
-          </p>
+          {
+            reviewData?.map((reviews, index) => (
+              <div key={index} className=" mb-3">
+                <h3 className=" font-semibold text-sm UserName">{reviews?.user?.firstname + ' ' + reviews?.user?.lastname}</h3>
+                <div className=" flex gap-5">
+                  <p className="text-[#515B6F] text-[16px] font-[400]">
+                    {removeHTMLTags(reviews?.review)}
+                  </p>
+                  <Rate value={reviews?.rating} className=" text-[#1AD48E]" />
+                </div>
+              </div>
+            ))
+          }
+
         </div>
       </div>
       <ProfileSection2 />

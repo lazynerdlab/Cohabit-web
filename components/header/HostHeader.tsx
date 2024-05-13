@@ -10,7 +10,7 @@ import Nav from "@/assets/icons/Nav";
 const HostHeader = ({ children }: HeaderType) => {
   const { push } = useRouter();
   return (
-    <div className="grid grid-cols-[10%_40%_20%_30%] md:grid-cols-[60%_20%_20%] lg:grid-cols-[70%_10%_20%] items-center px-[0.5rem] lg:px-[1rem] sticky top-0 bg-[white] z-10 shadow-inner shadow-[#D6DDEB]">
+    <div className="grid grid-cols-[10%_40%_20%_30%] md:grid-cols-[60%_20%_20%] lg:grid-cols-[70%_10%_20%] items-center px-[0.5rem] lg:px-[1rem] sticky top-0 bg-[white] z-10 border-b border-[#D6DDEB]">
       <label
         htmlFor="my-drawer-2"
         className="flex lg:hidden text-blue-800 px-3"

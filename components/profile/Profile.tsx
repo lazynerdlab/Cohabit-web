@@ -145,7 +145,7 @@ const Profile = () => {
                     <div className="flex items-start gap-[0.2rem]">
                       <span className="flex gap-[0.2rem]">
                         <VerifiedIcon />
-                        <p className="text-[rgba(50, 71, 92, 0.60)] text-[10px] md:text-[16px] font-[500]">
+                        <p className="text-[rgba(50,71,92,0.60)] text-[10px] md:text-[16px] font-[500]">
                           {
                           profile?.has_onboarded === true ?
                           "VERIFIED" : "NOT VERIFIED"
@@ -154,7 +154,7 @@ const Profile = () => {
                       </span>
                       <span className="flex gap-[0.2rem]">
                         <LocationIcon />
-                        <p className="text-[rgba(50, 71, 92, 0.60)] text-[10px] md:text-[16px] font-[500]">
+                        <p className="text-[rgba(50,71,92,0.60)] text-[10px] md:text-[16px] font-[500]">
                           {profile?.location === null
                             ? "No Location"
                             : profile?.location}
@@ -162,7 +162,7 @@ const Profile = () => {
                       </span>
                       <span className="flex gap-[0.2rem]">
                         <CalendarIcon />
-                        <p className="text-[rgba(50, 71, 92, 0.60)] text-[10px] md:text-[16px] font-[500]">
+                        <p className="text-[rgba(50,71,92,0.60)] text-[10px] md:text-[16px] font-[500]">
                           Joined {profile?.date_joined}
                         </p>
                       </span>
