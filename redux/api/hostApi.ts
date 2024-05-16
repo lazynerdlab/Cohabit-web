@@ -90,7 +90,7 @@ export const hostApi = createApi({
     }),
     updateHostBanner: builder.mutation({
       query: (data) => ({
-        url: "host/profile/update/banner",
+        url: "hosts/profile/update/banner",
         method: "PUT",
         body: data,
       }),
