@@ -31,10 +31,10 @@ const ViewMates = () => {
         ))}
       </div>
       {
-        data.meta.total < rowsPerPage ? null : (
+        data?.meta?.total < rowsPerPage ? null : (
           <CustomPagination
             current={page}
-            total={data.meta.total}
+            total={data?.meta?.total}
             pageSize={rowsPerPage}
             onChange={(page) => setPage(page)}
           />
