@@ -88,6 +88,14 @@ export const hostApi = createApi({
         method: "POST",
       }),
     }),
+    updateHostBanner: builder.mutation({
+      query: (data) => ({
+        url: "host/profile/update/banner",
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["HostProfile"],
+    }),
   }),
 });
 
@@ -105,4 +113,5 @@ export const {
   useGetHostStatisticsAnalyticsQuery,
   useGetHostBarChartQuery,
   useGetHostListingDetailQuery,
+  useUpdateHostBannerMutation
 } = hostApi;

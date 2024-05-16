@@ -1,5 +1,4 @@
 "use client";
-import gradient from "@/assets/gradient.jpg";
 
 import EditIcon from "@/assets/icons/EditIcon";
 import FlagIcon from "@/assets/icons/FlagIcon";
@@ -8,6 +7,7 @@ import VerifiedIcon from "@/assets/icons/VerifiedIcon";
 import CalendarIcon from "@/assets/icons/CalendarIcon";
 import LocationIcon from "@/assets/icons/LocationIcon";
 import Image from "next/image";
+import grad from "@/assets/gradient.jpg";
 import { CustomButton as Button } from "@/lib/AntDesignComponents";
 import ProfileSection from "./ProfileSection";
 import { useEffect, useState } from "react";
@@ -106,8 +106,8 @@ const Profile = () => {
                   style={{width: "100%", height: "200px"}}
                   width={500}
                   height={300}
-                  src={profile?.banner === "" 
-                  ?  gradient
+                  src={profile?.banner === null 
+                  ?  grad
                   :
                   profile?.banner
                   }
@@ -121,7 +121,7 @@ const Profile = () => {
                 <Image
                   alt="avatar"
                   src={
-                    profile?.image === ""
+                    profile?.image === null
                       ? "https://cdn-icons-png.flaticon.com/512/149/149071.png"
                       : profile?.image
                   }

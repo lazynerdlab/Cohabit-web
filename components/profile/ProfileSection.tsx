@@ -64,7 +64,6 @@ const ProfileSection = ({ data }: Props) => {
                   data?.house_type?.map((item: string, index: number) => (
                     <p className="text-[12px] md:text-[16px] font-[400] text-[#32475C]/[60%]" key={index}>
                       {item}
-
                     </p>
                   ))
                 }
