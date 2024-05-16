@@ -18,20 +18,25 @@ const Tab2 = () => {
   const handleChangePassword = async () => {
     if (password !== confirmPassword) {
       message.error("Passwords don't match");
-      return
+      return;
     }
 
     if (password.length < 6) {
       message.error("Password must be at least 6 characters");
-      return
+      return;
     }
 
-    if (oldPassword && password && confirmPassword) {
-      message.error("All are required");
-      return
+    if (!oldPassword || !password || !confirmPassword) {
+      message.error("All fields are required");
+      return;
     }
-    await updatePassword({ old_password: oldPassword, password: password, password_confirmation: confirmPassword });
-  }
+
+    try {
+      await updatePassword({ old_password: oldPassword, password: password, password_confirmation: confirmPassword });
+    } catch (error) {
+      message.error("Failed to update password");
+    }
+  };
 
   useEffect(() => {
     if (isSuccess) {
@@ -91,7 +96,7 @@ const Tab2 = () => {
           </div>
           <div className="w-full mx-auto flex flex-col items-start justify-start gap-[0.5rem]">
             <label
-              htmlFor="newPassword"
+              htmlFor="confirmPassword"
               className="text-[#0C1938] text-[16px] font-[700]"
             >
               Confirm Password
@@ -105,7 +110,10 @@ const Tab2 = () => {
           </div>
           <div>
             <Button className="!bg-[#010886]" type="primary" onClick={handleChangePassword}>
-              Update Password
+              {
+                isLoading? "Updating..." : "Update Password"
+              }
+              
             </Button>
           </div>
         </div>
