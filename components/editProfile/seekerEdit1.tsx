@@ -17,11 +17,11 @@ const SeekerEdit1 = () => {
         gender: number | null;
     }>({
         house_type: [],
-        budget: 0,
+        budget: null,
         location: '',
-        gender: 0
+        gender: null
     });
-    
+
     const { data, isLoading } = useGetHouseSeekerProfileQuery({})
     const [updatePrefrence, { isLoading: updateLoading }] = useUpdatePreferenceMutation()
     const { data: budgets } = useGetHouseBudgetQuery({})
@@ -42,10 +42,10 @@ const SeekerEdit1 = () => {
         if (!isLoading && data && houses) {
             // Set default values for preference properties if data is null or undefined
             const defaultPreference = {
-                house_type: data?.data.house_type?.map((house: string) => {
+                house_type: data?.data?.house_type?.map((house: string) => {
                     const category = houses?.data?.find((cat: { title: string; }) => cat.title.toLowerCase() === house.toLowerCase());
                     return category ? category.id : null;
-                }).filter((id: null) => id !== null),
+                }).filter((id: number | null) => id !== null) as number[],
                 budget: getIdFromValue(data?.data?.budget) || null,
                 location: data?.data?.location || '',
                 gender: getIdGender(data?.data?.gender) || null
@@ -99,7 +99,7 @@ const SeekerEdit1 = () => {
         updatePrefrence(preference).unwrap()
             .then(() => {
                 message.success("saved")
-                push("/dashboard/profile")
+                //push("/profile")
             }).catch(() => {
                 message.error("save failed")
             })

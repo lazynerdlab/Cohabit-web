@@ -83,7 +83,7 @@ const SeekerEdit2 = () => {
             .then(() => {
                 message.success("saved")
                 
-                push("/dashboard/profile")
+                //push("/profile")
             }).catch(() => {
                 message.error("save failed")
             })
