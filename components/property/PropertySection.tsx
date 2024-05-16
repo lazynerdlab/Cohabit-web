@@ -67,6 +67,11 @@ const PropertySection = () => {
         rating: reviewRating,
         review: reviewComment,
         apartment_id: propertyData?.id,
+      }).unwrap()
+      .then((res)=> {
+        message.success("Review submitted successfully!");
+        setReviewRating(0);
+        setReviewComment("");
       });
     }
     // After successfully submitting the review, refetch the review data
@@ -92,12 +97,6 @@ const PropertySection = () => {
         console.log(errorReview);
       }
     }
-    if (successReview) {
-      message.success("Review submitted successfully!");
-      setReviewRating(0);
-      setReviewComment("");
-    }
-
 
   }, [
     data,
@@ -109,7 +108,6 @@ const PropertySection = () => {
     ratingData,
     reviewSuccess,
     reviewData,
-
   ]);
   const removeHTMLTags = (str: string) => {
     if (typeof str === "string") {
