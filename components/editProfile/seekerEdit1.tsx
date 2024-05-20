@@ -99,7 +99,7 @@ const SeekerEdit1 = () => {
         updatePrefrence(preference).unwrap()
             .then(() => {
                 message.success("saved")
-                //push("/dashboard/profile")
+                push("/dashboard/profile")
             }).catch(() => {
                 message.error("save failed")
             })
