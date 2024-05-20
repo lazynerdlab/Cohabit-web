@@ -13,6 +13,7 @@ import ProfileSection2 from "./ProfileSection2";
 import { useGetSavedApartmentsQuery } from "@/redux/api/houseApi";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 interface Props {
@@ -35,9 +36,11 @@ const ProfileSection = ({ data }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               About Me
             </h4>
-            <a href="profile/edit-me">
+            <Link href="profile/edit-me">
+              <a>
               <Button icon={<EditIcon className="fill-colorPrimary" />} />
-            </a>
+              </a>
+            </Link>
           </span>
           <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
             {data?.preference?.personal_introduction}
@@ -49,9 +52,11 @@ const ProfileSection = ({ data }: Props) => {
             <h4 className="text-[#25324B] text-[18px] md:text-[24px] font-[700]">
               Preferences
             </h4>
-            <a href="/dashboard/profile/preference">
+            <Link href="profile/preference">
+              <a>
               <Button icon={<EditIcon className="fill-colorPrimary" />} />
-            </a>
+              </a>
+            </Link>
           </span>
           <div className="grid grid-cols-1 gap-[0.7rem]">
             <span className="flex items-center gap-[0.5rem]">
