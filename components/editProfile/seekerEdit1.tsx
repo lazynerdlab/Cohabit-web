@@ -24,8 +24,8 @@ const SeekerEdit1 = () => {
 
     const { data, isLoading } = useGetHouseSeekerProfileQuery({})
     const [updatePrefrence, { isLoading: updateLoading }] = useUpdatePreferenceMutation()
-    const { data: budgets } = useGetHouseBudgetQuery({})
-    const { data: houses } = useGetHouseTypeQuery({})
+    const { data: budgets, isLoading: budgetsLoading } = useGetHouseBudgetQuery({})
+    const { data: houses, isLoading: houseLoading } = useGetHouseTypeQuery({})
     const { push } = useRouter()
 
     const getIdFromValue = (apiValue: string) => {
@@ -106,17 +106,17 @@ const SeekerEdit1 = () => {
     }
 
 
-
+    const isDataLoading = isLoading || budgetsLoading || houseLoading;
 
     return (
         <>
-            <div className=" h-full bg-[#E7F6FD] mr-7 ml-3 max-h-[100svh] overflow-y-scroll noscroll-bar " >
-                <section className=" p-3 md:pr-[100px] pr-[20px]">
+            <div className=" h-full bg-[#E7F6FD] md:mr-7 md:ml-3 max-h-[100svh] overflow-y-scroll noscroll-bar " >
+                <section className=" p-3 md:pr-[100px] ">
                     <div className=" mb-10">
 
                         <h2 className=" text-[#101C1D] font-semibold text-lg mb-5">Edit your categories</h2>
                         {
-                            isLoading ? <Skeleton active /> :
+                            isDataLoading ? <Skeleton active /> :
                                 <div className=" flex flex-wrap gap-4">
                                     {
                                         houses?.data?.map((Categories: any, id: any) => (
@@ -138,7 +138,7 @@ const SeekerEdit1 = () => {
                     <div className=" mb-10">
                         <h2 className=" text-[#101C1D] font-semibold text-lg mb-5">Edit your budget</h2>
                         {
-                            isLoading ? <Skeleton active /> :
+                            isDataLoading ? <Skeleton active /> :
                                 <div className=" flex flex-wrap gap-4">
                                     {
                                         budgets?.data?.map((budget: any, index: any) => (
@@ -162,7 +162,7 @@ const SeekerEdit1 = () => {
                     <div className=" mb-10">
                         <h2 className=" text-[#101C1D] font-semibold text-lg mb-5">Edit your location</h2>
                         {
-                            isLoading ? <Skeleton active /> :
+                            isDataLoading ? <Skeleton active /> :
                                 <div className=" flex flex-wrap gap-4">
                                     {
                                         locationData.map((locations, id) => (
@@ -185,7 +185,7 @@ const SeekerEdit1 = () => {
                     <div>
                         <h2 className=" text-[#101C1D] font-semibold text-lg mb-5">Edit gender</h2>
                         {
-                            isLoading ? <Skeleton active /> :
+                            isDataLoading ? <Skeleton active /> :
                                 <div className=" flex flex-wrap gap-4">
                                     {
                                         genderData?.map((gender, id) => (

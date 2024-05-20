@@ -88,15 +88,15 @@ const SeekerEdit2 = () => {
                 message.error("save failed")
             })
     }
-
+    const isDataLoading = isLoading || traitsLoading;
     return (
-        <main className=" h-fit bg-[#E7F6FD] mr-7 ml-3 min-h-[100svh] overflow-y-auto mb-14 noscroll-bar" >
+        <main className=" h-fit bg-[#E7F6FD] md:mr-7 md:ml-3 min-h-[100svh] overflow-y-auto mb-14 noscroll-bar" >
             <section className=" p-3 md:pr-[100px] pr-[20px]">
                 <div className=" mb-10">
 
                     <h2 className=" text-[#101C1D] font-semibold text-lg mb-5">Edit your introduction</h2>
                     {
-                        isLoading ? <Skeleton active /> :
+                        isDataLoading ? <Skeleton active /> :
                             <textarea
                                 className=" bg-transparent border-[2px] border-[#B8C9C9] w-full h-[140px] focus:outline-none resize-none p-5"
                                 value={aboutMe?.personal_introduction}
@@ -112,7 +112,7 @@ const SeekerEdit2 = () => {
                 <div className=" mb-10">
                     <h2 className=" text-[#101C1D] font-semibold text-lg mb-5">Edit your category</h2>
                     {
-                        isLoading ? <Skeleton active /> :
+                        isDataLoading ? <Skeleton active /> :
                             <div className=" flex flex-wrap gap-4">
                                 {
                                     traits?.data?.map((vibe: any, index: any) => (
@@ -136,7 +136,7 @@ const SeekerEdit2 = () => {
                 <div className=" mb-10">
                     <h2 className=" text-[#101C1D] font-semibold text-lg mb-5">Edit language</h2>
                     {
-                        isLoading ? <Skeleton active /> :
+                        isDataLoading ? <Skeleton active /> :
                             <div className=" flex flex-wrap gap-4">
                                 {
                                     languageData?.map((language, id) => (
@@ -159,7 +159,7 @@ const SeekerEdit2 = () => {
                 <div className=" mb-10">
                     <h2 className=" text-[#101C1D] font-semibold text-lg mb-5">Edit pet</h2>
                     {
-                        isLoading ? <Skeleton active /> :
+                        isDataLoading ? <Skeleton active /> :
                             <div className=" flex flex-wrap gap-4">
                                 {
                                     petData?.map((pet, id) => (
@@ -182,7 +182,7 @@ const SeekerEdit2 = () => {
                 <div className=" mb-10">
                     <h2 className=" text-[#101C1D] font-semibold text-lg mb-5">Edit Employment</h2>
                     {
-                        isLoading ? <Skeleton active /> :
+                        isDataLoading ? <Skeleton active /> :
                             <div className=" flex flex-wrap gap-4">
                                 {
                                     workData?.map((work, id) => (
