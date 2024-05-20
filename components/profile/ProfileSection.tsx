@@ -37,9 +37,7 @@ const ProfileSection = ({ data }: Props) => {
               About Me
             </h4>
             <Link href="profile/edit-me">
-              <a>
               <Button icon={<EditIcon className="fill-colorPrimary" />} />
-              </a>
             </Link>
           </span>
           <p className="text-[12px] md:text-[16px] font-[400] text-[#515B6F]">
@@ -53,9 +51,7 @@ const ProfileSection = ({ data }: Props) => {
               Preferences
             </h4>
             <Link href="profile/preference">
-              <a>
               <Button icon={<EditIcon className="fill-colorPrimary" />} />
-              </a>
             </Link>
           </span>
           <div className="grid grid-cols-1 gap-[0.7rem]">
