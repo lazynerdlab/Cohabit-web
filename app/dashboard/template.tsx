@@ -3,6 +3,7 @@ import SideBar from "@/components/global/SideBar";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/redux/hook";
+import StyledComponentsRegistry from "@/lib/AntdRegistry";
 
 type children = {
   children: React.ReactNode;
