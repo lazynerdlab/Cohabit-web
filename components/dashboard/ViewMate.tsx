@@ -30,15 +30,13 @@ const ViewMate = ({ data }: Props) => {
 
   async function handleMessageClick() {
     const payload = {
-      messageId: data.id,
-      messageName: data.name,
-      avatarM: data.image,
-     userTypeM: "User"
+      receiverId: data.id,
+      name: data.name,
+      avatar: data.image,
+     userType: "User"
     };
     try {
       dispatch(SET_CURRENT_CHAT(payload))
-       localStorage.setItem("messageid", payload.messageId)
-       localStorage.setItem("messageName", payload.messageName)
       // console.log(payload.messageId)
       router.push("/dashboard/message");
     } catch (error) {

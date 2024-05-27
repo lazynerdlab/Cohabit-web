@@ -62,15 +62,14 @@ const PropertySection2 = () => {
   const dispatch = useAppDispatch();
   async function handleMessageClick() {
     const payload = {
-      messageId: data?.host?.id,
-      messageName: data?.host?.name,
-      avatarM: data?.host?.image,
-      userTypeM: "Host"
+      receiverId: data?.host?.id,
+      name: data?.host?.name,
+      avatar: data?.host?.image,
+      userType: "Host"
     };
     try {
       dispatch(SET_CURRENT_CHAT(payload))
-      localStorage.setItem("messageid", payload.messageId)
-      localStorage.setItem("messageName", payload.messageName)
+     
       // console.log(payload.messageId)
       router.push("/dashboard/message");
     } catch (error) {
