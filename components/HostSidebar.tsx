@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { useGetHostProfileQuery } from "@/redux/api/hostApi";
 import { Spinner } from "./spinner/Spinner";
 import sideImg from "@/assets/sidebar.svg"
+import { useAppSelector } from "@/redux/hook";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -43,18 +44,15 @@ const Title = () => <Image className="mxauto py-[0.5rem]" alt="" src={Logo} />;
 
 const HostSidebar = () => {
   const { push } = useRouter();
-  const { data, isSuccess, isLoading, isError, error } = useGetHostProfileQuery(
-    {}
-  );
+  const user = useAppSelector((state) => state.userData.user);
+  const { data, isSuccess, isLoading, isError, error } = useGetHostProfileQuery({});
   const [profile, setProfile] = useState<Record<string, any>>();
   const [active, setActive] = useState("");
   const path = usePathname();
 
   useEffect(() => {
-    if (isSuccess) {
-      setProfile(data);
-    }
-  }, [data, isSuccess]);
+    setProfile(user?.data?.user);
+  }, [user]);
   const menuItems: MenuProps["items"] = useMemo(
     () => [
       getItem(

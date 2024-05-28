@@ -69,6 +69,7 @@ const PropertySection2 = () => {
     };
     try {
       dispatch(SET_CURRENT_CHAT(payload))
+      localStorage.setItem("messageid", payload.receiverId)
      
       // console.log(payload.messageId)
       router.push("/dashboard/message");

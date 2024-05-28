@@ -18,7 +18,7 @@ import sideImg from "@/assets/sidebar.svg"
 import { MdLogout } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { useGetHouseSeekerProfileQuery } from "@/redux/api/houseApi";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { CLEAR_USER } from "@/redux/slice/userSlice";
 import { CLEAR_HOST, CLEAR_PROPERTY } from "@/redux/slice/propertySlice";
 import { Spinner } from "../spinner/Spinner";
@@ -48,16 +48,15 @@ const Title = () => (
 
 const SideBar = () => {
   const { push } = useRouter();
+  const user = useAppSelector((state) => state.userData.user);
   const { data, isSuccess, isLoading } = useGetHouseSeekerProfileQuery({});
   const [profile, setProfile] = useState<Record<string, any>>();
   const [active, setActive] = useState("");
   const path = usePathname();
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (isSuccess) {
-      setProfile(data?.data);
-    }
-  }, [data?.data, isSuccess]);
+    setProfile(user?.data?.user);
+  }, [user]);
 
   const ActiveMenuItem = ({ children, key, ...props }: any) => (
     <Menu key={key} {...props} className=" h-full w-full">
