@@ -17,11 +17,12 @@ import type { DatePickerProps, RadioChangeEvent, UploadProps } from "antd";
 import { useGetHouseSeekerProfileQuery } from "@/redux/api/houseApi";
 import { useEffect, useState } from "react";
 
-import { useAppSelector } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useUpdateProfileMutation } from "@/redux/api/settingApi";
 import moment from "moment";
 import { Spinner } from "../spinner/Spinner";
 import { useGetHostProfileQuery } from "@/redux/api/hostApi";
+import { SET_USER, UPDATE_USER_IMAGE } from "@/redux/slice/userSlice";
 
 const options = [
   { value: "0", label: "Male" },
@@ -48,24 +49,25 @@ const MAX_FILE_SIZE_MB = 5;
 
 const Tab1 = () => {
   const user = useAppSelector((state) => state.userData.user);
+  const dispatch = useAppDispatch();
   const { data, isSuccess, isLoading, isError, error } = useGetHouseSeekerProfileQuery({});
   const { data: host, isSuccess: hostSuccess } = useGetHostProfileQuery({});
   const userData = user?.data?.user
   const [accessToken, setAccessToken] = useState<string>()
   const [image, setImage] = useState<string>();
 
-   // Use house seeker or host profile query based on userType
-  
+  // Use house seeker or host profile query based on userType
+
 
   useEffect(() => {
     const token = sessionStorage.getItem('authToken')
     if (token) {
       setAccessToken(token)
     }
-    
+
   }, [])
 
-  
+
 
   const props: UploadProps = {
     name: "file",
@@ -126,7 +128,7 @@ const Tab1 = () => {
     setDOB(date);
   };
 
-  const [updateProfile, { isLoading: updateProfileLoading, isSuccess: updateProfileSuccess, isError: updateProfileIsError, error: updateProfileError}] = useUpdateProfileMutation();
+  const [updateProfile, { isLoading: updateProfileLoading, isSuccess: updateProfileSuccess, isError: updateProfileIsError, error: updateProfileError }] = useUpdateProfileMutation();
 
   useEffect(() => {
     if (updateProfileSuccess) {
@@ -134,21 +136,18 @@ const Tab1 = () => {
     }
     if (updateProfileIsError) {
       message.error("Profile update failed");
-      //message.error(updateProfileError?.data?.message);
-      /**
-       *  if ('status' in updateProfileError){
-        //const messErr = updateProfileError.data;
-        setUserErr(updateProfileError?.data);
-        message.error(userErr?.message);
-        //message.useMessage(updateProfileError?.data)
-        //console.error("well:", updateProfileError.data);
-      }else{
-        console.log(updateProfileError)
-      }
-       */
-      console.log(updateProfileError);
     }
   }, [updateProfileError, updateProfileIsError, updateProfileSuccess]);
+  useEffect(() => {
+    if (hostSuccess && userData?.user_type === 'host') {
+      setImage(host?.image)
+      setEmail(host?.email)
+      setPhoneNo(host?.phone)
+      setGender(host?.gender)
+      setUserStatus(host?.house_seeker_status)
+      setDOB(host?.dob)
+    }
+  }, [hostSuccess]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -159,15 +158,6 @@ const Tab1 = () => {
       setUserStatus(data?.data?.house_seeker_status)
       setDOB(data?.data?.dob)
     }
-    if (hostSuccess && userData?.user_type === 'host') {
-      setImage(host?.image)
-      setEmail(host?.email)
-      setPhoneNo(host?.phone)
-      setGender(host?.gender)
-      setUserStatus(host?.house_seeker_status)
-      setDOB(host?.dob)
-    }
-
     if (user) {
       setUserType(userData?.user_type)
       setFirstName(userData?.firstname)
@@ -176,14 +166,13 @@ const Tab1 = () => {
     if (isError) {
       console.log(error);
     }
-  }, [data, isSuccess, isError, error, userData, hostSuccess]);
+  }, [data, isSuccess, isError, error]);
 
 
   let date = moment(dob?.$d).format("YYYY-MM-DD")
 
   const handleProfileUpdate = async () => {
     if (!firstName || !lastName || !image || !phoneNo || !gender || !dob || !userStatus || !userType) {
-      // Handle the case where any field is empty
       message.error("Please fill in all fields.");
       return;
     }
@@ -195,9 +184,12 @@ const Tab1 = () => {
       gender: gender === "female" || gender === "FEMALE" ? 1 : gender === "male" || gender === "MALE" ? 2 : 0,
       dob,
       status: userStatus,
-      account_type: userType
+      account_type: userType,
     });
+    dispatch(UPDATE_USER_IMAGE({ image }));
   };
+
+
 
   return (
     <>

@@ -18,7 +18,19 @@ const userSlice = createSlice({
         user: action.payload,
       };
     },
-
+    UPDATE_USER_IMAGE: (state, action) => {
+      return {
+        ...state,
+        user: {
+          data: {
+            user: {
+              ...state.user.data.user,
+              image: action.payload.image,
+            },
+          },
+        },
+      };
+    },
     CLEAR_USER: (state) => {
       return {
         ...state,
@@ -29,4 +41,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { SET_USER, CLEAR_USER } = userSlice.actions;
+export const { SET_USER, CLEAR_USER,UPDATE_USER_IMAGE } = userSlice.actions;

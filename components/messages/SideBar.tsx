@@ -83,10 +83,9 @@ const SideBar = ({ display, setDisplay }: { display: boolean; setDisplay: React.
           userType: userType || (currentUserTypeId === sender.sender_id ? receiver.receiver.user_type : sender.sender.user_type),
           avatar: avatar || (currentUserTypeId === sender.sender_id ? receiver.receiver.image : sender.sender.image),
         };
-        if (!localStorage.getItem('messageid')) {
-          dispatch(SET_CURRENT_CHAT(payload));
-          dispatch(SET_USER_NAME(payload));
-        }
+        
+        dispatch(SET_CURRENT_CHAT(payload));
+        dispatch(SET_USER_NAME(payload));
         setActiveChat(payload.receiverId);
       } else {
         setOnGoingChats([]);
